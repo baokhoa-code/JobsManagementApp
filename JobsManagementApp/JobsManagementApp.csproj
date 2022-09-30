@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="fonts\Roboto-Black.ttf" />
+		<None Remove="fonts\Roboto-BlackItalic.ttf" />
+		<None Remove="fonts\Roboto-Bold.ttf" />
+		<None Remove="fonts\Roboto-BoldItalic.ttf" />
+		<None Remove="fonts\Roboto-Italic.ttf" />
+		<None Remove="fonts\Roboto-Light.ttf" />
+		<None Remove="fonts\Roboto-LightItalic.ttf" />
+		<None Remove="fonts\Roboto-Medium.ttf" />
+		<None Remove="fonts\Roboto-MediumItalic.ttf" />
+		<None Remove="fonts\Roboto-Regular.ttf" />
+		<None Remove="fonts\Roboto-Thin.ttf" />
+		<None Remove="fonts\Roboto-ThinItalic.ttf" />
+		<None Remove="images\background.jpg" />
+		<None Remove="images\backgroundSplash.jpg" />
+		<None Remove="images\suitcase.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="fonts\Roboto-Black.ttf" />
+		<Resource Include="fonts\Roboto-BlackItalic.ttf" />
+		<Resource Include="fonts\Roboto-Bold.ttf" />
+		<Resource Include="fonts\Roboto-BoldItalic.ttf" />
+		<Resource Include="fonts\Roboto-Italic.ttf" />
+		<Resource Include="fonts\Roboto-Light.ttf" />
+		<Resource Include="fonts\Roboto-LightItalic.ttf" />
+		<Resource Include="fonts\Roboto-Medium.ttf" />
+		<Resource Include="fonts\Roboto-MediumItalic.ttf" />
+		<Resource Include="fonts\Roboto-Regular.ttf" />
+		<Resource Include="fonts\Roboto-Thin.ttf" />
+		<Resource Include="fonts\Roboto-ThinItalic.ttf" />
+		<Resource Include="images\background.jpg" />
+		<Resource Include="images\backgroundSplash.jpg" />
+		<Resource Include="images\suitcase.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Login.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Login.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	</ItemGroup>
+</Project>

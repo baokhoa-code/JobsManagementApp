@@ -1,0 +1,31 @@
+﻿<Window x:Class="Jobs_Mangament_System.Splash"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:Jobs_Mangament_System"
+        mc:Ignorable="d" 
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        Title="Splash" Height="330" Width="650">
+    <Grid>
+        <Border CornerRadius="25" Padding="0,0,0,10">
+            <Border.Background>
+                <ImageBrush Stretch="Fill" ImageSource="/images/backgroundSplash.jpg"/>
+            </Border.Background>
+            <ProgressBar
+                IsIndeterminate="True" Margin="381,198,69,116" Foreground="#FF4AF169" ClipToBounds="True" >
+                <ProgressBar.Effect>
+                    <DropShadowEffect/>
+                </ProgressBar.Effect>
+            </ProgressBar>
+        </Border>
+    </Grid>
+
+
+</Window>

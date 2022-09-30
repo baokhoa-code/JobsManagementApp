@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "dbyX8wTaR0+hjjqAMEmHl6ivJUGtstqgMfykjzgYdPxe2LLgeBpXTuHIocAe4EDsYyqRLE0WSKe2vRcsAYU9+A==",
+  "success": true,
+  "projectFilePath": "G:\\CODE\\NLCN\\PROJECT\\JobsManagementApp\\JobsManagementApp\\JobsManagementApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\khoa1\\.nuget\\packages\\materialdesigncolors\\2.0.9\\materialdesigncolors.2.0.9.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\materialdesignthemes\\4.6.1\\materialdesignthemes.4.6.1.nupkg.sha512"
+  ],
+  "logs": []
+}
