@@ -70,7 +70,7 @@
                         FontSize="20"
                         Height="55" Width="350"
                         Foreground="White" BorderBrush="#FFAFAFAF"
-                        materialDesign:HintAssist.Hint="Please choose the question" SelectionChanged="cbx_question_SelectionChanged" Margin="0,11,0,0">
+                        materialDesign:HintAssist.Hint="Please choose the question"  Margin="0,11,0,0">
                         <ComboBoxItem
                             Content="What is your nick name?" />
                         <ComboBoxItem

@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace JobsManagementApp
 {
     /// <summary>
-    /// Interaction logic for forgot.xaml
+    /// Interaction logic for Forgot.xaml
     /// </summary>
     public partial class forgot : Window
     {

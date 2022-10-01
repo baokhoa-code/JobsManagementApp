@@ -10,7 +10,7 @@
     <Compile Update="DashBoard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="forgot.xaml.cs">
+    <Compile Update="Forgot.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Login.xaml.cs">
