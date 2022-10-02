@@ -20,6 +20,8 @@
 		<None Remove="fonts\Roboto-Regular.ttf" />
 		<None Remove="fonts\Roboto-Thin.ttf" />
 		<None Remove="fonts\Roboto-ThinItalic.ttf" />
+		<None Remove="images\avatar.jpg" />
+		<None Remove="images\avatar.png" />
 		<None Remove="images\background.jpg" />
 		<None Remove="images\backgroundSplash.jpg" />
 		<None Remove="images\suitcase.png" />
@@ -42,6 +44,8 @@
 		<Resource Include="fonts\Roboto-Regular.ttf" />
 		<Resource Include="fonts\Roboto-Thin.ttf" />
 		<Resource Include="fonts\Roboto-ThinItalic.ttf" />
+		<Resource Include="images\avatar.jpg" />
+		<Resource Include="images\avatar.png" />
 		<Resource Include="images\background.jpg" />
 		<Resource Include="images\backgroundSplash.jpg" />
 		<Resource Include="images\suitcase.png" />

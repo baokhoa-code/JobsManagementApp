@@ -86,5 +86,10 @@ namespace JobsManagementApp
         {
 
         }
+
+        private void btn_login_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -47,7 +47,7 @@
                                         Style="{StaticResource MaterialDesignFloatingActionButton}"
                                         ToolTip="MaterialDesignFloatingActionButton"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
-                                        Background="#FF4665C6" BorderBrush="#FF4665C6" Width="22" Height="22" Margin="481,14,47,14">
+                                        Background="#FF4665C6" BorderBrush="#FF4665C6" Width="22" Height="22" Margin="483,14,0,14" HorizontalAlignment="Left">
                         <materialDesign:PackIcon
                                             Kind="WindowMinimize"/>
                     </Button>
