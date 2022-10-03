@@ -17,16 +17,11 @@ namespace JobsManagementApp
     /// <summary>
     /// Interaction logic for Forgot.xaml
     /// </summary>
-    public partial class forgot : Window
+    public partial class Forgot : Window
     {
-        public forgot()
+        public Forgot()
         {
             InitializeComponent();
-        }
-
-        private void cbx_question_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
