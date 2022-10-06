@@ -54,7 +54,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Model\" />
 	  <Folder Include="ViewModel\AdminModel\" />
 	  <Folder Include="ViewModel\UserModel\" />
 	  <Folder Include="View\User\" />
