@@ -22,6 +22,7 @@ namespace JobsManagementApp
         public DashBoard()
         {
             InitializeComponent();
+            mainFrame.Navigate(new UserHomePage());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

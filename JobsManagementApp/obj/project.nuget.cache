@@ -1,34 +1,27 @@
 {
   "version": 2,
-  "dgSpecHash": "9Lgjf9kpymKBobiy1ONdW0hAlGuaP1YMvAnWHYiDMZ2da01pt43oF6fi9D+F83eR+uc9HH9V45Btu4A58yx2Mg==",
+  "dgSpecHash": "zwWM5cLVmY5rL5gnIBlPrRD3c56rGZ8JUOO+vrkLyGIbXx2qcU/F0rAi+dX2O2R7WMP8UgGQl0y758dlC/8CBA==",
   "success": true,
   "projectFilePath": "E:\\CODE\\NLCN\\PROJECT\\JobsManagementApp\\JobsManagementApp\\JobsManagementApp.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\khoa1\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
-    "C:\\Users\\khoa1\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\communitytoolkit.mvvm\\8.0.0\\communitytoolkit.mvvm.8.0.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\harfbuzzsharp\\2.8.2.1\\harfbuzzsharp.2.8.2.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\harfbuzzsharp.nativeassets.macos\\2.8.2.1\\harfbuzzsharp.nativeassets.macos.2.8.2.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\harfbuzzsharp.nativeassets.win32\\2.8.2.1\\harfbuzzsharp.nativeassets.win32.2.8.2.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\livechartscore\\2.0.0-beta.401\\livechartscore.2.0.0-beta.401.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\livechartscore.skiasharpview\\2.0.0-beta.401\\livechartscore.skiasharpview.2.0.0-beta.401.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\livechartscore.skiasharpview.wpf\\2.0.0-beta.401\\livechartscore.skiasharpview.wpf.2.0.0-beta.401.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\materialdesigncolors\\2.0.9\\materialdesigncolors.2.0.9.nupkg.sha512",
-    "C:\\Users\\khoa1\\.nuget\\packages\\materialdesignthemes\\4.6.1\\materialdesignthemes.4.6.1.nupkg.sha512"
+    "C:\\Users\\khoa1\\.nuget\\packages\\materialdesignthemes\\4.6.1\\materialdesignthemes.4.6.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\microsoft.win32.systemevents\\4.5.0\\microsoft.win32.systemevents.4.5.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp\\2.88.1\\skiasharp.2.88.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.harfbuzz\\2.88.1\\skiasharp.harfbuzz.2.88.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.1\\skiasharp.nativeassets.macos.2.88.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.1\\skiasharp.nativeassets.win32.2.88.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.views.desktop.common\\2.88.1\\skiasharp.views.desktop.common.2.88.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.views.wpf\\2.88.1\\skiasharp.views.wpf.2.88.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.drawing.common\\4.5.1\\system.drawing.common.4.5.1.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'LiveCharts 0.9.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "LiveCharts",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'LiveCharts.Wpf 0.9.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "LiveCharts.Wpf",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    }
-  ]
+  "logs": []
 }

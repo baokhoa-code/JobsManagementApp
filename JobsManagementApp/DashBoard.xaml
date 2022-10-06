@@ -609,12 +609,13 @@
 
                 </Grid>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="700"/>
-                        <ColumnDefinition Width="500"/>
-                    </Grid.ColumnDefinitions>
-
+                <Grid Grid.Row="1"
+                    Visibility="Visible">
+                    <DockPanel Margin="0">
+                        <Frame x:Name="mainFrame"
+                            NavigationUIVisibility="Hidden">
+                        </Frame>
+                    </DockPanel>
                 </Grid>
 
             </Grid>

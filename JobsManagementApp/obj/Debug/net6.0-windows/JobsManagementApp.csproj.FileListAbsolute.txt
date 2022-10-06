@@ -36,6 +36,7 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-windows\JobsManagementApp.runtimeconfig.json
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-windows\JobsManagementApp.dll
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-windows\JobsManagementApp.pdb
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-windows\CommunityToolkit.Mvvm.dll
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-windows\HarfBuzzSharp.dll
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-windows\LiveChartsCore.dll
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-windows\LiveChartsCore.SkiaSharpView.dll
@@ -62,6 +63,7 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\Splash.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\UserHomePage.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\App.g.cs
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp_MarkupCompile.cache
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp_MarkupCompile.lref
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\App.baml

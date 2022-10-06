@@ -4,10 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:JobsManagementApp"
+      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1200"
+      FontFamily="Roboto"
       Title="UserHomePage">
-
+    <Page.DataContext>
+        <local:ViewModel />
+    </Page.DataContext>
     <Grid Background="Beige">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="700"/>
@@ -32,6 +36,10 @@
                                             Width="320"
                                             Height="320" Margin="20,0,0,0">
                             </Border>
+                            <lvc:PieChart Series="{Binding Series1}" 
+                                          LegendPosition="Bottom" 
+                                          Width="300" 
+                                          Height="300"/>
                         </Grid>
                         <Grid Grid.Column="1">
                             <Border 
@@ -48,6 +56,9 @@
                                     CornerRadius="25"
                                     Background="white"
                                     Width="670" Margin="25,4,5,37.7"/>
+                    <lvc:CartesianChart Series="{Binding Series2}"
+                                        Width="650"
+                                        Height="300"/>
                 </Grid>
             </Grid>
 

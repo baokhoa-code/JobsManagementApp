@@ -28,7 +28,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+		<PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.401" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
 	</ItemGroup>
 
@@ -63,5 +64,12 @@
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	    <SubType>Designer</SubType>
 	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Model\" />
+	  <Folder Include="Resource\" />
+	  <Folder Include="ViewModel\" />
+	  <Folder Include="View\" />
 	</ItemGroup>
 </Project>

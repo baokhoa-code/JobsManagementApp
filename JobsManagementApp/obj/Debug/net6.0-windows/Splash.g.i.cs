@@ -56,7 +56,7 @@ namespace Jobs_Mangament_System {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/JobsManagementApp;V1.0.0.0;component/splash.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/JobsManagementApp;component/splash.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Splash.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
