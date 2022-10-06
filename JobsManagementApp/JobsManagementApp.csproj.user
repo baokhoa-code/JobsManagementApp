@@ -7,33 +7,36 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="DashBoard.xaml.cs">
+    <Compile Update="View\Admin\DashBoardAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Forgot.xaml.cs">
+    <Compile Update="View\Admin\HomePageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Login.xaml.cs">
+    <Compile Update="View\General\Forgot.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserHomePage.xaml.cs">
+    <Compile Update="View\General\Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\General\Splash.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="DashBoard.xaml">
+    <Page Update="View\Admin\DashBoardAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Forgot.xaml">
+    <Page Update="View\Admin\HomePageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Login.xaml">
+    <Page Update="View\General\Forgot.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="View\General\Login.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserHomePage.xaml">
+    <Page Update="View\General\Splash.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

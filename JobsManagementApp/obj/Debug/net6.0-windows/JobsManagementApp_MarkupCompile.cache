@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\App.xaml
-6-1769018596
+51039837550
 
-9-46046538
+8-1667607626
 206916303116
-DashBoard.xaml;Forgot.xaml;Login.xaml;MainWindow.xaml;Splash.xaml;UserHomePage.xaml;
+View\Admin\DashBoardAdmin.xaml;View\Admin\HomePageAdmin.xaml;View\General\Forgot.xaml;View\General\Login.xaml;View\General\Splash.xaml;
 
 False
 

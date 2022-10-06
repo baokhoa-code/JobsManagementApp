@@ -8,23 +8,23 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="fonts\Roboto-Black.ttf" />
-		<None Remove="fonts\Roboto-BlackItalic.ttf" />
-		<None Remove="fonts\Roboto-Bold.ttf" />
-		<None Remove="fonts\Roboto-BoldItalic.ttf" />
-		<None Remove="fonts\Roboto-Italic.ttf" />
-		<None Remove="fonts\Roboto-Light.ttf" />
-		<None Remove="fonts\Roboto-LightItalic.ttf" />
-		<None Remove="fonts\Roboto-Medium.ttf" />
-		<None Remove="fonts\Roboto-MediumItalic.ttf" />
-		<None Remove="fonts\Roboto-Regular.ttf" />
-		<None Remove="fonts\Roboto-Thin.ttf" />
-		<None Remove="fonts\Roboto-ThinItalic.ttf" />
-		<None Remove="images\avatar.jpg" />
-		<None Remove="images\avatar.png" />
-		<None Remove="images\background.jpg" />
-		<None Remove="images\backgroundSplash.jpg" />
-		<None Remove="images\suitcase.png" />
+		<None Remove="Resource\fonts\Roboto-Black.ttf" />
+		<None Remove="Resource\fonts\Roboto-BlackItalic.ttf" />
+		<None Remove="Resource\fonts\Roboto-Bold.ttf" />
+		<None Remove="Resource\fonts\Roboto-BoldItalic.ttf" />
+		<None Remove="Resource\fonts\Roboto-Italic.ttf" />
+		<None Remove="Resource\fonts\Roboto-Light.ttf" />
+		<None Remove="Resource\fonts\Roboto-LightItalic.ttf" />
+		<None Remove="Resource\fonts\Roboto-Medium.ttf" />
+		<None Remove="Resource\fonts\Roboto-MediumItalic.ttf" />
+		<None Remove="Resource\fonts\Roboto-Regular.ttf" />
+		<None Remove="Resource\fonts\Roboto-Thin.ttf" />
+		<None Remove="Resource\fonts\Roboto-ThinItalic.ttf" />
+		<None Remove="Resource\images\avatar.jpg" />
+		<None Remove="Resource\images\avatar.png" />
+		<None Remove="Resource\images\background.jpg" />
+		<None Remove="Resource\images\backgroundSplash.jpg" />
+		<None Remove="Resource\images\suitcase.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -34,42 +34,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Resource Include="fonts\Roboto-Black.ttf" />
-		<Resource Include="fonts\Roboto-BlackItalic.ttf" />
-		<Resource Include="fonts\Roboto-Bold.ttf" />
-		<Resource Include="fonts\Roboto-BoldItalic.ttf" />
-		<Resource Include="fonts\Roboto-Italic.ttf" />
-		<Resource Include="fonts\Roboto-Light.ttf" />
-		<Resource Include="fonts\Roboto-LightItalic.ttf" />
-		<Resource Include="fonts\Roboto-Medium.ttf" />
-		<Resource Include="fonts\Roboto-MediumItalic.ttf" />
-		<Resource Include="fonts\Roboto-Regular.ttf" />
-		<Resource Include="fonts\Roboto-Thin.ttf" />
-		<Resource Include="fonts\Roboto-ThinItalic.ttf" />
-		<Resource Include="images\avatar.jpg" />
-		<Resource Include="images\avatar.png" />
-		<Resource Include="images\background.jpg" />
-		<Resource Include="images\backgroundSplash.jpg" />
-		<Resource Include="images\suitcase.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Login.xaml.cs">
-	    <SubType>Code</SubType>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Page Update="Login.xaml">
-	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-	    <SubType>Designer</SubType>
-	  </Page>
+		<Resource Include="Resource\fonts\Roboto-Black.ttf" />
+		<Resource Include="Resource\fonts\Roboto-BlackItalic.ttf" />
+		<Resource Include="Resource\fonts\Roboto-Bold.ttf" />
+		<Resource Include="Resource\fonts\Roboto-BoldItalic.ttf" />
+		<Resource Include="Resource\fonts\Roboto-Italic.ttf" />
+		<Resource Include="Resource\fonts\Roboto-Light.ttf" />
+		<Resource Include="Resource\fonts\Roboto-LightItalic.ttf" />
+		<Resource Include="Resource\fonts\Roboto-Medium.ttf" />
+		<Resource Include="Resource\fonts\Roboto-MediumItalic.ttf" />
+		<Resource Include="Resource\fonts\Roboto-Regular.ttf" />
+		<Resource Include="Resource\fonts\Roboto-Thin.ttf" />
+		<Resource Include="Resource\fonts\Roboto-ThinItalic.ttf" />
+		<Resource Include="Resource\images\avatar.jpg" />
+		<Resource Include="Resource\images\avatar.png" />
+		<Resource Include="Resource\images\background.jpg" />
+		<Resource Include="Resource\images\backgroundSplash.jpg" />
+		<Resource Include="Resource\images\suitcase.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Model\" />
-	  <Folder Include="Resource\" />
-	  <Folder Include="ViewModel\" />
-	  <Folder Include="View\" />
+	  <Folder Include="ViewModel\AdminModel\" />
+	  <Folder Include="ViewModel\UserModel\" />
+	  <Folder Include="View\User\" />
 	</ItemGroup>
 </Project>

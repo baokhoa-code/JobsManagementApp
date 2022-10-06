@@ -1,9 +1,8 @@
-﻿
+﻿E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\App.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\DashBoard.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\Forgot.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\Login.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\MainWindow.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\Splash.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\UserHomePage.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\DashBoardAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\HomePageAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\Forgot.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\Login.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\Splash.xaml;;
 
