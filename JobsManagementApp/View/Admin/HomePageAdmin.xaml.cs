@@ -24,5 +24,10 @@ namespace JobsManagementApp.View.Admin
         {
             InitializeComponent();
         }
+
+        private void test_click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

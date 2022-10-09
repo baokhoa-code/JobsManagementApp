@@ -26,7 +26,7 @@ namespace JobsManagementApp.View.General
         {
             InitializeComponent();
             dT.Tick += new EventHandler(dt_Tick);
-            dT.Interval = new TimeSpan(0, 0, 4);
+            dT.Interval = new TimeSpan(0, 0, 2);
             dT.Start();
         }
 
