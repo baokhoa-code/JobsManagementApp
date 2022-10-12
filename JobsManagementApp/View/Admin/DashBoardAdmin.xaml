@@ -48,8 +48,8 @@
                         <Grid Grid.Row="1">
                             <Border 
                                 CornerRadius="15"
-                                Background="#5051F9"
-                                BorderBrush="#5051F9"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
                                 Height="50"
                                 Width="160">
                                 <Grid
@@ -64,11 +64,11 @@
                                         VerticalAlignment="Center" 
                                         Margin="10,0,0,0"
                                         Padding="0"
-                                        Foreground="white"/>
+                                        Foreground="black"/>
                                     <Label 
                                         Content="Dash Board" 
                                         FontSize="16" 
-                                        Foreground="white" 
+                                        Foreground="black" 
                                         Width="100" Height="30" 
                                         HorizontalAlignment="Center" 
                                         VerticalAlignment="Center" 

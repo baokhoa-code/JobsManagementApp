@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zwWM5cLVmY5rL5gnIBlPrRD3c56rGZ8JUOO+vrkLyGIbXx2qcU/F0rAi+dX2O2R7WMP8UgGQl0y758dlC/8CBA==",
+  "dgSpecHash": "SJjnxt3mXSX7ulwGzA7c9jCJQZP6bbvxWh+55PDKgDGzJAUbGvni59DbQgyDRWGUJhqNkac2R8omhFdGHlt8pg==",
   "success": true,
   "projectFilePath": "E:\\CODE\\NLCN\\PROJECT\\JobsManagementApp\\JobsManagementApp\\JobsManagementApp.csproj",
   "expectedPackageFiles": [
@@ -21,7 +21,19 @@
     "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.1\\skiasharp.nativeassets.win32.2.88.1.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.views.desktop.common\\2.88.1\\skiasharp.views.desktop.common.2.88.1.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.views.wpf\\2.88.1\\skiasharp.views.wpf.2.88.1.nupkg.sha512",
-    "C:\\Users\\khoa1\\.nuget\\packages\\system.drawing.common\\4.5.1\\system.drawing.common.4.5.1.nupkg.sha512"
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.drawing.common\\4.5.1\\system.drawing.common.4.5.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.windows.interactivity.wpf\\2.0.20525\\system.windows.interactivity.wpf.2.0.20525.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Windows.Interactivity.WPF 2.0.20525' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "System.Windows.Interactivity.WPF",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
 }

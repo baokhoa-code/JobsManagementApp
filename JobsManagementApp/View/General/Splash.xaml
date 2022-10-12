@@ -13,6 +13,17 @@
         Background="Transparent"
         ResizeMode="NoResize"
         Title="Splash" Height="330" Width="650">
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Duration="00:00:35" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
     <Grid>
         <Border CornerRadius="25" Padding="0,0,0,10">
             <Border.Background>

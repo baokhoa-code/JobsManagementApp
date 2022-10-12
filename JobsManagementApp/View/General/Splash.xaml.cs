@@ -26,13 +26,13 @@ namespace JobsManagementApp.View.General
         {
             InitializeComponent();
             dT.Tick += new EventHandler(dt_Tick);
-            dT.Interval = new TimeSpan(0, 0, 2);
+            dT.Interval = new TimeSpan(0, 0, 4);
             dT.Start();
         }
 
         private void dt_Tick(object sender, EventArgs e)
         {
-            DashBoardAdmin db = new DashBoardAdmin();
+            LoginWindow db = new LoginWindow();
             db.Show();
             dT.Stop();
             this.Close();

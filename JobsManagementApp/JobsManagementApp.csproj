@@ -31,6 +31,7 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.401" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
+		<PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -54,6 +55,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Model\" />
+	  <Folder Include="Util\" />
 	  <Folder Include="ViewModel\AdminModel\" />
 	  <Folder Include="ViewModel\UserModel\" />
 	  <Folder Include="View\User\" />

@@ -22,7 +22,8 @@ namespace JobsManagementApp.View.Admin
         public DashBoardAdmin()
         {
             InitializeComponent();
-            mainFrame.Navigate(new HomePageAdmin());
+            //mainFrame.Navigate(new HomePageAdmin());
+            mainFrame.Navigate(new JobsListPageAdmin());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

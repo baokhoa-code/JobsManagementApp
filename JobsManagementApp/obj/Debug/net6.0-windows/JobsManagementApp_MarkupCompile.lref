@@ -1,8 +1,11 @@
 ﻿
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\App.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\Resource\MainResource.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\DashBoardAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\HomePageAdmin.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\Forgot.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\Login.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\JobsListPageAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\ForgotPage.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\LoginPage.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\LoginWindow.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\Splash.xaml;;
 

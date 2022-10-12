@@ -23,6 +23,7 @@ namespace JobsManagementApp.View.Admin
         public HomePageAdmin()
         {
             InitializeComponent();
+            
         }
 
         private void test_click(object sender, RoutedEventArgs e)

@@ -8,6 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C21C442-2F95-441D-AD39-0A8BBE5B626D}"
 	ProjectSection(SolutionItems) = preProject
 		DuPhong.txt = DuPhong.txt
+		JobsManagementApp\View\General\Forgot.xaml = JobsManagementApp\View\General\Forgot.xaml
+		JobsManagementApp\View\General\Forgot.xaml.cs = JobsManagementApp\View\General\Forgot.xaml.cs
+		JobsManagementApp\View\General\Login.xaml = JobsManagementApp\View\General\Login.xaml
+		JobsManagementApp\View\General\Login.xaml.cs = JobsManagementApp\View\General\Login.xaml.cs
 	EndProjectSection
 EndProject
 Global

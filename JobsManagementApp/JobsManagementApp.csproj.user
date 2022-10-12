@@ -13,10 +13,16 @@
     <Compile Update="View\Admin\HomePageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\General\Forgot.xaml.cs">
+    <Compile Update="View\Admin\JobsListPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\General\Login.xaml.cs">
+    <Compile Update="View\General\ForgotPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\General\LoginPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\General\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\General\Splash.xaml.cs">
@@ -24,16 +30,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Resource\MainResource.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Admin\DashBoardAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\HomePageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\General\Forgot.xaml">
+    <Page Update="View\Admin\JobsListPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\General\Login.xaml">
+    <Page Update="View\General\ForgotPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\General\LoginPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\General\LoginWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\General\Splash.xaml">

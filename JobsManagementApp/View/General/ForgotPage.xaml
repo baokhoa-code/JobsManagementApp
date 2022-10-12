@@ -1,0 +1,312 @@
+﻿<Page x:Class="JobsManagementApp.View.General.ForgotPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JobsManagementApp.View.General"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      mc:Ignorable="d" 
+      d:DesignHeight="451" d:DesignWidth="429"
+      Title="ForgotPage"
+      x:Name="forgotpage"
+      DataContext="{StaticResource LoginVM}">
+    
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <ThicknessAnimation 
+                        Storyboard.TargetName="forgotpage"
+                        Storyboard.TargetProperty="Margin"
+                        From="440,0,0,0"
+                        To="0"
+                        Duration="0:0:0.35" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Label 
+                Cursor="Hand"
+                Height="45"
+                Grid.Row="0"
+                Width="45"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                x:Name="lbl" Margin="5,-45,0,0">
+                <materialDesign:PackIcon 
+                    Kind="ArrowLeft"
+                    Height="45"
+                    Width="45"
+                    Foreground="White" 
+                    HorizontalAlignment="Left"/>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding CancelCM}"
+                                               CommandParameter="{Binding ElementName=lbl}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Label>
+
+            <Label 
+                Content="Forgot Password" 
+                FontWeight="Bold" 
+                Foreground="White" 
+                FontSize="36" 
+                Height="60" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Center" 
+                Margin="0,-5,0,0"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBox    
+                Name="txb_email"
+                FontSize="17"
+                FontFamily="Roboto"
+                Foreground="White" 
+                BorderBrush="#FFAFAFAF" 
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                Height="55" Width="350"
+                materialDesign:HintAssist.Hint="Email"/>
+            <Button
+                x:Name="btn_del_email"
+                MouseMove="btn_del_email_mouse_move_handle"
+                MouseLeave="btn_del_email_mouse_leave_handle"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Height="25"
+                Width="25"
+                VerticalAlignment="Bottom"
+                Padding="0,0,0,0" 
+                Margin="0,0,35,15">
+                <materialDesign:PackIcon 
+                    x:Name="icon_del_email"
+                    Kind="CloseCircleOutline"
+                    Height="20"
+                    Width="20"
+                    Foreground="#FFAFAFAF"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            Width="25" 
+                            Height="25"
+                            CornerRadius="5"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <ComboBox
+                Name="cbx_question"
+                materialDesign:HintAssist.Hint="Please choose the question" 
+                FontSize="17"
+                FontFamily="Roboto"
+                Foreground="White" BorderBrush="#FFAFAFAF"
+                Height="55" Width="350"
+                VerticalContentAlignment="Center">
+                <ComboBoxItem
+                    Cursor="Hand"
+                    Width="350"
+                    Foreground="#FFAFAFAF"
+                    Content="What is your nick name?" />
+                <ComboBoxItem
+                    Cursor="Hand"
+                    Width="350"
+                    Foreground="#FFAFAFAF"
+                    Content="What is the name of your first pet?" />
+                <ComboBoxItem
+                    Cursor="Hand"
+                    Width="350"
+                    Foreground="#FFAFAFAF"
+                    Content="What elementary school did you attend?" />
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <TextBox    
+                Name="txb_answer"
+                materialDesign:HintAssist.Hint="Your answer"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                FontSize="17"
+                FontFamily="Roboto"
+                Height="55" Width="350"
+                Foreground="White" 
+                BorderBrush="#FFAFAFAF"/>
+            <Button     
+                x:Name="btn_del_answer"
+                MouseMove="btn_del_answer_mouse_move_handle"
+                MouseLeave="btn_del_answer_mouse_leave_handle"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Height="25"
+                Width="25"
+                VerticalAlignment="Bottom"
+                Padding="0,0,0,0" 
+                Margin="0,0,35,15">
+                <materialDesign:PackIcon 
+                    x:Name="icon_del_answer"
+                    Kind="CloseCircleOutline"
+                    Height="20"
+                    Width="20"
+                    Foreground="#FFAFAFAF"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            Width="25" Height="25"
+                            CornerRadius="5"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <PasswordBox    
+                Name="passb_new_password"
+                materialDesign:HintAssist.Hint="Your new password"
+                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                FontFamily="Roboto"
+                FontSize="17"
+                Foreground="White" BorderBrush="#FFAFAFAF"
+                Height="55" Width="350"
+                Visibility="Visible"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+            <TextBox    
+                Name="txb_new_password"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                FontSize="17"
+                Foreground="White" BorderBrush="#FFAFAFAF"  
+                Visibility="Hidden"
+                Height="55" Width="350"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+            <Button     
+                x:Name="btn_new_pass"  
+                MouseMove="btn_new_pass_mouse_move_handle"
+                MouseLeave="btn_new_pass_mouse_leave_handle"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Height="25"
+                Width="25"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Padding="0,0,0,0" 
+                Margin="0,0,60,15">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border 
+                            Width="25" Height="25"
+                            CornerRadius="5"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <materialDesign:PackIcon 
+                    Kind="Eye"
+                    x:Name="icon_new_pass"
+                    Height="20"
+                    Width="20"
+                    Foreground="#FFAFAFAF" 
+                    HorizontalAlignment="Center"/>
+            </Button>
+            <Button     
+                x:Name="btn_del_new_pass"
+                MouseMove="btn_del_new_pass_mouse_move_handle"
+                MouseLeave="btn_del_new_pass_mouse_leave_handle"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                VerticalAlignment="Bottom"
+                Height="25"
+                Width="25"
+                Padding="0,0,0,0" Margin="0,0,35,15">
+                <materialDesign:PackIcon 
+                    x:Name="icon_del_new_pass"
+                    Kind="CloseCircleOutline"
+                    Height="20"
+                    Width="20"
+                    Foreground="#FFAFAFAF"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            Width="25" Height="25"
+                            CornerRadius="5"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <Grid 
+            Grid.Row="5" 
+            Height="115" 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Right" 
+            Width="429">
+            <Button
+                Name="btn_change"
+                MouseMove="btn_change_mouse_move_handle"
+                MouseLeave="btn_change_mouse_leave_handle"
+                Width="150" 
+                Height="40" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                BorderBrush="#FF40CC6F" 
+                Background="#FF40CC6F">
+                <TextBlock 
+                    Text="Change" 
+                    FontSize="18" 
+                    FontWeight="Bold" />
+            </Button>
+        </Grid>
+
+    </Grid>
+
+</Page>
