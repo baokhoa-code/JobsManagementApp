@@ -12,6 +12,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="NoResize"
+        Icon="/Resource/images/suitcase.png"
         Title="Splash" Height="330" Width="650">
 
     <Window.Triggers>

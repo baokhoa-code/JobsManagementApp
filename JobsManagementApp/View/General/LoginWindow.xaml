@@ -15,6 +15,7 @@
         ResizeMode="NoResize"
         FontFamily="Roboto"
         Height="500" Width="860"
+        Icon="/Resource/images/suitcase.png"
         Title="Login" 
         x:Name="loginWindow"
         DataContext="{StaticResource LoginVM}">
