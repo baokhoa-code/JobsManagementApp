@@ -27,57 +27,62 @@ namespace JobsManagementApp.View.General
         private void btn_del_email_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_email.Foreground = (Brush)bc.ConvertFrom("#FFFFFF");
+            icon_del_email.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
         }
         private void btn_del_email_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_email.Foreground = (Brush)bc.ConvertFrom("#FFAFAFAF");
+            icon_del_email.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
         }
         private void btn_del_answer_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_answer.Foreground = (Brush)bc.ConvertFrom("#FFFFFF");
+            icon_del_answer.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
         }
         private void btn_del_answer_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_answer.Foreground = (Brush)bc.ConvertFrom("#FFAFAFAF");
+            icon_del_answer.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
         }
 
         private void btn_del_new_pass_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_new_pass.Foreground = (Brush)bc.ConvertFrom("#FFFFFF");
+            icon_del_new_pass.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
         }
         private void btn_del_new_pass_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_new_pass.Foreground = (Brush)bc.ConvertFrom("#FFAFAFAF");
+            icon_del_new_pass.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
         }
         private void btn_new_pass_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_new_pass.Foreground = (Brush)bc.ConvertFrom("#FFFFFF");
+            icon_new_pass.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
         }
         private void btn_new_pass_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_new_pass.Foreground = (Brush)bc.ConvertFrom("#FFAFAFAF");
+            icon_new_pass.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
         }
         private void btn_change_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            btn_change.Foreground = (Brush)bc.ConvertFrom("#FFFFFF");
-            btn_change.BorderBrush = (Brush)bc.ConvertFrom("#FF44EE7D");
-            btn_change.Background = (Brush)bc.ConvertFrom("#FF44EE7D");
+            btn_change.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
+            btn_change.BorderBrush = (Brush?)bc.ConvertFrom("#FF44EE7D");
+            btn_change.Background = (Brush?)bc.ConvertFrom("#FF44EE7D");
         }
         private void btn_change_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            btn_change.Foreground = (Brush)bc.ConvertFrom("#DDFFFFFF");
-            btn_change.BorderBrush = (Brush)bc.ConvertFrom("#FF40CC6F");
-            btn_change.Background = (Brush)bc.ConvertFrom("#FF40CC6F");
+            btn_change.Foreground = (Brush?)bc.ConvertFrom("#DDFFFFFF");
+            btn_change.BorderBrush = (Brush?)bc.ConvertFrom("#FF40CC6F");
+            btn_change.Background = (Brush?)bc.ConvertFrom("#FF40CC6F");
+        }
+
+        private void cbx_question_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

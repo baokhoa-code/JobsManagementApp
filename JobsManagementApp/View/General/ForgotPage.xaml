@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:JobsManagementApp.View.General"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="451" d:DesignWidth="429"
       Title="ForgotPage"

@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
@@ -31,7 +32,9 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.401" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
-		<PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+		<PackageReference Include="MySql.Data" Version="8.0.31" />
+		<PackageReference Include="System.Runtime.Numerics" Version="4.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,10 +58,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Model\" />
-	  <Folder Include="Util\" />
 	  <Folder Include="ViewModel\AdminModel\" />
 	  <Folder Include="ViewModel\UserModel\" />
-	  <Folder Include="View\User\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="MySql.Data">
+	    <HintPath>bin\Debug\MySql.Data.DLL</HintPath>
+	  </Reference>
 	</ItemGroup>
 </Project>

@@ -1,39 +1,55 @@
 {
   "version": 2,
-  "dgSpecHash": "SJjnxt3mXSX7ulwGzA7c9jCJQZP6bbvxWh+55PDKgDGzJAUbGvni59DbQgyDRWGUJhqNkac2R8omhFdGHlt8pg==",
+  "dgSpecHash": "YP2u1c8+nnRLp4gwsw1EArKMnPqMdGQPjBFxO43PdzaHvCX7IEmzj9Cz88rywhNgNc6S+v3pOgIuwXffYfsOCg==",
   "success": true,
   "projectFilePath": "E:\\CODE\\NLCN\\PROJECT\\JobsManagementApp\\JobsManagementApp\\JobsManagementApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\khoa1\\.nuget\\packages\\communitytoolkit.mvvm\\8.0.0\\communitytoolkit.mvvm.8.0.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\harfbuzzsharp\\2.8.2.1\\harfbuzzsharp.2.8.2.1.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\harfbuzzsharp.nativeassets.macos\\2.8.2.1\\harfbuzzsharp.nativeassets.macos.2.8.2.1.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\harfbuzzsharp.nativeassets.win32\\2.8.2.1\\harfbuzzsharp.nativeassets.win32.2.8.2.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\k4os.compression.lz4.streams\\1.2.6\\k4os.compression.lz4.streams.1.2.6.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\livechartscore\\2.0.0-beta.401\\livechartscore.2.0.0-beta.401.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\livechartscore.skiasharpview\\2.0.0-beta.401\\livechartscore.skiasharpview.2.0.0-beta.401.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\livechartscore.skiasharpview.wpf\\2.0.0-beta.401\\livechartscore.skiasharpview.wpf.2.0.0-beta.401.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\materialdesigncolors\\2.0.9\\materialdesigncolors.2.0.9.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\materialdesignthemes\\4.6.1\\materialdesignthemes.4.6.1.nupkg.sha512",
-    "C:\\Users\\khoa1\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
-    "C:\\Users\\khoa1\\.nuget\\packages\\microsoft.win32.systemevents\\4.5.0\\microsoft.win32.systemevents.4.5.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\mysql.data\\8.0.31\\mysql.data.8.0.31.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp\\2.88.1\\skiasharp.2.88.1.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.harfbuzz\\2.88.1\\skiasharp.harfbuzz.2.88.1.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.1\\skiasharp.nativeassets.macos.2.88.1.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.1\\skiasharp.nativeassets.win32.2.88.1.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.views.desktop.common\\2.88.1\\skiasharp.views.desktop.common.2.88.1.nupkg.sha512",
     "C:\\Users\\khoa1\\.nuget\\packages\\skiasharp.views.wpf\\2.88.1\\skiasharp.views.wpf.2.88.1.nupkg.sha512",
-    "C:\\Users\\khoa1\\.nuget\\packages\\system.drawing.common\\4.5.1\\system.drawing.common.4.5.1.nupkg.sha512",
-    "C:\\Users\\khoa1\\.nuget\\packages\\system.windows.interactivity.wpf\\2.0.20525\\system.windows.interactivity.wpf.2.0.20525.nupkg.sha512"
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.configuration.configurationmanager\\4.4.1\\system.configuration.configurationmanager.4.4.1.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.runtime.numerics\\4.3.0\\system.runtime.numerics.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.4.0\\system.security.cryptography.protecteddata.4.4.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.text.encoding.codepages\\4.4.0\\system.text.encoding.codepages.4.4.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
+    "C:\\Users\\khoa1\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.Windows.Interactivity.WPF 2.0.20525' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "System.Windows.Interactivity.WPF",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    }
-  ]
+  "logs": []
 }

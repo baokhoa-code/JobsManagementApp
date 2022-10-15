@@ -28,6 +28,9 @@
     <Compile Update="View\General\Splash.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\User\DashBoardUser.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Resource\MainResource.xaml">
@@ -52,6 +55,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\General\Splash.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\User\DashBoardUser.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

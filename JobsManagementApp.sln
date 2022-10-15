@@ -7,6 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobsManagementApp", "JobsMa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C21C442-2F95-441D-AD39-0A8BBE5B626D}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		DuPhong.txt = DuPhong.txt
 		JobsManagementApp\View\General\Forgot.xaml = JobsManagementApp\View\General\Forgot.xaml
 		JobsManagementApp\View\General\Forgot.xaml.cs = JobsManagementApp\View\General\Forgot.xaml.cs

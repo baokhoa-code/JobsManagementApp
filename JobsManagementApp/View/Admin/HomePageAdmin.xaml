@@ -407,7 +407,6 @@
                         </TabControl.Resources>
                         
                         <TabItem Header="Today" >
-
                             <StackPanel Width="600">
                                 <ContentControl 
                                     ContentTemplate="{StaticResource testTemplate}" />
@@ -415,24 +414,14 @@
                                     ContentTemplate="{StaticResource testTemplate}" />
                                 <ContentControl 
                                     ContentTemplate="{StaticResource testTemplate}" />
-                                <ContentControl 
-                                    ContentTemplate="{StaticResource testTemplate}" />
-                                <ContentControl 
-                                    ContentTemplate="{StaticResource testTemplate}" />
-                                <ContentControl 
-                                    ContentTemplate="{StaticResource testTemplate}" />
                             </StackPanel>
-
                         </TabItem>
-                        
                         <TabItem Header="Pending">
 
                         </TabItem>
-                        
                         <TabItem Header="Lated">
-                            
+
                         </TabItem>
-                        
                     </TabControl>
                 </Grid>
             </Grid>

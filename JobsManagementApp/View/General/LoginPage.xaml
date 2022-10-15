@@ -5,13 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:JobsManagementApp.View.General"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="451" d:DesignWidth="429"
       Title="LoginPage"
       x:Name="loginpage"
-      DataContext="{StaticResource LoginVM}">
-    
+      DataContext="{StaticResource LoginVM}"
+      PreviewKeyUp="mainPage_PreviewKeyUp">
+
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
             <BeginStoryboard>
@@ -25,23 +26,24 @@
             </BeginStoryboard>
         </EventTrigger>
     </Page.Triggers>
-    
+
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="112"></RowDefinition>
-            <RowDefinition Height="112"></RowDefinition>
-            <RowDefinition Height="112"></RowDefinition>
-            <RowDefinition Height="115"></RowDefinition>
+            <RowDefinition Height="92"></RowDefinition>
+            <RowDefinition Height="95"></RowDefinition>
+            <RowDefinition Height="95"></RowDefinition>
+            <RowDefinition Height="95"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            
+
             <Label 
                 Content="Welcome" 
                 FontWeight="Bold" 
                 Foreground="White" 
-                FontSize="36" 
+                FontSize="35" 
                 Height="50" 
                 VerticalAlignment="Top" 
                 Margin="0,10,0,0" 
@@ -49,29 +51,80 @@
             <Label 
                 Content="Please login to your account" 
                 Foreground="#FFAFAFAF" 
-                FontSize="16" 
+                FontSize="15" 
                 Height="40" 
                 VerticalAlignment="Top" 
                 Margin="115,60,114,0"/>
         </Grid>
 
         <Grid Grid.Row="1">
+            <materialDesign:PackIcon 
+                Kind="CompareHorizontal"
+                Height="33"
+                Width="33"
+                Margin="45,40,0,0" Foreground="White"
+                Padding="0"/>
             <Label 
-                Content="Enter your email" 
+                Content="Choose your role" 
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top" 
                 Height="40" 
                 Width="200" 
                 Foreground="#DDFFFFFF" 
-                FontSize="17" Background="{x:Null}" Margin="45,15,0,0"/>
-            <TextBox    
-                Name="txb_email"
+                FontSize="16" Background="{x:Null}" Margin="80,10,0,0"/>
+            <ComboBox
+                SelectedItem="{Binding SelectedRole}"
+                Cursor="Hand"
+                Name="cbx_role"
                 FontSize="15"
-                Margin="49,25,49,35" 
-                Height="52" Width="329"
+                Margin="85,20,0,0" 
+                Height="52" Width="150"
+                Padding="0,0,0,10"
+                Foreground="White" 
+                BorderBrush="#FFAFAFAF" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                VerticalContentAlignment="Bottom" FontFamily="Roboto">
+                <ComboBoxItem
+                    Cursor="Hand"
+                    Width="300"
+                    Foreground="#FFAFAFAF"
+                    Content="Admin" />
+                <ComboBoxItem
+                    Cursor="Hand"
+                    Width="300"
+                    Foreground="#FFAFAFAF"
+                    Content="User" />
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <materialDesign:PackIcon 
+                x:Name="account_icon"
+                Kind="Account"
+                Height="33"
+                Width="33"
+                Padding="0"
+                Margin="45,40,0,0" Foreground="White" />
+            <Label 
+                Content="Enter your username" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" 
+                Height="40" 
+                Width="200" 
+                Foreground="#DDFFFFFF" 
+                FontSize="16" Background="{x:Null}" Margin="80,10,0,0"/>
+            <TextBox    
+                
+                Name="txb_email"
+                Text="{Binding Username}"
+                FontSize="15"
+                Margin="85,20,0,0" 
+                Height="52" Width="300"
+                VerticalContentAlignment="Bottom"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                 Foreground="White" 
-                BorderBrush="#FFAFAFAF"/>
+                BorderBrush="#FFAFAFAF" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Roboto" Padding="0,0,0,10"/>
             <Button   
                 MouseMove="btn_del_email_mouse_move_handle"
                 MouseLeave="btn_del_email_mouse_leave_handle"
@@ -84,7 +137,7 @@
                 Height="26"
                 Width="25"
                 Padding="0,0,0,0"
-                Margin="357,0,0,0">
+                Margin="365,20,0,0">
                 <materialDesign:PackIcon 
                     Kind="CloseCircleOutline"
                     Name="icon_del_email"
@@ -92,7 +145,7 @@
                     Width="20"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center" 
-                    Foreground="#FFAFAFAF"/>
+                    Foreground="#FFAFAFAF" Margin="0,0,5,0"/>
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border 
@@ -109,13 +162,20 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3
+              ">
+            <materialDesign:PackIcon 
+                Kind="Lock"
+                Height="30"
+                Width="30"
+                HorizontalAlignment="Left"
+                Margin="46,40,0,0" Foreground="White" />
             <Label 
                 Content="Enter your Password" 
                 Width="200" 
                 Height="40" 
-                FontSize="17" 
-                Margin="45,15,0,0" 
+                FontSize="16" 
+                Margin="80,10,0,0" 
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Foreground="#DDFFFFFF" 
@@ -123,23 +183,30 @@
             <PasswordBox    
                 Name="passb_password"
                 FontSize="15"
-                Margin="49,25,49,35" 
+                Margin="85,20,0,0" 
                 Height="52" 
-                Width="329"
+                Width="300"
                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                 Visibility="Visible"
                 Foreground="White" 
-                BorderBrush="#FFAFAFAF" />
+                BorderBrush="#FFAFAFAF" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Roboto" VerticalContentAlignment="Bottom" Padding="0,0,0,10">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <i:InvokeCommandAction Command="{Binding PasswordChangedCM}"
+                                               CommandParameter="{Binding ElementName=passb_password}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
             <TextBox    
                 Name="txb_password"
                 FontSize="15"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                Margin="49,25,49,35" 
+                Margin="85,20,0,0" 
                 Height="52" 
-                Width="329"
+                Width="300"
                 Foreground="White" 
                 BorderBrush="#FFAFAFAF"  
-                Visibility="Hidden"/>
+                Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,10" VerticalContentAlignment="Bottom"/>
             <Button     
                 MouseMove="btn_password_mouse_move_handle"
                 MouseLeave="btn_password_mouse_leave_handle"
@@ -148,11 +215,11 @@
                 HorizontalAlignment="Left"
                 Background="Transparent"
                 BorderBrush="Transparent"
-                VerticalAlignment="Top"
+                VerticalAlignment="Center"
                 Height="25"
                 Width="25"
                 Padding="0,0,0,0"
-                Margin="354,50,0,0">
+                Margin="340,20,0,0">
                 <materialDesign:PackIcon 
                     Kind="Eye"
                     Name="icon_eye"
@@ -182,11 +249,11 @@
                 HorizontalAlignment="Left"
                 Background="Transparent"
                 BorderBrush="Transparent"
-                VerticalAlignment="Top"
+                VerticalAlignment="Center"
                 Height="25"
                 Width="25"
                 Padding="0,0,0,0"
-                Margin="325,50,0,0">
+                Margin="365,20,0,0">
                 <materialDesign:PackIcon 
                     Kind="CloseCircleOutline"
                     Name="icon_del_pass"
@@ -209,10 +276,16 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+            <Label
+                x:Name="Error"
+                FontSize="13"
+                Foreground="Red" 
+                Padding="0" Height="20" Margin="0,70,0,0" Width="150" HorizontalAlignment="Center"
+                />
         </Grid>
 
         <Grid 
-            Grid.Row="3" 
+            Grid.Row="4" 
             Height="115" 
             VerticalAlignment="Center" 
             HorizontalAlignment="Right" 
@@ -224,33 +297,37 @@
                 Content="Forgot Password?"
                 Foreground="#FFAAAAAA"
                 FontSize="14"
-                Margin="35,30,0,0"
                 FontWeight="Normal"
                 Background="Transparent"
-                BorderBrush="Transparent"
-                VerticalAlignment="Top" 
-                HorizontalAlignment="Left" 
+                BorderBrush="Transparent" 
                 Width="140"
                 HorizontalContentAlignment="Right"
-                Command="{Binding ForgotPassCM}"/>
-            <Button
-                MouseMove="btn_login_mouse_move_handle"
-                MouseLeave="btn_login_mouse_leave_handle"
-                Name="btn_login"
+                Command="{Binding ForgotPassCM}" FontFamily="Roboto" HorizontalAlignment="Left" Margin="35,0,0,0"/>
+            <Button 
+                Padding="0"
+                Content="Login"
+                x:Name="loginbtn"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                materialDesign:ButtonAssist.CornerRadius="20"
-                Height="45" 
-                Width="110" 
-                Margin="0,23,50,0" 
-                VerticalAlignment="Top" 
-                HorizontalAlignment="Right" 
+                materialDesign:ButtonAssist.CornerRadius="10"
                 BorderBrush="#FF40CC6F" 
                 Background="#FF40CC6F"
-                Content="Login"
-                FontSize="18"
-                FontWeight="Bold"/>
-
+                FontSize="16"
+                FontWeight="Bold"
+                Height="40" 
+                Width="100" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Right" 
+                Command="{Binding LoginCM}"
+                CommandParameter="{Binding ElementName=Error}"
+                Click="loginbtn_Click" Margin="0,-1,45,0" FontFamily="Roboto">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction Command="{Binding SaveLoginBtnCM}"
+                                                       CommandParameter="{Binding ElementName=loginbtn}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
 
         </Grid>
 

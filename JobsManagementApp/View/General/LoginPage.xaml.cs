@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JobsManagementApp.ViewModel;
+using JobsManagementApp.ViewModel.GeneralModel;
 
 namespace JobsManagementApp.View.General
 {
@@ -21,9 +23,22 @@ namespace JobsManagementApp.View.General
     /// </summary>
     public partial class LoginPage : Page
     {
+
         public LoginPage()
         {
             InitializeComponent();
+        }
+
+        private void mainPage_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Return)
+            {
+                passb_password.Focus();
+                txb_email.Focus();
+                var viewmodel = (LoginViewModel)DataContext;
+                if (viewmodel.LoginCM.CanExecute(true))
+                    viewmodel.LoginCM.Execute(Error);
+            }
         }
         private void btn_password_click(object sender, RoutedEventArgs e)
         {
@@ -54,7 +69,11 @@ namespace JobsManagementApp.View.General
             txb_password.Text = "";
             passb_password.Password = "";
         }
-
+        private void loginbtn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            passb_password.Focus();
+            txb_email.Focus();
+        }
         public class NotEmptyValidationRule : ValidationRule
         {
             public override ValidationResult Validate(object value, CultureInfo cultureInfo)
@@ -68,66 +87,68 @@ namespace JobsManagementApp.View.General
         private void forgot_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            forgot_btn.Foreground = (Brush)bc.ConvertFrom("#FFF36565");
+            forgot_btn.Foreground = (Brush?)bc.ConvertFrom("#FFF36565");
         }
 
         private void forgot_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            forgot_btn.Foreground = (Brush)bc.ConvertFrom("#FFAAAAAA");
+            forgot_btn.Foreground = (Brush?)bc.ConvertFrom("#FFAAAAAA");
         }
 
         private void btn_del_email_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_email.Foreground = (Brush)bc.ConvertFrom("#FFFFFF");
+            icon_del_email.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
         }
 
         private void btn_del_email_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_email.Foreground = (Brush)bc.ConvertFrom("#FFAFAFAF");
+            icon_del_email.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
         }
 
         private void btn_del_pass_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_pass.Foreground = (Brush)bc.ConvertFrom("#FFFFFF");
+            icon_del_pass.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
         }
 
         private void btn_del_pass_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_del_pass.Foreground = (Brush)bc.ConvertFrom("#FFAFAFAF");
+            icon_del_pass.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
         }
 
         private void btn_password_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_eye.Foreground = (Brush)bc.ConvertFrom("#FFFFFF");
+            icon_eye.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
         }
 
         private void btn_password_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            icon_eye.Foreground = (Brush)bc.ConvertFrom("#FFAFAFAF");
+            icon_eye.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
         }
 
-        private void btn_login_mouse_move_handle(object sender, MouseEventArgs e)
+        private void loginbtn_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            btn_login.Foreground = (Brush)bc.ConvertFrom("#FFFFFF");
-            btn_login.BorderBrush = (Brush)bc.ConvertFrom("#FF44EE7D");
-            btn_login.Background = (Brush)bc.ConvertFrom("#FF44EE7D");
+            loginbtn.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
+            loginbtn.BorderBrush = (Brush?)bc.ConvertFrom("#FF44EE7D");
+            loginbtn.Background = (Brush?)bc.ConvertFrom("#FF44EE7D");
         }
 
-        private void btn_login_mouse_leave_handle(object sender, MouseEventArgs e)
+        private void loginbtn_mouse_leave_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
-            btn_login.Foreground = (Brush)bc.ConvertFrom("#DDFFFFFF");
-            btn_login.BorderBrush = (Brush)bc.ConvertFrom("#FF40CC6F");
-            btn_login.Background = (Brush)bc.ConvertFrom("#FF40CC6F");
+            loginbtn.Foreground = (Brush?)bc.ConvertFrom("#DDFFFFFF");
+            loginbtn.BorderBrush = (Brush?)bc.ConvertFrom("#FF40CC6F");
+            loginbtn.Background = (Brush?)bc.ConvertFrom("#FF40CC6F");
         }
+
+
     }
 
 
