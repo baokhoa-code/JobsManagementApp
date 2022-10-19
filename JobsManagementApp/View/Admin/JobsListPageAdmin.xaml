@@ -11,6 +11,7 @@
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
       Title="JobsListPageAdmin">
+    
     <Page.Resources>
         <DataTemplate x:Key="testTemplate">
 
@@ -175,7 +176,6 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="5,20,0,0">
@@ -285,146 +285,7 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1" Margin="5,0,0,0">
-                <ComboBox
-                    Width="150"
-                    Height="30"
-                    Padding="10,0,10,0"
-                    BorderBrush="#232360"
-                    BorderThickness="2"
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                    materialDesign:HintAssist.Hint="Category"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" 
-                    HorizontalContentAlignment="Left"
-                    VerticalContentAlignment="Center" Margin="20,0,0,0"/>
-                <ComboBox
-                    Width="150"
-                    Height="30"
-                    Padding="10,0,10,0"
-                    BorderBrush="#232360"
-                    BorderThickness="2"
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                    materialDesign:HintAssist.Hint="Assignor"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" 
-                    HorizontalContentAlignment="Left"
-                    VerticalContentAlignment="Center" Margin="190,0,0,0"/>
-                <ComboBox
-                    Width="150"
-                    Height="30"
-                    Padding="10,0,10,0"
-                    BorderBrush="#232360"
-                    BorderThickness="2"
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                    materialDesign:HintAssist.Hint="Dependency"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" 
-                    HorizontalContentAlignment="Left"
-                    VerticalContentAlignment="Center" Margin="360,0,0,0"/>
-                <Border 
-                    CornerRadius="10"
-                    BorderBrush="#232360" 
-                    BorderThickness="2" 
-                    Height="30" Width="250" 
-                    HorizontalAlignment="Left" Background="White" Margin="530,0,0,0">
-                    <Grid>
-                        <Button 
-                            Style="{DynamicResource MaterialDesignToolButton}" 
-                            HorizontalAlignment="Left" 
-                            VerticalAlignment="Center" 
-                            Margin="5,0,0,0" Padding="0" FontSize="13" >
-                            <materialDesign:PackIcon 
-                                Kind="Magnify"
-                                Height="20"
-                                Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Button>
-
-                        <TextBox 
-                                Width="300"
-                                materialDesign:HintAssist.Hint="Enter job name."
-                                materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                BorderThickness="0"
-                                FontSize="15"
-                                x:Name="SearchBox" Margin="30,0,0,0" VerticalAlignment="Center" Foreground="#E5000000" />
-                    </Grid>
-                </Border>
-            </Grid>
-            <Grid Grid.Row="2">
-                <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}" Width="1250">
-                    <DataGrid.Columns>
-                        <DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
-                            <DataGridCheckBoxColumn.HeaderTemplate>
-                                <DataTemplate>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
-                                </DataTemplate>
-                            </DataGridCheckBoxColumn.HeaderTemplate>
-                        </DataGridCheckBoxColumn>
-                        <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
-                        <DataGridTemplateColumn Header="Job Name" IsReadOnly="True" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Category" Binding="{Binding Position}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Assignor" Binding="{Binding Email}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Dependency" Binding="{Binding Phone}" IsReadOnly="True" Width="*"/>
-                        <DataGridTemplateColumn Header="Stage" IsReadOnly="True" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Border 
-                                        CornerRadius="15"
-                                        Background="#5051F9"
-                                        BorderBrush="#5051F9"
-                                        Height="50"
-                                        Width="160"
-                                        >
-                                        <Grid
-                                            Height="50"
-                                            Width="160" 
-                                            HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"
-                                            >
-                                            <Label 
-                                                Content="Dash Board" 
-                                                FontSize="16" 
-                                                Foreground="white" 
-                                                FontWeight="SemiBold"
-                                                HorizontalAlignment="Center" 
-                                                VerticalAlignment="Center" />
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridEditButton}">
-                                            <materialDesign:PackIcon Kind="Pencil" 
-                                                                     Width="14"
-                                                                     Height="14"
-                                                                     VerticalAlignment="Center"/>
-                                        </Button>
-                                        <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
-                                            <materialDesign:PackIcon Kind="Delete" 
-                                                                     Width="14"
-                                                                     Height="14"
-                                                                     VerticalAlignment="Center"/>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-
-            </Grid>
+            <Grid Grid.Row="1"/>
         </Grid>
     </Grid>
 

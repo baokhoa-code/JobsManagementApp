@@ -11,6 +11,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using JobsManagementApp.Model;
+using JobsManagementApp.ViewModel.AdminModel;
+using System.Windows.Media.Imaging;
 
 namespace JobsManagementApp.ViewModel.GeneralModel
 {
@@ -133,7 +135,13 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                         else
                         {
                             LoginWindow.Hide();
-                            DashBoardAdmin dba = new DashBoardAdmin();
+                            MainWindowAdmin dba = new MainWindowAdmin();
+                            dba.label_name.Content= admin.name;
+                            dba.label_organization.Content = "Admin";
+                            dba.label_position.Content = admin.address;
+                            var uriSource = new Uri(admin.avatar, UriKind.Relative);
+                            dba.img_avatar.ImageSource = new BitmapImage(uriSource);
+                            MainWindowAdminViewModel.admin = admin;
                             dba.Show();
                             LoginWindow.Close();
                             return;

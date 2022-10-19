@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\App.xaml
-9-765208377
+13-787072686
 
-22-1856418
+27-514003372
 214645339832
-Resource\MainResource.xaml;View\Admin\DashBoardAdmin.xaml;View\Admin\HomePageAdmin.xaml;View\Admin\JobsListPageAdmin.xaml;View\General\ForgotPage.xaml;View\General\LoginPage.xaml;View\General\LoginWindow.xaml;View\General\Splash.xaml;View\User\DashBoardUser.xaml;
+Resource\MainResource.xaml;View\Admin\ExampleTable.xaml;View\Admin\HomePageAdmin.xaml;View\Admin\JobManagementAdmin.xaml;View\Admin\JobsListPageAdmin.xaml;View\Admin\MainWindowAdmin.xaml;View\Admin\StaffDetailAdmin.xaml;View\Admin\StaffManagementAdmin.xaml;View\General\ForgotPage.xaml;View\General\LoginPage.xaml;View\General\LoginWindow.xaml;View\General\Splash.xaml;View\User\DashBoardUser.xaml;
 
 False
 

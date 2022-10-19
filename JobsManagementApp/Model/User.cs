@@ -14,7 +14,6 @@ namespace JobsManagementApp.Model
         public string? dob { get; set; }
         public string? phone { get; set; }
         public string? address { get; set; }
-        public string? ethic { get; set; }
         public string? nationality { get; set; }
         public string? organization { get; set; }
         public string? position { get; set; }
@@ -29,7 +28,7 @@ namespace JobsManagementApp.Model
         }
 
         public User(int id_t, string name_t, string gender_t, string dob_t, string phone_t,
-           string address_t, string ethic_t, string nationality_t, string organization_t, string position_t, string avatar_t, string email_t, string username_t, string pass_t, string question_t, string answer_t)
+           string address_t, string nationality_t, string organization_t, string position_t, string avatar_t, string email_t, string username_t, string pass_t, string question_t, string answer_t)
         {
             id = id_t;
             name = name_t;
@@ -37,7 +36,6 @@ namespace JobsManagementApp.Model
             dob = dob_t;
             phone = phone_t;
             address = address_t;
-            ethic = ethic_t;
             nationality = nationality_t;
             organization = organization_t;
             position = position_t;

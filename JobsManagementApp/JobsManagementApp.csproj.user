@@ -7,13 +7,25 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="View\Admin\DashBoardAdmin.xaml.cs">
+    <Compile Update="View\Admin\ExampleTable.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\HomePageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Admin\JobManagementAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Admin\JobsListPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\MainWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\StaffDetailAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\StaffManagementAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\General\ForgotPage.xaml.cs">
@@ -36,13 +48,25 @@
     <Page Update="Resource\MainResource.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\DashBoardAdmin.xaml">
+    <Page Update="View\Admin\ExampleTable.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\HomePageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Admin\JobManagementAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Admin\JobsListPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\MainWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\StaffDetailAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\StaffManagementAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\General\ForgotPage.xaml">
