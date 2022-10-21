@@ -1,7 +1,6 @@
 ﻿
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\App.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\Resource\MainResource.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\HomePageAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\JobsListPageAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\MainWindowAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\StaffManagementAdmin.xaml;;
@@ -11,4 +10,7 @@ FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\LoginWind
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\Splash.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\User\DashBoardUser.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\StaffDetailAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\DashBoard\HomePageAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\ExampleTable.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\JobManagementAdmin.xaml;;
 

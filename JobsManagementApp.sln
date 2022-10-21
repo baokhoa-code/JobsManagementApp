@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		DuPhong.txt = DuPhong.txt
 		JobsManagementApp\View\General\Forgot.xaml = JobsManagementApp\View\General\Forgot.xaml
 		JobsManagementApp\View\General\Forgot.xaml.cs = JobsManagementApp\View\General\Forgot.xaml.cs
+		JobsManagementApp\View\Admin\Job\JobManagementAdmin.xaml = JobsManagementApp\View\Admin\Job\JobManagementAdmin.xaml
+		JobsManagementApp\View\Admin\Job\JobManagementAdmin.xaml.cs = JobsManagementApp\View\Admin\Job\JobManagementAdmin.xaml.cs
 		JobsManagementApp\View\General\Login.xaml = JobsManagementApp\View\General\Login.xaml
 		JobsManagementApp\View\General\Login.xaml.cs = JobsManagementApp\View\General\Login.xaml.cs
 	EndProjectSection
