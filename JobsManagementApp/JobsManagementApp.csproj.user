@@ -10,10 +10,19 @@
     <Compile Update="View\Admin\DashBoard\HomePageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\DashBoard\JobDetailAdmin.xaml.cs">
+    <Compile Update="View\Admin\DashBoard\JobAddWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\DashBoard\JobDetailPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\DashBoard\JobListPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\DashBoard\ReportAddWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\DashBoard\ReportListPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\ExampleTable.xaml.cs">
@@ -63,10 +72,19 @@
     <Page Update="View\Admin\DashBoard\HomePageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\DashBoard\JobDetailAdmin.xaml">
+    <Page Update="View\Admin\DashBoard\JobAddWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\DashBoard\JobDetailPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\DashBoard\JobListPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\DashBoard\ReportAddWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\DashBoard\ReportListPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\ExampleTable.xaml">

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\App.xaml
-17-874110694
+20-229080319
 
-31-1769246398
+341294393423
 214645339832
-Resource\MainResource.xaml;View\Admin\DashBoard\HomePageAdmin.xaml;View\Admin\DashBoard\JobDetailAdmin.xaml;View\Admin\DashBoard\JobListPageAdmin.xaml;View\Admin\ExampleTable.xaml;View\Admin\Job\DateFilter.xaml;View\Admin\Job\Filter.xaml;View\Admin\Job\JobDetailAdmin.xaml;View\Admin\Job\JobManagementAdmin.xaml;View\Admin\MainWindowAdmin.xaml;View\Admin\Staff\StaffDetailAdmin.xaml;View\Admin\Staff\StaffManagementAdmin.xaml;View\General\ForgotPage.xaml;View\General\LoginPage.xaml;View\General\LoginWindow.xaml;View\General\Splash.xaml;View\User\DashBoardUser.xaml;
+Resource\MainResource.xaml;View\Admin\DashBoard\HomePageAdmin.xaml;View\Admin\DashBoard\JobAddWindowAdmin.xaml;View\Admin\DashBoard\JobDetailPageAdmin.xaml;View\Admin\DashBoard\JobListPageAdmin.xaml;View\Admin\DashBoard\ReportAddWindowAdmin.xaml;View\Admin\DashBoard\ReportListPageAdmin.xaml;View\Admin\ExampleTable.xaml;View\Admin\Job\DateFilter.xaml;View\Admin\Job\Filter.xaml;View\Admin\Job\JobDetailAdmin.xaml;View\Admin\Job\JobManagementAdmin.xaml;View\Admin\MainWindowAdmin.xaml;View\Admin\Staff\StaffDetailAdmin.xaml;View\Admin\Staff\StaffManagementAdmin.xaml;View\General\ForgotPage.xaml;View\General\LoginPage.xaml;View\General\LoginWindow.xaml;View\General\Splash.xaml;View\User\DashBoardUser.xaml;
 
 True
 

@@ -64,6 +64,7 @@
 	  <Folder Include="ViewModel\AdminModel\StatisticModel\" />
 	  <Folder Include="ViewModel\AdminModel\StaffModel\" />
 	  <Folder Include="ViewModel\UserModel\" />
+	  <Folder Include="View\Admin\Share\" />
 	  <Folder Include="View\Admin\Statistic\" />
 	  <Folder Include="View\Admin\Report\" />
 	</ItemGroup>
