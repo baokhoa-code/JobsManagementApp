@@ -22,7 +22,13 @@
     <Compile Update="View\Admin\DashBoard\ReportAddWindowAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Admin\DashBoard\ReportDetailPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Admin\DashBoard\ReportListPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\DashBoard\ShowTableToChoose.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\ExampleTable.xaml.cs">
@@ -84,7 +90,13 @@
     <Page Update="View\Admin\DashBoard\ReportAddWindowAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Admin\DashBoard\ReportDetailPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Admin\DashBoard\ReportListPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\DashBoard\ShowTableToChoose.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\ExampleTable.xaml">

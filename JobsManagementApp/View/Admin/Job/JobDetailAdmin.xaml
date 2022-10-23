@@ -272,7 +272,7 @@
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Height="32"
                                     materialDesign:ButtonAssist.CornerRadius="10" 
-                                    Background="Transparent" BorderBrush="Gray" Width="110" Click='Button_Click'>
+                                    Background="Transparent" BorderBrush="Gray" Width="110">
                                     <Grid
                                         Height="50"
                                         Width="150" 
@@ -302,7 +302,7 @@
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Height="32"
                                     materialDesign:ButtonAssist.CornerRadius="10" 
-                                    Background="Transparent" BorderBrush="Gray" Width="110" Click='Button_Click'>
+                                    Background="Transparent" BorderBrush="Gray" Width="110" >
                                     <Grid
                                         Height="50"
                                         Width="150" 

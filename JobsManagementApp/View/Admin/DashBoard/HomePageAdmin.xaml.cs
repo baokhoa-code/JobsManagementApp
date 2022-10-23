@@ -28,5 +28,10 @@ namespace JobsManagementApp.View.Admin.DashBoard
         {
 
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

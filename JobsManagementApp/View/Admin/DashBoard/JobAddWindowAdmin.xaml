@@ -28,15 +28,14 @@
 
             <Grid Grid.Row='0'>
                 <Label 
-                    Content="Job Add" 
+                    Content="Add and Assign Job" 
                     FontSize="25" 
                     Foreground="#232360" 
                     FontWeight="Bold"
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     Padding="0" Margin='0,10,0,0'/>
-                <Button
-                    Click="button_close_click" 
+                <Button 
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
                     ToolTip="MaterialDesignFloatingActionButton"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
@@ -47,7 +46,6 @@
                         Kind="WindowClose"/>
                 </Button>
                 <Button
-                    Click="button_minimize_click" 
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
                     ToolTip="MaterialDesignFloatingActionButton"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
@@ -63,6 +61,24 @@
                 <ScrollViewer>
                     <StackPanel>
                         <StackPanel Orientation='Horizontal' Height='50' Margin='0,30,0,0'>
+                            <StackPanel Orientation='Horizontal' Margin='40,0,0,0'>
+                                <Label 
+                                    Content='Exist Job ID' 
+                                    Foreground="#232360" 
+                                    FontWeight="SemiBold" 
+                                    HorizontalContentAlignment='Center' 
+                                    VerticalContentAlignment='Center' Width='80' Margin='-3,0,0,0'/>
+                                <TextBox
+                                    wpf:HintAssist.Hint="Choose if job exist"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                    Height="30"
+                                    Padding='5,6.5,0,5'
+                                    Width='150' Margin='3,0,0,0'/>
+                                <Button
+                                    Style="{StaticResource MaterialDesignRaisedButton}" Padding='0' Height='26' Width='25' Background='#FF00BEFF' BorderBrush='#FF00BEFF' Margin='5,0,0,0'>
+                                    <wpf:PackIcon Kind="FormatListBulleted" Foreground='White' />
+                                </Button>
+                            </StackPanel>
                             <StackPanel Orientation='Horizontal' Margin='30,0,0,0'>
                                 <Label 
                                     Content='Category' 
@@ -96,7 +112,10 @@
                                     <wpf:PackIcon Kind="FormatListBulleted" Foreground='White' />
                                 </Button>
                             </StackPanel>
-                            <StackPanel Orientation='Horizontal' Margin='50,0,0,0'>
+                        </StackPanel>
+                        <Separator Width='900' Height='1' Margin='0,15,0,15'/>
+                        <StackPanel Orientation='Horizontal' Height='50'>
+                            <StackPanel Orientation='Horizontal' Margin='40,0,0,0'>
                                 <Label 
                                     Content='Dependency' 
                                     Foreground="#232360" 
@@ -112,9 +131,6 @@
                                     <wpf:PackIcon Kind="FormatListBulleted" Foreground='White' />
                                 </Button>
                             </StackPanel>
-                        </StackPanel>
-                        <Separator Width='900' Height='1' Margin='0,15,0,15'/>
-                        <StackPanel Orientation='Horizontal' Height='50'>
                             <StackPanel Orientation='Horizontal' Margin='30,0,0,0'>
                                 <Label 
                                     Content='Assignee' 
@@ -147,19 +163,6 @@
                                     Style="{StaticResource MaterialDesignRaisedButton}" Padding='0' Height='26' Width='25' Background='#FF00BEFF' BorderBrush='#FF00BEFF' Margin='5,0,0,0'>
                                     <wpf:PackIcon Kind="FormatListBulleted" Foreground='White' />
                                 </Button>
-                            </StackPanel>
-                            <StackPanel Orientation='Horizontal' Margin='50,0,0,0'>
-                                <Label 
-                                    Content='Created Date:' 
-                                    Foreground="#232360" 
-                                    FontWeight="SemiBold" 
-                                    VerticalContentAlignment='Center' Width='80'/>
-                                <DatePicker
-                                    Padding='10,0,10,0'
-                                    Width="150"
-                                    Height='30'
-                                    wpf:HintAssist.Hint="Pick Date"
-                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                             </StackPanel>
                         </StackPanel>
                         <Separator Width='900' Height='1' Margin='0,15,0,15'/>
@@ -271,18 +274,7 @@
                                     Background="#FF5051F9"
                                     FontSize="18"
                                     FontWeight="Bold"
-                                    Content="Add" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin='0,120,0,0'/>
-                                <Button
-                                    Width="200" 
-                                    Height="40" 
-                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                    wpf:ButtonAssist.CornerRadius="10"
-                                    ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
-                                    BorderBrush="#FFFE5555" 
-                                    Background="#FFFE5555"
-                                    FontSize="18"
-                                    FontWeight="Bold"
-                                    Content="Cancel" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin='0,40,0,0'/>
+                                    Content="Add and Assign" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin='0,120,0,0'/>
                             </StackPanel>
                         </StackPanel>
 

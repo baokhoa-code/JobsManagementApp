@@ -37,24 +37,17 @@
                                 Foreground="#B21EA7FF"/>
                     </Button>
 
-                    <StackPanel Width="140" Margin="20,0,0,0">
-                        <TextBlock 
-                                Text="Start from"
-                                FontSize="12"
+                    <TextBlock 
+                                Text="14/1/2022"
+                                TextAlignment='Center'
+                                Width="100"
                                 FontWeight="Medium"
+                                FontSize="15"
                                 Foreground="#FF232360"
                                 TextWrapping="Wrap" 
-                                HorizontalAlignment="Center" Margin="0,25,0,0">
-                        </TextBlock>
-                        <TextBlock 
-                                Text="6:00 am"
-                                FontSize="11"
-                                FontWeight="Medium"
-                                Foreground="#FF232360"
-                                TextWrapping="Wrap" VerticalAlignment="Center" 
-                                HorizontalAlignment="Center" 
-                                Margin="0,5,0,0" />
-                    </StackPanel>
+                                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Margin="40,0,0,0">
+                    </TextBlock>
 
                     <TextBlock 
                                 Text="This is job name."
@@ -65,7 +58,7 @@
                                 Foreground="#FF232360"
                                 TextWrapping="Wrap" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                Margin="0,0,0,0">
+                                Margin="20,0,0,0">
                     </TextBlock>
 
                     <TextBlock 
@@ -80,26 +73,20 @@
                                 Margin="0,0,0,0">
                     </TextBlock>
 
-                    <StackPanel Width="140">
-                        <TextBlock 
-                            Text="Start from"
-                            FontSize="12"
-                            FontWeight="Medium"
-                            Foreground="#FF232360"
-                            TextWrapping="Wrap" 
-                            HorizontalAlignment="Center" Margin="0,25,0,0"/>
-                        <TextBlock 
-                            Text="6:00 am"
-                            FontSize="11"
-                            FontWeight="Medium"
-                            Foreground="#FF232360"
-                            TextWrapping="Wrap" VerticalAlignment="Center" 
-                            HorizontalAlignment="Center" 
-                            Margin="0,5,0,0" />
-                    </StackPanel>
+                    <TextBlock 
+                                Text="14/1/2022"
+                                TextAlignment='Center'
+                                Width="100"
+                                FontWeight="Medium"
+                                FontSize="15"
+                                Foreground="#FF232360"
+                                TextWrapping="Wrap" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Margin="15,0,0,0">
+                    </TextBlock>
 
                     <StackPanel Width="200
-                                ">
+                                " Margin='24,0,0,0'>
                         <TextBlock 
                                 Text="50% completed"
                                 FontSize="12"
@@ -156,19 +143,14 @@
             <RowDefinition Height="700"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" d:IsLocked='True'>
-            <Grid>
-                <Grid
-                            HorizontalAlignment="Left" 
-                            VerticalAlignment="Center" 
-                            Margin="10,10,0,0">
-                    <Button
-                                Margin="0"
+        <StackPanel Orientation='Horizontal' Grid.Row="0">
+            <Button
+                                Margin="10,0,0,0"
                                 Padding="0"
                                 Background="Transparent"
                                 BorderBrush="Transparent">
-                        <Grid>
-                            <materialDesign:PackIcon
+                <Grid>
+                    <materialDesign:PackIcon
                                     Kind="ViewDashboard" 
                                     Height="30" 
                                     Width="30"
@@ -176,7 +158,7 @@
                                     Margin="10,0,0,0"
                                     Padding="0"
                                     Foreground="#232360"/>
-                            <Label 
+                    <Label 
                                     Content="Dash Board" 
                                     FontSize="22" 
                                     Foreground="#232360" 
@@ -185,20 +167,15 @@
                                     VerticalAlignment="Center" 
                                     Margin="40,0,0,0"
                                     Padding="0"/>
-                        </Grid>
-                    </Button>
                 </Grid>
-                <Grid
-                            HorizontalAlignment="Left" 
-                            VerticalAlignment="Center" 
-                            Margin="165,10,0,0">
-                    <Button
+            </Button>
+            <Button
                                 Margin="0"
                                 Padding="0"
                                 Background="Transparent"
                                 BorderBrush="Transparent">
-                        <Grid>
-                            <materialDesign:PackIcon
+                <Grid>
+                    <materialDesign:PackIcon
                                     Kind="ViewList" 
                                     Height="30" 
                                     Width="30"
@@ -206,7 +183,7 @@
                                     Margin="10,0,0,0"
                                     Padding="0"
                                     Foreground="#FF1EA7FF"/>
-                            <Label 
+                    <Label 
                                     Content="Job List" 
                                     FontSize="22" 
                                     Foreground="#FF1EA7FF" 
@@ -215,11 +192,33 @@
                                     VerticalAlignment="Center" 
                                     Margin="40,0,0,0"
                                     Padding="0"/>
-                        </Grid>
-                    </Button>
                 </Grid>
-            </Grid>
-        </Grid>
+            </Button>
+            <Button
+                Padding="0"
+                Background="Transparent"
+                BorderBrush="Transparent">
+                <Grid>
+                    <materialDesign:PackIcon
+                        Kind="ViewList" 
+                        Height="30" 
+                        Width="30"
+                        VerticalAlignment="Center" 
+                        Margin="10,0,0,0"
+                        Padding="0"
+                        Foreground="#FF232360"/>
+                    <Label 
+                        Content="Report List" 
+                        FontSize="22" 
+                        Foreground="#FF232360" 
+                        FontWeight="Bold"
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center" 
+                        Margin="40,0,0,0"
+                        Padding="0"/>
+                </Grid>
+            </Button>
+        </StackPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>

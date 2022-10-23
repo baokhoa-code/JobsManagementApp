@@ -92,7 +92,7 @@
                                 BorderBrush="#99000000" 
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                 Height="55" Width="450"
-                                materialDesign:HintAssist.Hint="Name" HorizontalAlignment="Left" Margin="90,0,0,0" Text="" TextChanged="TextBox_TextChanged_4"/>
+                                materialDesign:HintAssist.Hint="Name" HorizontalAlignment="Left" Margin="90,0,0,0" Text="" />
                             <Button
                                 HorizontalAlignment="Right"
                                 Background="Transparent"
@@ -218,7 +218,7 @@
                                 BorderBrush="#99000000" 
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                 Height="55" Width="450"
-                                materialDesign:HintAssist.Hint="Street Address" HorizontalAlignment="Left" Margin="90,0,0,0" Text="" TextChanged="TextBox_TextChanged_5"/>
+                                materialDesign:HintAssist.Hint="Street Address" HorizontalAlignment="Left" Margin="90,0,0,0" Text="" />
                             <Button
                                 HorizontalAlignment="Right"
                                 Background="Transparent"
@@ -259,7 +259,7 @@
                                 BorderBrush="#99000000" 
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                 Height="55" Width="450"
-                                materialDesign:HintAssist.Hint="Phone (+84)" HorizontalAlignment="Left" Margin="90,0,0,0" Text="" TextChanged="TextBox_TextChanged_3"/>
+                                materialDesign:HintAssist.Hint="Phone (+84)" HorizontalAlignment="Left" Margin="90,0,0,0" Text=""/>
                             <Button
                                 HorizontalAlignment="Right"
                                 Background="Transparent"
@@ -497,7 +497,7 @@
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                 Height="55" Width="450"
                                 materialDesign:HintAssist.Hint="Your answer" 
-                                HorizontalAlignment="Left" Margin="50,0,0,0" Text="" TextChanged="TextBox_TextChanged_4"/>
+                                HorizontalAlignment="Left" Margin="50,0,0,0" Text="" />
                             <Button
                                 HorizontalAlignment="Right"
                                 Background="Transparent"
