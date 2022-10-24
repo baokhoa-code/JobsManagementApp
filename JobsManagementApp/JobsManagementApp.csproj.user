@@ -49,10 +49,31 @@
     <Compile Update="View\Admin\MainWindowAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\Staff\StaffDetailAdmin.xaml.cs">
+    <Compile Update="View\Admin\Staff\JobAddWindowAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\Staff\StaffManagementAdmin.xaml.cs">
+    <Compile Update="View\Admin\Staff\JobDetailPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Staff\ReportAddWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Staff\ReportDetailPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Staff\ShowTableToChoose.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Staff\StaffAddWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Staff\StaffDetailPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Staff\StaffJobPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Staff\StaffManagementPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\General\ForgotPage.xaml.cs">
@@ -117,10 +138,31 @@
     <Page Update="View\Admin\MainWindowAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\Staff\StaffDetailAdmin.xaml">
+    <Page Update="View\Admin\Staff\JobAddWindowAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\Staff\StaffManagementAdmin.xaml">
+    <Page Update="View\Admin\Staff\JobDetailPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Staff\ReportAddWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Staff\ReportDetailPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Staff\ShowTableToChoose.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Staff\StaffAddWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Staff\StaffDetailPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Staff\StaffJobPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Staff\StaffManagementPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\General\ForgotPage.xaml">

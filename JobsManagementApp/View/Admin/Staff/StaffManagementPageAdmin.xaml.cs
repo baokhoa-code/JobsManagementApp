@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace JobsManagementApp.View.Admin.Staff
 {
     /// <summary>
-    /// Interaction logic for StaffDetailAdmin.xaml
+    /// Interaction logic for StaffManagementPageAdmin.xaml
     /// </summary>
-    public partial class StaffDetailAdmin : Page
+    public partial class StaffManagementPageAdmin : Page
     {
-        public StaffDetailAdmin()
+        public StaffManagementPageAdmin()
         {
             InitializeComponent();
         }

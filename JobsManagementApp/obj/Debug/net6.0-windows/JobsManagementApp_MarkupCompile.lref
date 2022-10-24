@@ -15,8 +15,14 @@ FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Job\Filter.
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Job\JobDetailAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Job\JobManagementAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\MainWindowAdmin.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\StaffDetailAdmin.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\StaffManagementAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\JobAddWindowAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\JobDetailPageAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\ReportAddWindowAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\ReportDetailPageAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\StaffAddWindowAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\StaffDetailPageAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\StaffJobPageAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Staff\StaffManagementPageAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\ForgotPage.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\LoginPage.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\LoginWindow.xaml;;
