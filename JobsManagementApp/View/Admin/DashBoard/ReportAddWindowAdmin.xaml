@@ -59,20 +59,8 @@
             </Grid>
             <Grid Grid.Row='1'>
                 <StackPanel>
-                    <StackPanel Orientation='Horizontal' Height='50' Margin='0,30,0,0'>
-                        <StackPanel Orientation='Horizontal' Margin='30,0,0,0'>
-                            <Label 
-                                Content='Tile' 
-                                Foreground="#232360" 
-                                FontWeight="SemiBold" 
-                                VerticalContentAlignment='Center' Width='80' Padding='15,4,4,4' Margin='20,0,0,0'/>
-                            <TextBox
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                Height="30"
-                                Padding='0'
-                                Width='150' Margin='47,0,0,0'/>
-                        </StackPanel>
-                        <StackPanel Orientation='Horizontal' Margin='130,0,0,0'>
+                    <StackPanel Orientation='Horizontal' Height='50' Margin='0,20,0,0'>
+                        <StackPanel Orientation='Horizontal' Margin='80,0,0,0'>
                             <Label 
                                 Content='Job Assign' 
                                 Foreground="#232360" 
@@ -82,109 +70,129 @@
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Height="30"
                                 Padding='0'
-                                Width='150' Margin='21.5,0,0,0'/>
+                                Width='150'/>
                             <Button
                                 Style="{StaticResource MaterialDesignRaisedButton}" Padding='0' Height='25' Width='25' Background='#FF00BEFF' BorderBrush='#FF00BEFF' Margin='5,0,0,0'>
                                 <wpf:PackIcon Kind="FormatListBulleted" Foreground='White' />
                             </Button>
+                            <StackPanel Orientation='Horizontal'/>
                         </StackPanel>
-                    </StackPanel>
-                    <Separator Width='900' Height='1' Margin='0,15,0,15'/>
-                    <StackPanel Orientation='Horizontal' Height='50'>
-                        <StackPanel Orientation='Horizontal' Margin='60,0,0,0'>
+                        <StackPanel Orientation='Horizontal' Margin='120,0,0,0'>
                             <Label 
-                                Content='Created time' 
+                                Content='Job Name' 
                                 Foreground="#232360" 
                                 FontWeight="SemiBold" 
-                                HorizontalContentAlignment='Center' 
-                                VerticalContentAlignment='Center' Width='80' Padding='4,4,4,4'/>
-                            <StackPanel
-                                Orientation="Horizontal">
-                                <TextBox
-                                    Text="{Binding Date, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}"
-                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                    Height="30"
-                                    Padding='0'
-                                    FontSize='12'
-                                    Width='150' Margin='36.5,0,0,0'/>
-                                <Button
-                                    Margin="8 0 0 0"
-                                    Content="..."
-                                    Command="{x:Static wpf:DialogHost.OpenDialogCommand}"
-                                    wpf:DialogHost.DialogOpenedAttached="CombinedDialogOpenedEventHandler"
-                                    wpf:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler" Foreground='White' BorderBrush='#FF00BEFF' Background='#FF00BEFF' Opacity='1' Width='25' Height='25' FontSize='16' Padding='0,0,0,0'>
-                                    <Button.CommandParameter>
-                                        <Grid Margin="-1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-                                            <StackPanel
-                                                Grid.Row="0"
-                                                Orientation="Horizontal">
-                                                <Calendar
-                                                    x:Name="CombinedCalendar"
-                                                    Margin="-1 -4 -1 0" />
-                                                <wpf:Clock
-                                                    x:Name="CombinedClock"
-                                                    DisplayAutomation="CycleWithSeconds"
-                                                    Is24Hours="True" />
-                                            </StackPanel>
-                                            <StackPanel
-                                                Grid.Row="1"
-                                                Margin="8"
-                                                HorizontalAlignment="Right"
-                                                Orientation="Horizontal">
-                                                <Button
-                                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
-                                                    CommandParameter="0"
-                                                    Content="CANCEL" />
-                                                <Button
-                                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
-                                                    CommandParameter="1"
-                                                    Content="OK" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Button.CommandParameter>
-                                </Button>
-                            </StackPanel>
-                        </StackPanel>
-                        <StackPanel Orientation='Horizontal' Margin='95,0,0,0'>
-                            <Label 
-                                Content='Completed Time' 
-                                Foreground="#232360" 
-                                FontWeight="SemiBold" 
-                                VerticalContentAlignment='Center' Width='99'/>
+                                VerticalContentAlignment='Center' Width='80'/>
                             <TextBox
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Height="30"
                                 Padding='0'
-                                Width='150' Margin='5,0,0,0'/>
+                                Width='150'/>
                         </StackPanel>
                     </StackPanel>
-                    <Separator Width='900' Height='1' Margin='0,15,0,15'/>
+                    <Separator Width='650' Height='1' Margin='0,15,0,15'/>
                     <StackPanel Orientation='Horizontal' Height='50'>
-                        <StackPanel Orientation='Horizontal' Margin='50,0,0,0'>
+                        <StackPanel Orientation='Horizontal' Margin='80,0,0,0'>
                             <Label 
-                                Content='Completed Percent' 
+                                Content='Assignee ' 
                                 Foreground="#232360" 
                                 FontWeight="SemiBold" 
-                                HorizontalContentAlignment='Center' 
-                                VerticalContentAlignment='Center' Width='111' Margin='10,0,0,0'/>
+                                VerticalContentAlignment='Center' Width='80'/>
                             <TextBox
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Height="30"
                                 Padding='0'
-                                Width='150' Margin='5,0,0,0'/>
+                                Width='150'/>
+                        </StackPanel>
+                        <StackPanel Orientation='Horizontal' Margin='150,0,0,0'>
+                            <Label 
+                                Content='Role' 
+                                Foreground="#232360" 
+                                FontWeight="SemiBold" 
+                                VerticalContentAlignment='Center' Width='80'/>
+                            <TextBox
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Height="30"
+                                Padding='0'
+                                Width='150'/>
                         </StackPanel>
                     </StackPanel>
-                    <Separator Width='900' Height='1' Margin='0,15,0,15'/>
+                    <Separator Width='650' Height='1' Margin='0,15,0,15'/>
+                    <StackPanel Orientation='Horizontal' Height='50'>
+                        <StackPanel Orientation='Horizontal' Margin='80,0,0,0'>
+                            <Label 
+                                Content='Tile' 
+                                Foreground="#232360" 
+                                FontWeight="SemiBold" 
+                                VerticalContentAlignment='Center' Width='80'/>
+                            <TextBox
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Height="30"
+                                Padding='0'
+                                Width='150'/>
+                        </StackPanel>
+                        <StackPanel Orientation='Horizontal' Margin='150,0,0,0'>
+                            <Label 
+                                    Content='Created time' 
+                                    Foreground="#232360" 
+                                    FontWeight="SemiBold" 
+                                    HorizontalContentAlignment='Center' 
+                                    VerticalContentAlignment='Center' Width='80' Padding='4,4,4,4'/>
+                            <TextBox
+                                        Text="{Binding Date, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}"
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        Height="30"
+                                        Padding='0'
+                                        FontSize='12'
+                                        Width='150'/>
+                            <Button
+                                        Content="..."
+                                        Command="{x:Static wpf:DialogHost.OpenDialogCommand}"
+                                        wpf:DialogHost.DialogOpenedAttached="CombinedDialogOpenedEventHandler"
+                                        wpf:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler" Foreground='White' BorderBrush='#FF00BEFF' Background='#FF00BEFF' Opacity='1' Width='25' Height='26' FontSize='16' Padding='0,0,0,0' Margin='5,0,0,0'>
+                                <Button.CommandParameter>
+                                    <Grid Margin="-1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel
+                                                    Grid.Row="0"
+                                                    Orientation="Horizontal">
+                                            <Calendar
+                                                        x:Name="CombinedCalendar"
+                                                        Margin="-1 -4 -1 0" />
+                                            <wpf:Clock
+                                                        x:Name="CombinedClock"
+                                                        DisplayAutomation="CycleWithSeconds"
+                                                        Is24Hours="True" />
+                                        </StackPanel>
+                                        <StackPanel
+                                                    Grid.Row="1"
+                                                    Margin="8"
+                                                    HorizontalAlignment="Right"
+                                                    Orientation="Horizontal">
+                                            <Button
+                                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                                        Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                                                        CommandParameter="0"
+                                                        Content="CANCEL" />
+                                            <Button
+                                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                                        Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                                                        CommandParameter="1"
+                                                        Content="OK" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Button.CommandParameter>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <Separator Width='650' Height='1' Margin='0,15,0,15'/>
                     <StackPanel Orientation='Horizontal'>
-                        <StackPanel Orientation='Vertical' Margin='20,0,0,0'>
+                        <StackPanel Orientation='Vertical' Margin='40,0,0,0'>
                             <Label 
-                                Content='Job Description' 
+                                Content='Report Description' 
                                 Foreground="#232360" 
                                 FontWeight="SemiBold" 
                                 HorizontalContentAlignment='Center' 
@@ -192,12 +200,12 @@
                             <TextBox
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 Height="183"
-                                TextWrapping="Wrap" Width='450' HorizontalAlignment='Left' Margin='40,5,0,0'
+                                TextWrapping="Wrap" Width='380' HorizontalAlignment='Left' Margin='40,5,0,0'
                                          />
                         </StackPanel>
                         <StackPanel Orientation='Vertical' HorizontalAlignment='Left' VerticalAlignment='Center' Margin='45,-90,0,11'>
                             <Button
-                                Width="200" 
+                                Width="150" 
                                 Height="40" 
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 wpf:ButtonAssist.CornerRadius="10"
@@ -206,18 +214,7 @@
                                 Background="#FF5051F9"
                                 FontSize="18"
                                 FontWeight="Bold"
-                                Content="Add" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin='0,120,0,0'/>
-                            <Button
-                                Width="200" 
-                                Height="40" 
-                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                wpf:ButtonAssist.CornerRadius="10"
-                                ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
-                                BorderBrush="#FFFE5555" 
-                                Background="#FFFE5555"
-                                FontSize="18"
-                                FontWeight="Bold"
-                                Content="Cancel" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin='0,40,0,0'/>
+                                Content="Add" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin='50,120,0,0'/>
                         </StackPanel>
                     </StackPanel>
 

@@ -10,22 +10,22 @@
     <Compile Update="View\Admin\DashBoard\HomePageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\DashBoard\JobAddWindowAdmin.xaml.cs">
+    <Compile Update="View\Admin\DashBoard\JobAddAndAssignWindowAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\DashBoard\JobDetailPageAdmin.xaml.cs">
+    <Compile Update="View\Admin\DashBoard\JobAssignDetailPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\DashBoard\JobListPageAdmin.xaml.cs">
+    <Compile Update="View\Admin\DashBoard\JobAssignListPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\DashBoard\ReportAddWindowAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\DashBoard\ReportDetailPageAdmin.xaml.cs">
+    <Compile Update="View\Admin\DashBoard\ReportListAllPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\DashBoard\ReportListPageAdmin.xaml.cs">
+    <Compile Update="View\Admin\DashBoard\ReportListAndDetailSinglePageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\DashBoard\ShowTableToChoose.xaml.cs">
@@ -40,10 +40,25 @@
     <Compile Update="View\Admin\Job\Filter.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\Job\JobDetailAdmin.xaml.cs">
+    <Compile Update="View\Admin\Job\JobAddWindowAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\Job\JobManagementAdmin.xaml.cs">
+    <Compile Update="View\Admin\Job\JobAssignDetailPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Job\JobDetailPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Job\JobManagementPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Job\ReportAddWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Job\ReportListAndDetailSinglePageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Job\ShowTableToChoose.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\MainWindowAdmin.xaml.cs">
@@ -99,22 +114,22 @@
     <Page Update="View\Admin\DashBoard\HomePageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\DashBoard\JobAddWindowAdmin.xaml">
+    <Page Update="View\Admin\DashBoard\JobAddAndAssignWindowAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\DashBoard\JobDetailPageAdmin.xaml">
+    <Page Update="View\Admin\DashBoard\JobAssignDetailPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\DashBoard\JobListPageAdmin.xaml">
+    <Page Update="View\Admin\DashBoard\JobAssignListPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\DashBoard\ReportAddWindowAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\DashBoard\ReportDetailPageAdmin.xaml">
+    <Page Update="View\Admin\DashBoard\ReportListAllPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\DashBoard\ReportListPageAdmin.xaml">
+    <Page Update="View\Admin\DashBoard\ReportListAndDetailSinglePageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\DashBoard\ShowTableToChoose.xaml">
@@ -129,10 +144,25 @@
     <Page Update="View\Admin\Job\Filter.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\Job\JobDetailAdmin.xaml">
+    <Page Update="View\Admin\Job\JobAddWindowAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\Job\JobManagementAdmin.xaml">
+    <Page Update="View\Admin\Job\JobAssignDetailPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Job\JobDetailPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Job\JobManagementPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Job\ReportAddWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Job\ReportListAndDetailSinglePageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Job\ShowTableToChoose.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\MainWindowAdmin.xaml">

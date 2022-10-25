@@ -38,12 +38,13 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="110"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
                             <RowDefinition Height="195"/>
                             <RowDefinition Height="70"/>
                         </Grid.RowDefinitions>
@@ -52,10 +53,10 @@
                             <Image Width="60"  Source="/Resource/images/suitcase.png" Height="60" Margin="0,30,0,0"/>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <ToggleButton 
+                            <RadioButton 
                                         x:Name="btn1"
-                                        Click="switchpagehandle1"
-                                        Style="{StaticResource ToggleButtonStyle1}">
+                                        GroupName='test'
+                                        Style="{StaticResource RadioButtonStyle1}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -67,13 +68,13 @@
                                     <TextBlock Text="Dashboard"
                                                 Style="{StaticResource menuButtonIconText}"/>
                                 </Grid>
-                            </ToggleButton>
+                            </RadioButton>
                         </Grid>
                         <Grid Grid.Row="2">
-                            <ToggleButton 
+                            <RadioButton 
                                         x:Name="btn2"
-                                        Click="switchpagehandle2"
-                                        Style="{StaticResource ToggleButtonStyle1}">
+                                        GroupName='test'
+                                        Style="{StaticResource RadioButtonStyle1}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -85,13 +86,13 @@
                                     <TextBlock Text="Staffs"
                                                 Style="{StaticResource menuButtonIconText}"/>
                                 </Grid>
-                            </ToggleButton>
+                            </RadioButton>
                         </Grid>
                         <Grid Grid.Row="3">
-                            <ToggleButton 
+                            <RadioButton 
                                         x:Name="btn3"
-                                        Click="switchpagehandle3"
-                                        Style="{StaticResource ToggleButtonStyle1}">
+                                        GroupName='test'
+                                        Style="{StaticResource RadioButtonStyle1}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -103,13 +104,31 @@
                                     <TextBlock Text="Jobs"
                                                 Style="{StaticResource menuButtonIconText}"/>
                                 </Grid>
-                            </ToggleButton>
+                            </RadioButton>
                         </Grid>
                         <Grid Grid.Row="4">
-                            <ToggleButton 
+                            <RadioButton 
                                         x:Name="btn4"
-                                        Click="switchpagehandle4"
-                                        Style="{StaticResource ToggleButtonStyle1}">
+                                        GroupName='test'
+                                        Style="{StaticResource RadioButtonStyle1}">
+                                <Grid
+                                            Height="50"
+                                            Width="160" 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center">
+                                    <materialDesign:PackIcon
+                                            Kind="BriefcaseCheck" 
+                                            Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Jobs Assign"
+                                                Style="{StaticResource menuButtonIconText}"/>
+                                </Grid>
+                            </RadioButton>
+                        </Grid>
+                        <Grid Grid.Row="5">
+                            <RadioButton 
+                                        x:Name="btn5"
+                                        GroupName='test'
+                                        Style="{StaticResource RadioButtonStyle1}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -121,13 +140,13 @@
                                     <TextBlock Text="Reports"
                                                 Style="{StaticResource menuButtonIconText}"/>
                                 </Grid>
-                            </ToggleButton>
+                            </RadioButton>
                         </Grid>
-                        <Grid Grid.Row="5">
-                            <ToggleButton 
-                                        x:Name="btn5"
-                                        Click="switchpagehandle5"
-                                        Style="{StaticResource ToggleButtonStyle1}">
+                        <Grid Grid.Row="6">
+                            <RadioButton 
+                                        x:Name="btn6"
+                                        GroupName='test'
+                                        Style="{StaticResource RadioButtonStyle1}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -139,13 +158,13 @@
                                     <TextBlock Text="Statistics"
                                                 Style="{StaticResource menuButtonIconText}"/>
                                 </Grid>
-                            </ToggleButton>
+                            </RadioButton>
                         </Grid>
-                        <Grid Grid.Row="6">
-                            <ToggleButton 
-                                        x:Name="btn6"
-                                        Click="switchpagehandle6"
-                                        Style="{StaticResource ToggleButtonStyle1}">
+                        <Grid Grid.Row="7">
+                            <RadioButton 
+                                        x:Name="btn7"
+                                        GroupName='test'
+                                        Style="{StaticResource RadioButtonStyle1}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -157,9 +176,9 @@
                                     <TextBlock Text="Logout"
                                                 Style="{StaticResource menuButtonIconText}"/>
                                 </Grid>
-                            </ToggleButton>
+                            </RadioButton>
                         </Grid>
-                        <Grid Grid.Row="7">
+                        <Grid Grid.Row="8">
                             <Border 
                                 CornerRadius="100"
                                 Width="125"
@@ -190,11 +209,11 @@
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Center" Margin="0,175,0,0" FontFamily="Roboto Light"/>
                         </Grid>
-                        <Grid Grid.Row="8">
-                            <ToggleButton 
-                                        x:Name="btn7"
-                                        Click="switchpagehandle7"
-                                        Style="{StaticResource ToggleButtonStyle1}">
+                        <Grid Grid.Row="9">
+                            <RadioButton 
+                                        x:Name="btn8"
+                                        GroupName='test'
+                                        Style="{StaticResource RadioButtonStyle1}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -206,7 +225,7 @@
                                     <TextBlock Text="Information"
                                                 Style="{StaticResource menuButtonIconText}"/>
                                 </Grid>
-                            </ToggleButton>
+                            </RadioButton>
                         </Grid>
                     </Grid>
                 </Border>
