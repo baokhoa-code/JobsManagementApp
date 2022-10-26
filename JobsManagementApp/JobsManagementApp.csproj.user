@@ -34,6 +34,27 @@
     <Compile Update="View\Admin\ExampleTable.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Admin\JobAssign\DateFilter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\JobAssign\Filter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\JobAssign\JobAssignAddWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\JobAssign\JobAssignDetailPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\JobAssign\JobAssignManagementPageAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\JobAssign\ReportAddWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\JobAssign\ReportListAndDetail SinglePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Admin\Job\DateFilter.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -62,6 +83,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\MainWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Report\DateFilter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Report\Filter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Report\ReportAddWindowAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Report\ReportListAndDetail SinglePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Report\ReportManagementPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\Staff\JobAddWindowAdmin.xaml.cs">
@@ -138,6 +174,27 @@
     <Page Update="View\Admin\ExampleTable.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Admin\JobAssign\DateFilter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\JobAssign\Filter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\JobAssign\JobAssignAddWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\JobAssign\JobAssignDetailPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\JobAssign\JobAssignManagementPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\JobAssign\ReportAddWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\JobAssign\ReportListAndDetail SinglePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Admin\Job\DateFilter.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -166,6 +223,21 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\MainWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Report\DateFilter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Report\Filter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Report\ReportAddWindowAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Report\ReportListAndDetail SinglePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Report\ReportManagementPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\Staff\JobAddWindowAdmin.xaml">
