@@ -20,7 +20,25 @@
         Name="MainWindowAd"
         DataContext="{StaticResource MainWindowAdminVM}"
         >
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Duration="00:02:50" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding MouseLeftButtonDownWindowCM}"
+                                   CommandParameter="{Binding ElementName=MainWindowAd}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding FirstLoadCM}" CommandParameter="{Binding ElementName=btn1}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Border 
         CornerRadius="25" Background="#FFE6E6E6" >
         <Grid>
@@ -49,14 +67,27 @@
                             <RowDefinition Height="70"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <Label Content="JMAPP" FontWeight="Bold" FontSize="25" Foreground="#FF5F6388" HorizontalAlignment="Center"/>
-                            <Image Width="60"  Source="/Resource/images/suitcase.png" Height="60" Margin="0,30,0,0"/>
+                            <Button 
+                                Background='{x:Null}' 
+                                BorderBrush='{x:Null}' 
+                                Padding='0,0,0,0' Height='110'
+                                Command="{Binding LoadHomePageCM}"
+                                        CommandParameter="{Binding ElementName=MainFrame}">
+                                <Grid>
+                                    <Label Content="JMAPP" FontWeight="Bold" FontSize="25" Foreground="#FF5F6388" HorizontalAlignment="Center" Background='{x:Null}'/>
+                                    <Image Width="60"  Source="/Resource/images/suitcase.png" Height="60" Margin="0,30,0,0"/>
+                                </Grid>
+                                
+                            </Button>
+                            
                         </Grid>
                         <Grid Grid.Row="1">
                             <RadioButton 
                                         x:Name="btn1"
                                         GroupName='test'
-                                        Style="{StaticResource RadioButtonStyle1}">
+                                        Style="{StaticResource RadioButtonStyle1}"
+                                        Command="{Binding LoadHomePageCM}"
+                                        CommandParameter="{Binding ElementName=MainFrame}" >
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -74,7 +105,9 @@
                             <RadioButton 
                                         x:Name="btn2"
                                         GroupName='test'
-                                        Style="{StaticResource RadioButtonStyle1}">
+                                        Style="{StaticResource RadioButtonStyle1}"
+                                        Command="{Binding LoadStaffManagementPageCM}"
+                                        CommandParameter="{Binding ElementName=MainFrame}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -92,7 +125,9 @@
                             <RadioButton 
                                         x:Name="btn3"
                                         GroupName='test'
-                                        Style="{StaticResource RadioButtonStyle1}">
+                                        Style="{StaticResource RadioButtonStyle1}"
+                                        Command="{Binding LoadJobManagementPageCM}"
+                                        CommandParameter="{Binding ElementName=MainFrame}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -110,7 +145,9 @@
                             <RadioButton 
                                         x:Name="btn4"
                                         GroupName='test'
-                                        Style="{StaticResource RadioButtonStyle1}">
+                                        Style="{StaticResource RadioButtonStyle1}"
+                                        Command="{Binding LoadJobAssignManagementPageCM}"
+                                        CommandParameter="{Binding ElementName=MainFrame}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -128,7 +165,9 @@
                             <RadioButton 
                                         x:Name="btn5"
                                         GroupName='test'
-                                        Style="{StaticResource RadioButtonStyle1}">
+                                        Style="{StaticResource RadioButtonStyle1}"
+                                        Command="{Binding LoadReportManagementPageCM}"
+                                        CommandParameter="{Binding ElementName=MainFrame}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -164,7 +203,9 @@
                             <RadioButton 
                                         x:Name="btn7"
                                         GroupName='test'
-                                        Style="{StaticResource RadioButtonStyle1}">
+                                        Style="{StaticResource RadioButtonStyle1}"
+                                        Command="{Binding LogoutCM}"
+                                        CommandParameter="{Binding ElementName=MainWindowAd}" >
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -213,7 +254,9 @@
                             <RadioButton 
                                         x:Name="btn8"
                                         GroupName='test'
-                                        Style="{StaticResource RadioButtonStyle1}">
+                                        Style="{StaticResource RadioButtonStyle1}"
+                                        Command="{Binding LoadUserInfortPageCM}"
+                                        CommandParameter="{Binding ElementName=MainFrame}">
                                 <Grid
                                             Height="50"
                                             Width="160" 
@@ -277,8 +320,14 @@
                 <Grid Grid.Row="1"
                     Visibility="Visible">
                     <DockPanel Margin="0">
-                        <Frame x:Name="mainFrame"
-                            NavigationUIVisibility="Hidden">
+                        <Frame  x:Name="MainFrame"
+                                NavigationUIVisibility="Hidden">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Loaded">
+                                    <i:InvokeCommandAction Command="{Binding LoadHomePageCM}"
+                                               CommandParameter="{Binding ElementName=MainFrame}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Frame>
                     </DockPanel>
                 </Grid>

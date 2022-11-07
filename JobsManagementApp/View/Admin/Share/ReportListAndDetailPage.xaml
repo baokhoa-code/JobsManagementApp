@@ -1,0 +1,433 @@
+﻿<Page x:Class="JobsManagementApp.View.Admin.Share.ReportListAndDetailPage"
+      xmlns:local="clr-namespace:JobsManagementApp.View.Admin.Share"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF" 
+      xmlns:vm="clr-namespace:JobsManagementApp.ViewModel"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      mc:Ignorable="d" 
+      d:DesignHeight="740" d:DesignWidth="1300"
+      FontFamily="Roboto"
+      Background='Beige'
+      Title="ReportListPageAdmin">
+
+
+    <Page.Resources>
+        <DataTemplate x:Key="testTemplate">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width='30'/>
+                        <ColumnDefinition Width='*'/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column='0'>
+                        <Rectangle Style="{StaticResource OuterRect}" />
+                        <Rectangle Style="{StaticResource InnerRect}" />
+                    </Grid>
+                    <Grid Grid.Column='1'>
+                        <TextBlock Text='14/11/2001 19:30' Style="{StaticResource timeTextStyle}"/>
+                    </Grid>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width='30'/>
+                        <ColumnDefinition Width='*'/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column='0'>
+                        <Path Style="{StaticResource LinePathStyle}"/>
+                    </Grid>
+                    <StackPanel Grid.Column='1'>
+                        <TextBlock Text='Name: Do step 1' Style="{StaticResource timeTextStyle}" Margin='10,30,0,0'/>
+                        <TextBlock TextWrapping='Wrap' Text='Description: I dont step 1 which take 5 hours to complete' Style="{StaticResource timeTextStyle}" Margin='10,10,0,0' Width='250' />
+                        <TextBlock Text='Progress: +10%' Style="{StaticResource timeTextStyle}" Margin='10,10,0,0'/>
+                        <Button
+                            Style="{StaticResource MaterialDesignPaperButton}"
+                            Content="Detail"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width='60' Height='20' FontSize='12' Padding='10,0,10,0' HorizontalAlignment='Left' Margin='10,10,0,0' BorderBrush='#FF58B0ED' />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height='50'/>
+            <RowDefinition Height='50'/>
+            <RowDefinition Height='*'/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row='0'>
+            <Label 
+                Cursor="Hand"
+                Height="45"
+                Grid.Row="0"
+                Width="45"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                x:Name="lbl" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="20,20,0,0">
+                <materialDesign:PackIcon 
+                    Kind="ArrowLeft"
+                    Height="45"
+                    Width="45"
+                    Foreground="#FF5F6388" 
+                    HorizontalAlignment="Left"/>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding CancelCM}"
+                                               CommandParameter="{Binding ElementName=lbl}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Label>
+        </Grid>
+
+        <Grid Grid.Row='1'>
+            <Grid
+                Height="35"
+                Width="110"
+                Margin="1142,0,0,0" VerticalAlignment='Center' HorizontalAlignment='Center'>
+                <Button
+                    Padding="0"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Height="35"
+                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="110">
+                    <Grid
+                        Height="35"
+                        Width="110" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+                        <materialDesign:PackIcon
+                            Kind="Plus" 
+                            Height="28" 
+                            Width="28"
+                            VerticalAlignment="Center" 
+                            Margin="5,0,0,0"
+                            Padding="0" 
+                            Foreground="white" FontSize="18"/>
+                        <Label 
+                            Content="Add report" 
+                            FontSize="14" 
+                            Foreground="white" 
+                            VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Center"/>
+                    </Grid>
+                </Button>
+            </Grid>
+            <Label 
+                Content="Reports Of Job" 
+                Foreground="#232360" 
+                FontWeight="Bold"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Padding="0" FontSize='30'/>
+            <ComboBox
+                Width="150"
+                Height="30"
+                Padding="10,0,10,0"
+                BorderBrush="#232360"
+                BorderThickness="1"
+                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                materialDesign:HintAssist.Hint="Choose role"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center" Margin='30,0,0,0'/>
+            <Grid HorizontalAlignment='Left' Margin='200,0,0,0'>
+                <Button
+                    Padding="0"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Height="30"
+                    materialDesign:ButtonAssist.CornerRadius="5" 
+                    Background="Transparent" BorderBrush="#FF232360" Width="125" >
+                    <Grid
+                        Height="50"
+                        Width="150" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+                        <materialDesign:PackIcon
+                            Kind="CalendarMinusOutline" 
+                            Height="20" 
+                            Width="20"
+                            VerticalAlignment="Stretch" 
+                            Margin="30,0,0,0"
+                            Padding="0" 
+                            Foreground="#FF69717D" FontSize="18"/>
+                        <Label 
+                            Content="Date Filter" 
+                            FontSize="14" 
+                            Foreground="#FF69717D" 
+                            VerticalAlignment="Center" Margin="22,2,0,0" HorizontalAlignment="Center" FontFamily='Roboto' FontWeight='Bold'/>
+                    </Grid>
+                </Button>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row='2'>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width='450'/>
+                <ColumnDefinition Width='*'/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column='0'>
+                <Label 
+                    Content="Job id - name: J0001 - Doing job 1" 
+                    Foreground="#232360" 
+                    FontWeight="SemiBold"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center" 
+                    Padding="0" FontSize='15' Margin='40,10,0,0'/>
+                <Label 
+                    Content="Assignee id - name: ASN0001 - Huynh Huu Bao Khoa" 
+                    Foreground="#232360" 
+                    FontWeight="Normal" 
+                    Padding="0" FontSize='13' Margin='40,10,0,0'/>
+                <ScrollViewer VerticalScrollBarVisibility='Visible' Margin='35,20,0,30'>
+                    <StackPanel>
+                        <ListView FontSize='52'>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                                    <Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate/>
+                            </ListView.ItemTemplate>
+                            <ListViewItem Padding='0'>
+                                <ContentControl 
+                                ContentTemplate="{StaticResource testTemplate}" />
+                            </ListViewItem>
+                            <ListViewItem Padding='0'>
+                                <ContentControl 
+                                ContentTemplate="{StaticResource testTemplate}" />
+                            </ListViewItem>
+                            <ListViewItem Padding='0'>
+                                <ContentControl 
+                                ContentTemplate="{StaticResource testTemplate}" />
+                            </ListViewItem>
+                            <ListViewItem Padding='0'>
+                                <ContentControl 
+                                ContentTemplate="{StaticResource testTemplate}" />
+                            </ListViewItem>
+                            <ListViewItem Padding='0'>
+                                <ContentControl 
+                                ContentTemplate="{StaticResource testTemplate}" />
+                            </ListViewItem>
+                            <ListViewItem Padding='0'>
+                                <ContentControl 
+                                ContentTemplate="{StaticResource testTemplate}" />
+                            </ListViewItem>
+                        </ListView>
+                    </StackPanel>
+                </ScrollViewer>
+
+            </StackPanel>
+            <Border
+                Grid.Column='1'
+                CornerRadius="25"
+                Background="white" Margin='30,20,30,30'>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height='40'/>
+                        <RowDefinition Height='*'/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row='0'>
+                        <Label 
+                            Content="Report Detail" 
+                            FontSize="25" 
+                            Foreground="#232360" 
+                            FontWeight="Bold"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Padding="0" Margin='0,10,0,0'/>
+
+                    </Grid>
+                    <Grid Grid.Row='1'>
+                        <StackPanel>
+                            <Label 
+                                    Content='ID: R00001'
+                                    FontSize="16" 
+                                    Foreground="#232360" 
+                                    FontWeight="SemiBold" Margin='50,0,0,0' Padding='15,4,4,4'/>
+                            <Separator Width='900' Margin='0,15,0,15'/>
+                            <StackPanel Orientation='Horizontal' Height='50'>
+                                <StackPanel Orientation='Horizontal' Margin='30,0,0,0'>
+                                    <Label 
+                                            Content='Tile' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80' Padding='15,4,4,4' Margin='20,0,0,0'/>
+                                    <TextBox
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            Height="30"
+                                            Padding='0'
+                                            Width='150' Margin='47,0,0,0'/>
+                                </StackPanel>
+                                <StackPanel Orientation='Horizontal' Margin='130,0,0,0'>
+                                    <Label 
+                                            Content='Job Assign' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80'/>
+                                    <TextBox
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            Height="30"
+                                            Padding='0'
+                                            Width='150' Margin='21.5,0,0,0'/>
+                                    <Button
+                                            Style="{StaticResource MaterialDesignRaisedButton}" Padding='0' Height='25' Width='25' Background='#FF00BEFF' BorderBrush='#FF00BEFF' Margin='5,0,0,0'>
+                                        <materialDesign:PackIcon Kind="FormatListBulleted" Foreground='White' />
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                            <Separator Width='900' Height='1' Margin='0,15,0,15'/>
+                            <StackPanel Orientation='Horizontal' Height='50'>
+                                <StackPanel Orientation='Horizontal' Margin='60,0,0,0'>
+                                    <Label 
+                                            Content='Created time' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            HorizontalContentAlignment='Center' 
+                                            VerticalContentAlignment='Center' Width='80' Padding='4,4,4,4'/>
+                                    <StackPanel
+  Orientation="Horizontal">
+                                        <TextBox
+                                            Text="{Binding Date, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            Height="30"
+                                            Padding='0'
+                                            FontSize='12'
+                                            Width='150' Margin='36.5,0,0,0'/>
+                                        <Button
+                                            Margin="8 0 0 0"
+                                            Content="..."
+                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                            materialDesign:DialogHost.DialogOpenedAttached="CombinedDialogOpenedEventHandler"
+                                            materialDesign:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler" Foreground='White' BorderBrush='#FF00BEFF' Background='#FF00BEFF' Opacity='1' Width='25' Height='25' FontSize='16' Padding='0,0,0,0'>
+                                            <Button.CommandParameter>
+                                                <Grid Margin="-1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <StackPanel
+                                                        Grid.Row="0"
+                                                        Orientation="Horizontal">
+                                                        <Calendar
+                                                            x:Name="CombinedCalendar"
+                                                            Margin="-1 -4 -1 0" />
+                                                        <materialDesign:Clock
+                                                            x:Name="CombinedClock"
+                                                            DisplayAutomation="CycleWithSeconds"
+                                                            Is24Hours="True" />
+                                                    </StackPanel>
+                                                    <StackPanel
+                                                        Grid.Row="1"
+                                                        Margin="8"
+                                                        HorizontalAlignment="Right"
+                                                        Orientation="Horizontal">
+                                                        <Button
+                                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                                            CommandParameter="0"
+                                                            Content="CANCEL" />
+                                                        <Button
+                                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                                            CommandParameter="1"
+                                                            Content="OK" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation='Horizontal' Margin='95,0,0,0'>
+                                    <Label 
+                                        Content='Completed Time' 
+                                        Foreground="#232360" 
+                                        FontWeight="SemiBold" 
+                                        VerticalContentAlignment='Center' Width='99'/>
+                                    <TextBox
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        Height="30"
+                                        Padding='0'
+                                        Width='150' Margin='5,0,0,0'/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Separator Width='900' Height='1' Margin='0,15,0,15'/>
+                            <StackPanel Orientation='Horizontal' Height='50'>
+                                <StackPanel Orientation='Horizontal' Margin='50,0,0,0'>
+                                    <Label 
+                                            Content='Completed Percent' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            HorizontalContentAlignment='Center' 
+                                            VerticalContentAlignment='Center' Width='111' Margin='10,0,0,0'/>
+                                    <TextBox
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        Height="30"
+                                        Padding='0'
+                                        Width='150' Margin='5,0,0,0'/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Separator Width='900' Height='1' Margin='0,15,0,15'/>
+                            <StackPanel Orientation='Horizontal'>
+                                <StackPanel Orientation='Vertical' Margin='20,0,0,0'>
+                                    <Label 
+                                            Content='Job Description' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            HorizontalContentAlignment='Center' 
+                                            VerticalContentAlignment='Center' Width='90' Padding='0,0,0,0' HorizontalAlignment='Left' Margin='40,0,0,0'/>
+                                    <TextBox
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            Height="183"
+                                            TextWrapping="Wrap" Width='450' HorizontalAlignment='Left' Margin='40,5,0,0'
+                                         />
+                                </StackPanel>
+                                <StackPanel Orientation='Vertical' HorizontalAlignment='Left' VerticalAlignment='Center' Margin='45,-90,0,11'>
+                                    <Button
+                                            Width="200" 
+                                            Height="40" 
+                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                            materialDesign:ButtonAssist.CornerRadius="10"
+                                            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
+                                            BorderBrush="#FF40CC6F" 
+                                            Background="#FF40CC6F"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Content="Update" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin='0,120,0,0'/>
+                                    <Button
+                                            Width="200" 
+                                            Height="40" 
+                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                            materialDesign:ButtonAssist.CornerRadius="10"
+                                            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
+                                            BorderBrush="#FFFE5555" 
+                                            Background="#FFFE5555"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Content="Delete" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin='0,40,0,0'/>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+    </Grid>
+
+
+</Page>

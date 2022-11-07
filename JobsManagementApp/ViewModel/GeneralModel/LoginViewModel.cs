@@ -124,34 +124,34 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                 {
                     if (SelectedRole.Content.ToString() == "Admin") 
                     {
-                        LoginWindow.Hide();
-                        MainWindowAdmin dba = new MainWindowAdmin();
-                        dba.Show();
-                        LoginWindow.Close();
-                        return;
+                        //LoginWindow.Hide();
+                        //MainWindowAdmin dba = new MainWindowAdmin();
+                        //dba.Show();
+                        //LoginWindow.Close();
+                        //return;
 
-                        //Admin admin;
-                        //string message;
-                        //(admin, message) = AdminService.Ins.Login(usn, pwr);
-                        //if(admin == null)
-                        //{
-                        //    lbl.Content = message;
-                        //    return;
-                        //}
-                        //else
-                        //{
-                        //    LoginWindow.Hide();
-                        //    MainWindowAdmin dba = new MainWindowAdmin();
-                        //    dba.label_name.Content= admin.name;
-                        //    dba.label_organization.Content = "Admin";
-                        //    dba.label_position.Content = admin.address;
-                        //    var uriSource = new Uri(admin.avatar, UriKind.Relative);
-                        //    dba.img_avatar.ImageSource = new BitmapImage(uriSource);
-                        //    MainWindowAdminViewModel.admin = admin;
-                        //    dba.Show();
-                        //    LoginWindow.Close();
-                        //    return;
-                        //}
+                        Admin admin;
+                        string message;
+                        (admin, message) = AdminService.Ins.Login(usn, pwr);
+                        if (admin == null)
+                        {
+                            lbl.Content = message;
+                            return;
+                        }
+                        else
+                        {
+                            LoginWindow.Hide();
+                            MainWindowAdmin dba = new MainWindowAdmin();
+                            MainWindowAdminViewModel.admin = admin;
+                            dba.label_name.Content = admin.name;
+                            dba.label_organization.Content = "ADMIN";
+                            dba.label_position.Content = admin.address;
+                            var uriSource = new Uri(admin.avatar, UriKind.Relative);
+                            dba.img_avatar.ImageSource = new BitmapImage(uriSource);
+                            dba.Show();
+                            LoginWindow.Close();
+                            return;
+                        }
 
                     }
                     else

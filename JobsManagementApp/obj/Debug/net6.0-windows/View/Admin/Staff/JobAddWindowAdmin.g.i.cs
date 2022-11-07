@@ -56,7 +56,7 @@ namespace JobsManagementApp.View.Admin.Staff {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/JobsManagementApp;component/view/admin/staff/jobaddwindowadmin.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/JobsManagementApp;V1.0.0.0;component/view/admin/staff/jobaddwindowadmin.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\View\Admin\Staff\JobAddWindowAdmin.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
