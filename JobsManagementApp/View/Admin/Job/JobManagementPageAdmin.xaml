@@ -13,6 +13,7 @@
       FontFamily="Roboto"
       Name="JobManagePage"
       DataContext='{StaticResource JobManagementAdminVM}'
+      Loaded='loaded_handle'
       Title="JobManagementAdmin">
 
     <i:Interaction.Triggers>
@@ -500,11 +501,26 @@
                                         Content="COMPLETE LATE" />
                                 </ComboBox>
                             </Border>
+                            <Grid
+                                Height="40"
+                                Width="130">
+                                <Button
+                                    Click='reset_filters_btn_handle'
+                                    Padding="0"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Height="35"
+                                    materialDesign:ButtonAssist.CornerRadius="10" 
+                                    Content='Reset Filters'
+                                    Background="Transparent" BorderBrush="Gray" Width="110" Foreground='Gray'>
+                                </Button>
+                            </Grid>
 
                             <Grid
                                 Height="40"
-                                Width="130" Margin='520,0,0,0'>
+                                Width="130" Margin='400,0,0,0'>
                                 <Button
+                                    x:Name='filter_btn'
+                                    Click='filter_btn_handle'
                                     Padding="0"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Height="35"
@@ -530,6 +546,115 @@
                                             VerticalAlignment="Center" Margin="22,2,0,0" HorizontalAlignment="Center" FontFamily='Roboto' FontWeight='Normal'/>
                                     </Grid>
                                 </Button>
+                                <Popup 
+                                    Name="popupnhe2"
+                                    AllowsTransparency="True"
+                                    IsOpen="False"
+                                    PopupAnimation="Fade"
+                                    Placement='Center'
+                                    PlacementTarget="{Binding ElementName=JobManagePage}">
+                                    <Border 
+                                        CornerRadius="20"
+                                        Background="white"
+                                        Padding='0'>    
+                                        <StackPanel >
+                                            <Label 
+                                                Content="Filter" 
+                                                FontSize="18" 
+                                                Foreground="#232360" 
+                                                FontWeight="SemiBold"
+                                                HorizontalAlignment="Left" 
+                                                Padding="0" Margin='20,20,0,0'/>    
+                                            <ComboBox
+                                                ItemsSource="{Binding CategorySource}"
+                                                Width="230"
+                                                Height="30"
+                                                Padding="10,0,10,0"
+                                                BorderBrush="Gray"
+                                                BorderThickness="1"
+                                                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                materialDesign:HintAssist.Hint="Category"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Center" 
+                                                HorizontalContentAlignment="Left"
+                                                VerticalContentAlignment="Center" 
+                                                FontFamily='Roboto Medium' FontSize='13' Margin='30,20,30,0'/>
+                                            <ComboBox
+                                                ItemsSource="{Binding DependencySource}"
+                                                Width="230"
+                                                Height="30"
+                                                Padding="10,0,10,0"
+                                                BorderBrush="#FF808080"
+                                                BorderThickness="1"
+                                                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                materialDesign:HintAssist.Hint="Dependency"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Center" 
+                                                HorizontalContentAlignment="Left"
+                                                VerticalContentAlignment="Center" 
+                                                FontFamily='Roboto Medium' FontSize='13' Margin='30,20,30,0'/>  
+                                            <ComboBox
+                                                ItemsSource="{Binding AssignorSource}"
+                                                Width="230"
+                                                Height="30"
+                                                Padding="10,0,10,0"
+                                                BorderBrush="#FF808080"
+                                                BorderThickness="1"
+                                                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                materialDesign:HintAssist.Hint="Assignor"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Center" 
+                                                HorizontalContentAlignment="Left"
+                                                VerticalContentAlignment="Center" 
+                                                FontFamily='Roboto Medium' FontSize='13' Margin='30,20,30,0'/>
+                                            <ComboBox
+                                                ItemsSource="{Binding AssigneeSource}"
+                                                Width="230"
+                                                Height="30"
+                                                Padding="10,0,10,0"
+                                                BorderBrush="#FF808080"
+                                                BorderThickness="1"
+                                                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                materialDesign:HintAssist.Hint="Assignee"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Center" 
+                                                HorizontalContentAlignment="Left"
+                                                VerticalContentAlignment="Center" 
+                                                FontFamily='Roboto Medium' FontSize='13' Margin='30,20,30,0'/>  
+
+                                            <Button
+                                                Padding="0"
+                                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                                Height="30"
+                                                materialDesign:ButtonAssist.CornerRadius="10" 
+                                                Background="#FF5051F9" BorderBrush="#FF5051F9" Width="200" Margin='0,20,0,0'>
+                                                <Grid
+                                                    Height="30"
+                                                    Width="230" 
+                                                    HorizontalAlignment="Center" 
+                                                    VerticalAlignment="Center">
+                                                    <materialDesign:PackIcon
+                                                        Kind="Filter" 
+                                                        Height="20" 
+                                                        Width="20"
+                                                        VerticalAlignment="Center"
+                                                        Padding="0" 
+                                                        Foreground="white" HorizontalAlignment='Center' 
+                                                        Margin='-60,0,0,0'/>
+                                                    <Label 
+                                                        Content="Filter" 
+                                                        FontSize="16" 
+                                                        Foreground="white" 
+                                                        VerticalAlignment="Center" 
+                                                        HorizontalAlignment="Center"/>
+                                                </Grid>
+                                            </Button>
+
+                                            <Label Height='30'/>
+                                        </StackPanel>
+                                    </Border>
+
+                                </Popup>
                             </Grid>
                             <Grid
                                 Height="40"
@@ -584,15 +709,35 @@
                                                     FontWeight="SemiBold"
                                                     HorizontalAlignment="Left" 
                                                     Padding="0" Margin='20,20,0,0'/>
-                                                <WrapPanel Orientation='Horizontal' Width='300' Margin='2,10,0,0'>
+                                                <Border  CornerRadius='10' BorderThickness='0' Height='35' Width='130' Margin='17,7,0,0' HorizontalAlignment='Left' >
+                                                    <ComboBox
+                                                        x:Name="date_type_cbx"
+                                                        Width="130"
+                                                        Height="35"
+                                                        Padding="5,10,5,0"
+                                                        BorderThickness="0"
+                                                        materialDesign:HintAssist.Hint="Choose Field" 
+                                                        VerticalAlignment='Center'
+                                                        FontSize="14" FontWeight="Bold" 
+                                                        >
+                                                        <ComboBoxItem
+                                                            Cursor="Hand"
+                                                            Content="Start Date" />
+                                                        <ComboBoxItem
+                                                            Cursor="Hand"
+                                                            Content="Due Date" />
+                                                        <ComboBoxItem
+                                                            Cursor="Hand"
+                                                            Content="End Date" />
+                                                    </ComboBox>
+                                                </Border>
+                                                <Separator Width='260' HorizontalAlignment='Center' VerticalAlignment='Center' Margin='5,20,0,2'></Separator>
+                                                <WrapPanel Orientation='Horizontal' Width='300' Margin='2,10,0,0' x:Name="panel">
                                                     <RadioButton Content='This Week' Margin='20,20,0,0' Width='100' FontSize='14'/>
-                                                    <RadioButton Content='Last Week' Margin='60,20,0,0' Width='100' FontSize='14'/>
-                                                    <RadioButton Content='This Month' Margin='20,20,0,0' Width='100' FontSize='14'/>
-                                                    <RadioButton Content='Last Month' Margin='60,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton Content='This Month' Margin='60,20,0,0' Width='100' FontSize='14'/>
                                                     <RadioButton Content='This Year' Margin='20,20,0,0' Width='100' FontSize='14'/>
-                                                    <RadioButton Content='Last Year' Margin='60,20,0,0' Width='100' FontSize='14'/>
-                                                    <Separator Width='260' HorizontalAlignment='Center' VerticalAlignment='Center' Margin='20,20,0,2'></Separator>
-                                                    <RadioButton Unchecked='date_range_unchecked_handler' Checked='date_range_checked_handler' Content='Date Range' Margin='20,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton Unchecked='date_range_unchecked_handler' Checked='date_range_checked_handler' Content='Date Range' Margin='60,20,0,0' Width='100' FontSize='14'/>
+                                                    <Separator Width='260' HorizontalAlignment='Center' VerticalAlignment='Center' Margin='16,20,0,2'></Separator>
                                                 </WrapPanel>
                                                 <TabControl x:Name='tab_control' Width='260' Visibility='Collapsed' HorizontalAlignment='Left' Height='374' Margin='20,20,0,0'>
                                                     <TabControl.Resources>
@@ -634,7 +779,7 @@
                                                         </Style>
                                                     </TabControl.Resources>
 
-                                                    <TabItem Header="From" >
+                                                    <TabItem Header="From">
                                                         <Grid>
                                                             <Grid.Resources>
                                                                 <Style
@@ -661,6 +806,7 @@
                                                                 </Style>
                                                             </Grid.Resources>
                                                             <Calendar
+                                                                x:Name='startDate'
                                                                 Background="{DynamicResource PrimaryHueLightBrush}"
                                                                 Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
                                                                 materialDesign:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
@@ -696,6 +842,7 @@
                                                                 </Style>
                                                             </Grid.Resources>
                                                             <Calendar
+                                                                x:Name='endDate'
                                                                 Background="{DynamicResource PrimaryHueLightBrush}"
                                                                 Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
                                                                 materialDesign:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
@@ -706,7 +853,8 @@
                                                     </TabItem>
                                                 </TabControl>
                                                 <Button
-                                                    Click='filter_handler'
+                                                    ClickMode='Press'
+                                                    Click='time_filter_handler'
                                                     Padding="0"
                                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                                     Height="30"
@@ -733,7 +881,7 @@
                                                             HorizontalAlignment="Center"/>
                                                     </Grid>
                                                 </Button>
-                                                <Label Height='30'/>
+                                                <Label Height='30' x:Name='annouce_lbl' FontSize='14' Foreground='Red'/>
                                             </StackPanel>
                                         </Border>
                                     </Grid>

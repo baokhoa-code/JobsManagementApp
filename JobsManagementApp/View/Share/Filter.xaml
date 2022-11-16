@@ -84,17 +84,6 @@
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center" 
                 FontFamily='Roboto Medium' FontSize='15' Margin='30,20,30,0'/>
-            <ComboBox
-                Width="200"
-                Height="30"
-                Padding="10,0,10,0"
-                BorderBrush="#FF808080"
-                BorderThickness="1"
-                Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                wpf:HintAssist.Hint="Role" 
-                HorizontalContentAlignment="Left"
-                VerticalContentAlignment="Center" 
-                FontFamily='Roboto Medium' FontSize='15' Margin='30,20,30,0'/>
 
             <Button
                 Click='filter_handler'

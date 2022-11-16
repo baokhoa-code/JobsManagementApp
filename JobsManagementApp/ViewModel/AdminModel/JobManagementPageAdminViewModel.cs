@@ -31,6 +31,30 @@ namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class JobManagementPageAdminViewModel : BaseViewModel
     {
+        private List<string> _CategorySource;
+        public List<string> CategorySource
+        {
+            get { return _CategorySource; }
+            set { _CategorySource = value; OnPropertyChanged(); }
+        }
+        private List<string> _DependencySource;
+        public List<string> DependencySource
+        {
+            get { return _DependencySource; }
+            set { _DependencySource = value; OnPropertyChanged(); }
+        }
+        private List<string> _AssignorSource;
+        public List<string> AssignorSource
+        {
+            get { return _AssignorSource; }
+            set { _AssignorSource = value; OnPropertyChanged(); }
+        }
+        private List<string> _AssigneeSource;
+        public List<string> AssigneeSource
+        {
+            get { return _AssigneeSource; }
+            set { _AssigneeSource = value; OnPropertyChanged(); }
+        }
         private ComboBoxItem _SelectedType;
         public ComboBoxItem SelectedType
         {
@@ -177,10 +201,14 @@ namespace JobsManagementApp.ViewModel.AdminModel
             Jobs = JobService.Ins.GetAllJob();
             JobsStore = new ObservableCollection<JobsDTO>(Jobs);
 
-            //INSERT WEEK, MONTH, YEAR COMBOBOX
+            //INSERT COMBOBOXES
             InsertWeekCombobox();
             InsertMonthCombobox(CurrentMonth);
             InsertYearCombobox();
+            InsertCategoryCombobox();
+            InsertAssignorCombobox();
+            InsertAssigneeCombobox();
+            InsertDependencyCombobox();
 
             //GET CURRENT WEEK, MONTH, YEAR JOB AMOUNT
             InsertWeekJobAmount();
@@ -272,6 +300,26 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 ListYear.Add(i.ToString());
             }
+        }
+        public void InsertCategoryCombobox()
+        {
+            CategorySource = new List<string>();
+            CategorySource = CategoryService.Ins.InsertCombobox();
+        }
+        public void InsertDependencyCombobox()
+        {
+            DependencySource = new List<string>();
+            DependencySource = JobService.Ins.InsertDependencyCombobox();
+        }
+        public void InsertAssignorCombobox()
+        {
+            AssignorSource = new List<string>();
+            AssignorSource = JobService.Ins.InsertAssignorCombobox();
+        }
+        public void InsertAssigneeCombobox()
+        {
+            AssigneeSource = new List<string>();
+            AssigneeSource = JobService.Ins.InsertAssigneeCombobox();
         }
         public void InsertWeekJobAmount()
         {
