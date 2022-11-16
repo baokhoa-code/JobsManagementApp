@@ -11,7 +11,20 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
+      Name="JobManagePage"
+      DataContext='{StaticResource JobManagementAdminVM}'
       Title="JobManagementAdmin">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding MaskNameCM}"
+                                   CommandParameter="{Binding ElementName=ShadowMask}" />
+            <i:InvokeCommandAction Command="{Binding GetJobListCM}"
+                                   CommandParameter="{Binding ElementName=_ListView}" />
+            <i:InvokeCommandAction Command="{Binding SaveCurrentPageCM}"
+                                   CommandParameter="{Binding ElementName=JobManagePage}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Page.Resources>
         <DataTemplate x:Key="testTemplate">
@@ -113,10 +126,11 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation='Horizontal' Grid.Row="0" Margin="5,0,0,0">
                 <Button
+                        Command="{Binding OpenCategoryWindowCM}"
                         Padding="0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Height="40"
-                        materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="160" Margin='805,0,0,0'>
+                        materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="160" Margin='965,0,0,0'>
                     <StackPanel Orientation='Horizontal'
                             Height="50"
                             Width="150" 
@@ -137,30 +151,7 @@
                     </StackPanel>
                 </Button>
                 <Button
-                    Padding="0"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Height="40"
-                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="130" Margin='30,0,0,0'>
-                    <StackPanel Orientation='Horizontal'
-                        Height="50"
-                        Width="140" 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Center">
-                        <materialDesign:PackIcon
-                            Kind="Table" 
-                            Height="30" 
-                            Width="30"
-                            VerticalAlignment="Center" 
-                            Padding="0" 
-                            Foreground="white" FontSize="18" Margin='10,0,0,0'/>
-                        <Label 
-                            Content="Show Role" 
-                            FontSize="16" 
-                            Foreground="white" 
-                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button
+                    Command="{Binding OpenAddJobWindowCM}"
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="40"
@@ -205,55 +196,80 @@
                         Margin="50,20,0,0" 
                         FontWeight="Bold"/>
                     <ComboBox
+                        ItemsSource="{Binding ListWeekRage}"
+                        SelectedItem="{Binding CurrentWeekRange,Mode=TwoWay}"
+                        Text='{Binding CurrentWeekRange, Mode=OneWay}'
+                        IsEditable='False'
                         Height="30"
                         Padding="10,0,10,0"
                         BorderBrush="#FF808080"
-                        materialDesign:HintAssist.Hint="This week" 
                         HorizontalContentAlignment="Left"
                         VerticalContentAlignment="Center" 
-                        FontFamily='Roboto Medium' FontSize='14' VerticalAlignment='Top' Width='100' HorizontalAlignment='Right' Margin='0,15,5,0' Foreground='#FF232360'/>
+                        FontFamily='Roboto Medium' FontSize='14' 
+                        FontWeight='Bold'
+                        VerticalAlignment='Top' Width='200' HorizontalAlignment='Right' Margin='0,15,5,0' Foreground='Gray'>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding ListWeekRageChangeCM}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                     <Label 
                         Content="Pending" 
-                        FontSize="15" 
+                        FontSize="17" 
                         Foreground="Gray" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='50,0,0,40'/>
+                        FontWeight="Bold" Margin='50,5,0,75'/>
                     <Label 
-                        Content="Lated" 
-                        FontSize="15" 
+                        Content="{Binding WeekPending,Mode=TwoWay}" 
+                        FontSize="16" 
+                        Foreground="#FF232360" 
+                        VerticalAlignment="Bottom"  
+                        HorizontalAlignment="Left" 
+                        FontWeight="Bold" Margin='130,5,0,75'/>
+                    <Label 
+                        Content="Late" 
+                        FontSize="17" 
                         Foreground="Gray" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='200,0,0,40'/>
+                        FontWeight="Bold" Margin='50,15,0,30'/>
                     <Label 
-                        Content="Completed" 
-                        FontSize="15" 
-                        Foreground="Gray" 
-                        VerticalAlignment="Bottom"  
-                        HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='330,0,0,40'/>
-                    <Label 
-                        Content="40" 
+                        Content="{Binding WeekLate,Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='60,0,0,15'/>
+                        FontWeight="Bold" Margin='130,5,0,30'/>
                     <Label 
-                        Content="40" 
+                        Content="Complete Soon" 
+                        FontSize="17" 
+                        Foreground="Gray" 
+                        VerticalAlignment="Bottom"  
+                        HorizontalAlignment="Left" 
+                        FontWeight="Bold" Margin='240,5,0,75'/>
+                    <Label 
+                        Content="{Binding WeekCompleteSoon,Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='210,0,0,15'/>
+                        FontWeight="Bold" Margin='370,5,0,75'/>
                     <Label 
-                        Content="40" 
+                        Content="Complete Late" 
+                        FontSize="17" 
+                        Foreground="Gray" 
+                        VerticalAlignment="Bottom"  
+                        HorizontalAlignment="Left" 
+                        FontWeight="Bold" Margin='240,0,0,30'/>
+                    <Label 
+                        Content="{Binding WeekCompleteLate,Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='355,0,0,15'/>
+                        FontWeight="Bold" Margin='370,5,0,35'/>
                 </Grid>
                 <Grid Grid.Column='1'>
                     <Border 
@@ -268,55 +284,81 @@
                         Margin="50,20,0,0" 
                         FontWeight="Bold"/>
                     <ComboBox
+                        ItemsSource="{Binding ListMonth}"
+                        SelectedItem="{Binding CurrentMonth,Mode=TwoWay}"
+                        Text='{Binding CurrentMonth, Mode=TwoWay}'
+                        IsEditable='False'
                         Height="30"
                         Padding="10,0,10,0"
                         BorderBrush="#FF808080"
                         materialDesign:HintAssist.Hint="This month" 
                         HorizontalContentAlignment="Left"
                         VerticalContentAlignment="Center" 
-                        FontFamily='Roboto Medium' FontSize='14' VerticalAlignment='Top' Width='105' HorizontalAlignment='Right' Margin='0,15,10,0'/>
+                        FontFamily='Roboto Medium' FontSize='15' 
+                        FontWeight='Bold'
+                        VerticalAlignment='Top' Width='60' HorizontalAlignment='Right' Margin='0,15,9,0' Foreground='Gray'>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding ListMonthChangeCM}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                     <Label 
-                        Content="Pending" 
-                        FontSize="15" 
+                        Content='Pending'
+                        FontSize="17" 
                         Foreground="Gray" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='50,0,0,40'/>
+                        FontWeight="Bold" Margin='50,0,0,75'/>
                     <Label 
-                        Content="Lated" 
-                        FontSize="15" 
+                        Content="{Binding MonthPending, Mode=TwoWay}" 
+                        FontSize="16" 
+                        Foreground="#FF232360" 
+                        VerticalAlignment="Bottom"  
+                        HorizontalAlignment="Left" 
+                        FontWeight="Bold" Margin='130,0,0,75'/>
+                    <Label 
+                        Content="Late" 
+                        FontSize="17" 
                         Foreground="Gray" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='200,0,0,40'/>
+                        FontWeight="Bold" Margin='50,0,0,30'/>
                     <Label 
-                        Content="Completed" 
-                        FontSize="15" 
-                        Foreground="Gray" 
-                        VerticalAlignment="Bottom"  
-                        HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='330,0,0,40'/>
-                    <Label 
-                        Content="40" 
+                        Content="{Binding MonthLate,Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='60,0,0,15'/>
+                        FontWeight="Bold" Margin='130,0,0,30'/>
                     <Label 
-                        Content="40" 
+                        Content="Complete Soon" 
+                        FontSize="17" 
+                        Foreground="Gray" 
+                        VerticalAlignment="Bottom"  
+                        HorizontalAlignment="Left" 
+                        FontWeight="Bold" Margin='240,0,0,75'/>
+                    <Label 
+                        Content="{Binding MonthCompleteSoon,Mode=TwoWay}"  
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='210,0,0,15'/>
+                        FontWeight="Bold" Margin='370,0,0,75'/>
                     <Label 
-                        Content="40" 
+                        Content="Complete Late" 
+                        FontSize="17" 
+                        Foreground="Gray" 
+                        VerticalAlignment="Bottom"  
+                        HorizontalAlignment="Left" 
+                        FontWeight="Bold" Margin='240,0,0,30'/>
+                    <Label 
+                        Content="{Binding MonthCompleteLate,Mode=TwoWay}"  
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='355,0,0,15'/>
+                        FontWeight="Bold" Margin='370,0,0,35'/>
 
                 </Grid>
                 <Grid Grid.Column='2'>
@@ -332,55 +374,80 @@
                         Margin="45,20,0,0" 
                         FontWeight="Bold"/>
                     <ComboBox
+                        ItemsSource="{Binding ListYear}"
+                        SelectedItem="{Binding CurrentYear,Mode=TwoWay}"
+                        Text='{Binding CurrentYear, Mode=OneWay}'
+                        IsEditable='False'
                         Height="30"
                         Padding="10,0,10,0"
                         BorderBrush="#FF808080"
-                        materialDesign:HintAssist.Hint="This year" 
                         HorizontalContentAlignment="Left"
                         VerticalContentAlignment="Center" 
-                        FontFamily='Roboto Medium' FontSize='14' VerticalAlignment='Top' Width='100' HorizontalAlignment='Right' Margin='0,15,25,0'/>
+                        FontFamily='Roboto Medium' FontSize='15' 
+                        FontWeight='Bold'
+                        VerticalAlignment='Top' Width='80' HorizontalAlignment='Right' Margin='0,15,25,0' Foreground='Gray' >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding ListYearChangeCM}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                     <Label 
                         Content="Pending" 
-                        FontSize="15" 
+                        FontSize="17" 
                         Foreground="Gray" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='45,0,0,40'/>
+                        FontWeight="Bold" Margin='50,0,0,75'/>
                     <Label 
-                        Content="Lated" 
-                        FontSize="15" 
+                        Content="{Binding YearPending,Mode=TwoWay}" 
+                        FontSize="16" 
+                        Foreground="#FF232360" 
+                        VerticalAlignment="Bottom"  
+                        HorizontalAlignment="Left" 
+                        FontWeight="Bold" Margin='130,0,0,75'/>
+                    <Label 
+                        Content="Late" 
+                        FontSize="17" 
                         Foreground="Gray" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='195,0,0,40'/>
+                        FontWeight="Bold" Margin='50,0,0,30'/>
                     <Label 
-                        Content="Completed" 
-                        FontSize="15" 
-                        Foreground="Gray" 
-                        VerticalAlignment="Bottom"  
-                        HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='315,0,0,40'/>
-                    <Label 
-                        Content="40" 
+                        Content="{Binding YearLate,Mode=TwoWay}"  
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='55,0,0,15'/>
+                        FontWeight="Bold" Margin='130,0,0,30'/>
                     <Label 
-                        Content="40" 
+                        Content="Complete Soon" 
+                        FontSize="17" 
+                        Foreground="Gray" 
+                        VerticalAlignment="Bottom"  
+                        HorizontalAlignment="Left" 
+                        FontWeight="Bold" Margin='240,0,0,75'/>
+                    <Label 
+                        Content="{Binding YearCompleteSoon,Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='205,0,0,15'/>
+                        FontWeight="Bold" Margin='370,0,0,75'/>
                     <Label 
-                        Content="40" 
+                        Content="Complete Late" 
+                        FontSize="17" 
+                        Foreground="Gray" 
+                        VerticalAlignment="Bottom"  
+                        HorizontalAlignment="Left" 
+                        FontWeight="Bold" Margin='240,0,0,30'/>
+                    <Label 
+                        Content="{Binding YearCompleteLate,Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
                         HorizontalAlignment="Left" 
-                        FontWeight="Bold" Margin='345,0,0,15'/>
+                        FontWeight="Bold" Margin='370,0,0,35'/>
 
                 </Grid>
             </Grid>
@@ -395,57 +462,54 @@
                             <RowDefinition Height='*'/>
                         </Grid.RowDefinitions>
                         <StackPanel Orientation='Horizontal' Grid.Row="0">
-                            <Border 
-                                CornerRadius="10,10,10,10"
-                                Background="#D6DB00"
-                                BorderBrush="#D6DB00"
-                                Height="30"
-                                Width="120"
-                                Visibility="Visible" Margin='20,0,0,0'>
-                                <Button 
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    FontSize="16"
-                                    Padding="0" 
-                                    Content="Pending" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Border BorderBrush='Gray' CornerRadius='10' BorderThickness='2' Height='35' Width='170' Margin='10,0,0,0'>
+                                <ComboBox
+                                    x:Name="job_type_cbx"
+                                    SelectionChanged="job_type_cbx_SelectionChanged"
+                                    SelectedItem="{Binding SelectedType}"
+                                    Width="170"
+                                    Height="35"
+                                    Padding="5,0,5,0"
+                                    BorderThickness="0"
+                                    materialDesign:HintAssist.Hint="Choose Job Type" 
+                                    FontSize="15" FontWeight="Bold" 
+                                    VerticalContentAlignment="Center" Foreground='Gray'>
+                                    <ComboBoxItem
+                                        Cursor="Hand"
+                                        Foreground="Purple"
+                                        Content="ALL JOBS" />
+                                    <ComboBoxItem
+                                        Cursor="Hand"
+                                        Foreground="Aqua"
+                                        Content="WAITING" />
+                                    <ComboBoxItem
+                                        Cursor="Hand"
+                                        Foreground="Yellow"
+                                        Content="PENDING" />
+                                    <ComboBoxItem
+                                        Cursor="Hand"
+                                        Foreground="Red"
+                                        Content="LATE" />
+                                    <ComboBoxItem
+                                        Cursor="Hand"
+                                        Foreground="Green"
+                                        Content="COMPLETE SOON" />
+                                    <ComboBoxItem
+                                        Cursor="Hand"
+                                        Foreground="Orange"
+                                        Content="COMPLETE LATE" />
+                                </ComboBox>
                             </Border>
-                            <Border 
-                                CornerRadius="10,10,10,10"
-                                Background="#FF4848"
-                                BorderBrush="#FF4848"
-                                Height="30"
-                                Width="120"
-                                Visibility="Visible" Margin='15,0,0,0'>
-                                <Button 
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    FontSize="16"
-                                    Padding="0" 
-                                    Content="Lated" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <Border 
-                                CornerRadius="10,10,10,10"
-                                Background="#38DE8A"
-                                BorderBrush="#38DE8A"
-                                Height="30"
-                                Width="120"
-                                Visibility="Visible" Margin='15,0,0,0'>
-                                <Button 
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    FontSize="16"
-                                    Padding="0" 
-                                    Content="Completed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
+
                             <Grid
                                 Height="40"
-                                Width="130" Margin='310,0,0,0'>
+                                Width="130" Margin='520,0,0,0'>
                                 <Button
                                     Padding="0"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Height="32"
+                                    Height="35"
                                     materialDesign:ButtonAssist.CornerRadius="10" 
-                                    Background="Transparent" BorderBrush="Gray" Width="110" Click='Button_Click'>
+                                    Background="Transparent" BorderBrush="Gray" Width="110">
                                     <Grid
                                         Height="50"
                                         Width="150" 
@@ -471,11 +535,13 @@
                                 Height="40"
                                 Width="130">
                                 <Button
+                                    x:Name='date_filter_btn'
+                                    Click='date_filter_btn_handle'
                                     Padding="0"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Height="32"
+                                    Height="35"
                                     materialDesign:ButtonAssist.CornerRadius="10" 
-                                    Background="Transparent" BorderBrush="Gray" Width="110" Click='Button_Click'>
+                                    Background="Transparent" BorderBrush="Gray" Width="110">
                                     <Grid
                                         Height="50"
                                         Width="150" 
@@ -496,113 +562,433 @@
                                             VerticalAlignment="Center" Margin="22,2,0,0" HorizontalAlignment="Center" FontFamily='Roboto' FontWeight='Normal'/>
                                     </Grid>
                                 </Button>
+                                <Popup 
+                                    Name="popupnhe"
+                                    AllowsTransparency="True"
+                                    IsOpen="False"
+                                    PopupAnimation="Fade"
+                                    Placement='Center'
+                                    PlacementTarget="{Binding ElementName=JobManagePage}">
+
+                                    <Grid>
+
+                                        <Border 
+                                            CornerRadius="20"
+                                            Background="white"
+                                            Padding='0'>
+                                            <StackPanel >
+                                                <Label 
+                                                    Content="Filter By Date" 
+                                                    FontSize="18" 
+                                                    Foreground="#232360" 
+                                                    FontWeight="SemiBold"
+                                                    HorizontalAlignment="Left" 
+                                                    Padding="0" Margin='20,20,0,0'/>
+                                                <WrapPanel Orientation='Horizontal' Width='300' Margin='2,10,0,0'>
+                                                    <RadioButton Content='This Week' Margin='20,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton Content='Last Week' Margin='60,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton Content='This Month' Margin='20,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton Content='Last Month' Margin='60,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton Content='This Year' Margin='20,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton Content='Last Year' Margin='60,20,0,0' Width='100' FontSize='14'/>
+                                                    <Separator Width='260' HorizontalAlignment='Center' VerticalAlignment='Center' Margin='20,20,0,2'></Separator>
+                                                    <RadioButton Unchecked='date_range_unchecked_handler' Checked='date_range_checked_handler' Content='Date Range' Margin='20,20,0,0' Width='100' FontSize='14'/>
+                                                </WrapPanel>
+                                                <TabControl x:Name='tab_control' Width='260' Visibility='Collapsed' HorizontalAlignment='Left' Height='374' Margin='20,20,0,0'>
+                                                    <TabControl.Resources>
+                                                        <Style TargetType="TabItem">
+                                                            <Setter Property='Cursor' Value='Hand'/>
+                                                            <Setter Property="FontSize" Value="14"/>
+                                                            <Setter Property="Height" Value="25"/>
+                                                            <Setter Property="FontWeight" Value="DemiBold"/>
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="TabItem">
+                                                                        <Border
+                                                                            Name="Border"
+                                                                            BorderBrush="Transparent"
+                                                                            BorderThickness="1"
+                                                                            CornerRadius="5"
+                                                                            Height='25'>
+                                                                            <ContentPresenter
+                                                                                x:Name="ContentSite"
+                                                                                Margin="10,2"
+                                                                                HorizontalAlignment="Center"
+                                                                                VerticalAlignment="Center"
+                                                                                ContentSource="Header" />
+                                                                        </Border>
+                                                                        <ControlTemplate.Triggers>
+                                                                            <Trigger Property="IsSelected" Value="True">
+                                                                                <Setter Property="Foreground" Value="White"/>
+                                                                                <Setter TargetName="Border" Property="Background" Value="#1EA7FF" />
+                                                                            </Trigger>
+                                                                            <Trigger Property="IsSelected" Value="False">
+                                                                                <Setter Property="Foreground" Value="#FF232360"/>
+                                                                                <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                                                            </Trigger>
+
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </TabControl.Resources>
+
+                                                    <TabItem Header="From" >
+                                                        <Grid>
+                                                            <Grid.Resources>
+                                                                <Style
+                                                                    x:Key="SecondaryCalendarDayButton"
+                                                                    TargetType="CalendarDayButton"
+                                                                    BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Value="{DynamicResource SecondaryHueMidBrush}" />
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
+                                                                </Style>
+                                                                <Style
+                                                                    x:Key="SecondaryCalendarButton"
+                                                                    TargetType="CalendarButton"
+                                                                    BasedOn="{StaticResource MaterialDesignCalendarButton}">
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Value="{DynamicResource SecondaryHueMidBrush}" />
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
+                                                                </Style>
+                                                            </Grid.Resources>
+                                                            <Calendar
+                                                                Background="{DynamicResource PrimaryHueLightBrush}"
+                                                                Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                                                                materialDesign:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
+                                                                materialDesign:CalendarAssist.HeaderForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                                                CalendarDayButtonStyle="{StaticResource SecondaryCalendarDayButton}"
+                                                                CalendarButtonStyle="{StaticResource SecondaryCalendarButton}" />
+                                                        </Grid>
+                                                    </TabItem>
+                                                    <TabItem Header="To">
+                                                        <Grid>
+                                                            <Grid.Resources>
+                                                                <Style
+                                                                  x:Key="SecondaryCalendarDayButton"
+                                                                  TargetType="CalendarDayButton"
+                                                                  BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Value="{DynamicResource SecondaryHueMidBrush}" />
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
+                                                                </Style>
+                                                                <Style
+                                                                    x:Key="SecondaryCalendarButton"
+                                                                    TargetType="CalendarButton"
+                                                                    BasedOn="{StaticResource MaterialDesignCalendarButton}">
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Value="{DynamicResource SecondaryHueMidBrush}" />
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
+                                                                </Style>
+                                                            </Grid.Resources>
+                                                            <Calendar
+                                                                Background="{DynamicResource PrimaryHueLightBrush}"
+                                                                Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                                                                materialDesign:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
+                                                                materialDesign:CalendarAssist.HeaderForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                                                CalendarDayButtonStyle="{StaticResource SecondaryCalendarDayButton}"
+                                                                CalendarButtonStyle="{StaticResource SecondaryCalendarButton}" />
+                                                        </Grid>
+                                                    </TabItem>
+                                                </TabControl>
+                                                <Button
+                                                    Click='filter_handler'
+                                                    Padding="0"
+                                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                                    Height="30"
+                                                    materialDesign:ButtonAssist.CornerRadius="10" 
+                                                    Background="#FF5051F9" BorderBrush="#FF5051F9" Width="200" Margin='0,20,0,0'>
+                                                    <Grid
+                                                        Height="30"
+                                                        Width="200" 
+                                                        HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center">
+                                                        <materialDesign:PackIcon
+                                                            Kind="Filter" 
+                                                            Height="20" 
+                                                            Width="20"
+                                                            VerticalAlignment="Center"
+                                                            Padding="0" 
+                                                            Foreground="white" HorizontalAlignment='Center' 
+                                                            Margin='-60,0,0,0'/>
+                                                        <Label 
+                                                            Content="Filter" 
+                                                            FontSize="16" 
+                                                            Foreground="white" 
+                                                            VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center"/>
+                                                    </Grid>
+                                                </Button>
+                                                <Label Height='30'/>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </Popup>
                             </Grid>
                             <Border 
                                 CornerRadius="10"
                                 BorderBrush="Gray" 
                                 BorderThickness="2" 
-                                Height="32" Width="250" Background="White" Margin='10,0,0,0'>
-                                <Grid>
+                                Height="35" Width="250" Background="White" Margin='10,0,0,0'>
+                                <Grid VerticalAlignment='Center' HorizontalAlignment='Center' Width='250'>
                                     <Button 
                                         Style="{DynamicResource MaterialDesignToolButton}" 
                                         HorizontalAlignment="Left" 
                                         VerticalAlignment="Center" 
-                                        Margin="5,0,0,0" Padding="0" FontSize="13" >
+                                        Margin="8,0,0,0" Padding="0" FontSize="13" >
                                         <materialDesign:PackIcon 
                                             Kind="Magnify"
-                                            Height="20"
-                                            Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            Height="25"
+                                            Width="25" VerticalAlignment="Center" HorizontalAlignment="Left" Margin='0,2,0,0'/>
                                     </Button>
 
                                     <TextBox 
+                                        x:Name="SearchBox"
+                                        TextChanged="TextBox_TextChanged"
                                         Width="200"
                                         materialDesign:HintAssist.Hint="Enter job name."
                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                         BorderThickness="0"
                                         FontSize="15"
-                                        x:Name="SearchBox" Margin="30,0,0,0" VerticalAlignment="Center" Foreground="#E5000000" />
+                                        Margin="30,0,0,0" VerticalAlignment="Center" Foreground="#E5000000" />
                                 </Grid>
                             </Border>
                         </StackPanel>
                         <Grid Grid.Row="1">
                             <Separator Width='1250' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='0,0,0,2' ></Separator>
+                            <StackPanel Width='1250' Height='430'>
+                                <ListView ItemsSource="{Binding Jobs}"
+                                    x:Name="_ListView"
+                                    Height="430" Width='1250'>
 
-                            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                          CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}" Width="1250" Margin="0,10,0,0">
-                                <DataGrid.Columns>
-                                    <DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
-                                        <DataGridCheckBoxColumn.HeaderTemplate>
-                                            <DataTemplate>
-                                                <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
-                                            </DataTemplate>
-                                        </DataGridCheckBoxColumn.HeaderTemplate>
-                                    </DataGridCheckBoxColumn>
-                                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
-                                    <DataGridTemplateColumn Header="Job Name" IsReadOnly="True" Width="150">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTextColumn Header="Category" Binding="{Binding Position}" IsReadOnly="True" Width="120"/>
-                                    <DataGridTextColumn Header="Dependency" Binding="{Binding Phone}" IsReadOnly="True" Width="150"/>
-                                    <DataGridTextColumn Header="Assignor" Binding="{Binding Email}" IsReadOnly="True" Width="120"/>
-                                    <DataGridTextColumn Header="Require Hours" Binding="{Binding Email}" IsReadOnly="True" Width="130"/>
-                                    <DataGridTextColumn Header="Due Date" Binding="{Binding Phone}" IsReadOnly="True" Width="110"/>
-                                    <DataGridTextColumn Header="Start - Finish Date" Binding="{Binding Phone}" IsReadOnly="True" Width="*"/>
-                                    <DataGridTemplateColumn Header="Stage" IsReadOnly="True" Width="100">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Border 
-                                        CornerRadius="15"
-                                        Background="#5051F9"
-                                        BorderBrush="#5051F9"
-                                        Height="50"
-                                        Width="160"
-                                        >
-                                                    <Grid
-                                            Height="50"
-                                            Width="160" 
-                                            HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"
-                                            >
-                                                        <Label 
-                                                Content="Dash Board" 
-                                                FontSize="16" 
-                                                Foreground="white" 
-                                                FontWeight="SemiBold"
-                                                HorizontalAlignment="Center" 
-                                                VerticalAlignment="Center" />
-                                                    </Grid>
-                                                </Border>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="Actions" IsReadOnly="True" Width="auto">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Button Style="{StaticResource gridEditButton}">
-                                                        <materialDesign:PackIcon Kind="Pencil" 
-                                                                     Width="14"
-                                                                     Height="14"
-                                                                     VerticalAlignment="Center"/>
-                                                    </Button>
-                                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
-                                                        <materialDesign:PackIcon Kind="Delete" 
-                                                                     Width="14"
-                                                                     Height="14"
-                                                                     VerticalAlignment="Center"/>
-                                                    </Button>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}"
+                                            BasedOn="{StaticResource MaterialDesignGridViewItem}"/>
+                                    </ListView.ItemContainerStyle>
+
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridView.ColumnHeaderContainerStyle>
+                                                <Style TargetType="{x:Type GridViewColumnHeader}">
+
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                <Border BorderThickness="0,0,0,0.2" BorderBrush="Black" Background="Transparent" >
+                                                                    <TextBlock x:Name="ContentHeader" 
+                                                                               FontSize='15'
+                                                                               FontWeight='Bold'
+                                                                               Text="{TemplateBinding Content}" 
+                                                                               Padding="5,5,5,5" Width="{TemplateBinding Width}" 
+                                                                               TextAlignment="Center" />
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                    <Setter Property="FontSize" Value="12" />
+
+                                                </Style>
+                                            </GridView.ColumnHeaderContainerStyle>
+                                            <GridViewColumn Header="ID" Width="40" >
+                                                <GridViewColumn.CellTemplate   >
+                                                    <DataTemplate>
+                                                        <TextBlock  Text="{Binding id}" Width="30" Margin="0,10,0,0"
+                                                                    FontWeight='SemiBold'
+                                                                    FontSize="12" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Job name"
+                                                Width="160">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock  Text="{Binding name}" FontWeight='SemiBold'
+                                                            FontSize="12"
+                                                            Margin="-10,10,0,0"
+                                                />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Category"
+                                                Width="80">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding category}" FontWeight='SemiBold'
+                                                            FontSize="12"
+                                                            Margin="0,10,0,0" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Job Parent"
+                                                Width="160">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation='Vertical' HorizontalAlignment='Center' Width='160'>
+                                                            <TextBlock Text="{Binding dependency_id}" FontWeight='SemiBold'
+                                                                FontSize="12"
+                                                                Margin="-20,0,0,0" 
+                                                                HorizontalAlignment='Center'/>
+                                                            <TextBlock Text="{Binding dependency_name}" FontWeight='SemiBold'
+                                                                FontSize="12"
+                                                                Margin="-15,10,0,0" HorizontalAlignment='Center'/>
+                                                        </StackPanel>
+
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Assignor"
+                                                Width="160">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation='Vertical'>
+                                                            <TextBlock Text="{Binding assignor_type}" FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                FontSize="12"
+                                                                Margin="10,2,0,0" />
+                                                            <TextBlock Text="{Binding assignor_name}" FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                FontSize="12"
+                                                                Margin="10,0,0,0" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Assignee"
+                                                Width="160">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation='Vertical'>
+                                                            <TextBlock Text="{Binding assignee_type}"  FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                FontSize="12"
+                                                                Margin="10,2,0,0" />
+                                                            <TextBlock Text="{Binding assignee_name}" FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                FontSize="12"
+                                                                Margin="10,0,0,0" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Hour"
+                                                Width="70">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding required_hour}" FontWeight='SemiBold'
+                                                            FontSize="12"
+                                                            Margin='10,10,0,0'
+                                        />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Due Date"
+                                                Width="90">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding due_date}" Margin='5,10,0,0' FontWeight='SemiBold'
+                                                            FontSize="12"
+                                        />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Start-Finish"
+                                                Width="90">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation='Vertical'>
+                                                            <TextBlock Text="{Binding start_date}" Margin='5,2,0,0' FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                FontSize="12"
+                                        />
+                                                            <TextBlock Text="{Binding end_date}" Margin='5,0,0,0' FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                FontSize="12"
+                                        />
+                                                        </StackPanel>
+
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Stage"
+                                                Width="140">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding stage}" FontWeight='SemiBold'
+                                                            FontSize="12"
+                                                            Margin="30,10,0,0" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel VerticalAlignment="Center"
+                                                            Orientation="Horizontal">
+                                                            <Border BorderBrush="Black"
+                                                                BorderThickness="1"
+                                                                CornerRadius="6"
+                                                                Cursor="Hand">
+                                                                <Border.Style>
+                                                                    <Style TargetType="{x:Type Border}">
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver"
+                                                                                Value="True">
+                                                                                <Setter Property="Background"
+                                                                                    Value="#00e5ff" />
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Border.Style>
+                                                                <materialDesign:PackIcon Kind="Magnify"
+                                                                    Width="30"
+                                                                    Height="30"
+                                                                    Cursor="Hand" />
+                                                            </Border>
+                                                            <Border Margin="0 0 0 0"
+                                                                BorderBrush="Black"
+                                                                BorderThickness="1"
+                                                                CornerRadius="6"
+                                                                Cursor="Hand">
+                                                                <Border.Style>
+                                                                    <Style TargetType="{x:Type Border}">
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver"
+                                                                                Value="True">
+                                                                                <Setter Property="Background"
+                                                                                    Value="#ff6255" />
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Border.Style>
+                                                                <materialDesign:PackIcon Kind="GarbageCanEmpty"
+                                                                    Width="30"
+                                                                    Height="30"
+                                                                    Cursor="Hand" />
+                                                            </Border>
+
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+
+                                </ListView>
+                                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                    Height="100"
+                                    Width="100"
+                                    Margin="0,-600,0,0" 
+                                    IsIndeterminate="{Binding IsGettingSource}"/>
+                            </StackPanel>
 
                         </Grid>
                     </Grid>
@@ -612,6 +998,11 @@
             </Grid>
 
         </Grid>
+        <Grid Grid.RowSpan="3"
+                  Background="Gray"
+                  Opacity="0.3"
+                  Visibility="Collapsed"
+                  x:Name="ShadowMask" />
     </Grid>
 
 </Page>

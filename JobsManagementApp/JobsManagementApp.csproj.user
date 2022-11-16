@@ -16,46 +16,16 @@
     <Compile Update="View\Admin\DashBoard\ReportListAllPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\ExampleTable.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Admin\JobAssign\JobAssignManagementPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\Job\JobManagementPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\Share\ShowTableToChoose.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Admin\MainWindowAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\Share\DateFilter.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\Share\Filter.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Admin\Report\ReportManagementPageAdmin.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\Share\JobAddWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\Share\JobAssignAddWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\Share\JobAssignDetailPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\Share\JobDetailPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\Share\ReportListAndDetailPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\Share\UserInformationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\Staff\StaffAddWindowAdmin.xaml.cs">
@@ -79,6 +49,39 @@
     <Compile Update="View\General\Splash.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Share\DateFilter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\Filter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\JobAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\JobAssignAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\JobAssignDetailPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\JobDetailPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\Notification.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\ReportAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\ReportListAndDetailPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\ShowTableToChoose.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\UserInformationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\User\DashBoardUser.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -96,46 +99,16 @@
     <Page Update="View\Admin\DashBoard\ReportListAllPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\ExampleTable.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="View\Admin\JobAssign\JobAssignManagementPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\Job\JobManagementPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\Share\ShowTableToChoose.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="View\Admin\MainWindowAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\Share\DateFilter.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\Share\Filter.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="View\Admin\Report\ReportManagementPageAdmin.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\Share\JobAddWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\Share\JobAssignAddWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\Share\JobAssignDetailPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\Share\JobDetailPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\Share\ReportListAndDetailPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\Share\UserInformationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\Staff\StaffAddWindowAdmin.xaml">
@@ -157,6 +130,39 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\General\Splash.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\DateFilter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\Filter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\JobAddWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\JobAssignAddWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\JobAssignDetailPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\JobDetailPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\Notification.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\ReportAddWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\ReportListAndDetailPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\ShowTableToChoose.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\UserInformationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\User\DashBoardUser.xaml">

@@ -15,14 +15,16 @@ using JobsManagementApp.View.Admin.DashBoard;
 using JobsManagementApp.View.Admin.Job;
 using JobsManagementApp.View.Admin.JobAssign;
 using JobsManagementApp.View.Admin.Report;
-using JobsManagementApp.View.Admin.Share;
+using JobsManagementApp.View.Share;
 using JobsManagementApp.View.Admin.Staff;
+using System.Windows.Navigation;
+using JobsManagementApp.ViewModel.AdminModel;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class MainWindowAdminViewModel : BaseViewModel
     {
-        public static Admin admin;
+        public Admin admin { get; set; }
         private string _SelectedFuncName;
         public string SelectedFuncName
         {
@@ -76,7 +78,14 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 SelectedFuncName = "Job Management";
                 if (p != null)
-                    p.Content = new JobManagementPageAdmin();
+                {
+                    JobManagementPageAdmin jobPage = new JobManagementPageAdmin();
+                    JobManagementPageAdminViewModel vm = new JobManagementPageAdminViewModel();
+                    vm.admin = admin;
+                    jobPage.DataContext = vm;
+                    p.Content = jobPage;
+                }
+
             });
             LoadJobAssignManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
@@ -99,8 +108,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
             LoadUserInfortPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
                 SelectedFuncName = "Report Management";
-                if (p != null)
-                    p.Content = new UserInformationPage();
+                //if (p != null)
+                //    p.Content = new UserInformationPage();
             });
         }
     }

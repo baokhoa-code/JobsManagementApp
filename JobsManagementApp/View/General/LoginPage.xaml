@@ -302,7 +302,9 @@
                 BorderBrush="Transparent" 
                 Width="140"
                 HorizontalContentAlignment="Right"
-                Command="{Binding ForgotPassCM}" FontFamily="Roboto" HorizontalAlignment="Left" Margin="35,0,0,0"/>
+                Command="{Binding ForgotPassCM}" 
+                FontFamily="Roboto" 
+                HorizontalAlignment="Left" Margin="35,0,0,0"/>
             <Button 
                 Padding="0"
                 Content="Login"

@@ -23,12 +23,13 @@ namespace JobsManagementApp.Model
         public string? pass { get; set; }
         public string? question { get; set; }
         public string? answer { get; set; }
+        public int? total_working_hour { get; set; }
         public User()
         {
         }
 
         public User(int id_t, string name_t, string gender_t, string dob_t, string phone_t,
-           string address_t, string nationality_t, string organization_t, string position_t, string avatar_t, string email_t, string username_t, string pass_t, string question_t, string answer_t)
+           string address_t, string nationality_t, string organization_t, string position_t, string avatar_t, string email_t, string username_t, string pass_t, string question_t, string answer_t, int total_working_hour_t)
         {
             id = id_t;
             name = name_t;
@@ -45,6 +46,7 @@ namespace JobsManagementApp.Model
             pass = pass_t;
             question = question_t;
             answer = answer_t;
+            total_working_hour = total_working_hour_t;
         }
     }
 }

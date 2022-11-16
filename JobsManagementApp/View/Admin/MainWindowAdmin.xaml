@@ -18,7 +18,7 @@
         Title="MainWindowAdmin" 
         Width="1500" Height="800"
         Name="MainWindowAd"
-        DataContext="{StaticResource MainWindowAdminVM}"
+
         >
     <Window.Triggers>
         <EventTrigger RoutedEvent="Loaded">
@@ -233,18 +233,20 @@
                             </Border>
                             <Label 
                                 x:Name="label_name"
+                                Content='{Binding admin.name}'
                                 FontSize="16" 
                                 Foreground="#FF5F6388" 
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Center" Margin="0,130,0,0" FontWeight="Bold" FontFamily="Roboto" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                             <Label 
-                                x:Name="label_organization"
+                                Content='Admin'
                                 FontSize="14" 
                                 Foreground="#FF5F6388" 
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Center" Margin="0,155,0,0" FontWeight="Medium" Padding="0,0,0,0" FontFamily="Roboto Medium"/>
                             <Label 
-                                x:Name="label_position"
+                                x:Name="label_address"
+                                Content='{Binding admin.address}'
                                 FontSize="13" 
                                 Foreground="#FF5F6388" 
                                 VerticalAlignment="Top"

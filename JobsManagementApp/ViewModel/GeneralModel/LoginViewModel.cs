@@ -142,12 +142,10 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                         {
                             LoginWindow.Hide();
                             MainWindowAdmin dba = new MainWindowAdmin();
-                            MainWindowAdminViewModel.admin = admin;
-                            dba.label_name.Content = admin.name;
-                            dba.label_organization.Content = "ADMIN";
-                            dba.label_position.Content = admin.address;
-                            var uriSource = new Uri(admin.avatar, UriKind.Relative);
-                            dba.img_avatar.ImageSource = new BitmapImage(uriSource);
+                            MainWindowAdminViewModel vm = new MainWindowAdminViewModel();
+                            vm.admin = admin;
+                            dba.DataContext = vm;
+                            dba.img_avatar.ImageSource = new BitmapImage(new Uri(admin.avatar, UriKind.Relative));
                             dba.Show();
                             LoginWindow.Close();
                             return;

@@ -1,0 +1,108 @@
+﻿<Window x:Class="JobsManagementApp.View.Share.Notification"
+        xmlns:local="clr-namespace:JobsManagementApp.View.Share"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Height="300" Width="432"
+        WindowStartupLocation="CenterScreen"
+        Title="Notification"
+        FontFamily="SVN-Product Sans">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <materialDesign:ColorZone Mode="Dark"
+                                      MouseDown="ColorZone_MouseDown">
+                <Grid Background="DarkSlateGray" Height="30">
+
+                    <TextBlock Margin="35 0 0 0"
+                               Name="txbl_Title"
+                               Text="Thông báo"
+                               FontSize="15"
+                               FontFamily="SVN-Product Sans"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left">
+                    </TextBlock>
+
+                    <Button Click="btn_Close_Click"
+                            Name="btn_Close"
+                            Height="20" Width="20"
+                            Margin="0 0 3 0"
+                            BorderBrush="OrangeRed"
+                            Opacity="0.8"
+                            Background="OrangeRed"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                        <materialDesign:PackIcon Kind="Close" Height="15" Width="15"/>
+                    </Button>
+
+                    <Button Name="btn_Maximize"
+                            Margin="0 0 27 0"
+                            BorderBrush="LightGray"
+                            Background="LightGray"
+                            Height="20" Width="20" Opacity="0.8"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                        <materialDesign:PackIcon Kind="WindowMaximize" Height="15" Width="15"/>
+                    </Button>
+
+                    <Button Click="btn_Minimize_Click"
+                            Name="btn_Minimize"
+                            Margin="0 0 51 0"
+                            BorderBrush="LightGreen"
+                            Background="LightGreen"
+                            Height="20" Width="20" Opacity="0.8"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                        <materialDesign:PackIcon Kind="WindowMinimize" Height="15" Width="15"/>
+                    </Button>
+                </Grid>
+            </materialDesign:ColorZone>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="70"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  Margin="5 5 5 5">
+                <TextBlock FontSize="30"
+                           TextAlignment="Justify"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Name="txbl_notification">
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Border Height="50"
+                        Width="120"
+                        Background="BlueViolet"
+                        BorderBrush="BlueViolet"
+                        CornerRadius="30">
+                    <Button Background="Transparent"
+                            BorderBrush="Transparent"
+                            Height="50"
+                            Width="110"
+                            FontSize="30"
+                            Name="btn_confirm"
+                            Click="btn_confirm_Click">
+                        OK
+                    </Button>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

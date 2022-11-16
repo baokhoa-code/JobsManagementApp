@@ -40,30 +40,30 @@ namespace JobsManagementApp.Service
             string code = "";
             MySqlDataReader reader;
 
-                code = "SELECT * FROM ADMIN WHERE USERNAME=@username";
-                dbc.command.CommandText = code;
-                dbc.command.Parameters.AddWithValue("@username", username);
+            code = "SELECT * FROM ADMIN WHERE USERNAME=@username";
+            dbc.command.CommandText = code;
+            dbc.command.Parameters.AddWithValue("@username", username);
 
-                dbc.connection.Open();
-                reader = dbc.command.ExecuteReader();
-                if (reader.HasRows)
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                string? r_pass = reader["PASS"].ToString();
+                if (password.Equals(r_pass))
                 {
-                    reader.Read();
-                    string? r_pass = reader["PASS"].ToString();
-                    if (password.Equals(r_pass))
-                    {
-                        admin = new Admin(Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
-                            reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
-                            reader.GetString(10), reader.GetString(11), reader.GetString(12));
-                        message = "Login Success";
-                        dbc.connection.Close();
-                    }
-                    else
-                    {
-                        admin = null;
-                        message = "Your password is inconrect";
-                        dbc.connection.Close();
-                    }
+                    admin = new Admin(Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), reader.GetString(14), Int16.Parse(reader.GetString(15)));
+                    message = "Login Success";
+                    dbc.connection.Close();
+                }
+                else
+                {
+                    admin = null;
+                    message = "Your password is inconrect";
+                    dbc.connection.Close();
+                }
 
             }
             else
