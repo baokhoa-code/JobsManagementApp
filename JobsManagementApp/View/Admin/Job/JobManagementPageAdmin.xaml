@@ -27,97 +27,6 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Page.Resources>
-        <DataTemplate x:Key="testTemplate">
-
-            <Border 
-                    Width="600"
-                    Height="80" 
-                    CornerRadius="20" Background="White" Margin="0,10,0,0">
-
-                <StackPanel Orientation="Horizontal">
-
-                    <Button                               
-                            Width="35"
-                            Height="35"
-                            Padding="0" 
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            ToolTip="MaterialDesignFloatingActionButton"
-                            Margin="7,0,0,0">
-                        <materialDesign:PackIcon
-                                Width="35"
-                                Height="35"
-                                Kind="Magnify" 
-                                Foreground="#B21EA7FF"/>
-                    </Button>
-
-                    <StackPanel Width="80">
-                        <TextBlock 
-                                Text="Start from"
-                                FontSize="12"
-                                FontWeight="Medium"
-                                Foreground="#FF232360"
-                                TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,20,0,0">
-                        </TextBlock>
-                        <TextBlock 
-                                Text="6:00 am"
-                                FontSize="11"
-                                FontWeight="Medium"
-                                Foreground="#FF232360"
-                                TextWrapping="Wrap" VerticalAlignment="Center" 
-                                HorizontalAlignment="Center" Margin="0,5,0,0" />
-                    </StackPanel>
-
-                    <TextBlock 
-                                Text="This is job name description."
-                                Width="260"
-                                FontWeight="Medium"
-                                FontSize="15"
-                                Foreground="#FF232360"
-                                TextWrapping="Wrap" 
-                                HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                Margin="11,0,0,0">
-                    </TextBlock>
-
-                    <StackPanel Width="150">
-                        <TextBlock 
-                                Text="50% completed"
-                                FontSize="12"
-                                FontWeight="Medium"
-                                Foreground="#FF232360"
-                                TextWrapping="Wrap" HorizontalAlignment="Center" 
-                                Margin="0,20,0,0">
-                        </TextBlock>
-                        <ProgressBar
-                                Value="25"
-                                Height="5" 
-                                Margin="0,10,0,0"/>
-                    </StackPanel>
-
-                    <Button                               
-                            Width="25"
-                            Height="25"
-                            Padding="0" 
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            ToolTip="MaterialDesignFloatingActionButton"
-                            
-                            Margin="15,0,0,0">
-                        <materialDesign:PackIcon
-                                Width="25"
-                                Height="25"
-                                Kind="CloseCircleOutline" 
-                                Foreground="#B2FF0000"/>
-                    </Button>
-
-                </StackPanel>
-
-            </Border>
-
-        </DataTemplate>
-    </Page.Resources>
-
     <Grid Background="Beige">
         <Grid>
             <Grid.RowDefinitions>
@@ -507,11 +416,13 @@
                                 <Button
                                     Click='reset_filters_btn_handle'
                                     Padding="0"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    materialDesign:ButtonProgressAssist.Value="-1"
+                                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                                     Height="35"
                                     materialDesign:ButtonAssist.CornerRadius="10" 
                                     Content='Reset Filters'
-                                    Background="Transparent" BorderBrush="Gray" Width="110" Foreground='Gray'>
+                                    Background="#FF23DF00" BorderBrush="Gray" Width="110" Foreground='White'>
                                 </Button>
                             </Grid>
 
@@ -519,6 +430,7 @@
                                 Height="40"
                                 Width="130" Margin='400,0,0,0'>
                                 <Button
+                                    Command="{Binding LoadFilterCbxCM}"
                                     x:Name='filter_btn'
                                     Click='filter_btn_handle'
                                     Padding="0"
@@ -566,11 +478,12 @@
                                                 HorizontalAlignment="Left" 
                                                 Padding="0" Margin='20,20,0,0'/>    
                                             <ComboBox
+                                                x:Name='category_cbx'
                                                 ItemsSource="{Binding CategorySource}"
                                                 Width="230"
                                                 Height="30"
                                                 Padding="10,0,10,0"
-                                                BorderBrush="Gray"
+                                                BorderBrush="#FF808080"
                                                 BorderThickness="1"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 materialDesign:HintAssist.Hint="Category"
@@ -580,6 +493,7 @@
                                                 VerticalContentAlignment="Center" 
                                                 FontFamily='Roboto Medium' FontSize='13' Margin='30,20,30,0'/>
                                             <ComboBox
+                                                x:Name='dependency_cbx'
                                                 ItemsSource="{Binding DependencySource}"
                                                 Width="230"
                                                 Height="30"
@@ -594,6 +508,7 @@
                                                 VerticalContentAlignment="Center" 
                                                 FontFamily='Roboto Medium' FontSize='13' Margin='30,20,30,0'/>  
                                             <ComboBox
+                                                x:Name='assignor_cbx'
                                                 ItemsSource="{Binding AssignorSource}"
                                                 Width="230"
                                                 Height="30"
@@ -608,6 +523,7 @@
                                                 VerticalContentAlignment="Center" 
                                                 FontFamily='Roboto Medium' FontSize='13' Margin='30,20,30,0'/>
                                             <ComboBox
+                                                x:Name='assignee_cbx'
                                                 ItemsSource="{Binding AssigneeSource}"
                                                 Width="230"
                                                 Height="30"
@@ -623,6 +539,7 @@
                                                 FontFamily='Roboto Medium' FontSize='13' Margin='30,20,30,0'/>  
 
                                             <Button
+                                                Click='field_filter_handler'
                                                 Padding="0"
                                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                                 Height="30"
@@ -650,7 +567,7 @@
                                                 </Grid>
                                             </Button>
 
-                                            <Label Height='30'/>
+                                            <Label Height='30' x:Name='annouce_lbl2' FontSize='14' Foreground='red' HorizontalAlignment='Center' VerticalAlignment='Center' HorizontalContentAlignment='Center' VerticalContentAlignment='Center'/>
                                         </StackPanel>
                                     </Border>
 
@@ -881,7 +798,7 @@
                                                             HorizontalAlignment="Center"/>
                                                     </Grid>
                                                 </Button>
-                                                <Label Height='30' x:Name='annouce_lbl' FontSize='14' Foreground='Red'/>
+                                                <Label Height='30' x:Name='annouce_lbl'  FontSize='14' Foreground='red' HorizontalAlignment='Center' VerticalAlignment='Center' HorizontalContentAlignment='Center' VerticalContentAlignment='Center'/>
                                             </StackPanel>
                                         </Border>
                                     </Grid>
@@ -919,7 +836,9 @@
                         <Grid Grid.Row="1">
                             <Separator Width='1250' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='0,0,0,2' ></Separator>
                             <StackPanel Width='1250' Height='430'>
-                                <ListView ItemsSource="{Binding Jobs}"
+                                <ListView 
+                                    ItemsSource="{Binding Jobs}"
+                                    SelectedItem="{Binding SelectedItem}"
                                     x:Name="_ListView"
                                     Height="430" Width='1250'>
 
@@ -1076,7 +995,7 @@
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
-                                            <GridViewColumn>
+                                            <GridViewColumn Header="Action">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel VerticalAlignment="Center"
@@ -1100,6 +1019,11 @@
                                                                     Width="30"
                                                                     Height="30"
                                                                     Cursor="Hand" />
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditJobCM}" />
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
                                                             </Border>
                                                             <Border Margin="0 0 0 0"
                                                                 BorderBrush="Black"
@@ -1121,6 +1045,11 @@
                                                                     Width="30"
                                                                     Height="30"
                                                                     Cursor="Hand" />
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.DeleteJobCM}" />
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
                                                             </Border>
 
                                                         </StackPanel>

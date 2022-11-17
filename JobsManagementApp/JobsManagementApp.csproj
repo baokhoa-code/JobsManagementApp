@@ -21,11 +21,24 @@
 		<None Remove="Resource\fonts\Roboto-Regular.ttf" />
 		<None Remove="Resource\fonts\Roboto-Thin.ttf" />
 		<None Remove="Resource\fonts\Roboto-ThinItalic.ttf" />
+		<None Remove="Resource\Icon\award1.png" />
+		<None Remove="Resource\Icon\error.png" />
+		<None Remove="Resource\Icon\ErrorIcon.png" />
+		<None Remove="Resource\Icon\iconApp.ico" />
+		<None Remove="Resource\Icon\info.png" />
+		<None Remove="Resource\Icon\Money.jpg" />
+		<None Remove="Resource\Icon\pencil.png" />
+		<None Remove="Resource\Icon\succes.png" />
+		<None Remove="Resource\Icon\warning.png" />
 		<None Remove="Resource\images\avatar.jpg" />
 		<None Remove="Resource\images\avatar.png" />
 		<None Remove="Resource\images\background.jpg" />
 		<None Remove="Resource\images\backgroundSplash.jpg" />
 		<None Remove="Resource\images\suitcase.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Resource\Icon\info.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -50,6 +63,14 @@
 		<Resource Include="Resource\fonts\Roboto-Regular.ttf" />
 		<Resource Include="Resource\fonts\Roboto-Thin.ttf" />
 		<Resource Include="Resource\fonts\Roboto-ThinItalic.ttf" />
+		<Resource Include="Resource\Icon\award1.png" />
+		<Resource Include="Resource\Icon\error.png" />
+		<Resource Include="Resource\Icon\ErrorIcon.png" />
+		<Resource Include="Resource\Icon\iconApp.ico" />
+		<Resource Include="Resource\Icon\Money.jpg" />
+		<Resource Include="Resource\Icon\pencil.png" />
+		<Resource Include="Resource\Icon\succes.png" />
+		<Resource Include="Resource\Icon\warning.png" />
 		<Resource Include="Resource\images\avatar.jpg" />
 		<Resource Include="Resource\images\avatar.png" />
 		<Resource Include="Resource\images\background.jpg" />

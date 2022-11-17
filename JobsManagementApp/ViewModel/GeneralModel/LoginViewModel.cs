@@ -154,7 +154,7 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                     }
                     else
                     {
-                        User user;
+                        UsersDTO user;
                         string message;
                         (user, message) = UserService.Ins.Login(usn, pwr);
                         if (user == null)

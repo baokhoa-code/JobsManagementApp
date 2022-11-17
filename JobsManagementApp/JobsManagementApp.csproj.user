@@ -67,6 +67,9 @@
     <Compile Update="View\Share\JobDetailPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Share\MessageBoxCustom.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Share\Notification.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +151,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\JobDetailPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\MessageBoxCustom.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\Notification.xaml">

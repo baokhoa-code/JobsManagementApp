@@ -80,9 +80,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 if (p != null)
                 {
                     JobManagementPageAdmin jobPage = new JobManagementPageAdmin();
-                    JobManagementPageAdminViewModel vm = new JobManagementPageAdminViewModel();
-                    vm.admin = admin;
-                    jobPage.DataContext = vm;
+                    JobManagementPageAdminViewModel.admin = admin;
                     p.Content = jobPage;
                 }
 
@@ -97,7 +95,11 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 SelectedFuncName = "Staff Management";
                 if (p != null)
-                    p.Content = new StaffManagementPageAdmin();
+                {
+                    StaffManagementPageAdmin staffpage = new StaffManagementPageAdmin();
+                    StaffManagementPageAdminViewModel.admin = admin;
+                    p.Content = staffpage;
+                }
             });
             LoadReportManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {

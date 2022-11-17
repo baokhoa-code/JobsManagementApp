@@ -15,12 +15,14 @@
         Background="Transparent"
         ResizeMode="NoResize"
         FontFamily="Roboto"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Title="JobAddWindowAdmin"
         SizeToContent='WidthAndHeight'
         >
     <Border
-        CornerRadius="25"
-        Background="white" Height='700' Width='500'>
+                            CornerRadius="25"
+                            Background="white" 
+                            Height='700' Width='500'>
         <Grid Grid.Row='1'>
             <Grid.RowDefinitions>
                 <RowDefinition Height='40'/>
@@ -29,104 +31,185 @@
 
             <Grid Grid.Row='0' d:IsLocked='True'>
                 <Label 
-                    Content="Table" 
-                    FontSize="25" 
-                    Foreground="#232360" 
-                    FontWeight="Bold"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Padding="0" Margin='0,10,0,0'/>
+                                        Content="Position" 
+                                        FontSize="25" 
+                                        Foreground="#232360" 
+                                        FontWeight="Bold"
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center" 
+                                        Padding="0" Margin='0,10,0,0'/>
                 <Button
-                    Style="{StaticResource MaterialDesignFloatingActionButton}"
-                    ToolTip="MaterialDesignFloatingActionButton"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
-                    Background="#FFFE5555" BorderBrush="#FFFE5555" 
-                    Width="22" Height="22" 
-                    HorizontalAlignment="Right" Margin='0,18,18.5,0'>
+                                       
+                                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                        ToolTip="MaterialDesignFloatingActionButton"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                                        Background="#FFFE5555" BorderBrush="#FFFE5555" 
+                                        Width="22" Height="22" 
+                                        HorizontalAlignment="Right" Margin='0,18,18.5,0'>
                     <wpf:PackIcon
-                        Kind="WindowClose"/>
+                                            Kind="WindowClose"/>
                 </Button>
-                <Button
-                    Style="{StaticResource MaterialDesignFloatingActionButton}"
-                    ToolTip="MaterialDesignFloatingActionButton"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
-                    Background="#FF4665C6" BorderBrush="#FF4665C6" 
-                    Width="22" Height="22" 
-                    HorizontalAlignment="Right" Margin='0,18,48.5,0'>
-                    <wpf:PackIcon
-                        Kind="WindowMinimize"/>
-                </Button>
-
             </Grid>
             <Grid Grid.Row='1'>
-                <wpf:Card Background="White"
-                    UniformCornerRadius="20" VerticalAlignment="Center" Margin="20,20,20,0">
-                    <StackPanel>
-                        <ListView x:Name="MovieListView"
-                            ItemsSource="{Binding MovieList}"
-                            SelectedItem="{Binding SelectedItem}"
-                            Focusable="True"
-                            Height="578"
-                            ToolTip="Nháy đúp để xem chi tiết">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="MouseDoubleClick">
-                                    <b:InvokeCommandAction Command="{Binding LoadInforMovieCM}" />
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                            <d:ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="ID"
-                                        Width="100">
-                                        <d:GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding DisplayName}"
-                                                    FontSize="18" />
-                                            </DataTemplate>
-                                        </d:GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Name"
-                                        Width="200">
-                                        <d:GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding MovieType}"
-                                                    Margin="30,0,0,0"
-                                                    FontSize="18" />
-                                            </DataTemplate>
-                                        </d:GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Role"
-                                        Width="100">
-                                        <d:GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding MovieType}"
-                                                    Margin="30,0,0,0"
-                                                    FontSize="18" />
-                                            </DataTemplate>
-                                        </d:GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                </GridView>
-                            </d:ListView.View>
-
-                        </ListView>
-                        <Grid>
-                            <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Right"
-                                Margin="0,0,20,0">
-                                <Label Content="Kết quả: "
-                                    FontSize="15" />
-                                <Label Content="{Binding MovieList.Count}"
-                                    x:Name="result"
-                                    FontSize="15" />
-                            </StackPanel>
-                        </Grid>
-                        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
-                            Height="100"
-                            Width="100"
-                            IsIndeterminate="{Binding IsLoadding}"
-                            Margin="0,-700,0,0" />
+                <StackPanel>
+                    <StackPanel Orientation='Horizontal' Margin='0,40,0,0'>
+                        <Label VerticalAlignment='Center' Content='Organization:' FontSize='21' FontWeight='DemiBold' Margin='20,0,0,0'/>
+                        <ComboBox
+                        ItemsSource="{Binding OrganizationSource}"   
+                        DisplayMemberPath="name"  
+                        SelectedItem="{Binding CurrentOrganization, Mode=TwoWay}"
+                        x:Name='organization_cbx'
+                        
+                        Width="250"
+                        Height="38"
+                        Padding="10,0,10,0"
+                        BorderBrush="#232360"
+                        BorderThickness="2"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                        wpf:HintAssist.Hint="Organization" FontSize="15" FontWeight="Bold" 
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding OrganizationChangeCM}"
+                                    CommandParameter="{Binding ElementName=organization_cbx}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
                     </StackPanel>
-                </wpf:Card>
+                    <StackPanel Orientation='Horizontal' Margin='0,20,0,0'>
+                        <Label Content='Name: ' FontSize='21' FontWeight='DemiBold' Margin='20,0,0,0'/>
+                        <Border 
+                                                CornerRadius="10"
+                                                BorderBrush="#232360" 
+                                                BorderThickness="2" 
+                                                Height="35" Width="250" 
+                                                HorizontalAlignment="Left" 
+                                                Background="White" Margin='60,0,0,0'>
+                            <TextBox 
+                                                    x:Name='addPosition_txt'
+                                                    Width="218"
+                                                    wpf:HintAssist.Hint="Enter  Position name"
+                                                    wpf:TextFieldAssist.DecorationVisibility="Hidden"
+                                                    BorderThickness="0"
+                                                    FontSize="16" VerticalAlignment="Center" Foreground="#E5000000" Padding="0,0,0,0" HorizontalAlignment='Center' />
+                        </Border>
+                        <Button 
+                                                Command="{Binding AddPositionCM}"
+                                                CommandParameter="{Binding ElementName=addPosition_txt}"
+                                                Content='Add' wpf:ButtonAssist.CornerRadius="10" 
+                                                Background='#FF385ADD' 
+                                                BorderBrush='#FF385ADD' Margin='10,0,0,0' Width='70' />
+                    </StackPanel>
+
+
+                    <wpf:Card Background="White"
+                                            UniformCornerRadius="20" Margin="20,25,20,20" Height='485'>
+                        <StackPanel>
+                            <ListView 
+                                                    x:Name="_ListView3"
+                                                    ItemsSource="{Binding }"
+                                                    SelectedItem="{Binding SelectedItem2}"
+                                                    Focusable="True"
+                                                    Height="485">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListViewItem}"
+                                                            BasedOn="{StaticResource MaterialDesignGridViewItem}"/>
+                                </ListView.ItemContainerStyle>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridView.ColumnHeaderContainerStyle>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                            <Border BorderThickness="0,0,0,0.2" BorderBrush="Black" 
+                                                                                    Background="Transparent" >
+                                                                <TextBlock x:Name="ContentHeader" 
+                                                                                        FontSize='15'
+                                                                                        FontWeight='Bold'
+                                                                                        Text="{TemplateBinding Content}" 
+                                                                                        Padding="5,5,5,5" Width="{TemplateBinding Width}" 
+                                                                                        TextAlignment="Center" />
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                <Setter Property="FontSize" Value="12" />
+
+                                            </Style>
+                                        </GridView.ColumnHeaderContainerStyle>
+                                        <GridViewColumn Header="Organization"
+                                                                    Width="200">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock  Text="{Binding organization}" FontWeight='SemiBold'
+                                                                            FontSize="11"
+                                                                            Margin="0,10,0,0"
+                                                                />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Name"
+                                                                    Width="170">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock  Text="{Binding name}" FontWeight='SemiBold'
+                                                                            FontSize="11"
+                                                                            Margin="0,10,0,0"
+                                                                />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+
+                                        <GridViewColumn Header="Action">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel VerticalAlignment="Center"
+                                                                             Orientation="Horizontal">
+                                                        <Border Margin="0 0 0 0"
+                                                                                BorderBrush="Black"
+                                                                                BorderThickness="1"
+                                                                                CornerRadius="6"
+                                                                                Cursor="Hand">
+                                                            <Border.Style>
+                                                                <Style TargetType="{x:Type Border}">
+                                                                    <Style.Triggers>
+                                                                        <Trigger Property="IsMouseOver"
+                                                                                                    Value="True">
+                                                                            <Setter Property="Background"
+                                                                                                    Value="#ff6255" />
+                                                                        </Trigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Border.Style>
+                                                            <i:Interaction.Triggers>
+                                                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                                    <i:InvokeCommandAction Command="{Binding DataContext.DeletePositionCM, ElementName=_ListView2}" />
+                                                                </i:EventTrigger>
+                                                            </i:Interaction.Triggers>
+                                                            <wpf:PackIcon Kind="GarbageCanEmpty"
+                                                                                    Width="30"
+                                                                                    Height="30"
+                                                                                    Cursor="Hand" />
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                    </wpf:Card>
+                </StackPanel>
+
+
             </Grid>
         </Grid>
     </Border>
+
 </Window>

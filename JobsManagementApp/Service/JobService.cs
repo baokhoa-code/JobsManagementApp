@@ -9,6 +9,7 @@ using JobsManagementApp.Model;
 using MySql.Data.MySqlClient;
 using JobsManagementApp.ViewModel.AdminModel;
 using System.Collections.ObjectModel;
+using System.Xml.Linq;
 
 namespace JobsManagementApp.Service
 {
@@ -31,7 +32,7 @@ namespace JobsManagementApp.Service
             }
             private set => _ins = value;
         }
-        public ObservableCollection<JobsDTO> GetAllJob()
+        public async Task< ObservableCollection<JobsDTO> >GetAllJob()
         {
             ObservableCollection<JobsDTO> Jobs = new ObservableCollection<JobsDTO>();
             DatabaseConnection dbc = new DatabaseConnection();
@@ -70,6 +71,35 @@ namespace JobsManagementApp.Service
             dbc.connection.Close();
             return Jobs;
         }
+        public async Task<(bool, string)> DeleteJob(int id)
+        {
+            try
+            {
+                ObservableCollection<JobsDTO> Jobs = new ObservableCollection<JobsDTO>();
+                DatabaseConnection dbc1 = new DatabaseConnection();
+                string code1 = "";
+                code1 = "DELETE FROM JOB WHERE ID = @id";
+                dbc1.command.CommandText = code1;
+                dbc1.command.Parameters.AddWithValue("@id", id);
+                dbc1.connection.Open();
+                dbc1.command.ExecuteNonQuery();
+                dbc1.connection.Close();
+                DatabaseConnection dbc2 = new DatabaseConnection();
+                string code2 = "";
+                code2 = "DELETE FROM REPORT WHERE JOB_ID = @id";
+                dbc2.command.CommandText = code2;
+                dbc2.command.Parameters.AddWithValue("@id", id);
+                dbc2.connection.Open();
+                dbc2.command.ExecuteNonQuery();
+                dbc2.connection.Close();
+
+                return (true, "Delete Success");
+            }
+            catch (Exception)
+            {
+                return (false, "Database Error");
+            }
+        }
         public List<string> InsertAssignorCombobox()
         {
             List<string> list = new List<string>();
@@ -84,7 +114,7 @@ namespace JobsManagementApp.Service
             reader = dbc.command.ExecuteReader();
             while (reader.Read())
             {
-                list.Add((string)reader["ASSIGNOR_TYPE"] + ": " + (string)reader["ASSIGNOR_NAME"]);
+                list.Add((string)reader["ASSIGNOR_TYPE"] + "-" + (string)reader["ASSIGNOR_NAME"]);
             }
             return list;
         }
@@ -102,7 +132,7 @@ namespace JobsManagementApp.Service
             reader = dbc.command.ExecuteReader();
             while (reader.Read())
             {
-                list.Add((string)reader["ASSIGNEE_TYPE"] + ": " + (string)reader["ASSIGNEE_NAME"]);
+                list.Add((string)reader["ASSIGNEE_TYPE"] + "-" + (string)reader["ASSIGNEE_NAME"]);
             }
             return list;
         }

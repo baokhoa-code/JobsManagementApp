@@ -8,6 +8,7 @@
     <viewmodel1:LoginViewModel x:Key="LoginVM" />
     <viewmodel2:MainWindowAdminViewModel x:Key="MainWindowAdminVM"/>
     <viewmodel2:JobManagementPageAdminViewModel x:Key='JobManagementAdminVM'/>
+    <viewmodel2:StaffManagementPageAdminViewModel x:Key='StaffManagementAdminVM'/>
 
 
 

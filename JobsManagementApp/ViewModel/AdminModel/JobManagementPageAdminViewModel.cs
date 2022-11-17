@@ -26,11 +26,18 @@ using System.Linq.Expressions;
 using System.Collections;
 using MaterialDesignThemes.Wpf;
 using System.ComponentModel;
+using MySql.Data.MySqlClient;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class JobManagementPageAdminViewModel : BaseViewModel
     {
+        private bool _IsGettingSource;
+        public bool IsGettingSource
+        {
+            get { return _IsGettingSource; }
+            set { _IsGettingSource = value; OnPropertyChanged(); }
+        }
         private List<string> _CategorySource;
         public List<string> CategorySource
         {
@@ -61,7 +68,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _SelectedType; }
             set { _SelectedType = value; OnPropertyChanged(); }
         }
-        public Admin admin { get; set; }
+        public static Admin admin;
         public string _CurrentYear;
         public string CurrentYear
         {
@@ -180,41 +187,97 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _YearCompleteLate; }
             set { _YearCompleteLate = value; OnPropertyChanged(); }
         }
-        public ICommand OpenAddJobWindowCM { get; set; }
         public ICommand OpenCategoryWindowCM { get; set; }
+        public ICommand OpenAddJobWindowCM { get; set; }
+        public ICommand OpenEditJobCM { get; set; }
+        public ICommand DeleteJobCM { get; set; }
         public ICommand SaveCurrentPageCM { get; set; }
         public ICommand MaskNameCM { get; set; }
         public ICommand GetJobListCM { get; set; }
         public ICommand ListWeekRageChangeCM { get; set; }
         public ICommand ListMonthChangeCM { get; set; }
         public ICommand ListYearChangeCM { get; set; }
-        public ObservableCollection<JobsDTO> Jobs { get; set; }
+        public ICommand LoadFilterCbxCM { get; set; }
+        private ObservableCollection<JobsDTO> _Jobs;
+        public ObservableCollection<JobsDTO> Jobs
+        {
+
+            get => _Jobs;
+            set
+            {
+                _Jobs = value;
+                OnPropertyChanged();
+            }
+        }
+        private JobsDTO _SelectedItem;
+        public JobsDTO SelectedItem
+        {
+            get { return _SelectedItem; }
+            set { _SelectedItem = value; OnPropertyChanged(); }
+        }
         public ObservableCollection<JobsDTO> JobsStore { get; set; }
         public JobManagementPageAdminViewModel()
         {
+            CategorySource = new List<string>();
+            DependencySource = new List<string>();
+            AssignorSource = new List<string>();
+            AssigneeSource = new List<string>();
             //GET CURRENT TIME
             CurrentYear = DateTime.Now.Year.ToString();
             CurrentMonth = DateTime.Now.Month.ToString();
             CurrentDate = DateTime.Now.Day.ToString();
 
-            //GET ALL JOB
-            Jobs = JobService.Ins.GetAllJob();
-            JobsStore = new ObservableCollection<JobsDTO>(Jobs);
+            //GET NEED INFORMATION
+            Load();
 
-            //INSERT COMBOBOXES
-            InsertWeekCombobox();
-            InsertMonthCombobox(CurrentMonth);
-            InsertYearCombobox();
-            InsertCategoryCombobox();
-            InsertAssignorCombobox();
-            InsertAssigneeCombobox();
-            InsertDependencyCombobox();
+            
 
-            //GET CURRENT WEEK, MONTH, YEAR JOB AMOUNT
-            InsertWeekJobAmount();
-            InsertMonthJobAmount();
-            InsertYearJobAmount();
+            //DEFINE COMMANDS
+            LoadFilterCbxCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                if(CategorySource.Count <= 0)
+                {
+                    InsertCategoryCombobox();
+                    InsertAssignorCombobox();
+                    InsertAssigneeCombobox();
+                    InsertDependencyCombobox();
+                }
+                
 
+            });
+            DeleteJobCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            {
+                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this Job and it related reports?", MessageType.Warning, MessageButtons.YesNo);
+                result.ShowDialog();
+
+                if (result.DialogResult == true)
+                {
+                    IsGettingSource = true;
+
+                    (bool isSuccess, string messageFromUpdate) = await JobService.Ins.DeleteJob((int) SelectedItem.id);
+
+                    IsGettingSource = false;
+
+                    if (isSuccess)
+                    {
+                        for (int i = 0; i < Jobs.Count; i++)
+                        {
+                            if (Jobs[i].id == SelectedItem?.id)
+                            {
+                                Jobs.Remove(Jobs[i]);
+                                break;
+                            }
+                        }
+                        MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                }
+            });
             GetJobListCM = new RelayCommand<ListView>((p) => { return true; }, (p) =>
             {
                 listView = p;
@@ -268,6 +331,37 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
         }
         //INTERNAL FUNCTIONS
+        public async Task Load()
+        {
+            try
+            {
+                IsGettingSource = true;
+                Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
+                JobsStore = new ObservableCollection<JobsDTO>(Jobs);
+                //INSERT COMBOBOXES
+                InsertWeekCombobox();
+                InsertMonthCombobox(CurrentMonth);
+                InsertYearCombobox();
+
+                //GET CURRENT WEEK, MONTH, YEAR JOB AMOUNT
+                InsertWeekJobAmount();
+                InsertMonthJobAmount();
+                InsertYearJobAmount();
+                IsGettingSource = false;
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e);
+                MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                mb.ShowDialog();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                mb.ShowDialog();
+            }
+        }
         public void InsertWeekCombobox()
         {
             ListWeekRage = null;
@@ -303,22 +397,22 @@ namespace JobsManagementApp.ViewModel.AdminModel
         }
         public void InsertCategoryCombobox()
         {
-            CategorySource = new List<string>();
+            
             CategorySource = CategoryService.Ins.InsertCombobox();
         }
         public void InsertDependencyCombobox()
         {
-            DependencySource = new List<string>();
+            
             DependencySource = JobService.Ins.InsertDependencyCombobox();
         }
         public void InsertAssignorCombobox()
         {
-            AssignorSource = new List<string>();
+            
             AssignorSource = JobService.Ins.InsertAssignorCombobox();
         }
         public void InsertAssigneeCombobox()
         {
-            AssigneeSource = new List<string>();
+            
             AssigneeSource = JobService.Ins.InsertAssigneeCombobox();
         }
         public void InsertWeekJobAmount()

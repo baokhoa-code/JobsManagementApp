@@ -156,7 +156,7 @@ namespace JobsManagementApp.View.Admin.Job
             string chosenValue = checkedValue?.Content.ToString();
             ComboBoxItem filterField = (ComboBoxItem)date_type_cbx.SelectedItem;
 
-            if (chosenValue != null && filterField.Content.ToString() != null && filterField != null && filterField.Content != null)
+            if (checkedValue != null && chosenValue != null && filterField.Content.ToString() != null && filterField != null && filterField.Content != null)
             {
                 ComboBoxItem s = (ComboBoxItem)job_type_cbx.SelectedItem;
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
@@ -280,185 +280,55 @@ namespace JobsManagementApp.View.Admin.Job
             {
                 annouce_lbl.Content = "You did not choose field or options!";
             }
-            checkedValue.IsChecked = false;
+            if(checkedValue != null)
+                checkedValue.IsChecked = false;
 
+        }
+        private void field_filter_handler(object sender, RoutedEventArgs e)
+        {
+            string category = (string)category_cbx.SelectedValue;
+            string dependency = (string)dependency_cbx.SelectedValue;
+            string assignor = (string)assignor_cbx.SelectedValue;
+            string assignee = (string)assignee_cbx.SelectedValue;
 
+            if (string.IsNullOrEmpty(category) && string.IsNullOrEmpty(dependency) && string.IsNullOrEmpty(assignor) && string.IsNullOrEmpty(assignee))
+            {
+                annouce_lbl2.Content = "You did not choose any option!";
+                
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(category))
+                {
+                    RemoveFilter("CATEGORY");
+                    AddFilterAndRefresh("CATEGORY", item => item.category == category);
+                }
+                if (!string.IsNullOrEmpty(dependency))
+                {
+                    RemoveFilter("DEPENDENCY");
+                    AddFilterAndRefresh("DEPENDENCY", item => item.dependency_name == dependency);
+                }
+                if (!string.IsNullOrEmpty(assignor))
+                {
+                    string[] split = assignor.Split('-');
+                    string a = split[0];
+                    string b = split[1];
+                    RemoveFilter("ASSIGNOR");
+                    AddFilterAndRefresh("ASSIGNOR", item => item.assignor_type == a && item.assignor_name == b);
+                }
+                if (!string.IsNullOrEmpty(assignee))
+                {
+                    string[] split = assignee.Split('-');
+                    string a = split[0];
+                    string b = split[1];
+                    RemoveFilter("ASSIGNEE");
+                    AddFilterAndRefresh("ASSIGNEE", item => item.assignee_type == a && item.assignee_name == b);
+                }
+                popupnhe2.IsOpen = !popupnhe2.IsOpen;
+                ShadowMask.Visibility = Visibility.Collapsed;
+                annouce_lbl2.Content = "";
+            }
         }
-        private bool FilterThisWeekS(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-            int CurrentDay = DateTime.Now.Day;
-            DateTime CurrentDate = new DateTime(CurrentYear, CurrentMonth, CurrentDay);
-            DateTime FirstWeek1Day = FirstDayOfWeek(CurrentDate);
-            DateTime FirstWeek2Day = FirstWeek1Day.AddDays(-7);
-            return DateTime.Compare(FirstWeek1Day, DateTime.ParseExact((item as JobsDTO).start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
-                DateTime.Compare(CurrentDate, DateTime.ParseExact((item as JobsDTO).start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0;
-        }
-        private bool FilterThisWeekD(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-            int CurrentDay = DateTime.Now.Day;
-            DateTime CurrentDate = new DateTime(CurrentYear, CurrentMonth, CurrentDay);
-            DateTime FirstWeek1Day = FirstDayOfWeek(CurrentDate);
-            DateTime FirstWeek2Day = FirstWeek1Day.AddDays(-7);
-            return DateTime.Compare(FirstWeek1Day, DateTime.ParseExact((item as JobsDTO).due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
-                DateTime.Compare(CurrentDate, DateTime.ParseExact((item as JobsDTO).due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0;
-        }
-        private bool FilterThisWeekE(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-            int CurrentDay = DateTime.Now.Day;
-            DateTime CurrentDate = new DateTime(CurrentYear, CurrentMonth, CurrentDay);
-            DateTime FirstWeek1Day = FirstDayOfWeek(CurrentDate);
-            DateTime FirstWeek2Day = FirstWeek1Day.AddDays(-7);
-            if ((item as JobsDTO).end_date == "NONE")
-                return false;
-            return DateTime.Compare(FirstWeek1Day, DateTime.ParseExact((item as JobsDTO).end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
-                DateTime.Compare(CurrentDate, DateTime.ParseExact((item as JobsDTO).end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0;
-        }
-        private bool FilterLastWeekS(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-            int CurrentDay = DateTime.Now.Day;
-            DateTime CurrentDate = new DateTime(CurrentYear, CurrentMonth, CurrentDay);
-            DateTime FirstWeek1Day = FirstDayOfWeek(CurrentDate);
-            DateTime FirstWeek2Day = FirstWeek1Day.AddDays(-7);
-            return DateTime.Compare(FirstWeek2Day, DateTime.ParseExact((item as JobsDTO).start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
-                DateTime.Compare(FirstWeek1Day, DateTime.ParseExact((item as JobsDTO).start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0;
-        }
-        private bool FilterLastWeekD(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-            int CurrentDay = DateTime.Now.Day;
-            DateTime CurrentDate = new DateTime(CurrentYear, CurrentMonth, CurrentDay);
-            DateTime FirstWeek1Day = FirstDayOfWeek(CurrentDate);
-            DateTime FirstWeek2Day = FirstWeek1Day.AddDays(-7);
-            return DateTime.Compare(FirstWeek2Day, DateTime.ParseExact((item as JobsDTO).due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
-                DateTime.Compare(FirstWeek1Day, DateTime.ParseExact((item as JobsDTO).due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0;
-        }
-        private bool FilterLastWeekE(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-            int CurrentDay = DateTime.Now.Day;
-            DateTime CurrentDate = new DateTime(CurrentYear, CurrentMonth, CurrentDay);
-            DateTime FirstWeek1Day = FirstDayOfWeek(CurrentDate);
-            DateTime FirstWeek2Day = FirstWeek1Day.AddDays(-7);
-            if ((item as JobsDTO).end_date == "NONE")
-                return false;
-            return DateTime.Compare(FirstWeek2Day, DateTime.ParseExact((item as JobsDTO).end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
-                DateTime.Compare(FirstWeek1Day, DateTime.ParseExact((item as JobsDTO).end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0;
-        }
-        private bool FilterThisMonthS(object item)
-        {
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-
-            return  DateTime.ParseExact((item as JobsDTO).start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Month == CurrentMonth;
-        }
-        private bool FilterThisMonthD(object item)
-        {
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-
-            return DateTime.ParseExact((item as JobsDTO).due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Month == CurrentMonth;
-        }
-        private bool FilterThisMonthE(object item)
-        {
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-
-            if ((item as JobsDTO).end_date == "NONE")
-                return false;
-            return DateTime.ParseExact((item as JobsDTO).end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Month == CurrentMonth;
-        }
-        private bool FilterLastMonthS(object item)
-        {
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-
-            return DateTime.ParseExact((item as JobsDTO).start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Month == LastMonth;
-        }
-        private bool FilterLastMonthD(object item)
-        {
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-
-            return DateTime.ParseExact((item as JobsDTO).due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Month == LastMonth;
-        }
-        private bool FilterLastMonthE(object item)
-        {
-            int CurrentMonth = DateTime.Now.Month;
-            int LastMonth = CurrentMonth - 1;
-
-            if ((item as JobsDTO).end_date == "NONE")
-                return false;
-            return DateTime.ParseExact((item as JobsDTO).end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Month == LastMonth;
-        }
-        private bool FilterThisYearS(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-
-            return DateTime.ParseExact((item as JobsDTO).start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Year == CurrentYear;
-        }
-        private bool FilterThisYearD(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-
-            return DateTime.ParseExact((item as JobsDTO).due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Year == CurrentYear;
-        }
-        private bool FilterThisYearE(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-
-            if ((item as JobsDTO).end_date == "NONE")
-                return false;
-            return DateTime.ParseExact((item as JobsDTO).end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Year == CurrentYear;
-        }
-        private bool FilterLastYearS(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-
-            return DateTime.ParseExact((item as JobsDTO).start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Year == LastYear;
-        }
-        private bool FilterLastYearD(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-
-            return DateTime.ParseExact((item as JobsDTO).due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Year == LastYear;
-        }
-        private bool FilterLastYearE(object item)
-        {
-            int CurrentYear = DateTime.Now.Year;
-            int LastYear = CurrentYear - 1;
-
-            if ((item as JobsDTO).end_date == "NONE")
-                return false;
-            return DateTime.ParseExact((item as JobsDTO).end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Year == LastYear;
-        }
-
 
 
 
@@ -492,7 +362,6 @@ namespace JobsManagementApp.View.Admin.Job
 
         private void date_filter_btn_handle(object sender, RoutedEventArgs e)
         {
-
             popupnhe.IsOpen = !popupnhe.IsOpen;
             if (ShadowMask.Visibility == Visibility.Visible)
                 ShadowMask.Visibility = Visibility.Collapsed;
@@ -520,6 +389,11 @@ namespace JobsManagementApp.View.Admin.Job
                 ShadowMask.Visibility = Visibility.Collapsed;
             if (ShadowMask.Visibility == Visibility.Collapsed)
                 ShadowMask.Visibility = Visibility.Visible;
+        }
+
+        private void _ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
