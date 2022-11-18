@@ -6,14 +6,7 @@ using System.Threading.Tasks;
 
 namespace JobsManagementApp.Model
 {
-    public class Organization
+    internal class ReportsMoreDTO
     {
-
-        public int? id { get; set; }
-        public string? name { get; set; }
-        public Organization()
-        {
-        }
-
     }
 }

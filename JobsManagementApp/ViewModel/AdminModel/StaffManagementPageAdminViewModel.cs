@@ -1,41 +1,51 @@
-﻿using JobsManagementApp.Model;
+﻿//using JobsManagementApp.Model;
+//using JobsManagementApp.Service;
+//using JobsManagementApp.View.Admin;
+//using JobsManagementApp.View.Admin.DashBoard;
+//using JobsManagementApp.View.Admin.Staff;
+//using JobsManagementApp.View.Admin.Job;
+//using JobsManagementApp.View.Admin.JobAssign;
+//using JobsManagementApp.View.Admin.Report;
+//using JobsManagementApp.View.Share;
+//using JobsManagementApp.View.General;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using System.Windows;
+//using System.Windows.Controls;
+//using System.Windows.Input;
+//using System.Windows.Navigation;
+//using System.Collections.ObjectModel;
+//using MySql.Data.MySqlClient;
+//using System.Linq;
+//using System.Windows.Documents;
+//using System.Data;
+//using System.Linq.Expressions;
+//using System.Collections;
+//using MaterialDesignThemes.Wpf;
+//using System.ComponentModel;
+//using MySql.Data.MySqlClient;
+//using System.Security.RightsManagement;
+//using System.Formats.Asn1;
+using JobsManagementApp.Model;
 using JobsManagementApp.Service;
-using JobsManagementApp.View.Admin;
-using JobsManagementApp.View.Admin.DashBoard;
-using JobsManagementApp.View.Admin.Staff;
-using JobsManagementApp.View.Admin.Job;
-using JobsManagementApp.View.Admin.JobAssign;
-using JobsManagementApp.View.Admin.Report;
 using JobsManagementApp.View.Share;
-using JobsManagementApp.View.General;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using MySql.Data.MySqlClient;
-using System.Linq;
-using System.Windows.Documents;
-using System.Data;
-using System.Linq.Expressions;
-using System.Collections;
-using MaterialDesignThemes.Wpf;
-using System.ComponentModel;
-using MySql.Data.MySqlClient;
-using System.Security.RightsManagement;
-using System.Formats.Asn1;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class StaffManagementPageAdminViewModel : BaseViewModel
     {
         public static Admin admin;
-        public ListView listView;
         private bool _IsGettingSource;
         public bool IsGettingSource
         {
@@ -54,6 +64,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _PositionSource; }
             set { _PositionSource = value; OnPropertyChanged(); }
         }
+        public static Grid MaskName { get; set; }
         private ObservableCollection<UsersDTO> _Staffs;
         public ObservableCollection<UsersDTO> Staffs
         {
@@ -90,7 +101,12 @@ namespace JobsManagementApp.ViewModel.AdminModel
             set { _CurrentOrganization = value; OnPropertyChanged(); }
         }
         public ObservableCollection<UsersDTO> StaffsStore { get; set; }
-        public ICommand GetStaffListCM { get; set; }
+        private Page _CurrentPage;
+        public Page CurrentPage
+        {
+            get { return _CurrentPage; }
+            set { _CurrentPage = value; OnPropertyChanged(); }
+        }
         public ICommand MaskNameCM { get; set; }
         public ICommand OpenAddStaffWindowCM { get; set; }
         public ICommand OpenEditStaffCM { get; set; }
@@ -98,8 +114,9 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand DeleteStaffCM { get; set; }
         public ICommand DeleteOrganizationCM { get; set; }
         public ICommand DeletePositionCM { get; set; }
-        public ICommand AddOrganizationCM { get; set; }
         public ICommand AddPositionCM { get; set; }
+        public ICommand AddOrganizationCM { get; set; }
+        public ICommand SaveCurrentPageCM { get; set; }
         public StaffManagementPageAdminViewModel()
         {
             OrganizationSource = new ObservableCollection<OrganizationsDTO>();
@@ -235,7 +252,9 @@ namespace JobsManagementApp.ViewModel.AdminModel
                                         (bool isSuccess, string messageFromUpdate) = await OrganizationAndPositionService.Ins.InsertPosition(CurrentOrganization.name,s);
                                         if (isSuccess)
                                         {
-                                            PositionSource.Add(new PositionsDTO(CurrentOrganization.name, s));
+                                            OrganizationSource = new ObservableCollection<OrganizationsDTO>(await OrganizationAndPositionService.Ins.GetAllOrganization());
+                                            CurrentOrganization = null;
+                                            ReloadPostion();
                                             MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
                                             mb.ShowDialog();
                                         }
@@ -306,9 +325,16 @@ namespace JobsManagementApp.ViewModel.AdminModel
                     }
                 }
             });
-            
-            
-            
+            MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
+            {
+                MaskName = p;
+            });
+            SaveCurrentPageCM = new RelayCommand<Page>((p) => { return true; }, async (p) =>
+            {
+                CurrentPage = p;
+            });
+
+
         }
         public async Task ReloadPostion()
         {
@@ -386,36 +412,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 mb.ShowDialog();
             }
         }
-        public async Task InsertPosition(string s)
-        {
-            try
-            {
-                (bool isSuccess, string messageFromUpdate) = await OrganizationAndPositionService.Ins.InsertOrganization(s);
-                if (isSuccess)
-                {
-                    OrganizationSource.Add(new OrganizationsDTO(s));
-                    MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
-                    mb.ShowDialog();
-                }
-                else
-                {
-                    MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
-                    mb.ShowDialog();
-                }
-            }
-            catch (MySqlException e)
-            {
-                Console.WriteLine(e);
-                MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
-                mb.ShowDialog();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
-                mb.ShowDialog();
-            }
-        }
+        
 
     }
 }

@@ -21,8 +21,6 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding MaskNameCM}"
                                    CommandParameter="{Binding ElementName=ShadowMask}" />
-            <i:InvokeCommandAction Command="{Binding GetJobListCM}"
-                                   CommandParameter="{Binding ElementName=_ListView}" />
             <i:InvokeCommandAction Command="{Binding SaveCurrentPageCM}"
                                    CommandParameter="{Binding ElementName=StaffManagePage}" />
         </i:EventTrigger>

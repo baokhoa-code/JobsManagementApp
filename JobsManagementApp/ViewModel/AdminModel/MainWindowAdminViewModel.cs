@@ -104,6 +104,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
             LoadReportManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
                 SelectedFuncName = "Report Management";
+                ReportManagementPageAdminViewModel.admin = admin;
                 if (p != null)
                     p.Content = new ReportManagementPageAdmin();
             });

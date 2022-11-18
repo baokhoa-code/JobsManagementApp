@@ -379,6 +379,10 @@ namespace JobsManagementApp.View.Admin.Job
 
         private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
         {
+            category_cbx.SelectedIndex = -1;
+            dependency_cbx.SelectedIndex = -1;
+            assignor_cbx.SelectedIndex = -1;
+            assignee_cbx.SelectedIndex = -1;
             ResetFilter();
         }
 

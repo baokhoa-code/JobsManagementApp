@@ -79,11 +79,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModel\AdminModel\DashBoardModel\" />
-	  <Folder Include="ViewModel\AdminModel\JobModel\" />
-	  <Folder Include="ViewModel\AdminModel\ReportModel\" />
-	  <Folder Include="ViewModel\AdminModel\StatisticModel\" />
-	  <Folder Include="ViewModel\AdminModel\StaffModel\" />
 	  <Folder Include="ViewModel\ShareModel\" />
 	  <Folder Include="ViewModel\UserModel\" />
 	  <Folder Include="View\Admin\Statistic\" />

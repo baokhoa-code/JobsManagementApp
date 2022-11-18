@@ -1,32 +1,46 @@
-﻿using JobsManagementApp.Model;
+﻿//using JobsManagementApp.Model;
+//using JobsManagementApp.Service;
+//using JobsManagementApp.View.Admin;
+//using JobsManagementApp.View.Admin.DashBoard;
+//using JobsManagementApp.View.Admin.Staff;
+//using JobsManagementApp.View.Admin.Job;
+//using JobsManagementApp.View.Admin.JobAssign;
+//using JobsManagementApp.View.Admin.Report;
+//using JobsManagementApp.View.Share;
+//using JobsManagementApp.View.General;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using System.Windows;
+//using System.Windows.Controls;
+//using System.Windows.Input;
+//using System.Windows.Navigation;
+//using System.Collections.ObjectModel;
+//using MySql.Data.MySqlClient;
+//using System.Linq;
+//using System.Windows.Documents;
+//using System.Data;
+//using System.Linq.Expressions;
+//using System.Collections;
+//using MaterialDesignThemes.Wpf;
+//using System.ComponentModel;
+//using MySql.Data.MySqlClient;
+
+using JobsManagementApp.Model;
 using JobsManagementApp.Service;
-using JobsManagementApp.View.Admin;
-using JobsManagementApp.View.Admin.DashBoard;
-using JobsManagementApp.View.Admin.Staff;
-using JobsManagementApp.View.Admin.Job;
-using JobsManagementApp.View.Admin.JobAssign;
-using JobsManagementApp.View.Admin.Report;
 using JobsManagementApp.View.Share;
-using JobsManagementApp.View.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using MySql.Data.MySqlClient;
-using System.Linq;
-using System.Windows.Documents;
 using System.Data;
-using System.Linq.Expressions;
-using System.Collections;
-using MaterialDesignThemes.Wpf;
-using System.ComponentModel;
-using MySql.Data.MySqlClient;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
@@ -93,7 +107,12 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _CurrentWeekRange; }
             set { _CurrentWeekRange = value; OnPropertyChanged(); }
         }
-        public Page CurrentPage { get; set; }
+        private Page _CurrentPage;
+        public Page CurrentPage
+        {
+            get { return _CurrentPage; }
+            set { _CurrentPage = value; OnPropertyChanged(); }
+        }
         public ListView listView;
         public static Grid MaskName { get; set; }
         private List<string> _ListWeekRage;
@@ -193,7 +212,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand DeleteJobCM { get; set; }
         public ICommand SaveCurrentPageCM { get; set; }
         public ICommand MaskNameCM { get; set; }
-        public ICommand GetJobListCM { get; set; }
         public ICommand ListWeekRageChangeCM { get; set; }
         public ICommand ListMonthChangeCM { get; set; }
         public ICommand ListYearChangeCM { get; set; }
@@ -277,10 +295,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
                         mb.ShowDialog();
                     }
                 }
-            });
-            GetJobListCM = new RelayCommand<ListView>((p) => { return true; }, (p) =>
-            {
-                listView = p;
             });
             SaveCurrentPageCM = new RelayCommand<Page>((p) => { return true; }, async (p) =>
             {
