@@ -44,6 +44,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand OpenEditReportPageCM { get; set; }
         public ICommand DeleteReportCM { get; set; }
         public ICommand MaskNameCM { get; set; }
+        public ICommand SaveCurrentPageCM { get; set; }
         public ReportManagementPageAdminViewModel()
         {
             //GET NEED INFORMATION
@@ -53,6 +54,51 @@ namespace JobsManagementApp.ViewModel.AdminModel
             MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
             {
                 MaskName = p;
+            });
+            SaveCurrentPageCM = new RelayCommand<Page>((p) => { return true; }, async (p) =>
+            {
+                CurrentPage = p;
+            });
+            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+
+            });
+            OpenEditReportPageCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+
+            });
+            DeleteReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this report?", MessageType.Warning, MessageButtons.YesNo);
+                result.ShowDialog();
+
+                if (result.DialogResult == true)
+                {
+                    IsGettingSource = true;
+
+                    (bool isSuccess, string messageFromUpdate) = await ReportService.Ins.DeleteReport((int)SelectedItem.id);
+
+                    IsGettingSource = false;
+
+                    if (isSuccess)
+                    {
+                        for (int i = 0; i < Reports.Count; i++)
+                        {
+                            if (Reports[i].id == SelectedItem?.id)
+                            {
+                                Reports.Remove(Reports[i]);
+                                break;
+                            }
+                        }
+                        MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                }
             });
         }
         public async Task Load()

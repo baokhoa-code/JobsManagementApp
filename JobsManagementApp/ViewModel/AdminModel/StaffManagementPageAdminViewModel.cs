@@ -333,8 +333,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 CurrentPage = p;
             });
-
-
         }
         public async Task ReloadPostion()
         {

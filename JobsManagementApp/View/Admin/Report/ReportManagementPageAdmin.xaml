@@ -12,6 +12,7 @@
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
       Name="ReportManagePage"
+      Loaded='loaded_handle'
       DataContext='{StaticResource ReportManagementAdminVM}'
       Title="JobManagementAdmin">
     
@@ -60,52 +61,40 @@
                 <Border 
                     CornerRadius="20"
                     Background="white"
-                    Padding='0' Width='1250' Margin='0,10,0,10'>
+                    Padding='0' Width='1250' Margin='0,10,0,30' Height='650'>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height='50'/>
                             <RowDefinition Height='*'/>
                         </Grid.RowDefinitions>
                         <StackPanel Orientation='Horizontal' Grid.Row="0">
+
                             <Grid
                                 Height="40"
-                                Width="130" Margin='720,0,0,0'>
+                                Width="130" Margin='10,12.5,0,0'>
                                 <Button
+                                    Click='reset_filters_btn_handle'
                                     Padding="0"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Height="32"
+                                    materialDesign:ButtonProgressAssist.Value="-1"
+                                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                                    Height="35"
                                     materialDesign:ButtonAssist.CornerRadius="10" 
-                                    Background="Transparent" BorderBrush="Gray" Width="110" >
-                                    <Grid
-                                        Height="50"
-                                        Width="150" 
-                                        HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center">
-                                        <materialDesign:PackIcon
-                                            Kind="FilterMultipleOutline" 
-                                            Height="20" 
-                                            Width="20"
-                                            VerticalAlignment="Stretch" 
-                                            Margin="30,0,0,0"
-                                            Padding="0" 
-                                            Foreground="#FF69717D" FontSize="18"/>
-                                        <Label 
-                                            Content="Filter" 
-                                            FontSize="14" 
-                                            Foreground="#FF69717D" 
-                                            VerticalAlignment="Center" Margin="22,2,0,0" HorizontalAlignment="Center" FontFamily='Roboto' FontWeight='Normal'/>
-                                    </Grid>
-                                </Button>
+                                    Content='Reset Filters'
+                                    Background="#FF23DF00" BorderBrush="Gray" Width="110" Foreground='White'/>
                             </Grid>
+
                             <Grid
                                 Height="40"
-                                Width="130">
+                                Width="130" Margin='700,12.5,0,0'>
                                 <Button
+                                    x:Name='date_filter_btn'
+                                    Click='date_filter_btn_handle'
                                     Padding="0"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Height="32"
+                                    Height="35"
                                     materialDesign:ButtonAssist.CornerRadius="10" 
-                                    Background="Transparent" BorderBrush="Gray" Width="110" >
+                                    Background="Transparent" BorderBrush="Gray" Width="110">
                                     <Grid
                                         Height="50"
                                         Width="150" 
@@ -126,12 +115,205 @@
                                             VerticalAlignment="Center" Margin="22,2,0,0" HorizontalAlignment="Center" FontFamily='Roboto' FontWeight='Normal'/>
                                     </Grid>
                                 </Button>
+                                <Popup 
+                                    x:Name="popupnhe"
+                                    AllowsTransparency="True"
+                                    IsOpen="False"
+                                    PopupAnimation="Fade"
+                                    Placement='Center'
+                                    PlacementTarget="{Binding ElementName=ReportManagePage}">
+
+                                    <Grid>
+
+                                        <Border 
+                                            CornerRadius="20"
+                                            Background="white"
+                                            Padding='0'>
+                                            <StackPanel >
+                                                <Label 
+                                                    Content="Filter By Date" 
+                                                    FontSize="18" 
+                                                    Foreground="#232360" 
+                                                    FontWeight="SemiBold"
+                                                    HorizontalAlignment="Left" 
+                                                    Padding="0" Margin='20,20,0,0'/>
+                                                <WrapPanel Orientation='Horizontal' Width='300' 
+                                                           Margin='2,10,0,0' x:Name="panel">
+                                                    <RadioButton x:Name='week_rbtn' Content='This Week' Margin='20,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton x:Name='month_rbtn' Content='This Month' Margin='60,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton x:Name='year_rbtn' Content='This Year' Margin='20,20,0,0' Width='100' FontSize='14'/>
+                                                    <RadioButton x:Name='day_range_rbtn' Unchecked='date_range_unchecked_handler' Checked='date_range_checked_handler' Content='Date Range' Margin='60,20,0,0' Width='100' FontSize='14'/>
+                                                    <Separator Width='260' HorizontalAlignment='Center' VerticalAlignment='Center' Margin='16,20,0,2'/>
+                                                </WrapPanel>
+                                                <TabControl x:Name='tab_control' Width='260' Visibility='Collapsed' HorizontalAlignment='Left' Height='374' Margin='20,20,0,0'>
+                                                    <TabControl.Resources>
+                                                        <Style TargetType="{x:Type TabItem}">
+                                                            <Setter Property='Cursor' Value='Hand'/>
+                                                            <Setter Property="FontSize" Value="14"/>
+                                                            <Setter Property="Height" Value="25"/>
+                                                            <Setter Property="FontWeight" Value="DemiBold"/>
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="{x:Type TabItem}">
+                                                                        <Border
+                                                                            x:Name="Border"
+                                                                            BorderBrush="Transparent"
+                                                                            BorderThickness="1"
+                                                                            CornerRadius="5"
+                                                                            Height='25'>
+                                                                            <ContentPresenter
+                                                                                x:Name="ContentSite"
+                                                                                Margin="10,2"
+                                                                                HorizontalAlignment="Center"
+                                                                                VerticalAlignment="Center"
+                                                                                ContentSource="Header" />
+                                                                        </Border>
+                                                                        <ControlTemplate.Triggers>
+                                                                            <Trigger Property="IsSelected" Value="True">
+                                                                                <Setter Property="Foreground" Value="White"/>
+                                                                                <Setter TargetName="Border" Property="Background" Value="#1EA7FF" />
+                                                                            </Trigger>
+                                                                            <Trigger Property="IsSelected" Value="False">
+                                                                                <Setter Property="Foreground" Value="#FF232360"/>
+                                                                                <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                                                            </Trigger>
+
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </TabControl.Resources>
+
+                                                    <TabItem Header="From">
+                                                        <StackPanel>
+                                                            <StackPanel.Resources>
+                                                                <Style
+                                                                    x:Key="SecondaryCalendarDayButton"
+                                                                    TargetType="{x:Type CalendarDayButton}"
+                                                                    BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Value="{DynamicResource SecondaryHueMidBrush}" />
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
+                                                                </Style>
+                                                                <Style
+                                                                    x:Key="SecondaryCalendarButton"
+                                                                    TargetType="{x:Type CalendarButton}"
+                                                                    BasedOn="{StaticResource MaterialDesignCalendarButton}">
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Value="{DynamicResource SecondaryHueMidBrush}" />
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
+                                                                </Style>
+                                                            </StackPanel.Resources>
+                                                            <materialDesign:TimePicker 
+                                                                x:Name="start_picker"
+                                                                WithSeconds="False"
+                                                                FontSize="25"
+                                                                VerticalContentAlignment="Bottom"
+                                                                Height="35"
+                                                                materialDesign:ValidationAssist.FontSize="0.001"
+                                                                Focusable="False" Foreground='Black' Width='150' HorizontalAlignment='Left'/>
+                                                            <Calendar
+                                                                x:Name='startDate'
+                                                                Background="{DynamicResource PrimaryHueLightBrush}"
+                                                                Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                                                                materialDesign:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
+                                                                materialDesign:CalendarAssist.HeaderForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                                                CalendarDayButtonStyle="{StaticResource SecondaryCalendarDayButton}"
+                                                                CalendarButtonStyle="{StaticResource SecondaryCalendarButton}" />
+                                                        </StackPanel>
+                                                    </TabItem>
+                                                    <TabItem Header="To">
+                                                        <StackPanel>
+                                                            <StackPanel.Resources>
+                                                                <Style
+                                                                  x:Key="SecondaryCalendarDayButton"
+                                                                  TargetType="{x:Type CalendarDayButton}"
+                                                                  BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Value="{DynamicResource SecondaryHueMidBrush}" />
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
+                                                                </Style>
+                                                                <Style
+                                                                    x:Key="SecondaryCalendarButton"
+                                                                    TargetType="{x:Type CalendarButton}"
+                                                                    BasedOn="{StaticResource MaterialDesignCalendarButton}">
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Value="{DynamicResource SecondaryHueMidBrush}" />
+                                                                    <Setter
+                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
+                                                                </Style>
+                                                            </StackPanel.Resources>
+                                                            <materialDesign:TimePicker 
+                                                                x:Name="end_picker"
+                                                                WithSeconds="False"
+                                                                FontSize="25"
+                                                                VerticalContentAlignment="Bottom"
+                                                                Height="35"
+                                                                materialDesign:ValidationAssist.FontSize="0.001"
+                                                                Focusable="False" Foreground='Black' Width='150' HorizontalAlignment='Left'/>
+                                                            <Calendar
+                                                                x:Name='endDate'
+                                                                Background="{DynamicResource PrimaryHueLightBrush}"
+                                                                Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                                                                materialDesign:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
+                                                                materialDesign:CalendarAssist.HeaderForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                                                CalendarDayButtonStyle="{StaticResource SecondaryCalendarDayButton}"
+                                                                CalendarButtonStyle="{StaticResource SecondaryCalendarButton}" />
+                                                        </StackPanel>
+                                                    </TabItem>
+                                                </TabControl>
+                                                <Button
+                                                    ClickMode='Press'
+                                                    Click='time_filter_handler'
+                                                    Padding="0"
+                                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                                    Height="30"
+                                                    materialDesign:ButtonAssist.CornerRadius="10" 
+                                                    Background="#FF5051F9" BorderBrush="#FF5051F9" Width="200" Margin='0,20,0,0'>
+                                                    <Grid
+                                                        Height="30"
+                                                        Width="200" 
+                                                        HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center">
+                                                        <materialDesign:PackIcon
+                                                            Kind="Filter" 
+                                                            Height="20" 
+                                                            Width="20"
+                                                            VerticalAlignment="Center"
+                                                            Padding="0" 
+                                                            Foreground="white" HorizontalAlignment='Center' 
+                                                            Margin='-60,0,0,0'/>
+                                                        <Label 
+                                                            Content="Filter" 
+                                                            FontSize="16" 
+                                                            Foreground="white" 
+                                                            VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center"/>
+                                                    </Grid>
+                                                </Button>
+                                                <Label Height='30' x:Name='annouce_lbl'  FontSize='14' Foreground='red' HorizontalAlignment='Center' VerticalAlignment='Center' HorizontalContentAlignment='Center' VerticalContentAlignment='Center'/>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </Popup>
                             </Grid>
                             <Border 
                                 CornerRadius="10"
                                 BorderBrush="Gray" 
                                 BorderThickness="2" 
-                                Height="32" Width="250" Background="White" Margin='10,0,0,0'>
+                                Height="35" Width="250" Background="White" Margin='10,12.5,0,0'>
                                 <Grid>
                                     <Button 
                                         Style="{DynamicResource MaterialDesignToolButton}" 
@@ -140,29 +322,31 @@
                                         Margin="5,0,0,0" Padding="0" FontSize="13" >
                                         <materialDesign:PackIcon 
                                             Kind="Magnify"
-                                            Height="20"
-                                            Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            Height="24"
+                                            Width="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin='3,1,0,0'/>
                                     </Button>
 
                                     <TextBox 
+                                        x:Name="SearchBox"
+                                        TextChanged="TextBox_TextChanged"
                                         Width="200"
                                         materialDesign:HintAssist.Hint="Enter report tile, job name."
                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                         BorderThickness="0"
                                         FontSize="15"
-                                        x:Name="SearchBox" Margin="30,0,0,0" VerticalAlignment="Center" Foreground="#E5000000" />
+                                        Margin="30,0,0,0" VerticalAlignment="Center" Foreground="#E5000000" />
                                 </Grid>
                             </Border>
                         </StackPanel>
                         <Grid Grid.Row="1">
-                            <Separator Width='1250' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='0,0,0,10' ></Separator>
+                            <Separator Width='1250' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='0,10,0,10' ></Separator>
 
-                            <StackPanel Width='1250' Height='430' VerticalAlignment='Top' Margin='0,10,0,0'>
+                            <StackPanel Width='1250' Height='580' VerticalAlignment='Top' Margin='0,25,0,0'>
                                 <ListView 
                                     ItemsSource="{Binding Reports}"
                                     SelectedItem="{Binding SelectedItem}"
                                     x:Name="_ListView"
-                                    Height="430" Width='1250'>
+                                    Height="580" Width='1250'>
 
                                     <ListView.ItemContainerStyle>
                                         <Style TargetType="{x:Type ListViewItem}"
@@ -181,8 +365,10 @@
                                                                     <TextBlock x:Name="ContentHeader" 
                                                                                FontSize='15'
                                                                                FontWeight='Bold'
+                                                                               VerticalAlignment='Center'
+                                                                               
                                                                                Text="{TemplateBinding Content}" 
-                                                                               Padding="5,5,5,5" Width="{TemplateBinding Width}" 
+                                                                               Padding="5,5,5,15" Width="{TemplateBinding Width}" 
                                                                                TextAlignment="Center" />
                                                                 </Border>
                                                             </ControlTemplate>
@@ -196,30 +382,33 @@
                                             <GridViewColumn Header="ID" Width="100" >
                                                 <GridViewColumn.CellTemplate   >
                                                     <DataTemplate>
-                                                        <TextBlock  Text="{Binding id}" Width="30" Margin="0,10,0,0"
+                                                        <TextBlock  Text="{Binding id}" Width="30" Margin="27,10,0,0"
                                                                     FontWeight='SemiBold'
                                                                     FontSize="12" />
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
                                             <GridViewColumn Header="Tile"
-                                                Width="200">
+                                                Width="215">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <TextBlock  Text="{Binding tile}" FontWeight='SemiBold'
                                                             FontSize="12"
-                                                            Margin="-10,10,0,0"
+                                                            Margin="0,10,0,0"
                                                 />
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
                                             <GridViewColumn Header="Description"
-                                                Width="350">
+                                                Width="330">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <TextBlock  Text="{Binding description}" FontWeight='SemiBold'
+                                                        <TextBlock  Width="330" Text="{Binding description}" FontWeight='SemiBold'
+                                                            HorizontalAlignment='Center'
+                                                            TextAlignment='Center'
+                                                            TextWrapping="WrapWithOverflow"
                                                             FontSize="12"
-                                                            Margin="-10,10,0,0"
+                                                            Margin="0,10,0,0"
                                                 />
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
@@ -228,26 +417,34 @@
                                                 Width="250">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <StackPanel Orientation='Vertical' HorizontalAlignment='Center' Width='160'>
-                                                            <TextBlock Text="{Binding job_id}" FontWeight='SemiBold'
-                                                                FontSize="12"
-                                                                Margin="-20,0,0,0" 
-                                                                HorizontalAlignment='Center'/>
-                                                            <TextBlock Text="{Binding job_name}" FontWeight='SemiBold'
-                                                                FontSize="12"
-                                                                Margin="-15,10,0,0" HorizontalAlignment='Center'/>
+                                                        <StackPanel Width="250"  Orientation='Vertical' 
+                                                                    HorizontalAlignment='Center'>
+                                                            <TextBlock  Text="{Binding job_id}" 
+                                                                        FontWeight='SemiBold'
+                                                                        FontSize="12"
+                                                                        HorizontalAlignment='Center'/>
+                                                            <TextBlock  Text="{Binding job_name}" 
+                                                                        FontWeight='SemiBold'
+                                                                        FontSize="12"
+                                                                        HorizontalAlignment='Center'/>
                                                         </StackPanel>
 
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
-                                            <GridViewColumn Header="Due Date"
+                                            <GridViewColumn Header="Created Time"
                                                 Width="250">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <TextBlock Text="{Binding created_time}" Margin='5,10,0,0' FontWeight='SemiBold'
+                                                        <TextBlock 
+                                                            HorizontalAlignment='Center'
+                                                            TextAlignment='Center'
+                                                            TextWrapping="WrapWithOverflow"
+                                                            Width="250"
+                                                            Text="{Binding created_time}" 
+                                                            Margin='0,10,0,0' FontWeight='SemiBold'
                                                             FontSize="12"
-                                        />
+                                                        />
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
@@ -277,7 +474,7 @@
                                                                     Cursor="Hand" />
                                                                 <i:Interaction.Triggers>
                                                                     <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditJobCM}" />
+                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditReportPageCM}" />
                                                                     </i:EventTrigger>
                                                                 </i:Interaction.Triggers>
                                                             </Border>
@@ -303,7 +500,7 @@
                                                                     Cursor="Hand" />
                                                                 <i:Interaction.Triggers>
                                                                     <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.DeleteJobCM}" />
+                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.DeleteReportCM}" />
                                                                     </i:EventTrigger>
                                                                 </i:Interaction.Triggers>
                                                             </Border>
@@ -329,7 +526,11 @@
 
 
             </Grid>
-
+            <Grid Grid.RowSpan="2"
+                  Background="Gray"
+                  Opacity="0.3"
+                  Visibility="Collapsed"
+                  x:Name="ShadowMask" />
         </Grid>
     </Grid>
 
