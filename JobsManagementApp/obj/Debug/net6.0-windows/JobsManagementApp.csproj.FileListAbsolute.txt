@@ -65,10 +65,7 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp.csproj.AssemblyReference.cache
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\MessageBoxCustom.baml
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\DashBoard\HomePageAdmin.g.cs
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\DashBoard\JobAssignListPageAdmin.g.cs
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\DashBoard\ReportListAllPageAdmin.g.cs
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\JobAssign\JobAssignManagementPageAdmin.g.cs
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\DashBoard\DashBoardPageAdmin.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Job\JobManagementPageAdmin.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\MainWindowAdmin.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Report\ReportManagementPageAdmin.g.cs
@@ -98,10 +95,7 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp_MarkupCompile.lref
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\App.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\Resource\MainResource.baml
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\DashBoard\HomePageAdmin.baml
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\DashBoard\JobAssignListPageAdmin.baml
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\DashBoard\ReportListAllPageAdmin.baml
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\JobAssign\JobAssignManagementPageAdmin.baml
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\DashBoard\DashBoardPageAdmin.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Job\JobManagementPageAdmin.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\MainWindowAdmin.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Report\ReportManagementPageAdmin.baml

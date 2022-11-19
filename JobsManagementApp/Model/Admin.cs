@@ -47,7 +47,25 @@ namespace JobsManagementApp.Model
             answer=answer_t;
             total_working_hour = total_working_hour_t;
         }
-
+        public Admin(Admin a)
+        {
+            id = a.id;
+            name = a.name;
+            gender = a.gender;
+            dob = a.dob;
+            phone = a.phone;
+            address = a.address;
+            nationality = a.nationality;
+            organization = a.organization;
+            position = a.position;
+            avatar = a.avatar;
+            email = a.email;
+            username = a.username;
+            pass = a.pass;
+            question = a.question;
+            answer = a.answer;
+            total_working_hour = a.total_working_hour;
+        }
 
     }
         

@@ -49,7 +49,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
         {
             //GET NEED INFORMATION
             Load();
-
+            Notification a = new Notification("Tao Lai");
+            a.ShowDialog(); 
             //DEFINE COMMAND
             MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
             {

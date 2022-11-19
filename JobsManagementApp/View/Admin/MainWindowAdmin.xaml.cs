@@ -23,8 +23,6 @@ namespace JobsManagementApp.View.Admin
         public MainWindowAdmin()
         {
             InitializeComponent();
-            //mainFrame.Navigate(new HomePageAdmin());
-            //mainFrame.Navigate(new JobsListPageAdmin());
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -39,6 +37,11 @@ namespace JobsManagementApp.View.Admin
         private void button_minimize_click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void btn5_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -306,6 +306,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
             OpenAddJobWindowCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
+                CurrentPage.NavigationService.GoBack();
                 //JobAddWindow wd = new JobAddWindow();
                 //MaskName.Visibility = Visibility.Visible;
                 //wd.ShowDialog();

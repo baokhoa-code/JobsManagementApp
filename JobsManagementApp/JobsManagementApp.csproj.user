@@ -7,16 +7,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="View\Admin\DashBoard\HomePageAdmin.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\DashBoard\JobAssignListPageAdmin.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\DashBoard\ReportListAllPageAdmin.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Admin\JobAssign\JobAssignManagementPageAdmin.xaml.cs">
+    <Compile Update="View\Admin\DashBoard\DashBoardPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Admin\Job\JobManagementPageAdmin.xaml.cs">
@@ -93,16 +84,7 @@
     <Page Update="Resource\MainResource.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Admin\DashBoard\HomePageAdmin.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\DashBoard\JobAssignListPageAdmin.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\DashBoard\ReportListAllPageAdmin.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\JobAssign\JobAssignManagementPageAdmin.xaml">
+    <Page Update="View\Admin\DashBoard\DashBoardPageAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\Job\JobManagementPageAdmin.xaml">

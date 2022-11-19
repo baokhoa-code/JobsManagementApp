@@ -399,5 +399,10 @@ namespace JobsManagementApp.View.Admin.Job
         {
 
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

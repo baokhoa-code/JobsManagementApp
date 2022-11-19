@@ -13,12 +13,12 @@ using System.Windows.Input;
 using JobsManagementApp.Model;
 using JobsManagementApp.View.Admin.DashBoard;
 using JobsManagementApp.View.Admin.Job;
-using JobsManagementApp.View.Admin.JobAssign;
 using JobsManagementApp.View.Admin.Report;
 using JobsManagementApp.View.Share;
 using JobsManagementApp.View.Admin.Staff;
 using System.Windows.Navigation;
 using JobsManagementApp.ViewModel.AdminModel;
+using System.Security.Cryptography;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
@@ -33,9 +33,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
         }
         public ICommand MouseLeftButtonDownWindowCM { get; set; }
         public ICommand FirstLoadCM { get; set; }
-        public ICommand LoadHomePageCM { get; set; }
+        public ICommand LoadDashBoardPageCM { get; set; }
         public ICommand LoadJobManagementPageCM { get; set; }
-        public ICommand LoadJobAssignManagementPageCM { get; set; }
         public ICommand LoadStaffManagementPageCM { get; set; }
         public ICommand LoadReportManagementPageCM { get; set; }
         public ICommand LoadUserInfortPageCM { get; set; }
@@ -68,11 +67,16 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 RadioButton b = (RadioButton) p;
                 b.IsChecked = true;
             });
-            LoadHomePageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
+            LoadDashBoardPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
                 SelectedFuncName = "Home";
                 if (p != null)
-                    p.Content = new HomePageAdmin();
+                {
+                    DashBoardPageAdminViewModel vm = new DashBoardPageAdminViewModel(admin);
+                    DashBoardPageAdmin dashboardpage = new DashBoardPageAdmin();
+                    dashboardpage.DataContext = vm;
+                    p.Content = dashboardpage;
+                }
             });
             LoadJobManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
@@ -84,12 +88,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
                     p.Content = jobPage;
                 }
 
-            });
-            LoadJobAssignManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
-            {
-                SelectedFuncName = "Job Assign Management";
-                if (p != null)
-                    p.Content = new JobAssignManagementPageAdmin();
             });
             LoadStaffManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {

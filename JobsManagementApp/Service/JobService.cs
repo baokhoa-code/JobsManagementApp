@@ -71,6 +71,45 @@ namespace JobsManagementApp.Service
             dbc.connection.Close();
             return Jobs;
         }
+        public async Task<ObservableCollection<JobsDTO>> GetAllJobByAssigneeID(string? userType, int assigneeID)
+        {
+            ObservableCollection<JobsDTO> Jobs = new ObservableCollection<JobsDTO>();
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT * FROM JOB WHERE ASSIGNEE_TYPE = '" + userType + "' AND ASSIGNEE_ID = " + assigneeID + " ";
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            while (reader.Read())
+            {
+                Jobs.Add(
+                    new JobsDTO(
+                    (int)reader["ID"],
+                    (int)reader["DEPENDENCY_ID"],
+                    (string)reader["DEPENDENCY_NAME"],
+                    (string)reader["NAME"],
+                    (string)reader["DESCRIPTION"],
+                    (string)reader["CATEGORY"],
+                    (string)reader["START_DATE"],
+                    (string)reader["DUE_DATE"],
+                    (string)reader["END_DATE"],
+                    (int)reader["REQUIRED_HOUR"],
+                    (int)reader["WORKED_HOUR"],
+                    (int)reader["PERCENT"],
+                    (string)reader["STAGE"],
+                    (int)reader["ASSIGNOR_ID"],
+                    (string)reader["ASSIGNOR_TYPE"],
+                    (string)reader["ASSIGNOR_NAME"],
+                    (int)reader["ASSIGNEE_ID"],
+                    (string)reader["ASSIGNEE_TYPE"],
+                    (string)reader["ASSIGNEE_NAME"]
+                    ));
+            }
+            dbc.connection.Close();
+            return Jobs;
+        }
         public async Task<(bool, string)> DeleteJob(int id)
         {
             try

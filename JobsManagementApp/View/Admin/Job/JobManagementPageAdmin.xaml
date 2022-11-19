@@ -565,7 +565,7 @@
                                                 </Grid>
                                             </Button>
 
-                                            <Label Height='30' x:Name='annouce_lbl2' FontSize='14' Foreground='red' HorizontalAlignment='Center' VerticalAlignment='Center' HorizontalContentAlignment='Center' VerticalContentAlignment='Center'/>
+                                            <Label Visibility='Collapsed' Height='25' x:Name='annouce_lbl2' FontSize='14' Foreground='red' HorizontalAlignment='Center' VerticalAlignment='Center' HorizontalContentAlignment='Center' VerticalContentAlignment='Center'/>
                                         </StackPanel>
                                     </Border>
 

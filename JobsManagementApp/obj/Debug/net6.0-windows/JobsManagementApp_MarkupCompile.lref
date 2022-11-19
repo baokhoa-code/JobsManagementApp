@@ -1,10 +1,7 @@
 ﻿
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\App.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\Resource\MainResource.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\DashBoard\HomePageAdmin.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\DashBoard\JobAssignListPageAdmin.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\DashBoard\ReportListAllPageAdmin.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\JobAssign\JobAssignManagementPageAdmin.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\DashBoard\DashBoardPageAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Job\JobManagementPageAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\MainWindowAdmin.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Admin\Report\ReportManagementPageAdmin.xaml;;
