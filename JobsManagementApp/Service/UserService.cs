@@ -1,4 +1,5 @@
 ﻿using JobsManagementApp.Model;
+using JobsManagementApp.View.Share;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,40 @@ namespace JobsManagementApp.Service
             {
                 return (false, "Database Error");
             }
+        }
+        public async Task<UsersDTO> GetUser(int id)
+        {
+            UsersDTO u = new UsersDTO();
+            try
+            {
+                DatabaseConnection dbc = new DatabaseConnection();
+                string code = "";
+                MySqlDataReader reader;
+
+                code = "SELECT * FROM USER WHERE ID = @id";
+                dbc.command.CommandText = code;
+                dbc.command.Parameters.AddWithValue("@id", id);
+
+                dbc.connection.Open();
+                reader = dbc.command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    u = new UsersDTO(Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), reader.GetString(14), Int16.Parse(reader.GetString(15)));
+                }
+                else
+                {
+                    u = null;
+                }
+                    
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return u;
         }
         public (UsersDTO?, string?) Login(string username, string password)
         {

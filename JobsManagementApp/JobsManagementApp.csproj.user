@@ -40,12 +40,6 @@
     <Compile Update="View\General\Splash.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Share\DateFilter.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Share\Filter.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Share\JobAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -56,6 +50,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Share\JobDetailPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Share\JobListForSingleAssignee.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Share\MessageBoxCustom.xaml.cs">
@@ -70,7 +67,7 @@
     <Compile Update="View\Share\ReportListAndDetailPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Share\ShowTableToChoose.xaml.cs">
+    <Compile Update="View\Share\ReportListForSingleAssignee.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Share\UserInformationPage.xaml.cs">
@@ -117,12 +114,6 @@
     <Page Update="View\General\Splash.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Share\DateFilter.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Share\Filter.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="View\Share\JobAddWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -133,6 +124,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\JobDetailPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\JobListForSingleAssignee.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\MessageBoxCustom.xaml">
@@ -147,7 +141,7 @@
     <Page Update="View\Share\ReportListAndDetailPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Share\ShowTableToChoose.xaml">
+    <Page Update="View\Share\ReportListForSingleAssignee.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\UserInformationPage.xaml">

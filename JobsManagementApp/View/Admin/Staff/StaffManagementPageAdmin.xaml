@@ -13,12 +13,11 @@
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
       Name="StaffManagePage"
-      Loaded='loaded_handle'
-      DataContext='{StaticResource StaffManagementAdminVM}'
       Title="StaffManagementPageAdmin">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCM}" />
             <i:InvokeCommandAction Command="{Binding MaskNameCM}"
                                    CommandParameter="{Binding ElementName=ShadowMask}" />
             <i:InvokeCommandAction Command="{Binding SaveCurrentPageCM}"
@@ -722,7 +721,8 @@
                                                                     Cursor="Hand" />
                                                         <i:Interaction.Triggers>
                                                             <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                                <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditStaffCM}" />
+                                                                <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditStaffCM}" 
+                                                                                       CommandParameter="{Binding ElementName=StaffManagePage}"/>
                                                             </i:EventTrigger>
                                                         </i:Interaction.Triggers>
                                                     </Border>

@@ -30,16 +30,16 @@ namespace JobsManagementApp.View.Admin.Staff
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (filters == null && view == null)
+            {
+                filters = new Dictionary<string, Predicate<UsersDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             RemoveFilter("SEARCH");
             AddFilterAndRefresh("SEARCH", item => item.name.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >=  0 ||
                                                     item.email.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
                                                     item.username.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
-        }
-        private void loaded_handle(object sender, RoutedEventArgs e)
-        {
-            filters = new Dictionary<string, Predicate<UsersDTO>>();
-            view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-            view.Filter = FilterJob;
         }
         public void ClearFilters()
         {
@@ -76,6 +76,12 @@ namespace JobsManagementApp.View.Admin.Staff
 
         private void organization_cbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (filters == null && view == null)
+            {
+                filters = new Dictionary<string, Predicate<UsersDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             OrganizationsDTO a = (OrganizationsDTO )organization_cbx.SelectedItem;
             
             if(a != null)
@@ -92,6 +98,12 @@ namespace JobsManagementApp.View.Admin.Staff
         }
         private void position_cbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (filters == null && view == null)
+            {
+                filters = new Dictionary<string, Predicate<UsersDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             PositionsDTO a = (PositionsDTO)position_cbx.SelectedItem;
             if(a != null)
             {
@@ -107,6 +119,12 @@ namespace JobsManagementApp.View.Admin.Staff
 
         private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
         {
+            if (filters == null && view == null)
+            {
+                filters = new Dictionary<string, Predicate<UsersDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             ResetFilter();
             organization_cbx.SelectedIndex = -1;
             position_cbx.SelectedIndex = -1;
@@ -116,6 +134,12 @@ namespace JobsManagementApp.View.Admin.Staff
 
         private void organ_popup_btn_handle(object sender, RoutedEventArgs e)
         {
+            if (filters == null && view == null)
+            {
+                filters = new Dictionary<string, Predicate<UsersDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             popupnhe1.IsOpen = !popupnhe1.IsOpen;
             if (ShadowMask.Visibility == Visibility.Visible)
                 ShadowMask.Visibility = Visibility.Collapsed;
@@ -148,6 +172,12 @@ namespace JobsManagementApp.View.Admin.Staff
 
         private void position_popup_btn_handle(object sender, RoutedEventArgs e)
         {
+            if (filters == null && view == null)
+            {
+                filters = new Dictionary<string, Predicate<UsersDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             popupnhe2.IsOpen = !popupnhe2.IsOpen;
             if (ShadowMask.Visibility == Visibility.Visible)
                 ShadowMask.Visibility = Visibility.Collapsed;

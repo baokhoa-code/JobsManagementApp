@@ -45,12 +45,12 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand DeleteReportCM { get; set; }
         public ICommand MaskNameCM { get; set; }
         public ICommand SaveCurrentPageCM { get; set; }
+        public ICommand testCM { get; set; }
         public ReportManagementPageAdminViewModel()
         {
             //GET NEED INFORMATION
             Load();
-            Notification a = new Notification("Tao Lai");
-            a.ShowDialog(); 
+            
             //DEFINE COMMAND
             MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
             {
@@ -67,6 +67,11 @@ namespace JobsManagementApp.ViewModel.AdminModel
             OpenEditReportPageCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
 
+            });
+            testCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                Notification w = new Notification("TAO LAI");
+                w.ShowDialog();
             });
             DeleteReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {

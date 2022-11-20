@@ -286,22 +286,23 @@ namespace JobsManagementApp.View.Admin.Job
         }
         private void field_filter_handler(object sender, RoutedEventArgs e)
         {
-            string category = (string)category_cbx.SelectedValue;
+            CategoriesDTO cate = (CategoriesDTO)category_cbx.SelectedItem;
+            
             string dependency = (string)dependency_cbx.SelectedValue;
             string assignor = (string)assignor_cbx.SelectedValue;
             string assignee = (string)assignee_cbx.SelectedValue;
 
-            if (string.IsNullOrEmpty(category) && string.IsNullOrEmpty(dependency) && string.IsNullOrEmpty(assignor) && string.IsNullOrEmpty(assignee))
+            if (cate == null && string.IsNullOrEmpty(dependency) && string.IsNullOrEmpty(assignor) && string.IsNullOrEmpty(assignee))
             {
                 annouce_lbl2.Content = "You did not choose any option!";
-                
+
             }
             else
             {
-                if (!string.IsNullOrEmpty(category))
+                if (cate != null)
                 {
                     RemoveFilter("CATEGORY");
-                    AddFilterAndRefresh("CATEGORY", item => item.category == category);
+                    AddFilterAndRefresh("CATEGORY", item => item.category == cate.name);
                 }
                 if (!string.IsNullOrEmpty(dependency))
                 {
@@ -325,8 +326,8 @@ namespace JobsManagementApp.View.Admin.Job
                     AddFilterAndRefresh("ASSIGNEE", item => item.assignee_type == a && item.assignee_name == b);
                 }
                 popupnhe2.IsOpen = !popupnhe2.IsOpen;
-                ShadowMask.Visibility = Visibility.Collapsed;
                 annouce_lbl2.Content = "";
+                ShadowMask.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -383,6 +384,7 @@ namespace JobsManagementApp.View.Admin.Job
             dependency_cbx.SelectedIndex = -1;
             assignor_cbx.SelectedIndex = -1;
             assignee_cbx.SelectedIndex = -1;
+            SearchBox.Text = "";
             ResetFilter();
         }
 
@@ -403,6 +405,33 @@ namespace JobsManagementApp.View.Admin.Job
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void category_popup_btn_handle(object sender, RoutedEventArgs e)
+        {
+            popupnhe1.IsOpen = !popupnhe1.IsOpen;
+            if (ShadowMask.Visibility == Visibility.Visible)
+                ShadowMask.Visibility = Visibility.Collapsed;
+            if (ShadowMask.Visibility == Visibility.Collapsed)
+                ShadowMask.Visibility = Visibility.Visible;
+            category_cbx.SelectedIndex = -1;
+            dependency_cbx.SelectedIndex = -1;
+            assignor_cbx.SelectedIndex = -1;
+            assignee_cbx.SelectedIndex = -1;
+            SearchBox.Text = "";
+            ResetFilter();
+        }
+
+        private void close_category_popup(object sender, RoutedEventArgs e)
+        {
+            popupnhe1.IsOpen = false;
+            ShadowMask.Visibility = Visibility.Collapsed;
+            category_cbx.SelectedIndex = -1;
+            dependency_cbx.SelectedIndex = -1;
+            assignor_cbx.SelectedIndex = -1;
+            assignee_cbx.SelectedIndex = -1;
+            SearchBox.Text = "";
+            ResetFilter(); ;
         }
     }
 }

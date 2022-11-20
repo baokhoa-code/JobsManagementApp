@@ -79,7 +79,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModel\ShareModel\" />
 	  <Folder Include="ViewModel\UserModel\" />
 	  <Folder Include="View\Admin\Statistic\" />
 	</ItemGroup>

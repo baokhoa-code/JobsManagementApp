@@ -19,18 +19,14 @@ using JobsManagementApp.View.Admin.Staff;
 using System.Windows.Navigation;
 using JobsManagementApp.ViewModel.AdminModel;
 using System.Security.Cryptography;
+using JobsManagementApp.ViewModel.ShareModel;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class MainWindowAdminViewModel : BaseViewModel
     {
         public Admin admin { get; set; }
-        private string _SelectedFuncName;
-        public string SelectedFuncName
-        {
-            get { return _SelectedFuncName; }
-            set { _SelectedFuncName = value; OnPropertyChanged(); }
-        }
+
         public ICommand MouseLeftButtonDownWindowCM { get; set; }
         public ICommand FirstLoadCM { get; set; }
         public ICommand LoadDashBoardPageCM { get; set; }
@@ -63,13 +59,11 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
             FirstLoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                SelectedFuncName = "Home";
                 RadioButton b = (RadioButton) p;
                 b.IsChecked = true;
             });
             LoadDashBoardPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                SelectedFuncName = "Home";
                 if (p != null)
                 {
                     DashBoardPageAdminViewModel vm = new DashBoardPageAdminViewModel(admin);
@@ -80,9 +74,12 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
             LoadJobManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                SelectedFuncName = "Job Management";
                 if (p != null)
                 {
+                    //JobListForSingleAssigneeViewModel vm = new JobListForSingleAssigneeViewModel(admin,1);
+                    //JobListForSingleAssignee jobforsingleassignee = new JobListForSingleAssignee();
+                    //jobforsingleassignee.DataContext = vm;
+                    //p.Content = jobforsingleassignee;
                     JobManagementPageAdmin jobPage = new JobManagementPageAdmin();
                     JobManagementPageAdminViewModel.admin = admin;
                     p.Content = jobPage;
@@ -91,24 +88,26 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
             LoadStaffManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                SelectedFuncName = "Staff Management";
                 if (p != null)
                 {
+                    StaffManagementPageAdminViewModel vm = new StaffManagementPageAdminViewModel(admin);
                     StaffManagementPageAdmin staffpage = new StaffManagementPageAdmin();
-                    StaffManagementPageAdminViewModel.admin = admin;
+                    staffpage.DataContext = vm;
                     p.Content = staffpage;
                 }
             });
             LoadReportManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                SelectedFuncName = "Report Management";
+                //ReportListForSingleAssigneeViewModel vm = new ReportListForSingleAssigneeViewModel(admin, 1);
+                //ReportListForSingleAssignee reportListForSingleAssignee = new ReportListForSingleAssignee();
+                //reportListForSingleAssignee.DataContext = vm;
+                //p.Content = reportListForSingleAssignee;
                 ReportManagementPageAdminViewModel.admin = admin;
                 if (p != null)
                     p.Content = new ReportManagementPageAdmin();
             });
             LoadUserInfortPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                SelectedFuncName = "Report Management";
                 //if (p != null)
                 //    p.Content = new UserInformationPage();
             });

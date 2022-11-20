@@ -46,5 +46,64 @@ namespace JobsManagementApp.Service
             }
             return combobox;
         }
+        public async Task<ObservableCollection<CategoriesDTO>> GetAllCategory()
+        {
+            ObservableCollection<CategoriesDTO> Categories = new ObservableCollection<CategoriesDTO>();
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT * FROM CATEGORY";
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            while (reader.Read())
+            {
+                Categories.Add(
+                    new CategoriesDTO(
+                        (string)reader["NAME"]
+                    ));
+            }
+            dbc.connection.Close();
+            return Categories;
+        }
+        public async Task<(bool, string)> InsertCategory(string cname)
+        {
+            try
+            {
+                DatabaseConnection dbc1 = new DatabaseConnection();
+                string code1 = "";
+                code1 = "INSERT INTO CATEGORY(NAME) VALUES('" + cname + "')";
+                dbc1.command.CommandText = code1;
+                dbc1.connection.Open();
+                dbc1.command.ExecuteNonQuery();
+                dbc1.connection.Close();
+
+                return (true, "Insert Success");
+            }
+            catch (Exception)
+            {
+                return (false, "Database Error");
+            }
+        }
+        public async Task<(bool, string)> DeleteCategory(string s)
+        {
+            try
+            {
+                DatabaseConnection dbc1 = new DatabaseConnection();
+                string code1 = "";
+                code1 = "DELETE FROM CATEGORY WHERE NAME = '" + s + "'";
+                dbc1.command.CommandText = code1;
+                dbc1.connection.Open();
+                dbc1.command.ExecuteNonQuery();
+                dbc1.connection.Close();
+
+                return (true, "Delete Success");
+            }
+            catch (Exception)
+            {
+                return (false, "Database Error");
+            }
+        }
     }
 }

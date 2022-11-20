@@ -76,5 +76,31 @@ namespace JobsManagementApp.Service
             dbc.connection.Close();
             return Reports;
         }
+        public async Task<ObservableCollection<ReportsDTO>> GetAllReportByAssigneeID(string? userType, int assigneeID)
+        {
+            ObservableCollection<ReportsDTO> Reports = new ObservableCollection<ReportsDTO>();
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT * FROM REPORT JOIN JOB ON REPORT.JOB_ID = JOB.ID WHERE ASSIGNEE_TYPE = '" + userType + "' AND ASSIGNEE_ID = " + assigneeID + " ";
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            while (reader.Read())
+            {
+                Reports.Add(
+                    new ReportsDTO(
+                        (int)reader["ID"],
+                        (int)reader["JOB_ID"],
+                        (string)reader["JOB_NAME"],
+                        (string)reader["TILE"],
+                        (string)reader["DESCRIPTION"],
+                        (string)reader["CREATED_TIME"]
+                        ));
+            }
+            dbc.connection.Close();
+            return Reports;
+        }
     }
 }

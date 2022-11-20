@@ -46,14 +46,15 @@ namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class JobManagementPageAdminViewModel : BaseViewModel
     {
+        public static Admin admin;
         private bool _IsGettingSource;
         public bool IsGettingSource
         {
             get { return _IsGettingSource; }
             set { _IsGettingSource = value; OnPropertyChanged(); }
         }
-        private List<string> _CategorySource;
-        public List<string> CategorySource
+        private ObservableCollection<CategoriesDTO> _CategorySource;
+        public ObservableCollection<CategoriesDTO> CategorySource
         {
             get { return _CategorySource; }
             set { _CategorySource = value; OnPropertyChanged(); }
@@ -82,7 +83,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _SelectedType; }
             set { _SelectedType = value; OnPropertyChanged(); }
         }
-        public static Admin admin;
         public string _CurrentYear;
         public string CurrentYear
         {
@@ -206,7 +206,14 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _YearCompleteLate; }
             set { _YearCompleteLate = value; OnPropertyChanged(); }
         }
-        public ICommand OpenCategoryWindowCM { get; set; }
+        private CategoriesDTO _SelectedItem2;
+        public CategoriesDTO SelectedItem2
+        {
+            get { return _SelectedItem2; }
+            set { _SelectedItem2 = value; OnPropertyChanged(); }
+        }
+        public ICommand AddCategoryCM { get; set; }
+        public ICommand DeleteCategoryCM { get; set; }
         public ICommand OpenAddJobWindowCM { get; set; }
         public ICommand OpenEditJobCM { get; set; }
         public ICommand DeleteJobCM { get; set; }
@@ -236,7 +243,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ObservableCollection<JobsDTO> JobsStore { get; set; }
         public JobManagementPageAdminViewModel()
         {
-            CategorySource = new List<string>();
+            CategorySource = new ObservableCollection<CategoriesDTO>();
             DependencySource = new List<string>();
             AssignorSource = new List<string>();
             AssigneeSource = new List<string>();
@@ -248,18 +255,79 @@ namespace JobsManagementApp.ViewModel.AdminModel
             //GET NEED INFORMATION
             Load();
 
-            
+
 
             //DEFINE COMMANDS
+            AddCategoryCM = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
+            {
+                TextBox temp = (p as TextBox);
+                if (temp != null)
+                {
+                    string s = temp.Text;
+                    if (s != null && s != "")
+                    {
+                        int c = CategorySource.Count(x => x.name == s);
+                        if (c > 0)
+                        {
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Category must be unique!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+
+                        }
+                        else
+                        {
+                            MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to insert this category?", MessageType.Warning, MessageButtons.YesNo);
+                            result.ShowDialog();
+
+                            if (result.DialogResult == true)
+                            {
+                                InsertCategory(s);
+                                temp.Text = "";
+                            }
+
+                        }
+
+                    }
+                    if (s == null || s == "")
+                    {
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Organization name can not be emptied!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                }
+
+            });
+            DeleteCategoryCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            {
+                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this category and all its related data?", MessageType.Warning, MessageButtons.YesNo);
+                result.ShowDialog();
+
+                if (result.DialogResult == true)
+                {
+
+                    (bool isSuccess, string messageFromUpdate) = await CategoryService.Ins.DeleteCategory(SelectedItem2.name);
+
+
+                    if (isSuccess)
+                    {
+                        Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
+                        InsertCategoryCombobox();
+                        MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                }
+            });
             LoadFilterCbxCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                if(CategorySource.Count <= 0)
-                {
+ 
                     InsertCategoryCombobox();
                     InsertAssignorCombobox();
                     InsertAssigneeCombobox();
                     InsertDependencyCombobox();
-                }
+                
                 
 
             });
@@ -311,12 +379,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 //MaskName.Visibility = Visibility.Visible;
                 //wd.ShowDialog();
             });
-            OpenCategoryWindowCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            {
-                ShowTableToChoose wd = new ShowTableToChoose();
-                MaskName.Visibility = Visibility.Visible;
-                wd.ShowDialog();
-            });
             ListWeekRageChangeCM = new RelayCommand<ListView>((p) => { return CurrentWeekRange!=null; }, (p) =>
             {
                 //UPDATE WEEK JOB AMOUNT
@@ -353,6 +415,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 IsGettingSource = true;
                 Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
                 JobsStore = new ObservableCollection<JobsDTO>(Jobs);
+                InsertCategoryCombobox();
+
                 //INSERT COMBOBOXES
                 InsertWeekCombobox();
                 InsertMonthCombobox(CurrentMonth);
@@ -410,10 +474,10 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 ListYear.Add(i.ToString());
             }
         }
-        public void InsertCategoryCombobox()
+        public async Task InsertCategoryCombobox()
         {
-            
-            CategorySource = CategoryService.Ins.InsertCombobox();
+
+            CategorySource = new ObservableCollection<CategoriesDTO>(await CategoryService.Ins.GetAllCategory());
         }
         public void InsertDependencyCombobox()
         {
@@ -508,6 +572,36 @@ namespace JobsManagementApp.ViewModel.AdminModel
             if (diff < 0)
                 diff += 7;
             return dt.AddDays(-diff).Date;
+        }
+        public async Task InsertCategory(string s)
+        {
+            try
+            {
+                (bool isSuccess, string messageFromUpdate) = await CategoryService.Ins.InsertCategory(s);
+                if (isSuccess)
+                {
+                    CategorySource.Add(new CategoriesDTO(s));
+                    MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
+                else
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e);
+                MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                mb.ShowDialog();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                mb.ShowDialog();
+            }
         }
     }
 }

@@ -301,10 +301,10 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 System.Globalization.CultureInfo.InvariantCulture);
 
             pending = JobsPie.Where(
-                item => item.stage == "PENDING" &&
-                DateTime.Compare(a, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
-                DateTime.Compare(b, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0
-                ).Count();
+            item => item.stage == "PENDING" &&
+            DateTime.Compare(a, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
+            DateTime.Compare(b, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0
+            ).Count();
             late = JobsPie.Where(
                 item => item.stage == "LATE" &&
                 DateTime.Compare(a, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
@@ -320,6 +320,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 DateTime.Compare(a, DateTime.ParseExact(item.end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
                 DateTime.Compare(b, DateTime.ParseExact(item.end_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0
                 ).Count();
+            
+
 
             Pies = new ISeries[]
             {

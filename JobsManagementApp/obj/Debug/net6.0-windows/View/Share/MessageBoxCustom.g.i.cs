@@ -127,7 +127,7 @@ namespace JobsManagementApp.View.Share {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/JobsManagementApp;V1.0.0.0;component/view/share/messageboxcustom.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/JobsManagementApp;component/view/share/messageboxcustom.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\Share\MessageBoxCustom.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -8,15 +8,13 @@ namespace JobsManagementApp.Model
 {
     public class CategoriesDTO
     {
-        public int? id { get; set; }
         public string? name { get; set; }
         public CategoriesDTO()
         {
 
         }
-        public CategoriesDTO(int id, string name)
+        public CategoriesDTO( string name)
         {
-            this.id = id;
             this.name = name;
         }
     }

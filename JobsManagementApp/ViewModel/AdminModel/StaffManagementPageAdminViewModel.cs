@@ -40,12 +40,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using MySql.Data.MySqlClient;
+using JobsManagementApp.ViewModel.ShareModel;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class StaffManagementPageAdminViewModel : BaseViewModel
     {
-        public static Admin admin;
+        public Admin admin { get; set; }
         private bool _IsGettingSource;
         public bool IsGettingSource
         {
@@ -117,14 +118,35 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand AddPositionCM { get; set; }
         public ICommand AddOrganizationCM { get; set; }
         public ICommand SaveCurrentPageCM { get; set; }
-        public StaffManagementPageAdminViewModel()
+        public ICommand LoadCM { get; set; }
+        public StaffManagementPageAdminViewModel(Admin a)
         {
+            admin = new Admin(a);
             OrganizationSource = new ObservableCollection<OrganizationsDTO>();
             PositionSource = new ObservableCollection<PositionsDTO>();
             //GET NEED INFORMATION
-            Load();
+            //Load();
 
             //DEFINE COMMAND
+            OpenEditStaffCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
+            {
+                //JobListForSingleAssigneeViewModel vm = new JobListForSingleAssigneeViewModel(admin, (int)SelectedItem.id);
+                //JobListForSingleAssignee jobforsingleassignee = new JobListForSingleAssignee();
+                //jobforsingleassignee.DataContext = vm;
+                //p.NavigationService.Navigate(jobforsingleassignee);
+                ReportListForSingleAssigneeViewModel vm = new ReportListForSingleAssigneeViewModel(admin, (int)SelectedItem.id);
+                ReportListForSingleAssignee reportListForSingleAssignee = new ReportListForSingleAssignee();
+                reportListForSingleAssignee.DataContext = vm;
+                p.NavigationService.Navigate(reportListForSingleAssignee);
+            });
+            LoadCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+
+                Load();
+
+
+
+            });
             DeleteStaffCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
                 MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this user and all his/her related data?", MessageType.Warning, MessageButtons.YesNo);

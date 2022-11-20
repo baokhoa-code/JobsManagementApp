@@ -3,15 +3,18 @@
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
                     xmlns:viewmodel1="clr-namespace:JobsManagementApp.ViewModel.GeneralModel"
-                    xmlns:viewmodel2="clr-namespace:JobsManagementApp.ViewModel.AdminModel">
+                    xmlns:viewmodel2="clr-namespace:JobsManagementApp.ViewModel.AdminModel"
+                    xmlns:viewmodel3="clr-namespace:JobsManagementApp.ViewModel.ShareModel">
 
     <viewmodel1:LoginViewModel x:Key="LoginVM" />
     <viewmodel2:MainWindowAdminViewModel x:Key="MainWindowAdminVM"/>
     <viewmodel2:JobManagementPageAdminViewModel x:Key='JobManagementAdminVM'/>
     <viewmodel2:StaffManagementPageAdminViewModel x:Key='StaffManagementAdminVM'/>
     <viewmodel2:ReportManagementPageAdminViewModel x:Key='ReportManagementAdminVM'/>
-    <viewmodel2:DashBoardPageAdminViewModel x:Key='DashBoardAdminVM'/>
+    <viewmodel3:JobListForSingleAssigneeViewModel x:Key='JobListForSingleVM'/>
+    <viewmodel3:ReportListForSingleAssigneeViewModel x:Key='ReportListForSingleVM'/>
 
+    
 
 
     <Style x:Key="OuterRect" TargetType="Rectangle">
