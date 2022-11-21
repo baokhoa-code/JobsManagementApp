@@ -12,14 +12,13 @@
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
       Name="ReportManagePage"
-      Loaded='loaded_handle'
-      DataContext='{StaticResource ReportManagementAdminVM}'
       Title="JobManagementAdmin">
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding MaskNameCM}"
                                    CommandParameter="{Binding ElementName=ShadowMask}" />
+            <i:InvokeCommandAction Command="{Binding LoadCM}" />
             <i:InvokeCommandAction Command="{Binding SaveCurrentPageCM}"
                                    CommandParameter="{Binding ElementName=ReportManagePage}" />
         </i:EventTrigger>
@@ -32,11 +31,25 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation='Horizontal' Grid.Row="0" Margin="5,0,0,0">
+                <Button 
+                    FontSize="18" 
+                    Background="Transparent"
+                    Foreground="#232360" 
+                    FontWeight="Bold"
+                    Command="{Binding LoadCM}" BorderBrush="Transparent" Height="32"
+                        >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Reload" Height="24" Width="24"/>
+                        <Label Content="Refresh" Foreground="#232360" FontSize="18"/>
+                    </StackPanel>
+
+                </Button>
                 <Button
+                    Command="{Binding OpenAddReportWindowCM}"
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="40"
-                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="130" Margin='1135,0,0,0'>
+                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="130" Margin='1015,0,0,0'>
                     <StackPanel Orientation='Horizontal'
                         Height="50"
                         Width="130" 

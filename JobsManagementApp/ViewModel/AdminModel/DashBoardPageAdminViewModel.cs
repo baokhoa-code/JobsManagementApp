@@ -20,11 +20,14 @@ using LiveChartsCore.SkiaSharpView.Painting.ImageFilters;
 using Org.BouncyCastle.Ocsp;
 using LiveChartsCore.Measure;
 using MaterialDesignThemes.Wpf;
+using JobsManagementApp.View.Admin.DashBoard;
+using JobsManagementApp.ViewModel.ShareModel;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class DashBoardPageAdminViewModel : BaseViewModel
     {
+
         public Admin admin { get; set; }
         private List<string> _CategorySource;
         public List<string> CategorySource
@@ -149,7 +152,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _WeekAlertRange; }
             set { _WeekAlertRange = value; OnPropertyChanged(); }
         }
-
+        public static Grid MaskName { get; set; }
 
         public ICommand OpenAddJobWindowCM { get; set; }
         public ICommand OpenEditJobCM { get; set; }
@@ -158,6 +161,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand LineByWeekCM { get; set; }
         public ICommand LineByMonthCM { get; set; }
         public ICommand LineByYearCM { get; set; }
+        public ICommand MaskNameCM { get; set; }
+        public ICommand LoadCM { get; set; }
         public DashBoardPageAdminViewModel(Admin a)
         {
 
@@ -178,10 +183,29 @@ namespace JobsManagementApp.ViewModel.AdminModel
             ShowAleartRange = WeekAlertRange;
             //LOAD REQUIRED INFORMATION
             admin = new Admin(a);
-            Load();
-            LoadLineByWeek();
 
             //DEFINE COMMANDS
+            LoadCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
+            {
+                Load();
+                LoadLineByWeek();
+
+            });
+            MaskNameCM = new RelayCommand<Grid>((p) => { return p !=null; }, (p) =>
+            {
+                MaskName = p;
+
+            });
+            OpenAddJobWindowCM = new RelayCommand<object>((p) => { return true; }, async(p) =>
+            {
+                JobAddWindow dba = new JobAddWindow();
+                JobAddViewModel vm = new JobAddViewModel(admin);
+                MaskName.Visibility = Visibility.Visible;
+                vm.Mask = MaskName;
+                dba.DataContext = vm;
+                dba.ShowDialog();
+  
+            });
             DeleteJobCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
                 MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this Job and it related reports?", MessageType.Warning, MessageButtons.YesNo);
@@ -238,9 +262,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
             try
             {
                 CategorySource = CategoryService.Ins.InsertCombobox();
-                Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
+                Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJobByAssigneeID("ADMIN", (int)admin.id));
                 JobsPie = JobsLine = Jobs;
-                //Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJobByAssigneeID("ADMIN", (int)admin.id));
 
             }
             catch (MySqlException e)

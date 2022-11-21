@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Height="300" Width="432"
+        Height="600" Width="600"
         WindowStartupLocation="CenterScreen"
         Title="Notification"
         FontFamily="SVN-Product Sans">
@@ -77,13 +77,14 @@
 
             <Grid Grid.Row="0"
                   Margin="5 5 5 5">
-                <TextBlock FontSize="30"
+                <TextBox
+                    FontSize="30"
                            TextAlignment="Justify"
                            TextWrapping="Wrap"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
-                           Name="txbl_notification">
-                </TextBlock>
+                           Name="txbl_notification" Width="600" Height="500" Padding="10,0,10,10">
+                </TextBox>
             </Grid>
 
             <Grid Grid.Row="1">

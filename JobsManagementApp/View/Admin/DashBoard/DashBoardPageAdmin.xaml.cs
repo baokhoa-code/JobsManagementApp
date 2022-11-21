@@ -70,15 +70,11 @@ namespace JobsManagementApp.View.Admin.DashBoard
         }
 
 
-        private void handle_loaded(object sender, RoutedEventArgs e)
-        {
-            filters = new Dictionary<string, Predicate<JobsDTO>>();
-            view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-            view.Filter = FilterJob;
-        }
+  
 
         private void handle_tab_change(object sender, SelectionChangedEventArgs e)
         {
+            
             string tabItem = ((sender as TabControl).SelectedItem as TabItem).Header as string;
 
             category_cbx.SelectedIndex = -1;
@@ -103,11 +99,22 @@ namespace JobsManagementApp.View.Admin.DashBoard
             {
                 case "All":
                     {
-                        ResetFilter();
+                        if (filters != null & view != null)
+                        {
+                            ResetFilter();
+                        }
+                        
                         break;
                     }
                 case "Today":
                     {
+
+                        if (filters == null & view == null)
+                        {
+                            filters = new Dictionary<string, Predicate<JobsDTO>>();
+                            view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                            view.Filter = FilterJob;
+                        }
                         start_dpk.IsEnabled = false;
                         end_dpk.IsEnabled = false;
                         date_field_cbx.IsEnabled = false;
@@ -126,18 +133,36 @@ namespace JobsManagementApp.View.Admin.DashBoard
                     }
                 case "Waiting":
                     {
+                        if (filters == null & view == null)
+                        {
+                            filters = new Dictionary<string, Predicate<JobsDTO>>();
+                            view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                            view.Filter = FilterJob;
+                        }
                         ResetFilter();
                         AddFilterAndRefresh("WAITING", item => item.stage == "WAITING");
                         break;
                     }
                 case "Pending":
                     {
+                        if (filters == null & view == null)
+                        {
+                            filters = new Dictionary<string, Predicate<JobsDTO>>();
+                            view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                            view.Filter = FilterJob;
+                        }
                         ResetFilter();
                         AddFilterAndRefresh("PENDING", item => item.stage == "PENDING");
                         break;
                     }
                 case "Late":
                     {
+                        if (filters == null & view == null)
+                        {
+                            filters = new Dictionary<string, Predicate<JobsDTO>>();
+                            view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                            view.Filter = FilterJob;
+                        }
                         ResetFilter();
                         AddFilterAndRefresh("LATE", item => item.stage == "LATE");
                         break;
@@ -165,9 +190,14 @@ namespace JobsManagementApp.View.Admin.DashBoard
 
         private void filter_btn_handle(object sender, RoutedEventArgs e)
         {
-            
-            
-            
+
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
+
 
             if (category_cbx.SelectedValue == null && date_field_cbx.SelectedValue == null && ! start_dpk.SelectedDate.HasValue && !end_dpk.SelectedDate.HasValue)
             {
@@ -256,6 +286,12 @@ namespace JobsManagementApp.View.Admin.DashBoard
 
         private void clear_filter_btn_handle(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             annouce_lbl2.Visibility = Visibility.Collapsed;
             annouce_lbl2.Content = "";
             category_cbx.SelectedIndex = -1;
@@ -276,6 +312,12 @@ namespace JobsManagementApp.View.Admin.DashBoard
 
         private void btn_Weekly_click(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             var bc = new BrushConverter();
             weekly_lbl.Foreground = (Brush?)bc.ConvertFrom("#1EA7FF");
             monthly_lbl.Foreground = (Brush?)bc.ConvertFrom("#232360");
@@ -283,6 +325,12 @@ namespace JobsManagementApp.View.Admin.DashBoard
         }
         private void btn_Monthly_click(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             var bc = new BrushConverter();
             weekly_lbl.Foreground = (Brush?)bc.ConvertFrom("#232360");
             monthly_lbl.Foreground = (Brush?)bc.ConvertFrom("#1EA7FF");
@@ -290,6 +338,12 @@ namespace JobsManagementApp.View.Admin.DashBoard
         }
         private void btn_Yearly_click(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             var bc = new BrushConverter();
             weekly_lbl.Foreground = (Brush?)bc.ConvertFrom("#232360");
             monthly_lbl.Foreground = (Brush?)bc.ConvertFrom("#232360");

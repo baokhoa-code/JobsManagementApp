@@ -76,10 +76,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 if (p != null)
                 {
-                    //JobListForSingleAssigneeViewModel vm = new JobListForSingleAssigneeViewModel(admin,1);
-                    //JobListForSingleAssignee jobforsingleassignee = new JobListForSingleAssignee();
-                    //jobforsingleassignee.DataContext = vm;
-                    //p.Content = jobforsingleassignee;
                     JobManagementPageAdmin jobPage = new JobManagementPageAdmin();
                     JobManagementPageAdminViewModel.admin = admin;
                     p.Content = jobPage;
@@ -98,13 +94,10 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
             LoadReportManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                //ReportListForSingleAssigneeViewModel vm = new ReportListForSingleAssigneeViewModel(admin, 1);
-                //ReportListForSingleAssignee reportListForSingleAssignee = new ReportListForSingleAssignee();
-                //reportListForSingleAssignee.DataContext = vm;
-                //p.Content = reportListForSingleAssignee;
-                ReportManagementPageAdminViewModel.admin = admin;
-                if (p != null)
-                    p.Content = new ReportManagementPageAdmin();
+                ReportManagementPageAdminViewModel vm = new ReportManagementPageAdminViewModel(admin);
+                ReportManagementPageAdmin reportMangementPage = new ReportManagementPageAdmin();
+                reportMangementPage.DataContext = vm;
+                p.Content = reportMangementPage;
             });
             LoadUserInfortPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {

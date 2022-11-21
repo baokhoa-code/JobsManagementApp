@@ -43,15 +43,6 @@
     <Compile Update="View\Share\JobAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Share\JobAssignAddWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Share\JobAssignDetailPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Share\JobDetailPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Share\JobListForSingleAssignee.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -115,15 +106,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\JobAddWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Share\JobAssignAddWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Share\JobAssignDetailPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Share\JobDetailPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\JobListForSingleAssignee.xaml">

@@ -41,6 +41,7 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using MySql.Data.MySqlClient;
 using System.Data;
+using JobsManagementApp.ViewModel.ShareModel;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
@@ -223,6 +224,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand ListMonthChangeCM { get; set; }
         public ICommand ListYearChangeCM { get; set; }
         public ICommand LoadFilterCbxCM { get; set; }
+        public ICommand LoadCM { get; set; }
+
         private ObservableCollection<JobsDTO> _Jobs;
         public ObservableCollection<JobsDTO> Jobs
         {
@@ -258,6 +261,21 @@ namespace JobsManagementApp.ViewModel.AdminModel
 
 
             //DEFINE COMMANDS
+            LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                Load2();
+
+            });
+            OpenAddJobWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                JobAddWindow dba = new JobAddWindow();
+                JobAddViewModel vm = new JobAddViewModel(admin);
+                MaskName.Visibility = Visibility.Visible;
+                vm.Mask = MaskName;
+                dba.DataContext = vm;
+                dba.ShowDialog();
+
+            });
             AddCategoryCM = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
             {
                 TextBox temp = (p as TextBox);
@@ -372,13 +390,13 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 MaskName = p;
             });
-            OpenAddJobWindowCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            {
-                CurrentPage.NavigationService.GoBack();
-                //JobAddWindow wd = new JobAddWindow();
-                //MaskName.Visibility = Visibility.Visible;
-                //wd.ShowDialog();
-            });
+            //OpenAddJobWindowCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            //{
+            //    CurrentPage.NavigationService.GoBack();
+            //    //JobAddWindow wd = new JobAddWindow();
+            //    //MaskName.Visibility = Visibility.Visible;
+            //    //wd.ShowDialog();
+            //});
             ListWeekRageChangeCM = new RelayCommand<ListView>((p) => { return CurrentWeekRange!=null; }, (p) =>
             {
                 //UPDATE WEEK JOB AMOUNT
@@ -408,7 +426,29 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
         }
         //INTERNAL FUNCTIONS
-        public async Task Load()
+        public async Task Load2()
+        {
+            try
+            {
+   
+                Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
+                JobsStore = new ObservableCollection<JobsDTO>(Jobs);
+
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e);
+                MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                mb.ShowDialog();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                mb.ShowDialog();
+            }
+        }
+            public async Task Load()
         {
             try
             {

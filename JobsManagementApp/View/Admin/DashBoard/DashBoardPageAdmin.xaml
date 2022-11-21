@@ -10,9 +10,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
-      Loaded='handle_loaded'
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       Title="UserHomePage">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCM}"/>
+            <i:InvokeCommandAction Command="{Binding MaskNameCM}"
+                                   CommandParameter="{Binding ElementName=ShadowMask}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Page.Resources>
         <DataTemplate x:Key="testTemplate">
 
@@ -73,7 +79,7 @@
                                 FontSize="12"
                                 Foreground="#FF232360"
                                 TextWrapping="Wrap"  VerticalAlignment='Center' 
-                                />
+                                Margin="10,0,0,0"/>
 
                     <StackPanel Width="110">
                         <StackPanel Orientation='Horizontal' HorizontalAlignment='Center'>
@@ -137,7 +143,21 @@
                     <RowDefinition Height="350"/>
                     <RowDefinition Height="350"/>
                 </Grid.RowDefinitions>
-
+                <Grid Grid.Column="0">
+                    <Button 
+                        FontSize="18" 
+                        Background="Transparent"
+                        Foreground="#232360" 
+                        FontWeight="Bold"
+                        Command="{Binding LoadCM}" BorderBrush="Transparent" HorizontalAlignment="Left" Margin="10,0,0,0"
+                        >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Reload" Height="24" Width="24"/>
+                            <Label Content="Refresh" Foreground="#232360" FontSize="18"/>
+                        </StackPanel>
+                        
+                    </Button>
+                </Grid>
                 <Grid Grid.Row="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -379,7 +399,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold"/>
                     <Button 
-                        Command="{Binding tesctcm}"
+                        Command="{Binding OpenAddJobWindowCM}"
                         Width="36"
                         Height="36" 
                         Background='Transparent' 
@@ -574,6 +594,10 @@
                 </Grid>
             </Grid>
         </Grid>
-
+        <Grid Grid.ColumnSpan="2"
+                  Background="Gray"
+                  Opacity="0.3"
+                  Visibility="Collapsed"
+                  x:Name="ShadowMask" />
     </Grid>
 </Page>

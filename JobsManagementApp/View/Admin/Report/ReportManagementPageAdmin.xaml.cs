@@ -28,12 +28,6 @@ namespace JobsManagementApp.View.Admin.Report
         {
             InitializeComponent();
         }
-        private void loaded_handle(object sender, RoutedEventArgs e)
-        {
-            filters = new Dictionary<string, Predicate<ReportsDTO>>();
-            view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-            view.Filter = FilterJob;
-        }
         public void ClearFilters()
         {
             filters.Clear();
@@ -69,7 +63,13 @@ namespace JobsManagementApp.View.Admin.Report
 
         private void date_filter_btn_handle(object sender, RoutedEventArgs e)
         {
-            popupnhe.IsOpen = !popupnhe.IsOpen;
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<ReportsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
+            popupnhe.IsOpen = true;
             if (ShadowMask.Visibility == Visibility.Visible)
                 ShadowMask.Visibility = Visibility.Collapsed;
             if (ShadowMask.Visibility == Visibility.Collapsed)
@@ -78,6 +78,12 @@ namespace JobsManagementApp.View.Admin.Report
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<ReportsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             RemoveFilter("SEARCH");
             AddFilterAndRefresh("SEARCH", item => item.tile.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 && item.job_name.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
@@ -204,6 +210,12 @@ namespace JobsManagementApp.View.Admin.Report
 
         private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<ReportsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             ResetFilter();
             month_rbtn.IsChecked = false;
             year_rbtn.IsChecked = false;

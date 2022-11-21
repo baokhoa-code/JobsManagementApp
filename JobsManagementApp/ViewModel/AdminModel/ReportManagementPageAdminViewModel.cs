@@ -1,4 +1,5 @@
 ﻿using JobsManagementApp.Model;
+using JobsManagementApp.ViewModel.ShareModel;
 using JobsManagementApp.Service;
 using JobsManagementApp.View.Share;
 using System;
@@ -45,13 +46,26 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand DeleteReportCM { get; set; }
         public ICommand MaskNameCM { get; set; }
         public ICommand SaveCurrentPageCM { get; set; }
+        public ICommand LoadCM { get; set; }
         public ICommand testCM { get; set; }
-        public ReportManagementPageAdminViewModel()
+        public ReportManagementPageAdminViewModel(Admin a)
         {
-            //GET NEED INFORMATION
-            Load();
-            
+            admin = new Admin(a);
+
             //DEFINE COMMAND
+            LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                Load();
+            });
+            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                ReportAddWindow dba = new ReportAddWindow();
+                ReportAddViewModel vm = new ReportAddViewModel(admin, -1);
+                MaskName.Visibility = Visibility.Visible;
+                vm.Mask = MaskName;
+                dba.DataContext = vm;
+                dba.ShowDialog();
+            });
             MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
             {
                 MaskName = p;
@@ -59,10 +73,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
             SaveCurrentPageCM = new RelayCommand<Page>((p) => { return true; }, async (p) =>
             {
                 CurrentPage = p;
-            });
-            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
-            {
-
             });
             OpenEditReportPageCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {

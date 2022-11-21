@@ -34,19 +34,32 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation='Horizontal' Grid.Row="0" Margin="5,0,0,0">
+                <Button 
+                    FontSize="18" 
+                    Background="Transparent"
+                    Foreground="#232360" 
+                    FontWeight="Bold"
+                    Command="{Binding LoadCM}" BorderBrush="Transparent" Height="32"
+                        >
+                    <StackPanel Orientation="Horizontal">
+                        <wpf:PackIcon Kind="Reload" Height="24" Width="24"/>
+                        <Label Content="Refresh" Foreground="#232360" FontSize="18"/>
+                    </StackPanel>
+
+                </Button>
                 <Button
                     x:Name='category_popup_btn'
                     Click='category_popup_btn_handle'
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="40"
-                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="160" Margin='965,0,0,0'>
+                    wpf:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="160" Margin='840,0,0,0'>
                     <StackPanel Orientation='Horizontal'
                             Height="50"
                             Width="150" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center">
-                        <materialDesign:PackIcon
+                        <wpf:PackIcon
                                             Kind="Table" 
                                             Height="30" 
                                             Width="30"
@@ -61,7 +74,7 @@
                     </StackPanel>
                 </Button>
                 <Popup 
-                        Name="popupnhe1"
+                        x:Name="popupnhe1"
                         AllowsTransparency="True"
                         IsOpen="False"
                         PopupAnimation="Fade"
@@ -120,12 +133,12 @@
                                         <Button 
                                                 Command="{Binding AddCategoryCM}"
                                                 CommandParameter="{Binding ElementName=addCategory_txt}"
-                                                Content='Add' materialDesign:ButtonAssist.CornerRadius="10" 
-                                                Background='#FF385ADD' BorderBrush='#FF385ADD' Margin='10,0,0,0' Width='70' ></Button>
+                                                Content='Add' wpf:ButtonAssist.CornerRadius="10" 
+                                                Background='#FF385ADD' BorderBrush='#FF385ADD' Margin='10,0,0,0' Width='70' />
                                     </StackPanel>
 
 
-                                    <materialDesign:Card Background="White"
+                                    <wpf:Card Background="White"
                                             UniformCornerRadius="20" VerticalAlignment="Center" Margin="20,20,20,20">
                                         <StackPanel>
                                             <ListView 
@@ -196,15 +209,15 @@
                                                                                     </Style.Triggers>
                                                                                 </Style>
                                                                             </Border.Style>
-                                                                            <materialDesign:PackIcon Kind="GarbageCanEmpty"
+                                                                            <i:Interaction.Triggers>
+                                                                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                                                    <i:InvokeCommandAction Command="{Binding DataContext.DeleteCategoryCM, ElementName=_ListView2}" />
+                                                                                </i:EventTrigger>
+                                                                            </i:Interaction.Triggers>
+                                                                            <wpf:PackIcon Kind="GarbageCanEmpty"
                                                                                     Width="30"
                                                                                     Height="30"
                                                                                     Cursor="Hand" />
-                                                                            <i:Interaction.Triggers>
-                                                                                <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                                                    <i:InvokeCommandAction Command="{Binding ElementName=_ListView2, Path=DataContext.DeleteCategoryCM}" />
-                                                                                </i:EventTrigger>
-                                                                            </i:Interaction.Triggers>
                                                                         </Border>
 
                                                                     </StackPanel>
@@ -215,7 +228,7 @@
                                                 </ListView.View>
                                             </ListView>
                                         </StackPanel>
-                                    </materialDesign:Card>
+                                    </wpf:Card>
                                 </StackPanel>
 
 
@@ -229,13 +242,13 @@
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="40"
-                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="115" Margin='30,0,0,0'>
+                    wpf:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="115" Margin='30,0,0,0'>
                     <StackPanel Orientation='Horizontal'
                         Height="50"
                         Width="120" 
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center">
-                        <materialDesign:PackIcon
+                        <wpf:PackIcon
                             Kind="Plus" 
                             Height="30" 
                             Width="30"

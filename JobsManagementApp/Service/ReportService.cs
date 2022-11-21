@@ -76,6 +76,26 @@ namespace JobsManagementApp.Service
             dbc.connection.Close();
             return Reports;
         }
+        public async Task<(bool, string)> AddReport(ReportsDTO r)
+        {
+            try
+            {
+                DatabaseConnection dbc1 = new DatabaseConnection();
+                string code1 = "";
+                code1 = "INSERT INTO REPORT(JOB_ID, JOB_NAME, TILE, DESCRIPTION, CREATED_TIME) VALUES(" + r.job_id
+                    + ",'" + r.job_name + "','" + r.tile + "','" + r.description + "','" + r.created_time + "')";
+                dbc1.command.CommandText = code1;
+                dbc1.connection.Open();
+                dbc1.command.ExecuteNonQuery();
+                dbc1.connection.Close();
+
+                return (true, "Insert Success");
+            }
+            catch (Exception)
+            {
+                return (false, "Database Error");
+            }
+        }
         public async Task<ObservableCollection<ReportsDTO>> GetAllReportByAssigneeID(string? userType, int assigneeID)
         {
             ObservableCollection<ReportsDTO> Reports = new ObservableCollection<ReportsDTO>();

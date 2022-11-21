@@ -2,6 +2,8 @@
 using JobsManagementApp.View.Admin;
 using JobsManagementApp.View.User;
 using JobsManagementApp.Service;
+using JobsManagementApp.ViewModel.AdminModel;
+using JobsManagementApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using JobsManagementApp.Model;
-using JobsManagementApp.ViewModel.AdminModel;
 using System.Windows.Media.Imaging;
+using JobsManagementApp.View.Share;
+using JobsManagementApp.ViewModel.ShareModel;
 
 namespace JobsManagementApp.ViewModel.GeneralModel
 {
@@ -140,7 +142,10 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                         }
                         else
                         {
-                            LoginWindow.Hide();
+                            //ReportAddWindow dba = new ReportAddWindow();
+                            //ReportAddViewModel vm = new ReportAddViewModel(admin,-1);
+                            //dba.DataContext = vm;
+                            //dba.ShowDialog();
                             MainWindowAdmin dba = new MainWindowAdmin();
                             MainWindowAdminViewModel vm = new MainWindowAdminViewModel();
                             vm.admin = admin;
