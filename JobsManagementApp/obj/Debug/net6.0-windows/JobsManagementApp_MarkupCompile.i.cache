@@ -16,5 +16,5 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\App.xaml
 214-255100442
 Resource\MainResource.xaml;View\Admin\DashBoard\DashBoardPageAdmin.xaml;View\Admin\Job\JobManagementPageAdmin.xaml;View\Admin\MainWindowAdmin.xaml;View\Admin\Report\ReportManagementPageAdmin.xaml;View\Admin\Staff\StaffDetailPageAdmin.xaml;View\Admin\Staff\StaffManagementPageAdmin.xaml;View\General\ForgotPage.xaml;View\General\LoginPage.xaml;View\General\LoginWindow.xaml;View\General\Splash.xaml;View\Share\JobAddWindow.xaml;View\Share\JobAssignDetailPage.xaml;View\Share\JobListForSingleAssignee.xaml;View\Share\MessageBoxCustom.xaml;View\Share\Notification.xaml;View\Share\ReportAddWindow.xaml;View\Share\ReportListAndDetailPage.xaml;View\Share\ReportListForSingleAssignee.xaml;View\Share\StaffAddWindow.xaml;View\Share\UserInformationPage.xaml;View\User\DashBoardUser.xaml;
 
-False
+True
 

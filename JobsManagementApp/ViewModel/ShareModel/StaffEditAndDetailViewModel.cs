@@ -163,7 +163,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             Storestaff = new UsersDTO(staff_t);
             staff = new UsersDTO();
             currentDate = DateTime.Now;
-            staffDob = DateTime.ParseExact(Storestaff.dob, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture); ;
+            
 
 
             //DEFINE COMMAND
@@ -441,6 +441,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             staffAddress = Storestaff.address;
             staffAnswer = Storestaff.answer;
             staffAvatar = Storestaff.avatar;
+            staffDob = DateTime.ParseExact(Storestaff.dob, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             try
             {
                 OrganizationSource = new ObservableCollection<OrganizationsDTO>(await OrganizationAndPositionService.Ins.GetAllOrganization());
