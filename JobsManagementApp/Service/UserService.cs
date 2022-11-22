@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace JobsManagementApp.Service
 {
     public class UserService
@@ -52,6 +53,27 @@ namespace JobsManagementApp.Service
                 return (false, "Database Error");
             }
         }
+        public async Task<(bool, string)> AddUser(UsersDTO u)
+        {
+            try
+            {
+                DatabaseConnection dbc1 = new DatabaseConnection();
+                string code1 = "";
+                code1 = "INSERT INTO USER(NAME, GENDER, D_O_B, PHONE, ADDRESS,  ORGANIZATION, POSITION, AVATAR, EMAIL, USERNAME, PASS, QUESTION, ANSWER, TOTAL_WORKING_HOUR) VALUES('"
+                        + u.name + "','" +u.gender +"','"+u.dob+ "','"+u.phone+ "','"+u.address+ "','"+u.organization+ "','"+u.position+ "','"+
+                        u.avatar+ "','"+u.email+ "','"+u.username+ "','"+u.pass+ "','"+u.question+ "','"+u.answer+ "',"+u.total_working_hour+ ")" ;
+                dbc1.command.CommandText = code1;
+                dbc1.connection.Open();
+                dbc1.command.ExecuteNonQuery();
+                dbc1.connection.Close();
+
+                return (true, "Insert Success");
+            }
+            catch (Exception)
+            {
+                return (false, "Database Error");
+            }
+        }
         public async Task<UsersDTO> GetUser(int id)
         {
             UsersDTO u = new UsersDTO();
@@ -72,7 +94,7 @@ namespace JobsManagementApp.Service
                     reader.Read();
                     u = new UsersDTO(Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
                         reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
-                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), reader.GetString(14), Int16.Parse(reader.GetString(15)));
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), Int16.Parse(reader.GetString(14)));
                 }
                 else
                 {
@@ -85,6 +107,35 @@ namespace JobsManagementApp.Service
                 return null;
             }
             return u;
+        }
+        public bool CheckExisted(string username)
+        {
+            bool check = false;
+            try
+            {
+                int count = -1;
+                DatabaseConnection dbc = new DatabaseConnection();
+                string code = "";
+                MySqlDataReader reader;
+
+                code = "SELECT COUNT(*) AS COUNTNHA FROM USER WHERE USERNAME = '" + username + "'";
+                dbc.command.CommandText = code;
+
+                dbc.connection.Open();
+                reader = dbc.command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    count = Int16.Parse(reader.GetString(0));
+                }
+                dbc.connection.Close();
+                if (count == 0)
+                    check = true;
+            }
+            catch (Exception)
+            {
+                return check;
+            }
+            return check;
         }
         public (UsersDTO?, string?) Login(string username, string password)
         {
@@ -108,7 +159,7 @@ namespace JobsManagementApp.Service
                 {
                     user = new UsersDTO(Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
                         reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
-                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), reader.GetString(14), Int16.Parse(reader.GetString(15)));
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13),  Int16.Parse(reader.GetString(14)));
                     message = "Login Success";
                     dbc.connection.Close();
                 }
@@ -146,7 +197,7 @@ namespace JobsManagementApp.Service
                 Users.Add(
                     new UsersDTO(Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
                         reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
-                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), reader.GetString(14), Int16.Parse(reader.GetString(15))));
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13),  Int16.Parse(reader.GetString(14))));
             }
             dbc.connection.Close();
             return Users;
@@ -167,7 +218,7 @@ namespace JobsManagementApp.Service
                 Users.Add(
                     new UsersDTO(Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
                         reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
-                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), reader.GetString(14), Int16.Parse(reader.GetString(15))));
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), Int16.Parse(reader.GetString(14))));
             }
             dbc.connection.Close();
             return Users;

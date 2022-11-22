@@ -216,6 +216,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand AddCategoryCM { get; set; }
         public ICommand DeleteCategoryCM { get; set; }
         public ICommand OpenAddJobWindowCM { get; set; }
+        public ICommand OpenAddStaffWindowCM { get; set; }
         public ICommand OpenEditJobCM { get; set; }
         public ICommand DeleteJobCM { get; set; }
         public ICommand SaveCurrentPageCM { get; set; }

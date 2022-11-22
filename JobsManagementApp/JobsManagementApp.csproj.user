@@ -19,9 +19,6 @@
     <Compile Update="View\Admin\Report\ReportManagementPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Admin\Staff\StaffAddWindowAdmin.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Admin\Staff\StaffDetailPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -61,6 +58,9 @@
     <Compile Update="View\Share\ReportListForSingleAssignee.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Share\StaffAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Share\UserInformationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -82,9 +82,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\Report\ReportManagementPageAdmin.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Admin\Staff\StaffAddWindowAdmin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\Staff\StaffDetailPageAdmin.xaml">
@@ -124,6 +121,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\ReportListForSingleAssignee.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Share\StaffAddWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\UserInformationPage.xaml">

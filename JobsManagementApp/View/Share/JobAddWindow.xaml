@@ -268,8 +268,8 @@
                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
                             wpf:ButtonAssist.CornerRadius="10"
                             ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
-                            BorderBrush="Green" 
-                            Background="Green"
+                            BorderBrush="#FF2CD73D" 
+                            Background="#FF2CD73D"
                             FontSize="18"
                             FontWeight="Bold"
                             Content="Clear" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" VerticalAlignment="Center" Margin="60,0,0,0"/>

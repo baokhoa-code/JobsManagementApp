@@ -33,18 +33,31 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Grid HorizontalAlignment='Left' Margin='30,10,0,0'>
+            <StackPanel Orientation="Horizontal">
+                <Button 
+                    FontSize="18" 
+                    Background="Transparent"
+                    Foreground="#232360" 
+                    FontWeight="Bold"
+                    Command="{Binding LoadCM}" BorderBrush="Transparent" Height="32"
+                        >
+                    <StackPanel Orientation="Horizontal">
+                        <wpf:PackIcon Kind="Reload" Height="24" Width="24"/>
+                        <Label Content="Refresh" Foreground="#232360" FontSize="18"/>
+                    </StackPanel>
+
+                </Button>
                 <Button
                     Click='reset_filters_btn_handle'
                     Padding="0"
-                    materialDesign:ButtonProgressAssist.Value="-1"
-                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                    Height="25"
-                    materialDesign:ButtonAssist.CornerRadius="10" 
+                    wpf:ButtonProgressAssist.Value="-1"
+                    wpf:ButtonProgressAssist.IsIndicatorVisible="True"
+                    wpf:ButtonProgressAssist.IsIndeterminate="True"
+                    Height="30"
+                    wpf:ButtonAssist.CornerRadius="10" 
                     Content='Reset Filters'
                     Background="#FF23DF00" BorderBrush="Gray" Width="100" Foreground='White'/>
-            </Grid>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -534,6 +547,7 @@
                     Height="40"
                     Width="130" VerticalAlignment='Center' HorizontalAlignment='Left' Margin='1155,0,0,0'>
                     <Button
+                        Command="{Binding OpenAddStaffWindowCM}"
                         Padding="0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Height="40"

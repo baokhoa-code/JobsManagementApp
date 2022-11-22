@@ -126,11 +126,6 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                 {
                     if (SelectedRole.Content.ToString() == "Admin") 
                     {
-                        //LoginWindow.Hide();
-                        //MainWindowAdmin dba = new MainWindowAdmin();
-                        //dba.Show();
-                        //LoginWindow.Close();
-                        //return;
 
                         Admin admin;
                         string message;
@@ -142,10 +137,6 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                         }
                         else
                         {
-                            //ReportAddWindow dba = new ReportAddWindow();
-                            //ReportAddViewModel vm = new ReportAddViewModel(admin,-1);
-                            //dba.DataContext = vm;
-                            //dba.ShowDialog();
                             MainWindowAdmin dba = new MainWindowAdmin();
                             MainWindowAdminViewModel vm = new MainWindowAdminViewModel();
                             vm.admin = admin;

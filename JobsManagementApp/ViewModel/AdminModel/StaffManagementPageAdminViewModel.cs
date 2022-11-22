@@ -128,16 +128,19 @@ namespace JobsManagementApp.ViewModel.AdminModel
             //Load();
 
             //DEFINE COMMAND
+            OpenAddStaffWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                StaffAddWindow dba = new StaffAddWindow();
+                StaffAddViewModel vm = new StaffAddViewModel(admin);
+                vm.Mask = MaskName;
+                MaskName.Visibility = Visibility.Visible;
+                dba.DataContext = vm;
+                dba.ShowDialog();
+
+            });
             OpenEditStaffCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
             {
-                //JobListForSingleAssigneeViewModel vm = new JobListForSingleAssigneeViewModel(admin, (int)SelectedItem.id);
-                //JobListForSingleAssignee jobforsingleassignee = new JobListForSingleAssignee();
-                //jobforsingleassignee.DataContext = vm;
-                //p.NavigationService.Navigate(jobforsingleassignee);
-                ReportListForSingleAssigneeViewModel vm = new ReportListForSingleAssigneeViewModel(admin, (int)SelectedItem.id);
-                ReportListForSingleAssignee reportListForSingleAssignee = new ReportListForSingleAssignee();
-                reportListForSingleAssignee.DataContext = vm;
-                p.NavigationService.Navigate(reportListForSingleAssignee);
+                
             });
             LoadCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
