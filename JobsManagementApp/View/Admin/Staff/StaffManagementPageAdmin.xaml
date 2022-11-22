@@ -186,7 +186,6 @@
                                         Click='close_organ_popup'
                                         Style="{StaticResource MaterialDesignFloatingActionButton}"
                                         ToolTip="MaterialDesignFloatingActionButton"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Background="#FFFE5555" BorderBrush="#FFFE5555" 
                                         Width="22" Height="22" 
                                         HorizontalAlignment="Right" Margin='0,18,18.5,0'>
@@ -373,7 +372,6 @@
                                         Click='close_position_popup'
                                         Style="{StaticResource MaterialDesignFloatingActionButton}"
                                         ToolTip="MaterialDesignFloatingActionButton"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Background="#FFFE5555" BorderBrush="#FFFE5555" 
                                         Width="22" Height="22" 
                                         HorizontalAlignment="Right" Margin='0,18,18.5,0'>

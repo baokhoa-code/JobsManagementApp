@@ -197,7 +197,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </PasswordBox>
-            <TextBox    
+            <TextBox   
                 Name="txb_password"
                 FontSize="15"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 

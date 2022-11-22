@@ -140,7 +140,10 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
             OpenEditStaffCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
             {
-                
+                StaffEditAndDetailPage dba = new StaffEditAndDetailPage();
+                StaffEditAndDetailViewModel vm = new StaffEditAndDetailViewModel(admin, SelectedItem);
+                dba.DataContext = vm;
+                p.NavigationService.Navigate(dba);
             });
             LoadCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {

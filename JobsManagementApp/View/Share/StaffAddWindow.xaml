@@ -14,7 +14,9 @@
         Width="1240"
         Name="StaffAddWindows"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="Manual"
+        Loaded="StaffAddWindows_Loaded"
+        WindowState="Normal"
         >
 
 
@@ -47,7 +49,6 @@
                     CommandParameter="{Binding ElementName=StaffAddWindows}"
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
                     ToolTip="MaterialDesignFloatingActionButton"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                     Background="#FFFE5555" BorderBrush="#FFFE5555" 
                     Width="22" Height="22" 
                     HorizontalAlignment="Right" Margin='0,18,18.5,0'>
@@ -205,21 +206,8 @@
                                         BorderBrush="#99000000" 
                                         materialDesign:TextFieldAssist.HasClearButton="True"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                        Height="55" Width="223"
+                                        Height="55" Width="450"
                                         wpf:HintAssist.Hint="Phone (+84)" HorizontalAlignment="Left" Margin="90,0,0,0" />
-                            <TextBox    
-                                x:Name="staffUserName_txt"
-                                Text="{Binding staffUserName}"
-                                FontWeight="DemiBold"
-                                FontSize="18"
-                                FontFamily="Roboto"
-                                Foreground="Black" 
-                                BorderThickness="0 0 0 1.5"
-                                BorderBrush="#99000000" 
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                Height="55" Width="223"
-                                materialDesign:HintAssist.Hint="Username" HorizontalAlignment="Left" Margin="340,0,0,0" />
                         </Grid>
                         <Grid Grid.Row="5"/>
                     </Grid>
@@ -339,94 +327,72 @@
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <ComboBox
-                                        x:Name="staffQuestion_cbx"
-                                        SelectedValue="{Binding staffQuestion}"
-                                        FontWeight="DemiBold"
-                                        BorderThickness="0 0 0 1.5"
-                                        wpf:HintAssist.Hint="Security Question" 
-                                        FontSize="18"
-                                        FontFamily="Roboto"
-                                        Foreground="black" BorderBrush="#99000000"
-                                        VerticalContentAlignment="Center"
-                                        Height="55" Width="450"
-                                        Margin="50,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Left"
-                                >
-                                <ComboBoxItem
-                                            Cursor="Hand"
-                                            Width="450"
-                                            Foreground="#FFAFAFAF"
-                                            Content="WHAT IS YOUR FAVORITE FOOD?" />
-                                <ComboBoxItem
-                                            Cursor="Hand"
-                                            Width="450"
-                                            Foreground="#FFAFAFAF"
-                                            Content="WHAT IS THE NAME OF THE TOWN WHERE YOU WERE BORN?" />
-                                <ComboBoxItem
-                                            Cursor="Hand"
-                                            Width="450"
-                                            Foreground="#FFAFAFAF"
-                                            Content="WHAT IS THE NAME OF YOUR FIRST PET?" />
-                                <ComboBoxItem
-                                            Cursor="Hand"
-                                            Width="450"
-                                            Foreground="#FFAFAFAF"
-                                            Content="WHAT WAS YOUR CHILDHOOD NICKNAME?" />
-                            </ComboBox>
+                            <TextBox    
+                                x:Name="staffUserName_txt"
+                                Text="{Binding staffUserName}"
+                                FontWeight="DemiBold"
+                                FontSize="18"
+                                FontFamily="Roboto"
+                                Foreground="Black" 
+                                BorderThickness="0 0 0 1.5"
+                                BorderBrush="#99000000" 
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                Height="55" Width="450"
+                                materialDesign:HintAssist.Hint="Username" HorizontalAlignment="Left" Margin="50,0,0,0" />
 
                         </Grid>
                         <Grid Grid.Row="2">
-                            <TextBox    
-                                        x:Name="staffAnswer_txt"
-                                        Text="{Binding staffAnswer}"
-                                        FontWeight="DemiBold"
-                                        FontSize="18"
-                                        FontFamily="Roboto"
-                                        Foreground="Black" 
-                                        BorderThickness="0 0 0 1.5"
-                                        BorderBrush="#99000000" 
-                                        materialDesign:TextFieldAssist.HasClearButton="True"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                        Height="55" Width="450"
-                                        wpf:HintAssist.Hint="Your answer" 
-                                        HorizontalAlignment="Left" Margin="50,0,0,0"  />
+                            <ComboBox
+                                x:Name="staffQuestion_cbx"
+                                SelectedValue="{Binding staffQuestion}"
+                                FontWeight="DemiBold"
+                                BorderThickness="0 0 0 1.5"
+                                materialDesign:HintAssist.Hint="Security Question" 
+                                FontSize="18"
+                                FontFamily="Roboto"
+                                Foreground="black" BorderBrush="#99000000"
+                                VerticalContentAlignment="Center"
+                                Height="55" Width="450"
+                                Margin="50,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Left"
+                                >
+                                <ComboBoxItem
+                                    Cursor="Hand"
+                                    Width="450"
+                                    Foreground="#FFAFAFAF"
+                                    Content="WHAT IS YOUR FAVORITE FOOD?" />
+                                <ComboBoxItem
+                                    Cursor="Hand"
+                                    Width="450"
+                                    Foreground="#FFAFAFAF"
+                                    Content="WHAT IS THE NAME OF THE TOWN WHERE YOU WERE BORN?" />
+                                <ComboBoxItem
+                                    Cursor="Hand"
+                                    Width="450"
+                                    Foreground="#FFAFAFAF"
+                                    Content="WHAT IS THE NAME OF YOUR FIRST PET?" />
+                                <ComboBoxItem
+                                    Cursor="Hand"
+                                    Width="450"
+                                    Foreground="#FFAFAFAF"
+                                    Content="WHAT WAS YOUR CHILDHOOD NICKNAME?" />
+                            </ComboBox>
                         </Grid>
                         <Grid Grid.Row="3">
-                            <PasswordBox  
-                                        x:Name="staffPassword_pass"
-                                        wpf:HintAssist.Hint="Your password" 
-                                        FontWeight="DemiBold"
-                                        BorderThickness="0 0 0 2.5"
-                                        FontSize="18"
-                                        Margin="48,18,0,18" 
-                                        Height="55" 
-                                        Width="450"
-                                        materialDesign:TextFieldAssist.HasClearButton="True"
-                                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                        Visibility="Visible"
-                                        Foreground="Black" 
-                                        BorderBrush="#99000000" HorizontalAlignment="Left" FontFamily="Roboto" 
-                                        VerticalContentAlignment="Bottom" Padding="0,0,0,12">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="PasswordChanged">
-                                        <i:InvokeCommandAction Command="{Binding PasswordChangedCM}"
-                                                       CommandParameter="{Binding ElementName=staffPassword_pass}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </PasswordBox>
                             <TextBox    
-                                        FontWeight="DemiBold"
-                                        BorderThickness="0 0 0 1.5"
-                                        x:Name="txb_password"
-                                        FontSize="18"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                        Margin="50,0,0,0" 
-                                        Height="55" 
-                                        Width="450"
-                                        Foreground="Black" 
-                                        BorderBrush="#99000000"  
-                                        Visibility="Hidden" HorizontalAlignment="Left" 
-                                        Padding="0,4,0,4" VerticalContentAlignment="Bottom"/>
+                                x:Name="staffAnswer_txt"
+                                Text="{Binding staffAnswer}"
+                                FontWeight="DemiBold"
+                                FontSize="18"
+                                FontFamily="Roboto"
+                                Foreground="Black" 
+                                BorderThickness="0 0 0 1.5"
+                                BorderBrush="#99000000" 
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                Height="55" Width="450"
+                                materialDesign:HintAssist.Hint="Your answer" 
+                                HorizontalAlignment="Left" Margin="50,0,0,0"  />
                         </Grid>
                     </Grid>
                 </Grid>

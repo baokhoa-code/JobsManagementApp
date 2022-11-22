@@ -22,12 +22,12 @@ using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace JobsManagementApp.ViewModel.ShareModel
 {
     public class StaffEditAndDetailViewModel : BaseViewModel
     {
-
         #region Binding Varirables
 
         private string _staffName;
@@ -54,20 +54,26 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _staffPhone; }
             set { _staffPhone = value; OnPropertyChanged(); }
         }
+        private string _staffWorkedHour;
+        public string staffWorkedHour
+        {
+            get { return _staffWorkedHour; }
+            set { _staffWorkedHour = value; OnPropertyChanged(); }
+        }
         private string _staffUserName;
         public string staffUserName
         {
             get { return _staffUserName; }
             set { _staffUserName = value; OnPropertyChanged(); }
         }
-        private ComboBoxItem _staffGender;
-        public ComboBoxItem staffGender
+        private string _staffGender;
+        public string staffGender
         {
             get { return _staffGender; }
             set { _staffGender = value; OnPropertyChanged(); }
         }
-        private ComboBoxItem _staffQuestion;
-        public ComboBoxItem staffQuestion
+        private string _staffQuestion;
+        public string staffQuestion
         {
             get { return _staffQuestion; }
             set { _staffQuestion = value; OnPropertyChanged(); }
@@ -83,12 +89,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
         {
             get { return _staffAvatar; }
             set { _staffAvatar = value; OnPropertyChanged(); }
-        }
-        private string _staffPas;
-        public string staffPas
-        {
-            get { return _staffPas; }
-            set { _staffPas = value; OnPropertyChanged(); }
         }
         private DateTime _staffDob;
         public DateTime staffDob
@@ -120,6 +120,18 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _PositionSource; }
             set { _PositionSource = value; OnPropertyChanged(); }
         }
+        private List<string> _Gender;
+        public List<string> Gender
+        {
+            get { return _Gender; }
+            set { _Gender = value; OnPropertyChanged(); }
+        }
+        private List<string> _Question;
+        public List<string> Question
+        {
+            get { return _Question; }
+            set { _Question = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region Internal Vairables
@@ -130,11 +142,11 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _staff; }
             set { _staff = value; OnPropertyChanged(); }
         }
-        private UsersDTO _Storestaff;
-        public UsersDTO Storestaff
+        private UsersDTO _Backupstaff;
+        public UsersDTO Backupstaff
         {
-            get { return _Storestaff; }
-            set { _Storestaff = value; OnPropertyChanged(); }
+            get { return _Backupstaff; }
+            set { _Backupstaff = value; OnPropertyChanged(); }
         }
         private DateTime _currentDate;
         public DateTime currentDate
@@ -147,24 +159,26 @@ namespace JobsManagementApp.ViewModel.ShareModel
 
         #region Command
         public ICommand LoadCM { get; set; }
-        public ICommand AddStaffCM { get; set; }
-        public ICommand StaffCM { get; set; }
-        public ICommand BackupInforCM { get; set; }
-        public ICommand PasswordChangedCM { get; set; }
+        public ICommand EditStaffCM { get; set; }
         public ICommand OrganizationChangeCM { get; set; }
         public ICommand StaffDOBChangeCM { get; set; }
         public ICommand UpLoadImageCM { get; set; }
-        public ICommand CloseWindowCM { get; set; }
+        public ICommand MoveToJobListCM { get; set; }
+        public ICommand MoveToReportListCM { get; set; }
+        public ICommand GoBackCM { get; set; }
         #endregion
 
-        public StaffEditAndDetailViewModel(Admin a, UsersDTO staff_t)
+        public StaffEditAndDetailViewModel(Admin a, UsersDTO user_t)
         {
             admin = new Admin(a);
-            Storestaff = new UsersDTO(staff_t);
             staff = new UsersDTO();
+            Backupstaff = user_t;
             currentDate = DateTime.Now;
-            
-
+            Gender = new List<string>();
+            Gender.Add("NAM"); Gender.Add("NU"); Gender.Add("KHAC");
+            Question = new List<string>();
+            Question.Add("WHAT IS YOUR FAVORITE FOOD?"); Question.Add("WHAT IS THE NAME OF THE TOWN WHERE YOU WERE BORN?"); 
+            Question.Add("WHAT IS THE NAME OF YOUR FIRST PET?"); Question.Add("WHAT WAS YOUR CHILDHOOD NICKNAME?");
 
             //DEFINE COMMAND
             LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
@@ -172,8 +186,9 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 Load();
 
             });
-            AddStaffCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            EditStaffCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
+
                 if (string.IsNullOrEmpty(staffUserName))
                 {
                     MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff username cannot be empty!", MessageType.Error, MessageButtons.OK);
@@ -243,7 +258,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                             else
                                             {
                                                 staff.address = staffAddress.Trim();
-                                                if (staffGender == null)
+                                                if (string.IsNullOrEmpty(staffGender))
                                                 {
                                                     MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff gender cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                     mb.ShowDialog();
@@ -251,8 +266,8 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                 }
                                                 else
                                                 {
-                                                    staff.gender = (string?)staffGender.Content;
-                                                    if (staffQuestion == null)
+                                                    staff.gender = staffGender;
+                                                    if (string.IsNullOrEmpty(staffQuestion))
                                                     {
                                                         MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff question cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                         mb.ShowDialog();
@@ -260,7 +275,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                     }
                                                     else
                                                     {
-                                                        staff.question = (string?)staffQuestion.Content;
+                                                        staff.question = staffQuestion;
                                                         if (string.IsNullOrEmpty(staffAnswer.Trim()))
                                                         {
                                                             MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff answer cannot be empty!", MessageType.Error, MessageButtons.OK);
@@ -270,42 +285,42 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                         else
                                                         {
                                                             staff.answer = staffAnswer.Trim();
-                                                            if (string.IsNullOrEmpty(staffPas.Trim()))
+                                                            if (string.IsNullOrEmpty(staffAvatar))
                                                             {
-                                                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff password cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff avatar cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                                 mb.ShowDialog();
                                                                 staff = new UsersDTO();
                                                             }
                                                             else
                                                             {
-                                                                staff.pass = staffPas.Trim();
-                                                                if (string.IsNullOrEmpty(staffAvatar))
+                                                                staff.avatar = staffAvatar;
+                                                                if (staffDob == null)
                                                                 {
-                                                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff avatar cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff day of birth cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                                     mb.ShowDialog();
                                                                     staff = new UsersDTO();
                                                                 }
                                                                 else
                                                                 {
-                                                                    staff.avatar = staffAvatar;
-                                                                    if (staffDob == null)
+                                                                    staff.dob = staffDob.ToString("dd-MM-yyyy");
+                                                                    if (staffOrganization == null)
                                                                     {
-                                                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff day of birth cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff organization cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                                         mb.ShowDialog();
                                                                         staff = new UsersDTO();
                                                                     }
                                                                     else
                                                                     {
-                                                                        staff.dob = staffDob.ToString("dd-MM-yyyy");
-                                                                        if (staffOrganization == null)
+                                                                        staff.organization = staffOrganization.name;
+                                                                        if (string.IsNullOrEmpty(staffWorkedHour))
                                                                         {
-                                                                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff organization cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                                                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff worked hour cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                                             mb.ShowDialog();
                                                                             staff = new UsersDTO();
                                                                         }
                                                                         else
                                                                         {
-                                                                            staff.organization = staffOrganization.name;
+                                                                            staff.total_working_hour = Int16.Parse(staffWorkedHour);
                                                                             if (staffPosition == null)
                                                                             {
                                                                                 MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff position cannot be empty!", MessageType.Error, MessageButtons.OK);
@@ -314,22 +329,21 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                                             }
                                                                             else
                                                                             {
+                                                                                staff.id = Backupstaff.id;
                                                                                 staff.position = staffPosition.name;
-                                                                                staff.total_working_hour = 0;
-                                                                                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to add this job?", MessageType.Warning, MessageButtons.YesNo);
+                                                                                staff.pass = Backupstaff.pass;
+                                                                                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to update this job?", MessageType.Warning, MessageButtons.YesNo);
                                                                                 result.ShowDialog();
 
                                                                                 if (result.DialogResult == true)
                                                                                 {
                                                                                     try
                                                                                     {
-                                                                                        (bool isSuccess, string messageFromUpdate) = await UserService.Ins.AddUser(staff);
+                                                                                        (bool isSuccess, string messageFromUpdate) = await UserService.Ins.UpdateUser(staff);
                                                                                         if (isSuccess)
                                                                                         {
                                                                                             MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
                                                                                             mb.ShowDialog();
-
-
                                                                                         }
                                                                                         else
                                                                                         {
@@ -353,10 +367,11 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                                             }
 
                                                                         }
+
                                                                     }
                                                                 }
-
                                                             }
+
                                                         }
                                                     }
                                                 }
@@ -371,50 +386,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
 
 
                 }
-
-            });
-            BackupInforCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                staff = new UsersDTO();
-                staffName = "";
-                staffUserName = "";
-                staffName = "";
-                staffOrganization = new OrganizationsDTO();
-                staffPosition = new PositionsDTO();
-                staffEmail = "";
-                staffAddress = "";
-                staffPhone = "";
-                staffAvatar = "";
-                staffGender = null;
-                staffDob = currentDate.AddYears(-20);
-                staffQuestion = null;
-                staffAnswer = "";
-                staffPas = "";
-
-            });
-            CloseWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                staff = new UsersDTO();
-                staffName = "";
-                staffUserName = "";
-                staffOrganization = new OrganizationsDTO();
-                staffPosition = new PositionsDTO();
-                staffEmail = "";
-                staffAddress = "";
-                staffPhone = "";
-                staffAvatar = "";
-                staffGender = null;
-                staffDob = currentDate.AddYears(-20);
-                staffQuestion = null;
-                staffAnswer = "";
-                staffPas = "";
-                if (Mask != null)
-                    Mask.Visibility = Visibility.Collapsed;
-                p.Close();
-            });
-            PasswordChangedCM = new RelayCommand<PasswordBox>((p) => { return true; }, (p) =>
-            {
-                staffPas = p.Password;
 
             });
             OrganizationChangeCM = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
@@ -434,18 +405,76 @@ namespace JobsManagementApp.ViewModel.ShareModel
                     staffAvatar = openFileDialog.FileName;
                 }
             });
+            MoveToJobListCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
+            {
+                JobListForSingleAssignee dba = new JobListForSingleAssignee();
+                JobListForSingleAssigneeViewModel vm = new JobListForSingleAssigneeViewModel(admin, (int) Backupstaff.id);
+                dba.DataContext = vm;
+                p.NavigationService.Navigate(dba);
+            });
+            MoveToReportListCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
+            {
+                ReportListForSingleAssignee dba = new ReportListForSingleAssignee();
+                ReportListForSingleAssigneeViewModel vm = new ReportListForSingleAssigneeViewModel(admin, (int)Backupstaff.id);
+                dba.DataContext = vm;
+                p.NavigationService.Navigate(dba);
+            });
+            GoBackCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
+            {
+                p.NavigationService.GoBack();
+            });
         }
 
         public async Task Load()
         {
-            staffAddress = Storestaff.address;
-            staffAnswer = Storestaff.answer;
-            staffAvatar = Storestaff.avatar;
-            staffDob = DateTime.ParseExact(Storestaff.dob, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            staffName = Backupstaff.name;
+            staffAddress = Backupstaff.address;
+            staffEmail = Backupstaff.email;
+            staffPhone = Backupstaff.phone;
+            staffAddress = Backupstaff.answer;
+            staffUserName = Backupstaff.username;
+            staffAnswer = Backupstaff.answer;
+            staffAvatar = Backupstaff.avatar;
+            staffWorkedHour = Backupstaff.total_working_hour.ToString();
+            staffDob = DateTime.ParseExact(Backupstaff.dob, "dd-MM-yyyy",
+                System.Globalization.CultureInfo.InvariantCulture);
+
             try
             {
                 OrganizationSource = new ObservableCollection<OrganizationsDTO>(await OrganizationAndPositionService.Ins.GetAllOrganization());
-
+                for(int i =0; i< OrganizationSource.Count; i++)
+                {
+                    if (OrganizationSource[i].name == Backupstaff.organization)
+                    {
+                        staffOrganization = OrganizationSource[i];
+                        i = OrganizationSource.Count;                    
+                    }
+                }
+                PositionSource = new ObservableCollection<PositionsDTO>(await OrganizationAndPositionService.Ins.GetAllPositionByOrganName(Backupstaff.organization));
+                for (int i = 0; i < PositionSource.Count; i++)
+                {
+                    if (PositionSource[i].name == Backupstaff.position)
+                    {
+                        staffPosition = PositionSource[i];
+                        i = PositionSource.Count;
+                    }
+                }
+                for (int i = 0; i < Gender.Count; i++)
+                {
+                    if (Gender[i] == Backupstaff.gender)
+                    {
+                        staffGender = Gender[i];
+                        i = Gender.Count;
+                    }
+                }
+                for (int i = 0; i < Question.Count; i++)
+                {
+                    if (Question[i] == Backupstaff.question)
+                    {
+                        staffQuestion = Question[i];
+                        i = Question.Count;
+                    }
+                }
             }
             catch (MySqlException e)
             {
@@ -504,6 +533,5 @@ namespace JobsManagementApp.ViewModel.ShareModel
             if (number != null) return Regex.IsMatch(number, motif);
             else return false;
         }
-
     }
 }

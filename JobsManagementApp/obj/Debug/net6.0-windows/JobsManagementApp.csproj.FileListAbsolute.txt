@@ -66,11 +66,13 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\bin\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp.csproj.AssemblyReference.cache
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\JobAddWindow.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\MessageBoxCustom.baml
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\ReportAddWindow.baml
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffAddWindow.baml
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffEditAndDetailWindow.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\DashBoard\DashBoardPageAdmin.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Job\JobManagementPageAdmin.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\MainWindowAdmin.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Report\ReportManagementPageAdmin.g.cs
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Staff\StaffDetailPageAdmin.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Staff\StaffManagementPageAdmin.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\General\ForgotPage.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\General\LoginPage.g.cs
@@ -84,6 +86,8 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\ReportAddWindow.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\ReportListAndDetailPage.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\ReportListForSingleAssignee.g.cs
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffAddWindow.g.cs
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffEditAndDetailWindow.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\UserInformationPage.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\User\DashBoardUser.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\App.g.cs
@@ -96,7 +100,6 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Job\JobManagementPageAdmin.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\MainWindowAdmin.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Report\ReportManagementPageAdmin.baml
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Staff\StaffDetailPageAdmin.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Admin\Staff\StaffManagementPageAdmin.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\General\ForgotPage.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\General\LoginPage.baml
@@ -105,7 +108,6 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\JobAssignDetailPage.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\JobListForSingleAssignee.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\Notification.baml
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\ReportAddWindow.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\ReportListAndDetailPage.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\ReportListForSingleAssignee.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\UserInformationPage.baml
@@ -121,5 +123,5 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp.pdb
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp.genruntimeconfig.cache
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\ref\JobsManagementApp.dll
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffAddWindow.baml
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffAddWindow.g.cs
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffEditAndDetailPage.g.cs
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffEditAndDetailPage.baml

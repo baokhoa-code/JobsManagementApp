@@ -87,5 +87,15 @@ namespace JobsManagementApp.View.Share
         {
 
         }
+
+        private void StaffAddWindows_Loaded(object sender, RoutedEventArgs e)
+        {
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double windowWidth = 1040;
+            double windowHeight = 690;
+            this.Left = (screenWidth / 2) - (windowWidth / 2);
+            this.Top = (screenHeight / 2) - (windowHeight / 2);
+        }
     }
 }

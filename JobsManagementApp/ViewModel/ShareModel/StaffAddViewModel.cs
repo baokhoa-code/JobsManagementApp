@@ -22,6 +22,7 @@ using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace JobsManagementApp.ViewModel.ShareModel
 {
@@ -83,12 +84,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _staffAvatar; }
             set { _staffAvatar = value; OnPropertyChanged(); }
         }
-        private string _staffPas;
-        public string staffPas
-        {
-            get { return _staffPas; }
-            set { _staffPas = value; OnPropertyChanged(); }
-        }
         private DateTime _staffDob;
         public DateTime staffDob
         {
@@ -142,7 +137,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
         public ICommand LoadCM { get; set; }
         public ICommand AddStaffCM { get; set; }
         public ICommand ClearInforCM { get; set; }
-        public ICommand PasswordChangedCM { get; set; }
         public ICommand OrganizationChangeCM { get; set; }
         public ICommand StaffDOBChangeCM { get; set; }
         public ICommand UpLoadImageCM { get; set; }
@@ -261,93 +255,86 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                         else
                                                         {
                                                             staff.answer = staffAnswer.Trim();
-                                                            if (string.IsNullOrEmpty(staffPas.Trim()))
+                                                            if (string.IsNullOrEmpty(staffAvatar))
                                                             {
-                                                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff password cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff avatar cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                                 mb.ShowDialog();
                                                                 staff = new UsersDTO();
                                                             }
                                                             else
                                                             {
-                                                                staff.pass = staffPas.Trim();
-                                                                if (string.IsNullOrEmpty(staffAvatar))
+                                                                staff.avatar = staffAvatar;
+                                                                if (staffDob == null)
                                                                 {
-                                                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff avatar cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff day of birth cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                                     mb.ShowDialog();
                                                                     staff = new UsersDTO();
                                                                 }
                                                                 else
                                                                 {
-                                                                    staff.avatar = staffAvatar;
-                                                                    if (staffDob == null)
+                                                                    staff.dob = staffDob.ToString("dd-MM-yyyy");
+                                                                    if (staffOrganization == null)
                                                                     {
-                                                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff day of birth cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff organization cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                                         mb.ShowDialog();
                                                                         staff = new UsersDTO();
                                                                     }
                                                                     else
                                                                     {
-                                                                        staff.dob = staffDob.ToString("dd-MM-yyyy");
-                                                                        if (staffOrganization == null)
+                                                                        staff.organization = staffOrganization.name;
+                                                                        if (staffPosition == null)
                                                                         {
-                                                                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff organization cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                                                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff position cannot be empty!", MessageType.Error, MessageButtons.OK);
                                                                             mb.ShowDialog();
                                                                             staff = new UsersDTO();
                                                                         }
                                                                         else
                                                                         {
-                                                                            staff.organization = staffOrganization.name;
-                                                                            if (staffPosition == null)
-                                                                            {
-                                                                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff position cannot be empty!", MessageType.Error, MessageButtons.OK);
-                                                                                mb.ShowDialog();
-                                                                                staff = new UsersDTO();
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                staff.position = staffPosition.name;
-                                                                                staff.total_working_hour = 0;
-                                                                                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to add this job?", MessageType.Warning, MessageButtons.YesNo);
-                                                                                result.ShowDialog();
+                                                                            staff.position = staffPosition.name;
+                                                                            staff.total_working_hour = 0;
+                                                                            staff.pass = CreatePassword(6);
+                                                                            MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to add this job?", MessageType.Warning, MessageButtons.YesNo);
+                                                                            result.ShowDialog();
 
-                                                                                if (result.DialogResult == true)
+                                                                            if (result.DialogResult == true)
+                                                                            {
+                                                                                try
                                                                                 {
-                                                                                    try
+                                                                                    (bool isSuccess, string messageFromUpdate) = await UserService.Ins.AddUser(staff);
+                                                                                    if (isSuccess)
                                                                                     {
-                                                                                        (bool isSuccess, string messageFromUpdate) = await UserService.Ins.AddUser(staff);
-                                                                                        if (isSuccess)
-                                                                                        {
-                                                                                            MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
-                                                                                            mb.ShowDialog();
-                                                                                        
-
-                                                                                        }
-                                                                                        else
-                                                                                        {
-                                                                                            MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
-                                                                                            mb.ShowDialog();
-                                                                                        }
-                                                                                    }
-                                                                                    catch (MySqlException e)
-                                                                                    {
-                                                                                        Console.WriteLine(e);
-                                                                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                                                                                        MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
                                                                                         mb.ShowDialog();
+                                                                                        MessageBoxCustom mb1 = new MessageBoxCustom("Annouce", "An user (staff) with password: '" + staff.pass + "' has been created, please change password in the the next login!", MessageType.Info, MessageButtons.OK);
+                                                                                        mb1.ShowDialog();
+
+
                                                                                     }
-                                                                                    catch (Exception e)
+                                                                                    else
                                                                                     {
-                                                                                        Console.WriteLine(e);
-                                                                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                                                                                        MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
                                                                                         mb.ShowDialog();
                                                                                     }
                                                                                 }
+                                                                                catch (MySqlException e)
+                                                                                {
+                                                                                    Console.WriteLine(e);
+                                                                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                                                                                    mb.ShowDialog();
+                                                                                }
+                                                                                catch (Exception e)
+                                                                                {
+                                                                                    Console.WriteLine(e);
+                                                                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                                                                                    mb.ShowDialog();
+                                                                                }
                                                                             }
-
                                                                         }
+
                                                                     }
                                                                 }
-
                                                             }
+
                                                         }
                                                     }
                                                 }
@@ -380,7 +367,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 staffDob = currentDate.AddYears(-20);
                 staffQuestion = null;
                 staffAnswer = "";
-                staffPas = "";
 
             });
             CloseWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -398,15 +384,9 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 staffDob = currentDate.AddYears(-20);
                 staffQuestion = null;
                 staffAnswer = "";
-                staffPas = "";
                 if (Mask != null)
                     Mask.Visibility = Visibility.Collapsed;
                 p.Close();
-            });
-            PasswordChangedCM = new RelayCommand<PasswordBox>((p) => { return true; }, (p) =>
-            {
-                staffPas = p.Password;
-
             });
             OrganizationChangeCM = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
             {
@@ -492,6 +472,16 @@ namespace JobsManagementApp.ViewModel.ShareModel
             if (number != null) return Regex.IsMatch(number, motif);
             else return false;
         }
-
+        public string CreatePassword(int length)
+        {
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder res = new StringBuilder();
+            Random rnd = new Random();
+            while (0 < length--)
+            {
+                res.Append(valid[rnd.Next(valid.Length)]);
+            }
+            return res.ToString();
+        }
     }
 }

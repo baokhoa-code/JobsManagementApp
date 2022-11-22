@@ -275,7 +275,6 @@
                                 Click="button_close_click" 
                                 Style="{StaticResource MaterialDesignFloatingActionButton}"
                                 ToolTip="MaterialDesignFloatingActionButton"
-                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                 Background="#FFFE5555" BorderBrush="#FFFE5555" 
                                 Width="22" Height="22" 
                                 HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,19,0">
@@ -286,7 +285,6 @@
                                 Click="button_minimize_click" 
                                 Style="{StaticResource MaterialDesignFloatingActionButton}"
                                 ToolTip="MaterialDesignFloatingActionButton"
-                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                 Background="#FF4665C6" BorderBrush="#FF4665C6" 
                                 Width="22" Height="22" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,-179,0">

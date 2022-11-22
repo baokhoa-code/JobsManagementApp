@@ -74,6 +74,28 @@ namespace JobsManagementApp.Service
                 return (false, "Database Error");
             }
         }
+        public async Task<(bool, string)> UpdateUser(UsersDTO u)
+        {
+            try
+            {
+                DatabaseConnection dbc1 = new DatabaseConnection();
+                string code1 = "";
+                code1 = "UPDATE USER SET NAME = '" + u.name  + "', GENDER = '" + u.gender  + "', D_O_B = '" + u.dob  + "', PHONE = '" + u.phone  +
+                    "', ADDRESS = '" + u.address  + "', ORGANIZATION ='" + u.organization  + "', POSITION = '" + u.position  + "', AVATAR = '" + 
+                    u.avatar  + "', EMAIL = '" + u.email  + "', USERNAME = '" + u.username  + "', PASS = '" + u.pass  + "', QUESTION = '" + u.question 
+                    + "', ANSWER = '" + u.answer  + "', TOTAL_WORKING_HOUR = " + u.total_working_hour  + " WHERE ID = " + u.id + " ";
+                dbc1.command.CommandText = code1;
+                dbc1.connection.Open();
+                dbc1.command.ExecuteNonQuery();
+                dbc1.connection.Close();
+
+                return (true, "Update Success");
+            }
+            catch (Exception)
+            {
+                return (false, "Database Error");
+            }
+        }
         public async Task<UsersDTO> GetUser(int id)
         {
             UsersDTO u = new UsersDTO();
@@ -123,12 +145,13 @@ namespace JobsManagementApp.Service
 
                 dbc.connection.Open();
                 reader = dbc.command.ExecuteReader();
-                if (reader.HasRows)
+                if (reader.Read())
                 {
                     count = Int16.Parse(reader.GetString(0));
+
                 }
-                dbc.connection.Close();
-                if (count == 0)
+
+                if (count > 0)
                     check = true;
             }
             catch (Exception)
