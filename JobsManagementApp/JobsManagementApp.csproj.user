@@ -61,9 +61,6 @@
     <Compile Update="View\Share\StaffEditAndDetailPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Share\StaffEditAndDetailWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Share\UserInformationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,9 +124,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\StaffEditAndDetailPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Share\StaffEditAndDetailWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\UserInformationPage.xaml">

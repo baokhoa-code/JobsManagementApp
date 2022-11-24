@@ -115,7 +115,6 @@
                 Foreground="#DDFFFFFF" 
                 FontSize="16" Background="{x:Null}" Margin="80,10,0,0"/>
             <TextBox    
-                
                 Name="txb_email"
                 Text="{Binding Username}"
                 FontSize="15"

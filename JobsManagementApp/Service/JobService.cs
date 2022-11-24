@@ -188,6 +188,99 @@ namespace JobsManagementApp.Service
             dbc.connection.Close();
             return Job;
         }
+        public JobsDTO GetJobForTreeBinding(int jobId)
+        {
+            JobsDTO Job = new JobsDTO();
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT * FROM JOB WHERE ID = " + jobId + " ";
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            if (reader.Read())
+            {
+
+                Job = new JobsDTO(
+                    (int)reader["ID"],
+                    (int)reader["DEPENDENCY_ID"],
+                    (string)reader["DEPENDENCY_NAME"],
+                    (string)reader["NAME"],
+                    (string)reader["DESCRIPTION"],
+                    (string)reader["CATEGORY"],
+                    (string)reader["START_DATE"],
+                    (string)reader["DUE_DATE"],
+                    (string)reader["END_DATE"],
+                    (int)reader["REQUIRED_HOUR"],
+                    (int)reader["WORKED_HOUR"],
+                    (int)reader["PERCENT"],
+                    (string)reader["STAGE"],
+                    (int)reader["ASSIGNOR_ID"],
+                    (string)reader["ASSIGNOR_TYPE"],
+                    (string)reader["ASSIGNOR_NAME"],
+                    (int)reader["ASSIGNEE_ID"],
+                    (string)reader["ASSIGNEE_TYPE"],
+                    (string)reader["ASSIGNEE_NAME"]
+                    );
+            }
+            dbc.connection.Close();
+            if(Job != null)
+            {
+                ObservableCollection<JobsDTO> childlist = GetAllChildJob((int) Job.id);
+                if(childlist != null)
+                {
+                    foreach (JobsDTO child in childlist)
+                    {
+                        JobsDTO temp = new JobsDTO();
+                        temp = GetJobForTreeBinding((int) child.id);
+                        Job.Jobs.Add(temp);
+                    }
+                }
+                
+            }
+            
+            return Job;
+        }
+        public ObservableCollection<JobsDTO> GetAllChildJob(int parentId)
+        {
+            ObservableCollection<JobsDTO> Jobs = new ObservableCollection<JobsDTO>();
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT * FROM JOB WHERE DEPENDENCY_ID = " + parentId;
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            while (reader.Read())
+            {
+                Jobs.Add(
+                    new JobsDTO(
+                    (int)reader["ID"],
+                    (int)reader["DEPENDENCY_ID"],
+                    (string)reader["DEPENDENCY_NAME"],
+                    (string)reader["NAME"],
+                    (string)reader["DESCRIPTION"],
+                    (string)reader["CATEGORY"],
+                    (string)reader["START_DATE"],
+                    (string)reader["DUE_DATE"],
+                    (string)reader["END_DATE"],
+                    (int)reader["REQUIRED_HOUR"],
+                    (int)reader["WORKED_HOUR"],
+                    (int)reader["PERCENT"],
+                    (string)reader["STAGE"],
+                    (int)reader["ASSIGNOR_ID"],
+                    (string)reader["ASSIGNOR_TYPE"],
+                    (string)reader["ASSIGNOR_NAME"],
+                    (int)reader["ASSIGNEE_ID"],
+                    (string)reader["ASSIGNEE_TYPE"],
+                    (string)reader["ASSIGNEE_NAME"]
+                    ));
+            }
+            dbc.connection.Close();
+            return Jobs;
+        }
         public async Task<(bool, string)> AddJob(JobsDTO j)
         {
             try

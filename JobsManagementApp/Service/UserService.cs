@@ -31,7 +31,51 @@ namespace JobsManagementApp.Service
             }
             private set => _ins = value;
         }
+        public async Task<(bool, string)> ChangePassword(string username, string newpass)
+        {
+            try
+            {
+                DatabaseConnection dbc1 = new DatabaseConnection();
+                string code1 = "";
+                code1 = "UPDATE USER SET PASS = '" + newpass + "' WHERE USERNAME = '" + username + "' ";
+                dbc1.command.CommandText = code1;
+                dbc1.connection.Open();
+                dbc1.command.ExecuteNonQuery();
+                dbc1.connection.Close();
 
+                return (true, "Change Success");
+            }
+            catch (Exception)
+            {
+                return (false, "Database Error");
+            }
+        }
+        public async Task<UsersDTO> GetUserByUsername(string username)
+        {
+            UsersDTO? user = null;
+
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT * FROM USER WHERE USERNAME=@username";
+            dbc.command.CommandText = code;
+            dbc.command.Parameters.AddWithValue("@username", username);
+
+            dbc.connection.Open();
+
+            reader = dbc.command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                user = new UsersDTO(Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), Int16.Parse(reader.GetString(14)));
+            }
+
+            dbc.connection.Close();
+            return (user);
+        }
         public async Task<(bool, string)> DeleteUser(int id)
         {
             try

@@ -332,7 +332,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                                                 staff.id = Backupstaff.id;
                                                                                 staff.position = staffPosition.name;
                                                                                 staff.pass = Backupstaff.pass;
-                                                                                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to update this job?", MessageType.Warning, MessageButtons.YesNo);
+                                                                                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to update this user profile?", MessageType.Warning, MessageButtons.YesNo);
                                                                                 result.ShowDialog();
 
                                                                                 if (result.DialogResult == true)
@@ -394,7 +394,8 @@ namespace JobsManagementApp.ViewModel.ShareModel
             });
             StaffDOBChangeCM = new RelayCommand<DatePicker>((p) => { return currentDate.Year - staffDob.Year < 20; }, async (p) =>
             {
-                staffDob = currentDate.AddYears(-20);
+                staffDob = DateTime.ParseExact(Backupstaff.dob, "dd-MM-yyyy",
+                System.Globalization.CultureInfo.InvariantCulture);
 
             });
             UpLoadImageCM = new RelayCommand<DatePicker>((p) => { return true; }, (p) =>

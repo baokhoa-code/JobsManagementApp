@@ -207,12 +207,12 @@
                                 BorderThickness="1,1,1,1" 
                                 Effect="{DynamicResource MaterialDesignShadowDepth1}" Margin="0,-79,0,0">
                                 <Border.Background>
-                                    <ImageBrush x:Name="img_avatar" />
+                                    <ImageBrush x:Name="img_avatar" ImageSource="{Binding adminAvatar}"/>
                                 </Border.Background>
                             </Border>
                             <Label 
                                 x:Name="label_name"
-                                Content='{Binding admin.name}'
+                                Content='{Binding adminName}'
                                 FontSize="16" 
                                 Foreground="#FF5F6388" 
                                 VerticalAlignment="Top"
@@ -225,7 +225,7 @@
                                 HorizontalAlignment="Center" Margin="0,155,0,0" FontWeight="Medium" Padding="0,0,0,0" FontFamily="Roboto Medium"/>
                             <Label 
                                 x:Name="label_address"
-                                Content='{Binding admin.address}'
+                                Content='{Binding adminAddress}'
                                 FontSize="13" 
                                 Foreground="#FF5F6388" 
                                 VerticalAlignment="Top"

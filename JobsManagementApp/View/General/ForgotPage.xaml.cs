@@ -24,37 +24,6 @@ namespace JobsManagementApp.View.General
         {
             InitializeComponent();
         }
-        private void btn_del_email_mouse_move_handle(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            icon_del_email.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
-        }
-        private void btn_del_email_mouse_leave_handle(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            icon_del_email.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
-        }
-        private void btn_del_answer_mouse_move_handle(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            icon_del_answer.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
-        }
-        private void btn_del_answer_mouse_leave_handle(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            icon_del_answer.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
-        }
-
-        private void btn_del_new_pass_mouse_move_handle(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            icon_del_new_pass.Foreground = (Brush?)bc.ConvertFrom("#FFFFFF");
-        }
-        private void btn_del_new_pass_mouse_leave_handle(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            icon_del_new_pass.Foreground = (Brush?)bc.ConvertFrom("#FFAFAFAF");
-        }
         private void btn_new_pass_mouse_move_handle(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
@@ -83,6 +52,30 @@ namespace JobsManagementApp.View.General
         private void cbx_question_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        private void btn_password_click(object sender, RoutedEventArgs e)
+        {
+            if (icon_new_pass.Kind == MaterialDesignThemes.Wpf.PackIconKind.Eye)
+            {
+                txb_new_password.Visibility = Visibility.Visible;
+                passb_new_password.Visibility = Visibility.Hidden;
+                txb_new_password.Text = passb_new_password.Password;
+                icon_new_pass.Kind = MaterialDesignThemes.Wpf.PackIconKind.EyeOff;
+                return;
+            }
+            else if (icon_new_pass.Kind == MaterialDesignThemes.Wpf.PackIconKind.EyeOff)
+            {
+                passb_new_password.Visibility = Visibility.Visible;
+                txb_new_password.Visibility = Visibility.Hidden;
+                passb_new_password.Password = txb_new_password.Text;
+                icon_new_pass.Kind = MaterialDesignThemes.Wpf.PackIconKind.Eye;
+                return;
+            }
+        }
+        private void txb_username_user_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            passb_new_password.Password = "";
+            txb_new_password.Text = "";
         }
     }
 }

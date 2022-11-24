@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,9 +28,10 @@ namespace JobsManagementApp.Model
         public int? assignee_id { get; set; }
         public string? assignee_type { get; set; }
         public string? assignee_name { get; set; }
+        public ObservableCollection<JobsDTO> Jobs { get; set; }
         public JobsDTO()
         {
-
+            this.Jobs = new ObservableCollection<JobsDTO>();
         }
         public JobsDTO(int id_t, int dependency_id_t, string dependency_name_t, string name_t, string description_t
             , string category_t, string start_date_t, string due_date_t, string end_date_t, int required_hour_t
@@ -55,6 +57,7 @@ namespace JobsManagementApp.Model
             assignee_id = assignee_id_t;
             assignee_name = assignee_name_t;
             assignee_type = assignee_type_t;
+            this.Jobs = new ObservableCollection<JobsDTO>();
         }
     }
 }

@@ -244,7 +244,17 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _SelectedItem; }
             set { _SelectedItem = value; OnPropertyChanged(); }
         }
-        public ObservableCollection<JobsDTO> JobsStore { get; set; }
+        private ObservableCollection<JobsDTO> _JobsStore;
+        public ObservableCollection<JobsDTO> JobsStore
+        {
+
+            get => _JobsStore;
+            set
+            {
+                _JobsStore = value;
+                OnPropertyChanged();
+            }
+        }
         public JobManagementPageAdminViewModel()
         {
             CategorySource = new ObservableCollection<CategoriesDTO>();
@@ -391,13 +401,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 MaskName = p;
             });
-            //OpenAddJobWindowCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            //{
-            //    CurrentPage.NavigationService.GoBack();
-            //    //JobAddWindow wd = new JobAddWindow();
-            //    //MaskName.Visibility = Visibility.Visible;
-            //    //wd.ShowDialog();
-            //});
             ListWeekRageChangeCM = new RelayCommand<ListView>((p) => { return CurrentWeekRange!=null; }, (p) =>
             {
                 //UPDATE WEEK JOB AMOUNT

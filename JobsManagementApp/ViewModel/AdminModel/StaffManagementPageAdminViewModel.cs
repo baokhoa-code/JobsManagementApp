@@ -124,8 +124,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
             admin = new Admin(a);
             OrganizationSource = new ObservableCollection<OrganizationsDTO>();
             PositionSource = new ObservableCollection<PositionsDTO>();
-            //GET NEED INFORMATION
-            //Load();
 
             //DEFINE COMMAND
             OpenAddStaffWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>

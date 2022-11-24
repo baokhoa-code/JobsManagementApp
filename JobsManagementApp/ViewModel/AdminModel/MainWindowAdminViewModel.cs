@@ -20,12 +20,38 @@ using System.Windows.Navigation;
 using JobsManagementApp.ViewModel.AdminModel;
 using System.Security.Cryptography;
 using JobsManagementApp.ViewModel.ShareModel;
+using MySql.Data.MySqlClient;
+using System.Collections.ObjectModel;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class MainWindowAdminViewModel : BaseViewModel
     {
-        public Admin admin { get; set; }
+        private Admin _admin;
+        public Admin admin
+        {
+            get { return _admin; }
+            set { _admin = value; OnPropertyChanged(); }
+        }
+        private string _adminName;
+        public string adminName
+        {
+            get { return _adminName; }
+            set { _adminName = value; OnPropertyChanged(); }
+        }
+
+        private string _adminAddress;
+        public string adminAddress
+        {
+            get { return _adminAddress; }
+            set { _adminAddress = value; OnPropertyChanged(); }
+        }
+        private string _adminAvatar;
+        public string adminAvatar
+        {
+            get { return _adminAvatar; }
+            set { _adminAvatar = value; OnPropertyChanged(); }
+        }
 
         public ICommand MouseLeftButtonDownWindowCM { get; set; }
         public ICommand FirstLoadCM { get; set; }
@@ -37,8 +63,12 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand LogoutCM { get; set; }
 
 
-        public MainWindowAdminViewModel()
+        public MainWindowAdminViewModel(Admin a)
         {
+            admin = a;
+            adminName = a.name;
+            adminAddress = a.address;
+            adminAvatar = a.avatar;
             MouseLeftButtonDownWindowCM = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
             {
                 if (p != null)
@@ -101,8 +131,11 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
             LoadUserInfortPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                //if (p != null)
-                //    p.Content = new UserInformationPage();
+                UserInformationPage dba = new UserInformationPage();
+                AdminEditAndDetailViewModel vm = new AdminEditAndDetailViewModel(admin,this);
+                dba.DataContext = vm;
+                if (p != null)
+                    p.Content = dba;
             });
         }
     }

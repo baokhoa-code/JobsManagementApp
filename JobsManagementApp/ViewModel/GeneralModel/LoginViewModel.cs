@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using JobsManagementApp.View.Share;
 using JobsManagementApp.ViewModel.ShareModel;
+using MySql.Data.MySqlClient;
 
 namespace JobsManagementApp.ViewModel.GeneralModel
 {
@@ -32,6 +33,9 @@ namespace JobsManagementApp.ViewModel.GeneralModel
         public ICommand LoginCM { get; set; }
         public ICommand PasswordChangedCM { get; set; }
         public ICommand SaveLoginWindowNameCM { get; set; }
+        public ICommand ForgotPasswordChangedCM { get; set; }
+        public ICommand UserNameChangedCM { get; set; }
+        public ICommand ChangePasswordCM { get; set; }
 
         private string _username;
         public string Username
@@ -59,6 +63,42 @@ namespace JobsManagementApp.ViewModel.GeneralModel
             get { return _SelectedRole; }
             set { _SelectedRole = value; OnPropertyChanged(); }
         }
+        private string _userForgotName;
+        public string userForgotName
+        {
+            get { return _userForgotName; }
+            set { _userForgotName = value; OnPropertyChanged(); }
+        }
+        private string _userForgotQuestion;
+        public string userForgotQuestion
+        {
+            get { return _userForgotQuestion; }
+            set { _userForgotQuestion = value; OnPropertyChanged(); }
+        }
+        private string _userForgotAnswer;
+        public string userForgotAnswer
+        {
+            get { return _userForgotAnswer; }
+            set { _userForgotAnswer = value; OnPropertyChanged(); }
+        }
+        private string _userForgotNewPassword;
+        public string userForgotNewPassword
+        {
+            get { return _userForgotNewPassword; }
+            set { _userForgotNewPassword = value; OnPropertyChanged(); }
+        }
+        private Admin _forgotAdmin;
+        public Admin forgotAdmin
+        {
+            get { return _forgotAdmin; }
+            set { _forgotAdmin = value; OnPropertyChanged(); }
+        }
+        private UsersDTO _forgotUser;
+        public UsersDTO forgotUser
+        {
+            get { return _forgotUser; }
+            set { _forgotUser = value; OnPropertyChanged(); }
+        }
 
         public LoginViewModel()
         {
@@ -71,6 +111,13 @@ namespace JobsManagementApp.ViewModel.GeneralModel
             });
             CancelCM = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {
+                forgotAdmin = null;
+                forgotUser = null;
+                userForgotAnswer = "";
+                userForgotNewPassword = "";
+                userForgotName = "";
+                userForgotQuestion = "";
+                SelectedRole = "";
                 LoginViewModel.MainFrame.Content = new LoginPage();
             });
             LoadLoginPageCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
@@ -80,8 +127,16 @@ namespace JobsManagementApp.ViewModel.GeneralModel
             });
             ForgotPassCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-
-                MainFrame.Content = new ForgotPage();
+                if (SelectedRole is null)
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Warning", "Please choose your role!", MessageType.Warning, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
+                else
+                {
+                    MainFrame.Content = new ForgotPage();
+                }
+                
             });
             SaveLoginBtnCM = new RelayCommand<Button>((p) => { return true; }, (p) =>
             {
@@ -95,6 +150,148 @@ namespace JobsManagementApp.ViewModel.GeneralModel
             {
                 Password = p.Password;
             });
+            ForgotPasswordChangedCM = new RelayCommand<PasswordBox>((p) => { return true; }, (p) =>
+            {
+                userForgotNewPassword = p.Password;
+            });
+            UserNameChangedCM = new RelayCommand<TextBox>((p) => { return true; }, async (p) =>
+            {
+                userForgotName = p.Text;
+                if (SelectedRole.Content.ToString() == "Admin")
+                {
+                    forgotAdmin = null;
+                    forgotUser = null;
+                    userForgotAnswer = "";
+                    userForgotNewPassword = "";
+                    if (!string.IsNullOrEmpty(userForgotName))
+                    {
+                        forgotAdmin = await AdminService.Ins.GetAdminByUsername(userForgotName);
+                        if (forgotAdmin is null)
+                            userForgotQuestion = "Username is not exist, question cannot found!";
+                        else
+                            userForgotQuestion = forgotAdmin.question;
+                    }
+                    else
+                        userForgotQuestion = "";
+                }
+                else
+                {
+                    forgotAdmin = null;
+                    forgotUser = null;
+                    userForgotAnswer = "";
+                    userForgotNewPassword = "";
+
+                    userForgotNewPassword = "";
+                    if (!string.IsNullOrEmpty(userForgotName))
+                    {
+                        forgotUser = await UserService.Ins.GetUserByUsername(userForgotName);
+                        if (forgotUser is null)
+                            userForgotQuestion = "Username is not exist, question cannot found!";
+                        else
+                            userForgotQuestion = forgotUser.question;
+                    }
+                    else
+                        userForgotQuestion = "";
+                }
+                
+            }); 
+            ChangePasswordCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+
+                if (string.IsNullOrEmpty(userForgotName))
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Username cannot be empty!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
+                else
+                {
+                    if (userForgotQuestion.Equals("Username is not exist, question cannot found!"))
+                    {
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Username is not exist!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(userForgotQuestion))
+                        {
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Question cannot be empty!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(userForgotAnswer))
+                            {
+                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Answer cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                mb.ShowDialog();
+                            }
+                            else
+                            {
+                                if ((forgotAdmin != null && !forgotAdmin.answer.Equals(userForgotAnswer)) || (forgotUser != null && !forgotUser.answer.Equals(userForgotAnswer)))
+                                {
+                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Incorrect answer!", MessageType.Error, MessageButtons.OK);
+                                    mb.ShowDialog();
+                                }
+                                else
+                                {
+                                    if (string.IsNullOrEmpty(userForgotNewPassword))
+                                    {
+                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "New password cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                        mb.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you really want to change your password?", MessageType.Warning, MessageButtons.YesNo);
+                                        result.ShowDialog();
+
+                                        if (result.DialogResult == true)
+                                        {
+                                            try
+                                            {
+                                                bool isSuccess = false;
+                                                string messageFromUpdate = "Error";
+
+                                                if (SelectedRole.Content.ToString() == "Admin")
+                                                {
+                                                    (isSuccess, messageFromUpdate) = await AdminService.Ins.ChangePassword(userForgotName, userForgotNewPassword);
+                                                }
+                                                else
+                                                {
+                                                    (isSuccess, messageFromUpdate) = await UserService.Ins.ChangePassword(userForgotName, userForgotNewPassword);
+                                                }
+                                                if (isSuccess)
+                                                {
+                                                    MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
+                                                    mb.ShowDialog();
+                                                }
+                                                else
+                                                {
+                                                    MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
+                                                    mb.ShowDialog();
+                                                }
+                                            }
+                                            catch (MySqlException e)
+                                            {
+                                                Console.WriteLine(e);
+                                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                                                mb.ShowDialog();
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine(e);
+                                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                                                mb.ShowDialog();
+                                            }
+                                        }
+                                    }
+                                }
+
+                                
+                            }
+                        }
+                    }
+                    
+                }
+            });
             LoginCM = new RelayCommand<Label>((p) => { return true; }, async (p) =>
             {
                 string username = Username;
@@ -107,6 +304,7 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                 IsLoading = false;
             });
         }
+        
         public void CheckValidateAccount(string usn, string pwr, Label lbl)
         {
 
@@ -138,10 +336,9 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                         else
                         {
                             MainWindowAdmin dba = new MainWindowAdmin();
-                            MainWindowAdminViewModel vm = new MainWindowAdminViewModel();
-                            vm.admin = admin;
+                            MainWindowAdminViewModel vm = new MainWindowAdminViewModel(admin);
                             dba.DataContext = vm;
-                            dba.img_avatar.ImageSource = new BitmapImage(new Uri(admin.avatar, UriKind.Relative));
+                            //dba.img_avatar.ImageSource = new BitmapImage(new Uri(admin.avatar, UriKind.Relative));
                             dba.Show();
                             LoginWindow.Close();
                             return;

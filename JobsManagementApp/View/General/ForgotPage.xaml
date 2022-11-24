@@ -74,140 +74,81 @@
 
         <Grid Grid.Row="1">
             <TextBox    
-                Name="txb_email"
-                FontSize="17"
+                Name="txb_username_user"
+                TextChanged="txb_username_user_TextChanged"
+                FontSize="16"
                 FontFamily="Roboto"
                 Foreground="White" 
                 BorderBrush="#FFAFAFAF" 
+                materialDesign:TextFieldAssist.HasClearButton="True"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                 Height="55" Width="350"
-                materialDesign:HintAssist.Hint="Email"/>
-            <Button
-                x:Name="btn_del_email"
-                MouseMove="btn_del_email_mouse_move_handle"
-                MouseLeave="btn_del_email_mouse_leave_handle"
-                HorizontalAlignment="Right"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Height="25"
-                Width="25"
-                VerticalAlignment="Bottom"
-                Padding="0,0,0,0" 
-                Margin="0,0,35,15">
-                <materialDesign:PackIcon 
-                    x:Name="icon_del_email"
-                    Kind="CloseCircleOutline"
-                    Height="20"
-                    Width="20"
-                    Foreground="#FFAFAFAF"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border 
-                            Width="25" 
-                            Height="25"
-                            CornerRadius="5"
-                            Background="{TemplateBinding Background}">
-                            <ContentPresenter 
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                materialDesign:HintAssist.Hint="Username">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding UserNameChangedCM}" 
+                                               CommandParameter="{Binding ElementName=txb_username_user}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
         </Grid>
 
         <Grid Grid.Row="2">
-            <ComboBox
-                Name="cbx_question"
-                materialDesign:HintAssist.Hint="Please choose the question" 
-                FontSize="17"
+            <TextBox    
+                Name="question_txt"
+                IsReadOnly="True"
+                Text="{Binding userForgotQuestion}"
+                FontSize="16"
                 FontFamily="Roboto"
-                Foreground="White" BorderBrush="#FFAFAFAF"
+                Foreground="White" 
+                BorderBrush="#FFAFAFAF" 
+
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                 Height="55" Width="350"
-                VerticalContentAlignment="Center">
-                <ComboBoxItem
-                    Cursor="Hand"
-                    Width="350"
-                    Foreground="#FFAFAFAF"
-                    Content="What is your nick name?" />
-                <ComboBoxItem
-                    Cursor="Hand"
-                    Width="350"
-                    Foreground="#FFAFAFAF"
-                    Content="What is the name of your first pet?" />
-                <ComboBoxItem
-                    Cursor="Hand"
-                    Width="350"
-                    Foreground="#FFAFAFAF"
-                    Content="What elementary school did you attend?" />
-            </ComboBox>
+                materialDesign:HintAssist.Hint="Question"/>
         </Grid>
 
         <Grid Grid.Row="3">
             <TextBox    
                 Name="txb_answer"
+                Text="{Binding userForgotAnswer}"
                 materialDesign:HintAssist.Hint="Your answer"
+                materialDesign:TextFieldAssist.HasClearButton="True"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                FontSize="17"
+                FontSize="16"
                 FontFamily="Roboto"
                 Height="55" Width="350"
                 Foreground="White" 
                 BorderBrush="#FFAFAFAF"/>
-            <Button     
-                x:Name="btn_del_answer"
-                MouseMove="btn_del_answer_mouse_move_handle"
-                MouseLeave="btn_del_answer_mouse_leave_handle"
-                HorizontalAlignment="Right"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Height="25"
-                Width="25"
-                VerticalAlignment="Bottom"
-                Padding="0,0,0,0" 
-                Margin="0,0,35,15">
-                <materialDesign:PackIcon 
-                    x:Name="icon_del_answer"
-                    Kind="CloseCircleOutline"
-                    Height="20"
-                    Width="20"
-                    Foreground="#FFAFAFAF"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border 
-                            Width="25" Height="25"
-                            CornerRadius="5"
-                            Background="{TemplateBinding Background}">
-                            <ContentPresenter 
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
         </Grid>
 
         <Grid Grid.Row="4">
             <PasswordBox    
                 Name="passb_new_password"
                 materialDesign:HintAssist.Hint="Your new password"
+                materialDesign:TextFieldAssist.HasClearButton="True"
                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                 FontFamily="Roboto"
-                FontSize="17"
+                FontSize="16"
                 Foreground="White" BorderBrush="#FFAFAFAF"
                 Height="55" Width="350"
                 Visibility="Visible"
                 VerticalContentAlignment="Center"
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <i:InvokeCommandAction Command="{Binding ForgotPasswordChangedCM}"
+                                               CommandParameter="{Binding ElementName=passb_new_password}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
             <TextBox    
                 Name="txb_new_password"
+                materialDesign:TextFieldAssist.HasClearButton="True"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                FontSize="17"
+                FontSize="16"
                 Foreground="White" BorderBrush="#FFAFAFAF"  
                 Visibility="Hidden"
                 Height="55" Width="350"
@@ -217,6 +158,7 @@
                 HorizontalAlignment="Center"/>
             <Button     
                 x:Name="btn_new_pass"  
+                Click="btn_password_click"
                 MouseMove="btn_new_pass_mouse_move_handle"
                 MouseLeave="btn_new_pass_mouse_leave_handle"
                 Background="Transparent"
@@ -226,7 +168,7 @@
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right"
                 Padding="0,0,0,0" 
-                Margin="0,0,60,15">
+                Margin="0,0,40,15">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border 
@@ -247,38 +189,6 @@
                     Foreground="#FFAFAFAF" 
                     HorizontalAlignment="Center"/>
             </Button>
-            <Button     
-                x:Name="btn_del_new_pass"
-                MouseMove="btn_del_new_pass_mouse_move_handle"
-                MouseLeave="btn_del_new_pass_mouse_leave_handle"
-                HorizontalAlignment="Right"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                VerticalAlignment="Bottom"
-                Height="25"
-                Width="25"
-                Padding="0,0,0,0" Margin="0,0,35,15">
-                <materialDesign:PackIcon 
-                    x:Name="icon_del_new_pass"
-                    Kind="CloseCircleOutline"
-                    Height="20"
-                    Width="20"
-                    Foreground="#FFAFAFAF"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border 
-                            Width="25" Height="25"
-                            CornerRadius="5"
-                            Background="{TemplateBinding Background}">
-                            <ContentPresenter 
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
         </Grid>
 
         <Grid 
@@ -289,6 +199,7 @@
             Width="429">
             <Button
                 Name="btn_change"
+                Command="{Binding ChangePasswordCM}"
                 MouseMove="btn_change_mouse_move_handle"
                 MouseLeave="btn_change_mouse_leave_handle"
                 Width="150" 
