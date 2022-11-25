@@ -117,7 +117,7 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                 userForgotNewPassword = "";
                 userForgotName = "";
                 userForgotQuestion = "";
-                SelectedRole = "";
+                SelectedRole = null;
                 LoginViewModel.MainFrame.Content = new LoginPage();
             });
             LoadLoginPageCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>

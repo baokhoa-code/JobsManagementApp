@@ -13,6 +13,7 @@ namespace JobsManagementApp.Model
         public int? dependency_id { get; set; }
         public string? dependency_name { get; set; }
         public string? name { get; set; }
+        public bool? IsSelected { get; set; }
         public string? description { get; set; }
         public string? category { get; set; }
         public string? start_date { get; set; }
@@ -31,6 +32,7 @@ namespace JobsManagementApp.Model
         public ObservableCollection<JobsDTO> Jobs { get; set; }
         public JobsDTO()
         {
+            IsSelected = false;
             this.Jobs = new ObservableCollection<JobsDTO>();
         }
         public JobsDTO(int id_t, int dependency_id_t, string dependency_name_t, string name_t, string description_t
@@ -57,6 +59,7 @@ namespace JobsManagementApp.Model
             assignee_id = assignee_id_t;
             assignee_name = assignee_name_t;
             assignee_type = assignee_type_t;
+            IsSelected = false;
             this.Jobs = new ObservableCollection<JobsDTO>();
         }
     }

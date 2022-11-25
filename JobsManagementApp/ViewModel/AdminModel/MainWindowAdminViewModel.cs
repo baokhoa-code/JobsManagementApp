@@ -96,10 +96,14 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 if (p != null)
                 {
-                    DashBoardPageAdminViewModel vm = new DashBoardPageAdminViewModel(admin);
-                    DashBoardPageAdmin dashboardpage = new DashBoardPageAdmin();
+                    JobDetailViewModel vm = new JobDetailViewModel();
+                    JobAssignDetailPage dashboardpage = new JobAssignDetailPage();
                     dashboardpage.DataContext = vm;
                     p.Content = dashboardpage;
+                    //DashBoardPageAdminViewModel vm = new DashBoardPageAdminViewModel(admin);
+                    //DashBoardPageAdmin dashboardpage = new DashBoardPageAdmin();
+                    //dashboardpage.DataContext = vm;
+                    //p.Content = dashboardpage;
                 }
             });
             LoadJobManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
