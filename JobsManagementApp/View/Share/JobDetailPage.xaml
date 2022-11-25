@@ -13,7 +13,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
-      Name="JobDetailPage">
+      Name="JobDetailPages">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -92,181 +92,279 @@
                     <Grid Grid.Row='1'>
                         <ScrollViewer>
                             <StackPanel Width='990'>
-                                <Label 
-                                    Content='ID - Name: J00001 Teach at CT101H'
+                                <StackPanel Orientation="Horizontal">
+                                    <Label 
+                                    Content='ID: '
                                     FontSize="16" 
                                     Foreground="#232360" 
                                     FontWeight="SemiBold" Margin='40,0,0,0'/>
+                                    <Label 
+                                        Content='{Binding CurrentJob.id}'
+                                        FontSize="16" 
+                                        Foreground="#232360" 
+                                        FontWeight="SemiBold" Margin='0,0,0,0'/>
+                                    <Label 
+                                        Visibility="{Binding IsVisible}"
+                                        Content='Changable filed: worked hour, percent.'
+                                        FontSize="16" 
+                                        Foreground="#FFFA1B44" 
+                                        FontWeight="SemiBold" Margin="550,0,0,0"/>
+                                </StackPanel>
+
                                 <Separator Width='900' Height='1' Margin='0,15,0,15'/>
                                 <StackPanel Orientation='Horizontal' Height='50'>
-                                    <StackPanel Orientation='Horizontal' Margin='30,0,0,0'>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
                                         <Label 
-                                            Content='Assignee' 
-                                            Foreground="#232360" 
-                                            FontWeight="SemiBold" 
-                                            HorizontalContentAlignment='Center' 
-                                            VerticalContentAlignment='Center' Width='80'/>
-                                        <TextBox
-                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                            Height="30"
-                                            Padding='0'
-                                            Width='150'/>
-                                        <Button
-                                            Style="{StaticResource MaterialDesignRaisedButton}" Padding='0' Height='26' Width='25' Background='#FF00BEFF' BorderBrush='#FF00BEFF' Margin='5,0,0,0'>
-                                            <materialDesign:PackIcon Kind="FormatListBulleted" Foreground='White' />
-                                        </Button>
-                                    </StackPanel>
-                                    <StackPanel Orientation='Horizontal' Margin='50,0,0,0'>
-                                        <Label 
-                                            Content='Role' 
+                                            Content='Name' 
                                             Foreground="#232360" 
                                             FontWeight="SemiBold" 
                                             VerticalContentAlignment='Center' Width='80'/>
                                         <TextBox
+                                            Text="{Binding jobName}"
+                                            IsHitTestVisible="{Binding IsChangable}"
+                                            x:Name="job_name"
+                                            FontWeight="DemiBold"
+                                            FontSize="12"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Height="30"
-                                            Padding='0'
-                                            Width='150'/>
-                                        <Button
-                                            Style="{StaticResource MaterialDesignRaisedButton}" Padding='0' Height='26' Width='25' Background='#FF00BEFF' BorderBrush='#FF00BEFF' Margin='5,0,0,0'>
-                                            <materialDesign:PackIcon Kind="FormatListBulleted" Foreground='White' />
-                                        </Button>
+                                            Padding='10,5,10,5'
+                                            Width='190'/>
                                     </StackPanel>
-                                </StackPanel>
-                                <Separator Width='900' Margin='0,15,0,15'/>
-                                <StackPanel Orientation='Horizontal' Height='50'>
-                                    <StackPanel Orientation='Horizontal' Margin='30,0,0,0'>
-                                        <Label 
-                                            Content='Assignor' 
-                                            Foreground="#232360" 
-                                            FontWeight="SemiBold" 
-                                            HorizontalContentAlignment='Center' 
-                                            VerticalContentAlignment='Center' Width='80'/>
-                                        <TextBox
-                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                            Height="30"
-                                            Padding='0'
-                                            Width='150'/>
-                                        <Button
-                                            Style="{StaticResource MaterialDesignRaisedButton}" Padding='0' Height='26' Width='25' Background='#FF00BEFF' BorderBrush='#FF00BEFF' Margin='5,0,0,0'>
-                                            <materialDesign:PackIcon Kind="FormatListBulleted" Foreground='White' />
-                                        </Button>
-                                    </StackPanel>
-                                    <StackPanel Orientation='Horizontal' Margin='50,0,0,0'>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
                                         <Label 
                                             Content='Category' 
                                             Foreground="#232360" 
                                             FontWeight="SemiBold" 
-                                            VerticalContentAlignment='Center' Width='80'/>
-                                        <TextBox
-                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            VerticalContentAlignment='Center' Width='80' Padding="4,4,4,4"/>
+                                        <ComboBox
+                                            x:Name="job_category"
+                                            IsEditable="False"
+                                            IsHitTestVisible="{Binding IsChangable}"
+                                            ItemsSource="{Binding CategorySource}" 
+                                            SelectedItem="{Binding jobCategory}"
+                                            DisplayMemberPath="name"
+                                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                             Height="30"
-                                            Padding='0'
-                                            Width='150'/>
-                                        <Button
-                                            Style="{StaticResource MaterialDesignRaisedButton}" Padding='0' Height='26' Width='25' Background='#FF00BEFF' BorderBrush='#FF00BEFF' Margin='5,0,0,0'>
-                                            <materialDesign:PackIcon Kind="FormatListBulleted" Foreground='White' />
-                                        </Button>
+                                            FontWeight="DemiBold"
+                                            FontSize="14"
+                                            Padding='10,5,10,5'
+                                            Width='190' VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" />
                                     </StackPanel>
-                                    <StackPanel Orientation='Horizontal' Margin='40,0,0,0'>
-                                        <Label 
-                                            Content='Dependency' 
-                                            Foreground="#232360" 
-                                            FontWeight="SemiBold" 
-                                            HorizontalContentAlignment='Center' 
-                                            VerticalContentAlignment='Center' Width='80'/>
-                                        <TextBox
-                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                            Height="30"
-                                            Padding='0'
-                                            Width='150' Margin='10,0,0,0'/>
-                                        <Button
-                                            Style="{StaticResource MaterialDesignRaisedButton}" Padding='0' Height='26' Width='25' Background='#FF00BEFF' BorderBrush='#FF00BEFF' Margin='5,0,0,0'>
-                                            <materialDesign:PackIcon Kind="FormatListBulleted" Foreground='White' />
-                                        </Button>
-                                    </StackPanel>
-                                </StackPanel>
-                                <Separator Width='900' Height='1' Margin='0,15,0,15'/>
-                                <StackPanel Orientation='Horizontal' Height='50'>
-                                    <StackPanel Orientation='Horizontal' Margin='30,0,0,0'>
-                                        <Label 
-                                            Content='Due Date' 
-                                            Foreground="#232360" 
-                                            FontWeight="SemiBold" 
-                                            HorizontalContentAlignment='Center' 
-                                            VerticalContentAlignment='Center' Width='80'/>
-                                        <DatePicker
-                                            Padding='10,0,10,0'
-                                            Width="150"
-                                            Height='30'
-                                            materialDesign:HintAssist.Hint="Pick Date"
-                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation='Horizontal' Margin='80,0,0,0'>
-                                        <Label 
-                                            Content='Start Date' 
-                                            Foreground="#232360" 
-                                            FontWeight="SemiBold" 
-                                            VerticalContentAlignment='Center' Width='80'/>
-                                        <DatePicker
-                                            Padding='10,0,10,0'
-                                            Width="150"
-                                            Height='30'
-                                            materialDesign:HintAssist.Hint="Pick Date"
-                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation='Horizontal' Margin='80,0,0,0'>
-                                        <Label 
-                                            Content='End Date' 
-                                            Foreground="#232360" 
-                                            FontWeight="SemiBold" 
-                                            VerticalContentAlignment='Center' Width='80'/>
-                                        <DatePicker
-                                            Padding='10,0,10,0'
-                                            Width="150"
-                                            Height='30'
-                                            materialDesign:HintAssist.Hint="Pick Date"
-                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-                                    </StackPanel>
-                                </StackPanel>
-                                <Separator Width='900' Height='1' Margin='0,15,0,15'/>
-                                <StackPanel Orientation='Horizontal' Height='50'>
-                                    <StackPanel Orientation='Horizontal' Margin='30,0,0,0'>
-                                        <Label 
-                                            Content='Require Time' 
-                                            Foreground="#232360" 
-                                            FontWeight="SemiBold" 
-                                            HorizontalContentAlignment='Center' 
-                                            VerticalContentAlignment='Center' Width='80' Padding='0,0,0,0' Margin='10,0,0,0'/>
-                                        <TextBox
-                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                            Height="30"
-                                            Padding='0'
-                                            Width='150'/>
-                                    </StackPanel>
-                                    <StackPanel Orientation='Horizontal' Margin='70,0,0,0'>
-                                        <Label 
-                                            Content='Progress' 
-                                            Foreground="#232360" 
-                                            FontWeight="SemiBold" 
-                                            VerticalContentAlignment='Center' Width='80'/>
-                                        <TextBox
-                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                            Height="30"
-                                            Padding='0'
-                                            Width='150'/>
-                                    </StackPanel>
-                                    <StackPanel Orientation='Horizontal' Margin='80,0,0,0'>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
                                         <Label 
                                             Content='Stage' 
                                             Foreground="#232360" 
                                             FontWeight="SemiBold" 
                                             VerticalContentAlignment='Center' Width='80'/>
                                         <TextBox
+                                            Text="{Binding jobStage}"
+                                            IsReadOnly="True"
+                                            IsHitTestVisible="False"
+                                            x:Name="job_stage"
+                                            FontWeight="DemiBold"
+                                            FontSize="12"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Height="30"
-                                            Padding='0'
-                                            Width='150'/>
+                                            Padding='10,5,10,5'
+                                            Width='190'/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Separator Width='900' Margin='0,15,0,15'/>
+                                <StackPanel Orientation='Horizontal' Height='50'>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
+                                        <Label 
+                                            Content='Assignor' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80' Padding="4,4,4,4"/>
+                                        <TextBox
+                                            x:Name="job_assignor"
+                                            Text="{Binding jobAssignor}"
+                                            IsReadOnly = "True" 
+                                            IsHitTestVisible="False"
+                                            FontWeight="DemiBold"
+                                            FontSize="10"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            Height="30"
+                                            Padding='10,10,10,5'
+                                            Width='190' TextChanged="job_assignor_TextChanged_1"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
+                                        <Label 
+                                            Content='Assignee' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80' Padding="4,4,4,4"/>
+                                        <ComboBox
+                                            x:Name="job_assignee"
+                                            IsEditable="False"
+                                            IsHitTestVisible="{Binding IsChangable}"
+                                            ItemsSource="{Binding AssigneeSource}" 
+                                            SelectedItem="{Binding jobAssignee}"
+                                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                            Height="30"
+                                            FontWeight="DemiBold"
+                                            FontSize="10"
+                                            Padding='10,7.5,10,5'
+                                            Width='190' VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock><Run Text="{Binding type}" /></TextBlock>
+                                                        <TextBlock Text=" - "/>
+                                                        <TextBlock><Run Text="{Binding name}" /></TextBlock>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
+                                        <Label 
+                                            Content='Dependency' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80' Padding="4,4,4,4"/>
+                                        <ComboBox
+                                            x:Name="job_dependency"
+                                            IsEditable="False"
+                                            IsHitTestVisible="{Binding IsChangable}"
+                                            ItemsSource="{Binding DependencySource}" 
+                                            SelectedItem="{Binding jobDependency}"
+                                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                            Height="30"
+                                            FontWeight="DemiBold"
+                                            FontSize="11"
+                                            Padding='10,7.5,10,5'
+                                            Width='190' VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" >
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock><Run Text="{Binding id}" /></TextBlock>
+                                                        <TextBlock Text=" - "/>
+                                                        <TextBlock><Run Text="{Binding name}" /></TextBlock>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Separator Width='900' Height='1' Margin='0,15,0,15'/>
+                                <StackPanel Orientation='Horizontal' Height='50'>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
+                                        <Label 
+                                            Content='Start Date' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80' Padding="4,4,4,4"/>
+                                        <DatePicker
+                                            x:Name="job_start_date"
+                                            IsHitTestVisible="{Binding IsChangable}"
+                                            FirstDayOfWeek="Sunday"
+                                            SelectedDate="{Binding jobStartDate, Mode=TwoWay}"
+                                            SelectedDateChanged="check_valid_start_date"
+                                            wpf:HintAssist.Hint="Format: MM/dd/yyyy"
+                                            Focusable="False"
+                                            FontWeight="DemiBold"
+                                            FontSize="12"
+                                            Padding='10,0,10,0'
+                                            Width="190"
+                                            Height='30'
+                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" VerticalAlignment="Stretch" />
+                                    </StackPanel>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
+                                        <Label 
+                                            Content='Due Date' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80'/>
+                                        <DatePicker
+                                            x:Name="job_due_date"
+                                            FirstDayOfWeek="Sunday"
+                                            SelectedDate="{Binding jobDueDate, Mode=TwoWay}"
+                                            IsHitTestVisible="{Binding IsChangable}"
+                                            SelectedDateChanged="check_valid_due_date"
+                                            wpf:HintAssist.Hint="Format: MM/dd/yyyy"
+                                            Focusable="False"
+                                            FontWeight="DemiBold"
+                                            FontSize="12"
+                                            Padding='10,5,10,5'
+                                            Width="190"
+                                            Height='30'
+                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                    </StackPanel>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
+                                        <Label 
+                                            Content='End Date' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80'/>
+                                        <DatePicker
+                                            x:Name="job_end_date"
+                                            FirstDayOfWeek="Sunday"
+                                            SelectedDate="{Binding jobEndDate, Mode=TwoWay}"
+                                            SelectedDateChanged="check_valid_end_date"
+                                            wpf:HintAssist.Hint="Format: MM/dd/yyyy"
+                                            Focusable="False"
+                                            FontWeight="DemiBold"
+                                            FontSize="12"
+                                            Padding='10,5,10,5'
+                                            Width="190"
+                                            Height='30'
+                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <Separator Width='900' Height='1' Margin='0,15,0,15'/>
+                                <StackPanel Orientation='Horizontal' Height='50'>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
+                                        <Label 
+                                            Content='Require Hour' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80' Padding="4,4,4,4"/>
+                                        <TextBox
+                                            x:Name="job_require_hour"
+                                            IsHitTestVisible="{Binding IsChangable}"
+                                            Text="{Binding jobRequire_hour}"
+                                            wpf:HintAssist.Hint="Number only"
+                                            PreviewTextInput="PreviewTextInput"
+                                            FontWeight="DemiBold"
+                                            FontSize="12"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            Height="30"
+                                            Padding='10,5,10,5'
+                                            Width='190'/>
+                                    </StackPanel>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
+                                        <Label 
+                                            Content='Worked Hour' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80' Padding="3,4,3,4" UseLayoutRounding="True"/>
+                                        <TextBox
+                                            x:Name="job_worked_hour"
+                                            Text="{Binding jobWorked_hour}"
+                                            wpf:HintAssist.Hint="Number only"
+                                            PreviewTextInput="PreviewTextInput"
+                                            FontWeight="DemiBold"
+                                            FontSize="12"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            Height="30"
+                                            Padding='10,5,10,5'
+                                            Width='190'/>
+                                    </StackPanel>
+                                    <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
+                                        <Label 
+                                            Content='Percent' 
+                                            Foreground="#232360" 
+                                            FontWeight="SemiBold" 
+                                            VerticalContentAlignment='Center' Width='80' Padding="4,4,4,4"/>
+                                        <Slider
+                                            Value="{Binding CurrentJob.percent}"
+                                            Minimum="0"
+                                            Maximum="100"
+                                            Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                            TickFrequency="10"
+                                            TickPlacement="Both" Width="190" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,8,0,0" />
                                     </StackPanel>
                                 </StackPanel>
                                 <Separator Width='900' Height='1' Margin='0,15,0,15'/>
@@ -279,12 +377,15 @@
                                             HorizontalContentAlignment='Center' 
                                             VerticalContentAlignment='Center' Width='90' Padding='0,0,0,0' HorizontalAlignment='Left' Margin='40,0,0,0'/>
                                         <TextBox
+                                            x:Name="job_description"
+                                            IsHitTestVisible="{Binding IsChangable}"
+                                            Text="{Binding jobDescription}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Height="170"
-                                            TextWrapping="Wrap" Width='400' HorizontalAlignment='Left' Margin='40,5,0,0'
+                                            TextWrapping="Wrap" Width='580' Margin="40,15,0,0"
                                          />
                                     </StackPanel>
-                                    <StackPanel Orientation='Vertical' HorizontalAlignment='Left' VerticalAlignment='Center' Margin='150,-90,0,11'>
+                                    <StackPanel Orientation='Vertical' HorizontalAlignment='Left' VerticalAlignment='Center' Margin='90,-90,0,11'>
                                         <Button
                                             Width="200" 
                                             Height="40" 

@@ -96,8 +96,9 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 if (p != null)
                 {
-                    JobDetailViewModel vm = new JobDetailViewModel();
-                    JobAssignDetailPage dashboardpage = new JobAssignDetailPage();
+                    JobsDTO j = JobService.Ins.GetJob(19);
+                    JobDetailViewModel vm = new JobDetailViewModel(admin,j);
+                    JobDetailPage dashboardpage = new JobDetailPage();
                     dashboardpage.DataContext = vm;
                     p.Content = dashboardpage;
                     //DashBoardPageAdminViewModel vm = new DashBoardPageAdminViewModel(admin);

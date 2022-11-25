@@ -62,5 +62,29 @@ namespace JobsManagementApp.Model
             IsSelected = false;
             this.Jobs = new ObservableCollection<JobsDTO>();
         }
+        public JobsDTO(JobsDTO temp)
+        {
+            id = temp.id;
+            dependency_id = temp.dependency_id;
+            dependency_name = temp.dependency_name;
+            name = temp.name;
+            description = temp.description;
+            category = temp.category;
+            start_date = temp.start_date;
+            due_date = temp.due_date;
+            end_date = temp.end_date;
+            required_hour = temp.required_hour;
+            worked_hour = temp.worked_hour;
+            percent = temp.percent;
+            stage = temp.stage;
+            assignor_id = temp.assignor_id;
+            assignor_name = temp.assignor_name;
+            assignor_type = temp.assignor_type;
+            assignee_id = temp.assignee_id;
+            assignee_name = temp.assignee_name;
+            assignee_type = temp.assignee_type;
+            IsSelected = false;
+            this.Jobs = new ObservableCollection<JobsDTO>();
+        }
     }
 }

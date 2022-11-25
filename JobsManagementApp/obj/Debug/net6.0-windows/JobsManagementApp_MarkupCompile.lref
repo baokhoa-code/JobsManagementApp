@@ -10,7 +10,6 @@ FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\ForgotPag
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\LoginPage.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\LoginWindow.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\General\Splash.xaml;;
-FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Share\JobAssignDetailPage.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Share\JobListForSingleAssignee.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Share\Notification.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Share\ReportListAndDetailPage.xaml;;
@@ -18,4 +17,5 @@ FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Share\ReportListF
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Share\StaffEditAndDetailPage.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Share\UserInformationPage.xaml;;
 FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\User\DashBoardUser.xaml;;
+FE:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\View\Share\JobDetailPage.xaml;;
 
