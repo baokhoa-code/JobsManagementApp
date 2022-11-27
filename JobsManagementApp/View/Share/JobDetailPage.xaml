@@ -19,8 +19,6 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadCM}" 
                                    CommandParameter="{Binding ElementName=trvMenu}"/>
-            <i:InvokeCommandAction Command="{Binding MaskNameCM}"
-                                   CommandParameter="{Binding ElementName=ShadowMask}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Page.Resources>
@@ -61,8 +59,8 @@
                     HorizontalAlignment="Left"/>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction Command="{Binding CancelCM}"
-                                               CommandParameter="{Binding ElementName=lbl}" />
+                            <i:InvokeCommandAction Command="{Binding GoBackCM}"
+                                               CommandParameter="{Binding ElementName=JobDetailPages}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Label>
@@ -99,13 +97,19 @@
                                     Foreground="#232360" 
                                     FontWeight="SemiBold" Margin='40,0,0,0'/>
                                     <Label 
-                                        Content='{Binding CurrentJob.id}'
+                                        Content='{Binding jobId}'
                                         FontSize="16" 
                                         Foreground="#232360" 
                                         FontWeight="SemiBold" Margin='0,0,0,0'/>
                                     <Label 
                                         Visibility="{Binding IsVisible}"
-                                        Content='Changable filed: worked hour, percent.'
+                                        Content='Changable field: worked hour, percent.'
+                                        FontSize="16" 
+                                        Foreground="#FFFA1B44" 
+                                        FontWeight="SemiBold" Margin="550,0,0,0"/>
+                                    <Label 
+                                        Visibility="{Binding IsVisible2}"
+                                        Content='Changable field: None.'
                                         FontSize="16" 
                                         Foreground="#FFFA1B44" 
                                         FontWeight="SemiBold" Margin="550,0,0,0"/>
@@ -124,11 +128,12 @@
                                             IsHitTestVisible="{Binding IsChangable}"
                                             x:Name="job_name"
                                             FontWeight="DemiBold"
-                                            FontSize="12"
+                                            FontSize="11"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Height="30"
-                                            Padding='10,5,10,5'
-                                            Width='190'/>
+                                            Padding='5,8,5,5'
+                                            Width='190'>
+                                        </TextBox>
                                     </StackPanel>
                                     <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
                                         <Label 
@@ -146,8 +151,8 @@
                                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                             Height="30"
                                             FontWeight="DemiBold"
-                                            FontSize="14"
-                                            Padding='10,5,10,5'
+                                            FontSize="11"
+                                            Padding='5,7,5,5'
                                             Width='190' VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" />
                                     </StackPanel>
                                     <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
@@ -162,10 +167,10 @@
                                             IsHitTestVisible="False"
                                             x:Name="job_stage"
                                             FontWeight="DemiBold"
-                                            FontSize="12"
+                                            FontSize="11"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Height="30"
-                                            Padding='10,5,10,5'
+                                            Padding='5,8,5,5'
                                             Width='190'/>
                                     </StackPanel>
                                 </StackPanel>
@@ -186,7 +191,7 @@
                                             FontSize="10"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Height="30"
-                                            Padding='10,10,10,5'
+                                            Padding='5,9,5,5'
                                             Width='190' TextChanged="job_assignor_TextChanged_1"/>
                                     </StackPanel>
                                     <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
@@ -205,7 +210,7 @@
                                             Height="30"
                                             FontWeight="DemiBold"
                                             FontSize="10"
-                                            Padding='10,7.5,10,5'
+                                            Padding='5,8.5,5,5'
                                             Width='190' VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
@@ -216,6 +221,12 @@
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </ComboBox.ItemTemplate>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <i:InvokeCommandAction Command="{Binding AssgineeChangeCM}" 
+                                                        />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
                                         </ComboBox>
                                     </StackPanel>
                                     <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
@@ -234,7 +245,7 @@
                                             Height="30"
                                             FontWeight="DemiBold"
                                             FontSize="11"
-                                            Padding='10,7.5,10,5'
+                                            Padding='5,8.5,5,5'
                                             Width='190' VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" >
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
@@ -261,15 +272,21 @@
                                             IsHitTestVisible="{Binding IsChangable}"
                                             FirstDayOfWeek="Sunday"
                                             SelectedDate="{Binding jobStartDate, Mode=TwoWay}"
-                                            SelectedDateChanged="check_valid_start_date"
                                             wpf:HintAssist.Hint="Format: MM/dd/yyyy"
                                             Focusable="False"
                                             FontWeight="DemiBold"
-                                            FontSize="12"
-                                            Padding='10,0,10,0'
+                                            FontSize="11"
+                                            Padding='5,9,5,5'
                                             Width="190"
                                             Height='30'
-                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" VerticalAlignment="Stretch" />
+                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" VerticalAlignment="Stretch" >
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectedDateChanged">
+                                                    <i:InvokeCommandAction Command="{Binding StartChangeCM}" 
+                                                        />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </DatePicker>
                                     </StackPanel>
                                     <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
                                         <Label 
@@ -282,15 +299,21 @@
                                             FirstDayOfWeek="Sunday"
                                             SelectedDate="{Binding jobDueDate, Mode=TwoWay}"
                                             IsHitTestVisible="{Binding IsChangable}"
-                                            SelectedDateChanged="check_valid_due_date"
                                             wpf:HintAssist.Hint="Format: MM/dd/yyyy"
                                             Focusable="False"
                                             FontWeight="DemiBold"
-                                            FontSize="12"
-                                            Padding='10,5,10,5'
+                                            FontSize="11"
+                                            Padding='5,9,5,5'
                                             Width="190"
                                             Height='30'
-                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectedDateChanged">
+                                                    <i:InvokeCommandAction Command="{Binding DueChangeCM}" 
+                                                        />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </DatePicker>
                                     </StackPanel>
                                     <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
                                         <Label 
@@ -301,16 +324,35 @@
                                         <DatePicker
                                             x:Name="job_end_date"
                                             FirstDayOfWeek="Sunday"
+                                            IsHitTestVisible="{Binding IsChangable2}"
                                             SelectedDate="{Binding jobEndDate, Mode=TwoWay}"
-                                            SelectedDateChanged="check_valid_end_date"
                                             wpf:HintAssist.Hint="Format: MM/dd/yyyy"
                                             Focusable="False"
                                             FontWeight="DemiBold"
-                                            FontSize="12"
-                                            Padding='10,5,10,5'
-                                            Width="190"
+                                            FontSize="11"
+                                            Padding='5,9,5,5'
+                                            Width="136"
                                             Height='30'
-                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" >
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectedDateChanged">
+                                                    <i:InvokeCommandAction Command="{Binding EndChangeCM}" 
+                                                        />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </DatePicker>
+                                        <Button
+                                            Command="{Binding SetEndDateNullCM}"
+                                            Width="50" 
+                                            Height="20" 
+                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                            wpf:ButtonAssist.CornerRadius="5"
+                                            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
+                                            BorderBrush="#FF405DCC" 
+                                            Background="#FF405DCC"
+                                            FontSize="12"
+                                            FontWeight="Bold"
+                                            Content="None" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </StackPanel>
                                 <Separator Width='900' Height='1' Margin='0,15,0,15'/>
@@ -328,11 +370,18 @@
                                             wpf:HintAssist.Hint="Number only"
                                             PreviewTextInput="PreviewTextInput"
                                             FontWeight="DemiBold"
-                                            FontSize="12"
+                                            FontSize="11"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Height="30"
-                                            Padding='10,5,10,5'
-                                            Width='190'/>
+                                            Padding='5,8,5,5'
+                                            Width='190'>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="LostFocus">
+                                                    <i:InvokeCommandAction Command="{Binding CheckRequireHourEmptyCM}" 
+                                                        />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </TextBox>
                                     </StackPanel>
                                     <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
                                         <Label 
@@ -342,6 +391,7 @@
                                             VerticalContentAlignment='Center' Width='80' Padding="3,4,3,4" UseLayoutRounding="True"/>
                                         <TextBox
                                             x:Name="job_worked_hour"
+                                            IsHitTestVisible="{Binding IsChangable2}"
                                             Text="{Binding jobWorked_hour}"
                                             wpf:HintAssist.Hint="Number only"
                                             PreviewTextInput="PreviewTextInput"
@@ -349,8 +399,15 @@
                                             FontSize="12"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Height="30"
-                                            Padding='10,5,10,5'
-                                            Width='190'/>
+                                            Padding='5,8,5,5'
+                                            Width='190'>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="LostFocus">
+                                                    <i:InvokeCommandAction Command="{Binding CheckWorkedHourEmptyCM}" 
+                                                        />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </TextBox>
                                     </StackPanel>
                                     <StackPanel Orientation='Horizontal' Margin="40,0,0,0">
                                         <Label 
@@ -359,12 +416,21 @@
                                             FontWeight="SemiBold" 
                                             VerticalContentAlignment='Center' Width='80' Padding="4,4,4,4"/>
                                         <Slider
-                                            Value="{Binding CurrentJob.percent}"
+                                            x:Name="slider"
+                                            IsHitTestVisible="{Binding IsChangable2}"
+                                            Value="{Binding jobPercent}"
                                             Minimum="0"
                                             Maximum="100"
                                             Style="{StaticResource MaterialDesignDiscreteSlider}"
                                             TickFrequency="10"
-                                            TickPlacement="Both" Width="190" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,8,0,0" />
+                                            TickPlacement="Both" Width="190" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,8,0,0">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="ValueChanged">
+                                                    <i:InvokeCommandAction Command="{Binding PercentChangeCM}" 
+                                                        CommandParameter="{Binding ElementName=slider}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Slider>
                                     </StackPanel>
                                 </StackPanel>
                                 <Separator Width='900' Height='1' Margin='0,15,0,15'/>
@@ -387,6 +453,8 @@
                                     </StackPanel>
                                     <StackPanel Orientation='Vertical' HorizontalAlignment='Left' VerticalAlignment='Center' Margin='90,-90,0,11'>
                                         <Button
+                                            Command="{Binding UpdateJobCM}"
+                                            CommandParameter="{Binding ElementName=trvMenu}"
                                             Width="200" 
                                             Height="40" 
                                             Style="{StaticResource MaterialDesignRaisedDarkButton}"

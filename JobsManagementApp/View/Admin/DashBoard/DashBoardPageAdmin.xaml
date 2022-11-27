@@ -145,6 +145,7 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Column="0">
                     <Button 
+                        Click="Button_Click"
                         FontSize="18" 
                         Background="Transparent"
                         Foreground="#232360" 
@@ -399,6 +400,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold"/>
                     <Button 
+                        Click="Button_Click_1"
                         Command="{Binding OpenAddJobWindowCM}"
                         Width="36"
                         Height="36" 

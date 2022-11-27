@@ -37,7 +37,7 @@ namespace JobsManagementApp.Model
         }
         public JobsDTO(int id_t, int dependency_id_t, string dependency_name_t, string name_t, string description_t
             , string category_t, string start_date_t, string due_date_t, string end_date_t, int required_hour_t
-            , int worked_hour_t, int percent_t, string stage_t, int assignor_id_t, string assignor_type_t
+            , int worked_hour_t, int percent_t, int assignor_id_t, string assignor_type_t
             , string assignor_name_t, int assignee_id_t, string assignee_type_t, string assignee_name_t)
         {
             id = id_t;
@@ -52,7 +52,50 @@ namespace JobsManagementApp.Model
             required_hour = required_hour_t;
             worked_hour = worked_hour_t;
             percent = percent_t;
-            stage = stage_t;
+            DateTime current_t = DateTime.Now;
+            DateTime current = DateTime.ParseExact(current_t.ToString("dd-MM-yyyy"), "dd-MM-yyyy",
+                System.Globalization.CultureInfo.InvariantCulture);
+            DateTime start = DateTime.ParseExact(start_date_t, "dd-MM-yyyy",
+                System.Globalization.CultureInfo.InvariantCulture);
+            DateTime due = DateTime.ParseExact(due_date_t, "dd-MM-yyyy",
+                System.Globalization.CultureInfo.InvariantCulture);
+            DateTime end = new DateTime();
+            if (end_date_t != "NONE")
+            {
+                end = DateTime.ParseExact(end_date_t, "dd-MM-yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture);
+            }
+
+            if (DateTime.Compare(start,current) > 0)
+            {
+                stage = "WAITING";
+            }
+            else
+            {
+                if(end_date_t == "NONE")
+                {
+                    if(DateTime.Compare(due, current) < 0)
+                    {
+                        stage = "LATE";
+                    }
+                    else
+                    {
+                        stage = "PENDING";
+                    }
+                }
+                else
+                {
+                    if (DateTime.Compare(end, due) < 0)
+                    {
+                        stage = "COMPLETE SOON";
+                    }
+                    else
+                    {
+                        stage = "COMPLETE LATE";
+                    }
+                }
+            }
+            
             assignor_id = assignor_id_t;
             assignor_name = assignor_name_t;
             assignor_type = assignor_type_t;
@@ -83,6 +126,13 @@ namespace JobsManagementApp.Model
             assignee_id = temp.assignee_id;
             assignee_name = temp.assignee_name;
             assignee_type = temp.assignee_type;
+            IsSelected = false;
+            this.Jobs = new ObservableCollection<JobsDTO>();
+        }
+        public JobsDTO(int id_t, string name_t)
+        {
+            id = id_t;
+            name = name_t;
             IsSelected = false;
             this.Jobs = new ObservableCollection<JobsDTO>();
         }

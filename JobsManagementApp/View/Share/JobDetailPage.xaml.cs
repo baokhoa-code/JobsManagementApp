@@ -141,5 +141,42 @@ namespace JobsManagementApp.View.Share
         {
 
         }
+
+        private void Slider_PreviewDragLeave(object sender, DragEventArgs e)
+        {
+            Slider a = (Slider) sender;
+            Notification w = new Notification(a.Value.ToString());
+            w.ShowDialog();
+        }
+
+
+        private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Slider a = (Slider)sender;
+            if(a.Value == 100)
+            {
+                job_stage.Text = "Test2";
+            }
+        }
+
+        private void job_dependency_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void job_name_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void job_assignee_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

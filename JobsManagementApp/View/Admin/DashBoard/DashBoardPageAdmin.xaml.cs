@@ -354,5 +354,25 @@ namespace JobsManagementApp.View.Admin.DashBoard
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            category_cbx.SelectedIndex = -1;
+            category_cbx.SelectedItem = null;
+            date_field_cbx.SelectedIndex = -1;
+            date_field_cbx.SelectedItem = null;
+            start_dpk.SelectedDate = null;
+            start_dpk.DisplayDate = DateTime.Today;
+            end_dpk.SelectedDate = null;
+            end_dpk.DisplayDate = DateTime.Today;
+            ResetFilter();
+            filters = null;
+            view = null;
+        }
     }
 }

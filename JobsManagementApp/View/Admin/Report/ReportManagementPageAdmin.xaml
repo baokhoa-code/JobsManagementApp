@@ -45,6 +45,7 @@
 
                 </Button>
                 <Button
+                    Click="Button_Click"
                     Command="{Binding OpenAddReportWindowCM}"
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"

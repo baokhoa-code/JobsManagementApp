@@ -69,7 +69,6 @@ namespace JobsManagementApp.Service
                     (int)reader["REQUIRED_HOUR"],
                     (int)reader["WORKED_HOUR"],
                     (int)reader["PERCENT"],
-                    (string)reader["STAGE"],
                     (int)reader["ASSIGNOR_ID"],
                     (string)reader["ASSIGNOR_TYPE"],
                     (string)reader["ASSIGNOR_NAME"],
@@ -126,7 +125,6 @@ namespace JobsManagementApp.Service
                     (int)reader["REQUIRED_HOUR"],
                     (int)reader["WORKED_HOUR"],
                     (int)reader["PERCENT"],
-                    (string)reader["STAGE"],
                     (int)reader["ASSIGNOR_ID"],
                     (string)reader["ASSIGNOR_TYPE"],
                     (string)reader["ASSIGNOR_NAME"],
@@ -165,7 +163,6 @@ namespace JobsManagementApp.Service
                     (int)reader["REQUIRED_HOUR"],
                     (int)reader["WORKED_HOUR"],
                     (int)reader["PERCENT"],
-                    (string)reader["STAGE"],
                     (int)reader["ASSIGNOR_ID"],
                     (string)reader["ASSIGNOR_TYPE"],
                     (string)reader["ASSIGNOR_NAME"],
@@ -204,7 +201,6 @@ namespace JobsManagementApp.Service
                     (int)reader["REQUIRED_HOUR"],
                     (int)reader["WORKED_HOUR"],
                     (int)reader["PERCENT"],
-                    (string)reader["STAGE"],
                     (int)reader["ASSIGNOR_ID"],
                     (string)reader["ASSIGNOR_TYPE"],
                     (string)reader["ASSIGNOR_NAME"],
@@ -243,7 +239,6 @@ namespace JobsManagementApp.Service
                     (int)reader["REQUIRED_HOUR"],
                     (int)reader["WORKED_HOUR"],
                     (int)reader["PERCENT"],
-                    (string)reader["STAGE"],
                     (int)reader["ASSIGNOR_ID"],
                     (string)reader["ASSIGNOR_TYPE"],
                     (string)reader["ASSIGNOR_NAME"],
@@ -282,7 +277,6 @@ namespace JobsManagementApp.Service
                     (int)reader["REQUIRED_HOUR"],
                     (int)reader["WORKED_HOUR"],
                     (int)reader["PERCENT"],
-                    (string)reader["STAGE"],
                     (int)reader["ASSIGNOR_ID"],
                     (string)reader["ASSIGNOR_TYPE"],
                     (string)reader["ASSIGNOR_NAME"],
@@ -321,7 +315,6 @@ namespace JobsManagementApp.Service
                     (int)reader["REQUIRED_HOUR"],
                     (int)reader["WORKED_HOUR"],
                     (int)reader["PERCENT"],
-                    (string)reader["STAGE"],
                     (int)reader["ASSIGNOR_ID"],
                     (string)reader["ASSIGNOR_TYPE"],
                     (string)reader["ASSIGNOR_NAME"],
@@ -339,16 +332,39 @@ namespace JobsManagementApp.Service
             {
                 DatabaseConnection dbc1 = new DatabaseConnection();
                 string code1 = "";
-                code1 = "INSERT INTO JOB(DEPENDENCY_ID, DEPENDENCY_NAME, NAME, DESCRIPTION, CATEGORY, START_DATE, DUE_DATE, END_DATE, REQUIRED_HOUR, WORKED_HOUR, PERCENT, STAGE, ASSIGNOR_ID, ASSIGNOR_TYPE, ASSIGNOR_NAME, ASSIGNEE_ID, ASSIGNEE_TYPE, ASSIGNEE_NAME)" 
+                code1 = "INSERT INTO JOB(DEPENDENCY_ID, DEPENDENCY_NAME, NAME, DESCRIPTION, CATEGORY, START_DATE, DUE_DATE, END_DATE, REQUIRED_HOUR, WORKED_HOUR, PERCENT, ASSIGNOR_ID, ASSIGNOR_TYPE, ASSIGNOR_NAME, ASSIGNEE_ID, ASSIGNEE_TYPE, ASSIGNEE_NAME)" 
                     + " VALUES(" + j.dependency_id
                     + ",'" + j.dependency_name + "','"+ j.name+"','" +j.description +"','"+ j.category + "','" + j.start_date+"','"+j.due_date+ "','"+j.end_date + "'," +j.required_hour 
-                    + ","+j.worked_hour + "," +j.percent+ ",'" + j.stage + "'," + j.assignor_id+",'" + j.assignor_type + "','" + j.assignor_name +"'," + j.assignee_id + ",'" + j.assignee_type + "','" + j.assignee_name + "')";
+                    + ","+j.worked_hour + "," +j.percent+ "," + j.assignor_id+",'" + j.assignor_type + "','" + j.assignor_name +"'," + j.assignee_id + ",'" + j.assignee_type + "','" + j.assignee_name + "')";
                 dbc1.command.CommandText = code1;
                 dbc1.connection.Open();
                 dbc1.command.ExecuteNonQuery();
                 dbc1.connection.Close();
 
                 return (true, "Insert Success");
+            }
+            catch (Exception)
+            {
+                return (false, "Database Error");
+            }
+        }
+        public async Task<(bool, string)> UpdateJob(JobsDTO job)
+        {
+            try
+            {
+                DatabaseConnection dbc1 = new DatabaseConnection();
+                string code1 = "";
+                code1 = "UPDATE JOB SET DEPENDENCY_ID = " + job.dependency_id + ", DEPENDENCY_NAME = '" + job.dependency_name + "', NAME = '" + job.name + "', DESCRIPTION = '" + job.description +
+                    "', CATEGORY = '" + job.category + "', START_DATE ='" + job.start_date + "', DUE_DATE = '" + job.due_date + "', END_DATE = '" +
+                    job.end_date + "', REQUIRED_HOUR = " + job.required_hour + ", WORKED_HOUR = " + job.worked_hour + ", PERCENT = " + job.percent + ", ASSIGNOR_ID = " + job.assignor_id
+                    + ", ASSIGNOR_TYPE = '" + job.assignor_type + "', ASSIGNOR_NAME = '" + job.assignor_name +  "', ASSIGNEE_ID = " + job.assignee_id
+                    + ", ASSIGNEE_TYPE = '" + job.assignee_type + "', ASSIGNEE_NAME = '"  + job.assignee_name + "' WHERE ID = " + job.id + " ";
+                dbc1.command.CommandText = code1;
+                dbc1.connection.Open();
+                dbc1.command.ExecuteNonQuery();
+                dbc1.connection.Close();
+
+                return (true, "Update Success");
             }
             catch (Exception)
             {
@@ -382,7 +398,6 @@ namespace JobsManagementApp.Service
                     (int)reader["REQUIRED_HOUR"],
                     (int)reader["WORKED_HOUR"],
                     (int)reader["PERCENT"],
-                    (string)reader["STAGE"],
                     (int)reader["ASSIGNOR_ID"],
                     (string)reader["ASSIGNOR_TYPE"],
                     (string)reader["ASSIGNOR_NAME"],

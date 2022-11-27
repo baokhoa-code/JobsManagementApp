@@ -193,5 +193,15 @@ namespace JobsManagementApp.View.Admin.Staff
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ResetFilter();
+            organization_cbx.SelectedIndex = -1;
+            position_cbx.SelectedIndex = -1;
+            SearchBox.Text = "";
+            filters = null;
+            view = null;
+        }
     }
 }

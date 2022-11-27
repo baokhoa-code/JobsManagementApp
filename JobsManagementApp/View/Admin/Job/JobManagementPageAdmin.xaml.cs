@@ -34,9 +34,6 @@ namespace JobsManagementApp.View.Admin.Job
         }
         private void loaded_handle(object sender, RoutedEventArgs e)
         {
-            filters = new Dictionary<string, Predicate<JobsDTO>>();
-            view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-            view.Filter = FilterJob;
         }
         public void ClearFilters()
         {
@@ -73,6 +70,12 @@ namespace JobsManagementApp.View.Admin.Job
         
         private void job_type_cbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             ComboBoxItem s = (ComboBoxItem)job_type_cbx.SelectedItem;
             
             switch (s.Content.ToString())
@@ -138,12 +141,23 @@ namespace JobsManagementApp.View.Admin.Job
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             RemoveFilter("SEARCH");
             AddFilterAndRefresh("SEARCH", item => item.name.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
         private void time_filter_handler(object sender, RoutedEventArgs e)
         {
-
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             int CurrentYear = DateTime.Now.Year;
             int LastYear = CurrentYear - 1;
             int CurrentMonth = DateTime.Now.Month;
@@ -286,6 +300,12 @@ namespace JobsManagementApp.View.Admin.Job
         }
         private void field_filter_handler(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             CategoriesDTO cate = (CategoriesDTO)category_cbx.SelectedItem;
             
             string dependency = (string)dependency_cbx.SelectedValue;
@@ -380,6 +400,12 @@ namespace JobsManagementApp.View.Admin.Job
 
         private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             category_cbx.SelectedIndex = -1;
             dependency_cbx.SelectedIndex = -1;
             assignor_cbx.SelectedIndex = -1;
@@ -390,6 +416,12 @@ namespace JobsManagementApp.View.Admin.Job
 
         private void filter_btn_handle(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             popupnhe2.IsOpen = !popupnhe2.IsOpen;
             if (ShadowMask.Visibility == Visibility.Visible)
                 ShadowMask.Visibility = Visibility.Collapsed;
@@ -409,6 +441,12 @@ namespace JobsManagementApp.View.Admin.Job
 
         private void category_popup_btn_handle(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             popupnhe1.IsOpen = !popupnhe1.IsOpen;
             if (ShadowMask.Visibility == Visibility.Visible)
                 ShadowMask.Visibility = Visibility.Collapsed;
@@ -424,6 +462,12 @@ namespace JobsManagementApp.View.Admin.Job
 
         private void close_category_popup(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             popupnhe1.IsOpen = false;
             ShadowMask.Visibility = Visibility.Collapsed;
             category_cbx.SelectedIndex = -1;
@@ -432,6 +476,18 @@ namespace JobsManagementApp.View.Admin.Job
             assignee_cbx.SelectedIndex = -1;
             SearchBox.Text = "";
             ResetFilter(); ;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            category_cbx.SelectedIndex = -1;
+            dependency_cbx.SelectedIndex = -1;
+            assignor_cbx.SelectedIndex = -1;
+            assignee_cbx.SelectedIndex = -1;
+            SearchBox.Text = "";
+            ResetFilter();
+            filters = null;
+            view = null;
         }
     }
 }
