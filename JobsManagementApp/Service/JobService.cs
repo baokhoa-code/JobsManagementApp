@@ -290,7 +290,7 @@ namespace JobsManagementApp.Service
         }
         public JobsDTO GetJob(int jobId)
         {
-            JobsDTO Job = new JobsDTO();
+            JobsDTO Job = null;
             DatabaseConnection dbc = new DatabaseConnection();
             string code = "";
             MySqlDataReader reader;

@@ -27,5 +27,14 @@ namespace JobsManagementApp.Model
             this.description = description;
             this.created_time = created_time;
         }
+        public ReportsDTO(ReportsDTO temp)
+        {
+            this.id = temp.id;
+            this.job_id = temp.job_id;
+            this.job_name = temp.job_name;
+            this.tile = temp.tile;
+            this.description = temp.description;
+            this.created_time = temp.created_time;
+        }
     }
 }

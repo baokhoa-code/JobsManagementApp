@@ -763,20 +763,27 @@ namespace JobsManagementApp.ViewModel.ShareModel
                     {
                         if (jobEndDate == null)
                         {
-                            MessageBoxCustom mb = new MessageBoxCustom("Infor", "You setted job to complete stage, system will choose radom date between start and due date!", MessageType.Info, MessageButtons.OK);
-                            mb.ShowDialog();
-                            MessageBoxCustom mb2 = new MessageBoxCustom("Infor", "Please change end date to your desired date!", MessageType.Info, MessageButtons.OK);
-                            mb2.ShowDialog();
-                            var randomTest = new Random();
+                            if (PastEndDate != null)
+                                jobEndDate = PastEndDate;
+                            else
+                            {
+                                MessageBoxCustom mb = new MessageBoxCustom("Infor", "You setted job to complete stage, system will choose radom date between start and due date!", MessageType.Info, MessageButtons.OK);
+                                mb.ShowDialog();
+                                MessageBoxCustom mb2 = new MessageBoxCustom("Infor", "Please change end date to your desired date!", MessageType.Info, MessageButtons.OK);
+                                mb2.ShowDialog();
+                                var randomTest = new Random();
 
-                            TimeSpan timeSpan = jobDueDate - jobStartDate;
-                            TimeSpan newSpan = new TimeSpan(0, randomTest.Next(0, (int)timeSpan.TotalMinutes), 0);
-                            jobEndDate = jobStartDate + newSpan;
+                                TimeSpan timeSpan = jobDueDate - jobStartDate;
+                                TimeSpan newSpan = new TimeSpan(0, randomTest.Next(0, (int)timeSpan.TotalMinutes), 0);
+                                jobEndDate = jobStartDate + newSpan;
+                            }
+                            
                         }
                     }
                     else
                     {
-                        jobEndDate = null;
+                        if(jobEndDate != null)
+                            jobEndDate = null;
                     }
                 }
                 
@@ -813,10 +820,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
             Current = DateTime.ParseExact(current_t.ToString("dd-MM-yyyy"), "dd-MM-yyyy",
                 System.Globalization.CultureInfo.InvariantCulture);
             user = u;
-            IsChangable = true;
-            IsVisible = Visibility.Collapsed;
-            IsChangable2 = true;
-            IsVisible2 = Visibility.Collapsed;
             CurrentJob = new JobsDTO();
             BackupJob = new JobsDTO();
 
@@ -1390,20 +1393,27 @@ namespace JobsManagementApp.ViewModel.ShareModel
                     {
                         if (jobEndDate == null)
                         {
-                            MessageBoxCustom mb = new MessageBoxCustom("Infor", "You setted job to complete stage, system will choose radom date between start and due date!", MessageType.Info, MessageButtons.OK);
-                            mb.ShowDialog();
-                            MessageBoxCustom mb2 = new MessageBoxCustom("Infor", "Please change end date to your desired date!", MessageType.Info, MessageButtons.OK);
-                            mb2.ShowDialog();
-                            var randomTest = new Random();
+                            if (PastEndDate != null)
+                                jobEndDate = PastEndDate;
+                            else
+                            {
+                                MessageBoxCustom mb = new MessageBoxCustom("Infor", "You setted job to complete stage, system will choose radom date between start and due date!", MessageType.Info, MessageButtons.OK);
+                                mb.ShowDialog();
+                                MessageBoxCustom mb2 = new MessageBoxCustom("Infor", "Please change end date to your desired date!", MessageType.Info, MessageButtons.OK);
+                                mb2.ShowDialog();
+                                var randomTest = new Random();
 
-                            TimeSpan timeSpan = jobDueDate - jobStartDate;
-                            TimeSpan newSpan = new TimeSpan(0, randomTest.Next(0, (int)timeSpan.TotalMinutes), 0);
-                            jobEndDate = jobStartDate + newSpan;
+                                TimeSpan timeSpan = jobDueDate - jobStartDate;
+                                TimeSpan newSpan = new TimeSpan(0, randomTest.Next(0, (int)timeSpan.TotalMinutes), 0);
+                                jobEndDate = jobStartDate + newSpan;
+                            }
+
                         }
                     }
                     else
                     {
-                        jobEndDate = null;
+                        if (jobEndDate != null)
+                            jobEndDate = null;
                     }
                 }
 

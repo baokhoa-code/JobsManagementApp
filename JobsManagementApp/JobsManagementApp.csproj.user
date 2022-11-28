@@ -52,7 +52,7 @@
     <Compile Update="View\Share\ReportAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Share\ReportListAndDetailPage.xaml.cs">
+    <Compile Update="View\Share\ReportDetailPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Share\ReportListForSingleAssignee.xaml.cs">
@@ -120,7 +120,7 @@
     <Page Update="View\Share\ReportAddWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Share\ReportListAndDetailPage.xaml">
+    <Page Update="View\Share\ReportDetailPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Share\ReportListForSingleAssignee.xaml">

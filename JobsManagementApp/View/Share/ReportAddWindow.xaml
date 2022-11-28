@@ -252,7 +252,7 @@
                                 Foreground="#232360" 
                                 FontWeight="SemiBold" 
                                 HorizontalContentAlignment='Center' 
-                                VerticalContentAlignment='Center' Width='90' Padding='0,0,0,0' HorizontalAlignment='Left' Margin='40,0,0,0'/>
+                                VerticalContentAlignment='Center' Width='110' Padding='0,0,0,0' HorizontalAlignment='Left' Margin='40,0,0,0'/>
                             <TextBox
                                 Text="{Binding reportDescription}"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"

@@ -96,11 +96,18 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 if (p != null)
                 {
-                    JobsDTO j = JobService.Ins.GetJob(19);
-                    JobDetailViewModel vm = new JobDetailViewModel(admin, j);
-                    JobDetailPage dashboardpage = new JobDetailPage();
-                    dashboardpage.DataContext = vm;
-                    p.Content = dashboardpage;
+                    JobsDTO j = JobService.Ins.GetJob(1);
+                    ReportsDTO r = ReportService.Ins.GetReport(4);
+                    ReportDetailViewModel vm = new ReportDetailViewModel(admin, r);
+                    ReportDetailPage rdp = new ReportDetailPage();
+                    rdp.DataContext= vm;
+                    p.Content = rdp;
+
+                    //JobsDTO j = JobService.Ins.GetJob(19);
+                    //JobDetailViewModel vm = new JobDetailViewModel(admin, j);
+                    //JobDetailPage dashboardpage = new JobDetailPage();
+                    //dashboardpage.DataContext = vm;
+                    //p.Content = dashboardpage;
 
                     //DashBoardPageAdminViewModel vm = new DashBoardPageAdminViewModel(admin);
                     //DashBoardPageAdmin dashboardpage = new DashBoardPageAdmin();
