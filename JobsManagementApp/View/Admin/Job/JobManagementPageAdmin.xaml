@@ -13,11 +13,11 @@
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
       Name="JobManagePage"
-      DataContext='{StaticResource JobManagementAdminVM}'
       Title="JobManagementAdmin">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCM}" />
             <i:InvokeCommandAction Command="{Binding MaskNameCM}"
                                    CommandParameter="{Binding ElementName=ShadowMask}" />
             <i:InvokeCommandAction Command="{Binding SaveCurrentPageCM}"
@@ -38,7 +38,8 @@
                     Background="Transparent"
                     Foreground="#232360" 
                     FontWeight="Bold"
-                    Command="{Binding LoadCM}" BorderBrush="Transparent" Height="32"
+                    Click="Button_Click_1"
+                    Command="{Binding LoadCM2}" BorderBrush="Transparent" Height="32"
                         >
                     <StackPanel Orientation="Horizontal">
                         <wpf:PackIcon Kind="Reload" Height="24" Width="24"/>
@@ -378,7 +379,6 @@
                         Height="30"
                         Padding="10,0,10,0"
                         BorderBrush="#FF808080"
-                        materialDesign:HintAssist.Hint="This month" 
                         HorizontalContentAlignment="Left"
                         VerticalContentAlignment="Center" 
                         FontFamily='Roboto Medium' FontSize='15' 
@@ -463,7 +463,7 @@
                     <ComboBox
                         ItemsSource="{Binding ListYear}"
                         SelectedItem="{Binding CurrentYear,Mode=TwoWay}"
-                        Text='{Binding CurrentYear, Mode=OneWay}'
+                        Text='{Binding CurrentYear, Mode=TwoWay}'
                         IsEditable='False'
                         Height="30"
                         Padding="10,0,10,0"
@@ -554,6 +554,7 @@
                                     x:Name="job_type_cbx"
                                     SelectionChanged="job_type_cbx_SelectionChanged"
                                     SelectedItem="{Binding SelectedType}"
+                                    SelectedIndex="{Binding SelectedIndexnhe}"
                                     Width="170"
                                     Height="35"
                                     Padding="5,0,5,0"
@@ -591,7 +592,8 @@
                                 Height="40"
                                 Width="130">
                                 <Button
-                                    Click='reset_filters_btn_handle'
+                                    Click='Button_Click_1'
+                                    Command="{Binding LoadCM2}"
                                     Padding="0"
                                     materialDesign:ButtonProgressAssist.Value="-1"
                                     materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
@@ -1199,7 +1201,8 @@
                                                                     Cursor="Hand" />
                                                                 <i:Interaction.Triggers>
                                                                     <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditJobCM}" />
+                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditJobCM}" 
+                                                                                               CommandParameter="{Binding ElementName=JobManagePage}"/>
                                                                     </i:EventTrigger>
                                                                 </i:Interaction.Triggers>
                                                             </Border>

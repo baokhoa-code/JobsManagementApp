@@ -113,9 +113,10 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 if (p != null)
                 {
-                    JobManagementPageAdmin jobPage = new JobManagementPageAdmin();
-                    JobManagementPageAdminViewModel.admin = admin;
-                    p.Content = jobPage;
+                    JobManagementPageAdminViewModel vm = new JobManagementPageAdminViewModel(admin);
+                    JobManagementPageAdmin dashboardpage = new JobManagementPageAdmin();
+                    dashboardpage.DataContext = vm;
+                    p.Content = dashboardpage;
                 }
 
             });

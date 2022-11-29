@@ -47,7 +47,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class JobManagementPageAdminViewModel : BaseViewModel
     {
-        public static Admin admin;
+        public Admin admin { get; set; }
         private bool _IsGettingSource;
         public bool IsGettingSource
         {
@@ -213,6 +213,12 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _SelectedItem2; }
             set { _SelectedItem2 = value; OnPropertyChanged(); }
         }
+        private int _SelectedIndexnhe;
+        public int SelectedIndexnhe
+        {
+            get { return _SelectedIndexnhe; }
+            set { _SelectedIndexnhe = value; OnPropertyChanged(); }
+        }
         public ICommand AddCategoryCM { get; set; }
         public ICommand DeleteCategoryCM { get; set; }
         public ICommand OpenAddJobWindowCM { get; set; }
@@ -226,6 +232,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand ListYearChangeCM { get; set; }
         public ICommand LoadFilterCbxCM { get; set; }
         public ICommand LoadCM { get; set; }
+        public ICommand LoadCM2 { get; set; }
 
         private ObservableCollection<JobsDTO> _Jobs;
         public ObservableCollection<JobsDTO> Jobs
@@ -255,8 +262,9 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 OnPropertyChanged();
             }
         }
-        public JobManagementPageAdminViewModel()
+        public JobManagementPageAdminViewModel(Admin a)
         {
+            admin = new Admin(a);
             CategorySource = new ObservableCollection<CategoriesDTO>();
             DependencySource = new List<string>();
             AssignorSource = new List<string>();
@@ -265,26 +273,36 @@ namespace JobsManagementApp.ViewModel.AdminModel
             CurrentYear = DateTime.Now.Year.ToString();
             CurrentMonth = DateTime.Now.Month.ToString();
             CurrentDate = DateTime.Now.Day.ToString();
-
-            //GET NEED INFORMATION
-            Load();
-
-
+            SelectedIndexnhe = -1;
 
             //DEFINE COMMANDS
             LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
+                Load();
+
+            });
+            LoadCM2 = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                
                 Load2();
 
             });
             OpenAddJobWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 JobAddWindow dba = new JobAddWindow();
-                JobAddViewModel vm = new JobAddViewModel(admin);
+                JobAddViewModel vm = new JobAddViewModel(admin, this);
                 MaskName.Visibility = Visibility.Visible;
                 vm.Mask = MaskName;
                 dba.DataContext = vm;
                 dba.ShowDialog();
+
+            });
+            OpenEditJobCM = new RelayCommand<Page>((p) => { return SelectedItem != null; }, (p) =>
+            {
+                JobDetailViewModel vm = new JobDetailViewModel(admin, SelectedItem);
+                JobDetailPage dashboardpage = new JobDetailPage();
+                dashboardpage.DataContext = vm;
+                p.NavigationService.Navigate(dashboardpage);
 
             });
             AddCategoryCM = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
@@ -360,7 +378,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 
 
             });
-            DeleteJobCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            DeleteJobCM = new RelayCommand<Window>((p) => { return SelectedItem != null; }, async (p) =>
             {
                 MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this Job and it related reports?", MessageType.Warning, MessageButtons.YesNo);
                 result.ShowDialog();
@@ -432,6 +450,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
         //INTERNAL FUNCTIONS
         public async Task Load2()
         {
+            SelectedIndexnhe = -1;
             try
             {
    
@@ -452,8 +471,9 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 mb.ShowDialog();
             }
         }
-            public async Task Load()
+        public async Task Load()
         {
+            
             try
             {
                 IsGettingSource = true;
