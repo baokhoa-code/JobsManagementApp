@@ -19,8 +19,6 @@
             <i:InvokeCommandAction Command="{Binding MaskNameCM}"
                                    CommandParameter="{Binding ElementName=ShadowMask}" />
             <i:InvokeCommandAction Command="{Binding LoadCM}" />
-            <i:InvokeCommandAction Command="{Binding SaveCurrentPageCM}"
-                                   CommandParameter="{Binding ElementName=ReportManagePage}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -32,6 +30,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation='Horizontal' Grid.Row="0" Margin="5,0,0,0">
                 <Button 
+                    Click="Button_Click_1"
                     FontSize="18" 
                     Background="Transparent"
                     Foreground="#232360" 
@@ -45,7 +44,7 @@
 
                 </Button>
                 <Button
-                    Click="Button_Click"
+                    Click="Button_Click_1"
                     Command="{Binding OpenAddReportWindowCM}"
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"
@@ -87,7 +86,8 @@
                                 Height="40"
                                 Width="130" Margin='10,12.5,0,0'>
                                 <Button
-                                    Click='reset_filters_btn_handle'
+                                    Click='Button_Click_1'
+                                    Command="{Binding LoadCM}"
                                     Padding="0"
                                     materialDesign:ButtonProgressAssist.Value="-1"
                                     materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
@@ -488,7 +488,8 @@
                                                                     Cursor="Hand" />
                                                                 <i:Interaction.Triggers>
                                                                     <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                                        <i:InvokeCommandAction Command="{Binding ElementName=ReportManagePage, Path=DataContext.OpenEditReportPageCM}" />
+                                                                        <i:InvokeCommandAction Command="{Binding ElementName=ReportManagePage, Path=DataContext.OpenEditReportPageCM}" 
+                                                                                               CommandParameter="{Binding ElementName=ReportManagePage}"/>
                                                                     </i:EventTrigger>
                                                                 </i:Interaction.Triggers>
                                                             </Border>

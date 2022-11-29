@@ -208,38 +208,21 @@ namespace JobsManagementApp.View.Admin.Report
                 checkedValue.IsChecked = false;
         }
 
-        private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
-        {
-            if (filters == null & view == null)
-            {
-                filters = new Dictionary<string, Predicate<ReportsDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
-            ResetFilter();
-            SearchBox.Text = "";
-            month_rbtn.IsChecked = false;
-            year_rbtn.IsChecked = false;
-            day_range_rbtn.IsChecked = false;
-            week_rbtn.IsChecked = false;
-        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (filters == null & view == null)
+            
+            if (filters != null & view != null)
             {
-                filters = new Dictionary<string, Predicate<ReportsDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
+                ResetFilter();
             }
-            ResetFilter();
-            SearchBox.Text = "";
-            month_rbtn.IsChecked = false;
-            year_rbtn.IsChecked = false;
-            day_range_rbtn.IsChecked = false;
-            week_rbtn.IsChecked = false;
             filters = null;
             view = null;
+            SearchBox.Text = "";
+            month_rbtn.IsChecked = false;
+            year_rbtn.IsChecked = false;
+            day_range_rbtn.IsChecked = false;
+            week_rbtn.IsChecked = false;
         }
     }
 }

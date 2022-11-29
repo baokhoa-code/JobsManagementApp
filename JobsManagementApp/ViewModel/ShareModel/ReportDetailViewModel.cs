@@ -419,19 +419,32 @@ namespace JobsManagementApp.ViewModel.ShareModel
         {
             admin = a;
             job = new JobsDTO();
+            AssigneeChanagable = true;
             Reports = new ObservableCollection<ReportsDTO>();
             BackupReport = new ReportsDTO();
             CurrentReport = new ReportsDTO();
 
             //DEFINE COMMANDS
+            MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
+            {
+                MaskName = p;
+            });
             GoBackCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
             {
                 p.NavigationService.GoBack();
             });
+            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return job != null; }, async (p) =>
+            {
+                ReportAddWindow dba = new ReportAddWindow();
+                ReportAddViewModel vm = new ReportAddViewModel(admin, (int)job.id, Reports);
+                MaskName.Visibility = Visibility.Visible;
+                vm.Mask = MaskName;
+                dba.DataContext = vm;
+                dba.ShowDialog();
+            });
             LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                ReportsDTO tempr = new ReportsDTO();
-                tempr = ReportService.Ins.GetReport((int)report_t.id);
+                ReportsDTO tempr = ReportService.Ins.GetReport((int)report_t.id);
                 if (tempr == null)
                 {
                     MessageBoxCustom mb = new MessageBoxCustom("Error", "Chosen report is not exist!", MessageType.Error, MessageButtons.OK);
@@ -456,6 +469,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                         MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
                         mb.ShowDialog();
                     }
+
                     for (int i = 0; i < Reports.Count; i++)
                     {
                         if (Reports[i].id == tempr.id)
@@ -543,7 +557,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
 
                 if (DateTime.Compare(NewDate, job_start_date) < 0)
                 {
-
                     MessageBoxCustom mb = new MessageBoxCustom("Warning", "Created time must greater than job start date ", MessageType.Warning, MessageButtons.OK);
                     mb.ShowDialog();
                     p.Text = CurrentReport.created_time = BackupReport.created_time;
@@ -564,7 +577,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                     (bool isSuccess, string messageFromUpdate) = await ReportService.Ins.DeleteReport((int)CurrentReport.id);
                     if (isSuccess)
                     {
-
                         Reports = new ObservableCollection<ReportsDTO>(await ReportService.Ins.GetAllReportByJobID((int)job.id));
                         BackupReport = Reports[0];
                         CurrentReport = new ReportsDTO(BackupReport);

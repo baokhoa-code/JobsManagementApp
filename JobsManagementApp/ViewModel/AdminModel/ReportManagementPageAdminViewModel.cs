@@ -51,7 +51,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ReportManagementPageAdminViewModel(Admin a)
         {
             admin = new Admin(a);
-
             //DEFINE COMMAND
             LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
@@ -74,14 +73,12 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 CurrentPage = p;
             });
-            OpenEditReportPageCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            OpenEditReportPageCM = new RelayCommand<Page>((p) => { return SelectedItem != null; }, async (p) =>
             {
-
-            });
-            testCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
-            {
-                Notification w = new Notification("TAO LAI");
-                w.ShowDialog();
+                ReportDetailViewModel vm = new ReportDetailViewModel(admin, SelectedItem);
+                ReportDetailPage dashboardpage = new ReportDetailPage();
+                dashboardpage.DataContext = vm;
+                p.NavigationService.Navigate(dashboardpage);
             });
             DeleteReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
