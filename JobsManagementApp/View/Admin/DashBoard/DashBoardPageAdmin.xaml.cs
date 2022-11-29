@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Org.BouncyCastle.Crmf;
 using Org.BouncyCastle.Bcpg.OpenPgp;
+using MySqlX.XDevAPI.Relational;
 
 namespace JobsManagementApp.View.Admin.DashBoard
 {
@@ -103,7 +104,6 @@ namespace JobsManagementApp.View.Admin.DashBoard
                         {
                             ResetFilter();
                         }
-                        
                         break;
                     }
                 case "Today":
@@ -312,12 +312,6 @@ namespace JobsManagementApp.View.Admin.DashBoard
 
         private void btn_Weekly_click(object sender, RoutedEventArgs e)
         {
-            if (filters == null & view == null)
-            {
-                filters = new Dictionary<string, Predicate<JobsDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
             var bc = new BrushConverter();
             weekly_lbl.Foreground = (Brush?)bc.ConvertFrom("#1EA7FF");
             monthly_lbl.Foreground = (Brush?)bc.ConvertFrom("#232360");
@@ -325,12 +319,6 @@ namespace JobsManagementApp.View.Admin.DashBoard
         }
         private void btn_Monthly_click(object sender, RoutedEventArgs e)
         {
-            if (filters == null & view == null)
-            {
-                filters = new Dictionary<string, Predicate<JobsDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
             var bc = new BrushConverter();
             weekly_lbl.Foreground = (Brush?)bc.ConvertFrom("#232360");
             monthly_lbl.Foreground = (Brush?)bc.ConvertFrom("#1EA7FF");
@@ -338,12 +326,6 @@ namespace JobsManagementApp.View.Admin.DashBoard
         }
         private void btn_Yearly_click(object sender, RoutedEventArgs e)
         {
-            if (filters == null & view == null)
-            {
-                filters = new Dictionary<string, Predicate<JobsDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
             var bc = new BrushConverter();
             weekly_lbl.Foreground = (Brush?)bc.ConvertFrom("#232360");
             monthly_lbl.Foreground = (Brush?)bc.ConvertFrom("#232360");
@@ -357,11 +339,7 @@ namespace JobsManagementApp.View.Admin.DashBoard
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
+            Dispatcher.BeginInvoke((Action)(() => tabct.SelectedIndex = 0));
             category_cbx.SelectedIndex = -1;
             category_cbx.SelectedItem = null;
             date_field_cbx.SelectedIndex = -1;
@@ -370,7 +348,66 @@ namespace JobsManagementApp.View.Admin.DashBoard
             start_dpk.DisplayDate = DateTime.Today;
             end_dpk.SelectedDate = null;
             end_dpk.DisplayDate = DateTime.Today;
-            ResetFilter();
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
+            var btn = sender as Button;
+            btn.Command.Execute(null);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke((Action)(() => tabct.SelectedIndex = 0));
+            category_cbx.SelectedIndex = -1;
+            category_cbx.SelectedItem = null;
+            date_field_cbx.SelectedIndex = -1;
+            date_field_cbx.SelectedItem = null;
+            start_dpk.SelectedDate = null;
+            start_dpk.DisplayDate = DateTime.Today;
+            end_dpk.SelectedDate = null;
+            end_dpk.DisplayDate = DateTime.Today;
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
+        }
+
+
+        private void tabct_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void _ListView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(filters!= null)
+            {
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
+            
+        }
+
+        private void DashBoardPageAd_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Dispatcher.BeginInvoke((Action)(() => tabct.SelectedIndex = 0));
+            category_cbx.SelectedIndex = -1;
+            category_cbx.SelectedItem = null;
+            date_field_cbx.SelectedIndex = -1;
+            date_field_cbx.SelectedItem = null;
+            start_dpk.SelectedDate = null;
+            start_dpk.DisplayDate = DateTime.Today;
+            end_dpk.SelectedDate = null;
+            end_dpk.DisplayDate = DateTime.Today;
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
             filters = null;
             view = null;
         }

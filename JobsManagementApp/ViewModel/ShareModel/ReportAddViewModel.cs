@@ -97,7 +97,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
         public ICommand CloseWindowCM { get; set; }
         public ICommand JobChangedCM { get; set; }
         public ICommand SaveCreatedTimeCM { get; set; }
-        public ReportAddViewModel(Admin a, int job_Id)
+        public ReportAddViewModel(Admin a, int job_Id, ObservableCollection<ReportsDTO> Reports)
         {
             admin = new Admin(a);
             report = new ReportsDTO();
@@ -171,6 +171,11 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                         (bool isSuccess, string messageFromUpdate) = await ReportService.Ins.AddReport(report);
                                         if (isSuccess)
                                         {
+                                            ReportsDTO temp = ReportService.Ins.GetLatestReport();
+                                            if (temp != null)
+                                            {
+                                                Reports.Add(temp);
+                                            }
                                             MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
                                             mb.ShowDialog();
                                             report = new ReportsDTO();

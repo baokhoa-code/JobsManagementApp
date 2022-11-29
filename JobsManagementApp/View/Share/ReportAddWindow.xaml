@@ -14,7 +14,9 @@
         Width="750"
         Name="ReportAddWindowS"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="Manual"
+        Loaded="ReportAddWindowS_Loaded"
+        >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadCM}" />
@@ -63,6 +65,8 @@
                                 VerticalContentAlignment='Center' Width='80' Padding="4,4,4,4"/>
                             <ComboBox
                                 x:Name="assgned_jobs"
+                                IsEditable="False"
+                                IsHitTestVisible="{Binding AssigneeChanagable}"
                                 ItemsSource="{Binding AssignedJobs}" 
                                 SelectedItem="{Binding SelectedAssignedJob}"
                                 SelectedIndex="{Binding SelectedIndexAssignedJob}"

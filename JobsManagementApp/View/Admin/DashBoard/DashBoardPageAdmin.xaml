@@ -10,6 +10,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
+      Name="DashBoardPageAd"
+      IsVisibleChanged="DashBoardPageAd_IsVisibleChanged"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       Title="UserHomePage">
     <i:Interaction.Triggers>
@@ -28,21 +30,25 @@
                     CornerRadius="20" Background="White" Margin="10,10,0,0">
 
                 <StackPanel Orientation="Horizontal">
-
-                    <Button                               
+                    <Border Margin="7,0,0,0"
                             Width="35"
                             Height="35"
-                            Padding="0" 
-                            Background="Transparent"
                             BorderBrush="Transparent"
-                            ToolTip="MaterialDesignFloatingActionButton"
-                            Margin="7,0,0,0">
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Cursor="Hand">
                         <materialDesign:PackIcon
                                 Width="35"
                                 Height="35"
                                 Kind="Magnify" 
                                 Foreground="#B21EA7FF"/>
-                    </Button>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditJobCM}" 
+                                                       CommandParameter="{Binding ElementName=DashBoardPageAd}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Border>
 
                     <StackPanel Width="70" Margin="10,0,0,0">
                         <TextBlock 
@@ -143,14 +149,14 @@
                     <RowDefinition Height="350"/>
                     <RowDefinition Height="350"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Column="0">
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
                     <Button 
                         Click="Button_Click"
                         FontSize="18" 
                         Background="Transparent"
                         Foreground="#232360" 
                         FontWeight="Bold"
-                        Command="{Binding LoadCM}" BorderBrush="Transparent" HorizontalAlignment="Left" Margin="10,0,0,0"
+                        Command="{Binding RefreshCM}" BorderBrush="Transparent" HorizontalAlignment="Left" Margin="10,0,0,0"
                         >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Reload" Height="24" Width="24"/>
@@ -158,7 +164,7 @@
                         </StackPanel>
                         
                     </Button>
-                </Grid>
+                </StackPanel>
                 <Grid Grid.Row="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -415,7 +421,7 @@
 
                 </Grid>
                 <Grid Grid.Row="1">
-                    <TabControl SelectionChanged='handle_tab_change'>
+                    <TabControl Name="tabct" SelectionChanged='handle_tab_change'>
                         <TabControl.Resources>
                             <Style TargetType="TabItem">
                                 <Setter Property="FontSize" Value="18"/>

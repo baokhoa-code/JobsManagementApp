@@ -13,6 +13,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
+      Background="Beige"
       Name="JobDetailPages">
 
     <i:Interaction.Triggers>
@@ -466,6 +467,8 @@
                                             FontWeight="Bold"
                                             Content="Update" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Margin='0,110,0,0'/>
                                         <Button
+                                            Command="{Binding MoveToReportDetailCM}"
+                                            CommandParameter="{Binding ElementName=JobDetailPages}"
                                             Width="200" 
                                             Height="40" 
                                             Style="{StaticResource MaterialDesignRaisedDarkButton}"

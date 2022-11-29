@@ -22,6 +22,7 @@ using LiveChartsCore.Measure;
 using MaterialDesignThemes.Wpf;
 using JobsManagementApp.View.Admin.DashBoard;
 using JobsManagementApp.ViewModel.ShareModel;
+using System.Security.Cryptography;
 
 namespace JobsManagementApp.ViewModel.AdminModel
 {
@@ -85,7 +86,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 OnPropertyChanged();
             }
         }
-
+        public string LineStage;
         private ComboBoxItem _PieSelectedType;
         public ComboBoxItem PieSelectedType
         {
@@ -152,6 +153,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
             get { return _WeekAlertRange; }
             set { _WeekAlertRange = value; OnPropertyChanged(); }
         }
+
+  
         public static Grid MaskName { get; set; }
 
         public ICommand OpenAddJobWindowCM { get; set; }
@@ -163,6 +166,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand LineByYearCM { get; set; }
         public ICommand MaskNameCM { get; set; }
         public ICommand LoadCM { get; set; }
+        public ICommand RefreshCM { get; set; }
         public DashBoardPageAdminViewModel(Admin a)
         {
 
@@ -189,6 +193,25 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 Load();
                 LoadLineByWeek();
+                LineStage = "WEEK";
+
+            });
+            RefreshCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
+            {
+                Load();
+                PieSelectionChanged();
+                if (LineStage == "WEEK")
+                {
+                    LoadLineByWeek();
+                }
+                if (LineStage == "MONTH")
+                {
+                    LoadLineByMonth();
+                }
+                if (LineStage == "YEAR")
+                {
+                    LoadLineByYear();
+                }
 
             });
             MaskNameCM = new RelayCommand<Grid>((p) => { return p !=null; }, (p) =>
@@ -199,12 +222,20 @@ namespace JobsManagementApp.ViewModel.AdminModel
             OpenAddJobWindowCM = new RelayCommand<object>((p) => { return true; }, async(p) =>
             {
                 JobAddWindow dba = new JobAddWindow();
-                JobAddViewModel vm = new JobAddViewModel(admin);
+                JobAddViewModel vm = new JobAddViewModel(admin, JobsPie, JobsLine, Jobs, this);
                 MaskName.Visibility = Visibility.Visible;
                 vm.Mask = MaskName;
                 dba.DataContext = vm;
                 dba.ShowDialog();
   
+            });
+            OpenEditJobCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
+            {
+                JobDetailViewModel vm = new JobDetailViewModel(admin, SelectedItem);
+                JobDetailPage dashboardpage = new JobDetailPage();
+                dashboardpage.DataContext = vm;
+                p.NavigationService.Navigate(dashboardpage);
+
             });
             DeleteJobCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
@@ -230,6 +261,19 @@ namespace JobsManagementApp.ViewModel.AdminModel
                             }
                         }
                         JobsLine = JobsPie = Jobs;
+                        PieSelectionChanged();
+                        if(LineStage == "WEEK")
+                        {
+                            LoadLineByWeek();
+                        }
+                        if (LineStage == "MONTH")
+                        {
+                            LoadLineByMonth();
+                        }
+                        if (LineStage == "YEAR")
+                        {
+                            LoadLineByYear();
+                        }
                         MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
                         mb.ShowDialog();
                     }
@@ -247,14 +291,17 @@ namespace JobsManagementApp.ViewModel.AdminModel
             LineByWeekCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 await LoadLineByWeek();
+                LineStage = "WEEK";
             });
             LineByMonthCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 await LoadLineByMonth();
+                LineStage = "MONTH";
             });
             LineByYearCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 await LoadLineByYear();
+                LineStage = "YEAR";
             });
         }
         public async Task Load()
@@ -312,6 +359,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public async Task LoadPieByWeek()
         {
             var pending = 0;
+            var waiting = 0;
             var complete_late = 0;
             var complete_soon = 0;
             var late = 0;
@@ -323,11 +371,17 @@ namespace JobsManagementApp.ViewModel.AdminModel
             DateTime b = DateTime.ParseExact(years[1], "dd/MM/yyyy",
                 System.Globalization.CultureInfo.InvariantCulture);
 
+            waiting = JobsPie.Where(
+                item => item.stage == "WAITING" &&
+                DateTime.Compare(a, DateTime.ParseExact(item.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
+                DateTime.Compare(b, DateTime.ParseExact(item.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0
+                ).Count();
+
             pending = JobsPie.Where(
-            item => item.stage == "PENDING" &&
-            DateTime.Compare(a, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
-            DateTime.Compare(b, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0
-            ).Count();
+                item => item.stage == "PENDING" &&
+                DateTime.Compare(a, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
+                DateTime.Compare(b, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0
+                ).Count();
             late = JobsPie.Where(
                 item => item.stage == "LATE" &&
                 DateTime.Compare(a, DateTime.ParseExact(item.due_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
@@ -350,6 +404,15 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 new PieSeries<double>
                 {
+                    Name = "WAITING",
+                    Values = new double[] { waiting },
+                    DataLabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255)),
+                    DataLabelsSize = 12,
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                    DataLabelsFormatter =  p => $"{p.StackedValue.Share:P2}",
+                },
+                new PieSeries<double>
+                {
                     Name = "PENDING",
                     Values = new double[] { pending },
                     DataLabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255)),
@@ -359,7 +422,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 },
                 new PieSeries<double>
                 {
-                    Name = "LATE",
+                    Name = "LATE      ",
                     Values = new double[] { late },
                     DataLabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255)),
                     DataLabelsSize = 12,
@@ -381,10 +444,16 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public async Task LoadPieByMonth()
         {
             var pending = 0;
+            var waiting = 0;
             var complete_late = 0;
             var complete_soon = 0;
             var late = 0;
 
+            waiting = JobsPie.Where(item => item.stage == "WAITING" &&
+                DateTime.ParseExact(item.start_date, "dd-MM-yyyy",
+                System.Globalization.CultureInfo.InvariantCulture).Month.ToString() == CurrentMonth &&
+                DateTime.ParseExact(item.start_date, "dd-MM-yyyy",
+                System.Globalization.CultureInfo.InvariantCulture).Year.ToString() == CurrentYear).Count();
             pending = JobsPie.Where(item => item.stage == "PENDING" &&
                 DateTime.ParseExact(item.due_date, "dd-MM-yyyy",
                 System.Globalization.CultureInfo.InvariantCulture).Month.ToString() == CurrentMonth &&
@@ -410,6 +479,15 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 new PieSeries<double>
                 {
+                    Name = "WAITING",
+                    Values = new double[] { waiting },
+                    DataLabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255)),
+                    DataLabelsSize = 12,
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                    DataLabelsFormatter =  p => $"{p.StackedValue.Share:P2}",
+                },
+                new PieSeries<double>
+                {
                     Name = "PENDING",
                     Values = new double[] { pending },
                     DataLabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255)),
@@ -419,7 +497,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 },
                 new PieSeries<double>
                 {
-                    Name = "LATE",
+                    Name = "LATE      ",
                     Values = new double[] { late },
                     DataLabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255)),
                     DataLabelsSize = 12,
@@ -441,10 +519,14 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public async Task LoadPieByYear()
         {
             var pending = 0;
+            var waiting = 0;
             var complete_late = 0;
             var complete_soon = 0;
             var late = 0;
 
+            waiting = JobsPie.Where(item => item.stage == "WAITING" &&
+                DateTime.ParseExact(item.start_date, "dd-MM-yyyy",
+                System.Globalization.CultureInfo.InvariantCulture).Year.ToString() == CurrentYear).Count();
             pending = JobsPie.Where(item => item.stage == "PENDING" &&
                 DateTime.ParseExact(item.due_date, "dd-MM-yyyy",
                 System.Globalization.CultureInfo.InvariantCulture).Year.ToString() == CurrentYear).Count();
@@ -462,6 +544,15 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 new PieSeries<double>
                 {
+                    Name = "WAITING",
+                    Values = new double[] { waiting },
+                    DataLabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255)),
+                    DataLabelsSize = 12,
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                    DataLabelsFormatter =  p => $"{p.StackedValue.Share:P2}",
+                },
+                new PieSeries<double>
+                {
                     Name = "PENDING",
                     Values = new double[] { pending },
                     DataLabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255)),
@@ -471,7 +562,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 },
                 new PieSeries<double>
                 {
-                    Name = "LATE",
+                    Name = "LATE       ",
                     Values = new double[] { late },
                     DataLabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255)),
                     DataLabelsSize = 12,
@@ -550,9 +641,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
 
                     },
                };
-        }
-
-    
+        } 
         public async Task LoadLineByMonth()
         {
             ShowAleartRange = MonthAlertRange;
@@ -661,8 +750,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
                     },
                };
         }
-        public IEnumerable<ISeries> Series1 { get; set; }
-        public IEnumerable<ISeries> Series2 { get; set; }
         public static DateTime FirstDayOfWeek(DateTime dt)
         {
             var culture = System.Threading.Thread.CurrentThread.CurrentCulture;

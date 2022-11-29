@@ -326,6 +326,44 @@ namespace JobsManagementApp.Service
             dbc.connection.Close();
             return Job;
         }
+        public JobsDTO GetLatestJob()
+        {
+            JobsDTO Job = null;
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT* FROM JOB WHERE ID = (SELECT MAX(ID) FROM JOB)";
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            if (reader.Read())
+            {
+
+                Job = new JobsDTO(
+                    (int)reader["ID"],
+                    (int)reader["DEPENDENCY_ID"],
+                    (string)reader["DEPENDENCY_NAME"],
+                    (string)reader["NAME"],
+                    (string)reader["DESCRIPTION"],
+                    (string)reader["CATEGORY"],
+                    (string)reader["START_DATE"],
+                    (string)reader["DUE_DATE"],
+                    (string)reader["END_DATE"],
+                    (int)reader["REQUIRED_HOUR"],
+                    (int)reader["WORKED_HOUR"],
+                    (int)reader["PERCENT"],
+                    (int)reader["ASSIGNOR_ID"],
+                    (string)reader["ASSIGNOR_TYPE"],
+                    (string)reader["ASSIGNOR_NAME"],
+                    (int)reader["ASSIGNEE_ID"],
+                    (string)reader["ASSIGNEE_TYPE"],
+                    (string)reader["ASSIGNEE_NAME"]
+                    );
+            }
+            dbc.connection.Close();
+            return Job;
+        }
         public async Task<(bool, string)> AddJob(JobsDTO j)
         {
             try

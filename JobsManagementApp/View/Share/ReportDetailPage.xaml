@@ -94,6 +94,8 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadCM}" />
+            <i:InvokeCommandAction Command="{Binding MaskNameCM}"
+                                   CommandParameter="{Binding ElementName=ShadowMask}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
@@ -134,6 +136,7 @@
                 Width="110"
                 Margin="1142,0,0,0" VerticalAlignment='Center' HorizontalAlignment='Center'>
                 <Button
+                    Command="{Binding OpenAddReportWindowCM}"
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="35"
@@ -160,7 +163,7 @@
                 </Button>
             </Grid>
             <Label 
-                Content="Reports Of Job" 
+                Content="Reports of Job" 
                 Foreground="#232360" 
                 FontWeight="Bold"
                 HorizontalAlignment="Center" 

@@ -29,6 +29,32 @@ namespace JobsManagementApp.Service
             }
             private set => _ins = value;
         }
+        public ReportsDTO GetLatestReport()
+        {
+            ReportsDTO report = null;
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT* FROM REPORT WHERE ID = (SELECT MAX(ID) FROM REPORT)";
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            if (reader.Read())
+            {
+
+                report = new ReportsDTO(
+                        (int)reader["ID"],
+                        (int)reader["JOB_ID"],
+                        (string)reader["JOB_NAME"],
+                        (string)reader["TILE"],
+                        (string)reader["DESCRIPTION"],
+                        (string)reader["CREATED_TIME"]
+                        );
+            }
+            dbc.connection.Close();
+            return report;
+        }
         public async Task<(bool, string)> DeleteReport(int id)
         {
             try

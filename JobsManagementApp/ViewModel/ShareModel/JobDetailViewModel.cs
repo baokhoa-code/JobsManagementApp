@@ -15,6 +15,8 @@ using System.ComponentModel;
 using System.Xml.Linq;
 using System.Reflection;
 using MaterialDesignColors;
+using JobsManagementApp.ViewModel.AdminModel;
+using JobsManagementApp.View.Admin.DashBoard;
 
 namespace JobsManagementApp.ViewModel.ShareModel
 {
@@ -210,7 +212,8 @@ namespace JobsManagementApp.ViewModel.ShareModel
         public ICommand PercentChangeCM { get; set; }
         public ICommand CheckRequireHourEmptyCM { get; set; }
         public ICommand CheckWorkedHourEmptyCM { get; set; }
- 
+        public ICommand MoveToReportDetailCM { get; set; }
+
 
 
         #endregion
@@ -229,17 +232,26 @@ namespace JobsManagementApp.ViewModel.ShareModel
             IsChangable2 = true;
             IsVisible2 = Visibility.Collapsed;
             CurrentJob = new JobsDTO();
-            BackupJob = new JobsDTO();
+            BackupJob = null;
 
             //DEFINE COMMAND
             GoBackCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
             {
                 p.NavigationService.GoBack();
             });
+            MoveToReportDetailCM = new RelayCommand<Page>((p) => { return BackupJob != null; }, (p) =>
+            {
+                ReportDetailViewModel vm = new ReportDetailViewModel(admin, BackupJob);
+                ReportDetailPage dashboardpage = new ReportDetailPage();
+                dashboardpage.DataContext = vm;
+                p.NavigationService.Navigate(dashboardpage);
+            });
             LoadCM = new RelayCommand<TreeView>((p) => { return true; }, async (p) =>
             {
-                
-                CurrentJob = JobService.Ins.GetJob((int)chosenJob.id);
+                if(BackupJob != null)
+                    CurrentJob = new JobsDTO(BackupJob);
+                else
+                    CurrentJob = JobService.Ins.GetJob((int)chosenJob.id);
                 if (CurrentJob == null)
                 {
                     MessageBoxCustom mb = new MessageBoxCustom("Error", "Chosen job is not exist!", MessageType.Error, MessageButtons.OK);
@@ -247,10 +259,13 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 }
                 else
                 {
-                    BackupJob = chosenJob;
+                    if (BackupJob == null)
+                        BackupJob = chosenJob;
                     //GET ROOT ID OF CHOSEN JOB
                     int rootJobID = JobService.Ins.GetRootJobId((int)CurrentJob.id);
                     //BUILD TREE FROM ROOT ID
+                    if(TreeJob != null)
+                        treeview.Items.Remove(TreeJob);
                     TreeJob = JobService.Ins.GetJobForTreeBinding(rootJobID, (int)CurrentJob.id);
                     treeview = p;
                     treeview.Items.Add(TreeJob);
@@ -321,7 +336,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                         mb.ShowDialog();
                     }
                 }
-                
+
             });
             UpdateJobCM = new RelayCommand<TreeView>((p) => { return true; }, async (p) =>
             {
@@ -404,7 +419,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                     MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
                                                     mb.ShowDialog();
                                                     CurrentJob.id = updateJob.id;
-                                                    CurrentJob.name= updateJob.name;
+                                                    CurrentJob.name = updateJob.name;
                                                     CurrentJob.end_date = updateJob.end_date;
                                                     CurrentJob.start_date = updateJob.start_date;
                                                     CurrentJob.due_date = updateJob.due_date;
@@ -412,15 +427,15 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                     CurrentJob.description = updateJob.description;
                                                     CurrentJob.percent = updateJob.percent;
                                                     CurrentJob.stage = updateJob.stage;
-                                                    CurrentJob.dependency_id= updateJob.dependency_id;
-                                                    CurrentJob.dependency_name= updateJob.dependency_name;
+                                                    CurrentJob.dependency_id = updateJob.dependency_id;
+                                                    CurrentJob.dependency_name = updateJob.dependency_name;
                                                     CurrentJob.assignee_id = updateJob.assignee_id;
                                                     CurrentJob.assignee_type = updateJob.assignee_type;
-                                                    CurrentJob.assignee_name= updateJob.assignee_name;
+                                                    CurrentJob.assignee_name = updateJob.assignee_name;
                                                     CurrentJob.assignor_id = updateJob.assignor_id;
                                                     CurrentJob.assignor_type = updateJob.assignor_type;
-                                                    CurrentJob.assignor_name= updateJob.assignor_name;
-                                                    CurrentJob.required_hour= updateJob.required_hour;
+                                                    CurrentJob.assignor_name = updateJob.assignor_name;
+                                                    CurrentJob.required_hour = updateJob.required_hour;
                                                     CurrentJob.worked_hour = updateJob.worked_hour;
 
                                                     BackupJob.id = updateJob.id;
@@ -451,7 +466,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                     chosenJob.category = updateJob.category;
                                                     chosenJob.description = updateJob.description;
                                                     chosenJob.percent = updateJob.percent;
-                                                    chosenJob.stage = updateJob.stage;
+                                                    chosenJob.stage = jobStage;
                                                     chosenJob.dependency_id = updateJob.dependency_id;
                                                     chosenJob.dependency_name = updateJob.dependency_name;
                                                     chosenJob.assignee_id = updateJob.assignee_id;
@@ -602,7 +617,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             {
                 jobEndDate = null;
             });
-            AssgineeChangeCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            AssgineeChangeCM = new RelayCommand<object>((p) => { return BackupJob != null && jobAssignee !=null; }, (p) =>
             {
                 if ((jobAssignee.type != BackupJob.assignee_type) || (jobAssignee.type == BackupJob.assignee_type && jobAssignee.id != BackupJob.assignee_id))
                 {
@@ -623,7 +638,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                             }
                         }
                     }
-                    
+
                 }
                 if (jobEndDate == null)
                 {
@@ -635,16 +650,16 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 if (jobEndDate != null)
                 {
                     jobPercent = 100;
-                    if(jobWorked_hour == "0" || string.IsNullOrEmpty(jobWorked_hour))
+                    if (jobWorked_hour == "0" || string.IsNullOrEmpty(jobWorked_hour))
                         jobWorked_hour = ((Int32.Parse(jobRequire_hour) * 10) / 100).ToString();
                 }
             });
             StartChangeCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                if(DateTime.Compare((DateTime)jobStartDate, (DateTime)jobDueDate) > 0)
+                if (DateTime.Compare((DateTime)jobStartDate, (DateTime)jobDueDate) > 0)
                 {
                     TimeSpan result = jobDueDate.Subtract(PastStartDate);
-                    jobDueDate =  jobStartDate.Add(result);
+                    jobDueDate = jobStartDate.Add(result);
 
                 }
                 if (jobEndDate != null)
@@ -672,7 +687,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             });
             EndChangeCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                if(jobEndDate != null)
+                if (jobEndDate != null)
                 {
                     if (DateTime.Compare((DateTime)jobStartDate, (DateTime)jobEndDate.Value) > 0)
                     {
@@ -745,48 +760,38 @@ namespace JobsManagementApp.ViewModel.ShareModel
                         }
                     }
                 }
-                
+
             });
             PercentChangeCM = new RelayCommand<Slider>((p) => { return true; }, (p) =>
             {
                 int a = (int)p.Value;
-                if(jobStage == "WAITING")
+                if (a == 100)
                 {
-                    MessageBoxCustom mb = new MessageBoxCustom("Infor", "You setted job to WAITING stage, percent and worked hour is fixed at 01", MessageType.Info, MessageButtons.OK);
-                    mb.ShowDialog();
-                    jobPercent = 0;
-                    jobWorked_hour = "0";
+                    if (jobEndDate == null)
+                    {
+                        if (PastEndDate != null)
+                            jobEndDate = PastEndDate;
+                        else
+                        {
+                            MessageBoxCustom mb = new MessageBoxCustom("Infor", "You setted job to complete stage, system will choose radom date between start and due date!", MessageType.Info, MessageButtons.OK);
+                            mb.ShowDialog();
+                            MessageBoxCustom mb2 = new MessageBoxCustom("Infor", "Please change end date to your desired date!", MessageType.Info, MessageButtons.OK);
+                            mb2.ShowDialog();
+                            var randomTest = new Random();
+
+                            TimeSpan timeSpan = jobDueDate - jobStartDate;
+                            TimeSpan newSpan = new TimeSpan(0, randomTest.Next(0, (int)timeSpan.TotalMinutes), 0);
+                            jobEndDate = jobStartDate + newSpan;
+                        }
+
+                    }
                 }
                 else
                 {
-                    if (a == 100)
-                    {
-                        if (jobEndDate == null)
-                        {
-                            if (PastEndDate != null)
-                                jobEndDate = PastEndDate;
-                            else
-                            {
-                                MessageBoxCustom mb = new MessageBoxCustom("Infor", "You setted job to complete stage, system will choose radom date between start and due date!", MessageType.Info, MessageButtons.OK);
-                                mb.ShowDialog();
-                                MessageBoxCustom mb2 = new MessageBoxCustom("Infor", "Please change end date to your desired date!", MessageType.Info, MessageButtons.OK);
-                                mb2.ShowDialog();
-                                var randomTest = new Random();
-
-                                TimeSpan timeSpan = jobDueDate - jobStartDate;
-                                TimeSpan newSpan = new TimeSpan(0, randomTest.Next(0, (int)timeSpan.TotalMinutes), 0);
-                                jobEndDate = jobStartDate + newSpan;
-                            }
-                            
-                        }
-                    }
-                    else
-                    {
-                        if(jobEndDate != null)
-                            jobEndDate = null;
-                    }
+                    if (jobEndDate != null)
+                        jobEndDate = null;
                 }
-                
+
             });
             CheckRequireHourEmptyCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -800,7 +805,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             {
                 if (string.IsNullOrEmpty(jobWorked_hour) || jobWorked_hour == "0")
                 {
-                    if(jobStage == "WAITING")
+                    if (jobStage == "WAITING")
                     {
                         jobWorked_hour = "0";
                     }
@@ -813,6 +818,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
 
             });
         }
+
 
         public JobDetailViewModel(UsersDTO u, JobsDTO chosenJob)
         {
@@ -1494,5 +1500,12 @@ namespace JobsManagementApp.ViewModel.ShareModel
 
         }
 
+        #region Internal functions
+        public void innhe(string a)
+        {
+            Notification w = new Notification(a);
+            w.ShowDialog();
+        }
+        #endregion
     }
 }

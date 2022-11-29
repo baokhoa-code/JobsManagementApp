@@ -43,7 +43,12 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _CurrentReport; }
             set { _CurrentReport = value; OnPropertyChanged(); }
         }
-   
+        private bool _AssigneeChanagable;
+        public bool AssigneeChanagable
+        {
+            get { return _AssigneeChanagable; }
+            set { _AssigneeChanagable = value; OnPropertyChanged(); }
+        }
 
 
 
@@ -58,7 +63,8 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _job; }
             set { _job = value; OnPropertyChanged(); }
         }
- 
+        public static Grid MaskName { get; set; }
+
         #endregion
 
         #region Commands
@@ -69,21 +75,36 @@ namespace JobsManagementApp.ViewModel.ShareModel
         public ICommand UpdateCurrentCM { get; set; }
         public ICommand SaveCreatedTimeCM { get; set; }
         public ICommand DeleteReportCM { get; set; }
-        public ICommand OpenAddReportWindow { get; set; }
+        public ICommand OpenAddReportWindowCM { get; set; }
+        public ICommand MaskNameCM { get; set; }
         #endregion
 
         public ReportDetailViewModel(Admin a, JobsDTO job_t)
         {
             admin = a;
             job = new JobsDTO();
+            AssigneeChanagable = true;
             Reports = new ObservableCollection<ReportsDTO>();
             BackupReport = new ReportsDTO();
             CurrentReport = new ReportsDTO();
 
             //DEFINE COMMANDS
+            MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
+            {
+                MaskName = p;
+            });
             GoBackCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
             {
                 p.NavigationService.GoBack();
+            });
+            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                ReportAddWindow dba = new ReportAddWindow();
+                ReportAddViewModel vm = new ReportAddViewModel(admin, (int)job_t.id, Reports);
+                MaskName.Visibility = Visibility.Visible;
+                vm.Mask = MaskName;
+                dba.DataContext = vm;
+                dba.ShowDialog();
             });
             LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
@@ -112,8 +133,18 @@ namespace JobsManagementApp.ViewModel.ShareModel
                         MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
                         mb.ShowDialog();
                     }
-                    BackupReport = Reports[0];
-                    CurrentReport = new ReportsDTO(BackupReport);
+                    if (Reports.Count <= 0)
+                    {
+                        MessageBoxCustom result = new MessageBoxCustom("Warning", "The current job do not have any report!", MessageType.Warning, MessageButtons.OK);
+                        result.ShowDialog();
+                    }
+                    else
+                    {
+                        BackupReport = Reports[0];
+                        CurrentReport = new ReportsDTO(BackupReport);
+
+                    }
+
                 }
 
             });

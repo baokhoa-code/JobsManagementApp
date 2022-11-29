@@ -60,7 +60,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
             OpenAddReportWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 ReportAddWindow dba = new ReportAddWindow();
-                ReportAddViewModel vm = new ReportAddViewModel(admin, -1);
+                ReportAddViewModel vm = new ReportAddViewModel(admin, -1,Reports);
                 MaskName.Visibility = Visibility.Visible;
                 vm.Mask = MaskName;
                 dba.DataContext = vm;
