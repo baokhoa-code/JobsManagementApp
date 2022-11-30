@@ -32,7 +32,12 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _job; }
             set { _job = value; OnPropertyChanged(); }
         }
-
+        private bool _IsAssigneeChanagable;
+        public bool IsAssigneeChanagable
+        {
+            get { return _IsAssigneeChanagable; }
+            set { _IsAssigneeChanagable = value; OnPropertyChanged(); }
+        }
 
         private string _jobAssignor;
         public string jobAssignor
@@ -126,6 +131,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             jobName = "";
             jobRequire_hour = "";
             jobDescription = "";
+            IsAssigneeChanagable = true;
             DateTime current_t = DateTime.Now;
             DateTime current = DateTime.ParseExact(current_t.ToString("dd-MM-yyyy"), "dd-MM-yyyy",
                 System.Globalization.CultureInfo.InvariantCulture);
@@ -168,6 +174,208 @@ namespace JobsManagementApp.ViewModel.ShareModel
             LoadCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 Load();
+
+            });
+            AddJobCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                if (string.IsNullOrEmpty(jobName))
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Job name cannot be empty!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                    job = new JobsDTO();
+                }
+                else
+                {
+                    job.name = jobName;
+                    if (string.IsNullOrEmpty(jobDescription))
+                    {
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Job description cannot be empty!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                        job = new JobsDTO();
+                    }
+                    else
+                    {
+                        job.description = jobDescription;
+                        if (string.IsNullOrEmpty(jobRequire_hour))
+                        {
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Job require hour cannot be empty!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+                            job = new JobsDTO();
+                        }
+                        else
+                        {
+                            job.required_hour = Int32.Parse(jobRequire_hour);
+                            if (jobCategory == null)
+                            {
+                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Job category cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                mb.ShowDialog();
+                                job = new JobsDTO();
+                            }
+                            else
+                            {
+                                job.category = jobCategory.name;
+                                if (jobAssignee == null)
+                                {
+                                    job.assignee_id = -1;
+                                    job.assignee_type = "NONE";
+                                    job.assignee_name = "NONE";
+                                }
+                                if (jobAssignee != null)
+                                {
+                                    job.assignee_id = jobAssignee.id;
+                                    job.assignee_type = jobAssignee.type;
+                                    job.assignee_name = jobAssignee.name;
+                                }
+                                job.category = jobCategory.name;
+                                if (jobDependency == null)
+                                {
+                                    job.dependency_id = -1;
+                                    job.dependency_name = "NONE";
+                                }
+                                if (jobDependency != null)
+                                {
+                                    job.dependency_id = jobDependency.id;
+                                    job.dependency_name = jobDependency.name;
+                                }
+                                if (admin != null)
+                                {
+                                    job.assignor_id = admin.id;
+                                    job.assignor_type = "ADMIN";
+                                    job.assignor_name = admin.name;
+                                }
+                                if (user != null)
+                                {
+                                    job.assignor_id = user.id;
+                                    job.assignor_type = "USER";
+                                    job.assignor_name = user.name;
+                                }
+                                job.percent = 0;
+                                job.worked_hour = 0;
+                                job.stage = "WAITING";
+                                job.end_date = "NONE";
+                                job.start_date = jobStartDate.ToString("dd-MM-yyy");
+                                job.due_date = jobDueDate.ToString("dd-MM-yyy");
+
+                                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to add this job?", MessageType.Warning, MessageButtons.YesNo);
+                                result.ShowDialog();
+
+                                if (result.DialogResult == true)
+                                {
+                                    try
+                                    {
+                                        (bool isSuccess, string messageFromUpdate) = await JobService.Ins.AddJob(job);
+
+
+                                        if (isSuccess)
+                                        {
+                                            dbpa.Load2();
+
+                                            MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
+                                            mb.ShowDialog();
+                                            job = new JobsDTO();
+                                            jobName = "";
+                                            jobRequire_hour = "";
+                                            jobDescription = "";
+                                            jobAssignee = null;
+                                            jobCategory = null;
+                                            jobDependency = null;
+                                            DateTime current_t = DateTime.Now;
+                                            DateTime current = DateTime.ParseExact(current_t.ToString("dd-MM-yyyy"), "dd-MM-yyyy",
+                                                System.Globalization.CultureInfo.InvariantCulture);
+                                            jobStartDate = current;
+                                            jobDueDate = current;
+                                        }
+                                        else
+                                        {
+                                            MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
+                                            mb.ShowDialog();
+                                        }
+                                    }
+                                    catch (MySqlException e)
+                                    {
+                                        Console.WriteLine(e);
+                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                                        mb.ShowDialog();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e);
+                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                                        mb.ShowDialog();
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        public JobAddViewModel(Admin a, JobListForSingleAssigneeViewModel dbpa)
+        {
+
+            admin = new Admin(a);
+            job = new JobsDTO();
+            jobAssignor = a.id + "-" + "ADMIN" + "-" + a.name;
+            jobName = "";
+            jobRequire_hour = "";
+            jobDescription = "";
+            IsAssigneeChanagable = false;
+            DateTime current_t = DateTime.Now;
+            DateTime current = DateTime.ParseExact(current_t.ToString("dd-MM-yyyy"), "dd-MM-yyyy",
+                System.Globalization.CultureInfo.InvariantCulture);
+            jobStartDate = current;
+            jobDueDate = current;
+            //DEFINE COMMAND
+            CloseWindowCM = new RelayCommand<Window>((p) => { return p != null; }, async (p) =>
+            {
+                job = new JobsDTO();
+                jobName = "";
+                jobRequire_hour = "";
+                jobDescription = "";
+                jobAssignee = null;
+                jobCategory = null;
+                jobDependency = null;
+                DateTime current_t = DateTime.Now;
+                DateTime current = DateTime.ParseExact(current_t.ToString("dd-MM-yyyy"), "dd-MM-yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture);
+                jobStartDate = current;
+                jobDueDate = current;
+                Mask.Visibility = Visibility.Collapsed;
+                p.Close();
+
+            });
+            ClearInforCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                jobName = "";
+                jobRequire_hour = "";
+                jobDescription = "";
+                jobAssignee = null;
+                jobCategory = null;
+                jobDependency = null;
+                DateTime current_t = DateTime.Now;
+                DateTime current = DateTime.ParseExact(current_t.ToString("dd-MM-yyyy"), "dd-MM-yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture);
+                jobStartDate = current;
+                jobDueDate = current;
+
+            });
+            LoadCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                Load();
+                if(dbpa.assignee != null)
+                {
+                    for (int i = 0; i < AssigneeSource.Count; i++)
+                    {
+                        if (AssigneeSource[i].id == dbpa.assignee.id && AssigneeSource[i].type == "USER")
+                        {
+                            jobAssignee = AssigneeSource[i];
+                            i = AssigneeSource.Count;
+                        }
+                    }
+                }
+                
 
             });
             AddJobCM = new RelayCommand<object>((p) => { return true; }, async (p) =>

@@ -12,6 +12,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
+      Loaded="JobManagePage_Loaded"
       Name="JobManagePage"
       Title="JobManagementAdmin">
 

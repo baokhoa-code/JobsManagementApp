@@ -12,6 +12,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
+      Loaded="JobListForSingleAssigneePage_Loaded"
       Name="JobListForSingleAssigneePage"
       Title="JobManagementAdmin">
 
@@ -73,11 +74,12 @@
                     Foreground="#232360" 
                     FontWeight="Bold" VerticalAlignment='Center' Margin='185,0,0,0'/>
                 <Button
+                    Click="Button_Click"
                     Command="{Binding OpenAddJobWindowCM}"
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="40"
-                    wpf:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="115" Margin='405,0,0,0'>
+                    wpf:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="115" Margin="400,0,0,0">
                     <StackPanel Orientation='Horizontal'
                         Height="50"
                         Width="120" 
@@ -107,8 +109,7 @@
                 <Grid Grid.Column='0'>
                     <Border 
                         CornerRadius="25"
-                        Background="white" Margin='25,10,5,10'>
-                    </Border>
+                        Background="white" Margin='25,10,5,10'/>
                     <Label 
                         Content="Week" 
                         FontSize="18" 
@@ -119,7 +120,7 @@
                         FontWeight="Bold"/>
                     <ComboBox
                         ItemsSource="{Binding ListWeekRage}"
-                        SelectedItem="{Binding CurrentWeekRange,Mode=TwoWay}"
+                        SelectedItem="{Binding CurrentWeekRange, Mode=TwoWay}"
                         Text='{Binding CurrentWeekRange, Mode=OneWay}'
                         IsEditable='False'
                         Height="30"
@@ -144,7 +145,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='50,5,0,75'/>
                     <Label 
-                        Content="{Binding WeekPending,Mode=TwoWay}" 
+                        Content="{Binding WeekPending, Mode=TwoWay}" 
                         FontSize="16" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -158,7 +159,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='50,15,0,30'/>
                     <Label 
-                        Content="{Binding WeekLate,Mode=TwoWay}" 
+                        Content="{Binding WeekLate, Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -172,7 +173,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='240,5,0,75'/>
                     <Label 
-                        Content="{Binding WeekCompleteSoon,Mode=TwoWay}" 
+                        Content="{Binding WeekCompleteSoon, Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -186,7 +187,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='240,0,0,30'/>
                     <Label 
-                        Content="{Binding WeekCompleteLate,Mode=TwoWay}" 
+                        Content="{Binding WeekCompleteLate, Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -207,13 +208,12 @@
                         FontWeight="Bold"/>
                     <ComboBox
                         ItemsSource="{Binding ListMonth}"
-                        SelectedItem="{Binding CurrentMonth,Mode=TwoWay}"
+                        SelectedItem="{Binding CurrentMonth, Mode=TwoWay}"
                         Text='{Binding CurrentMonth, Mode=TwoWay}'
                         IsEditable='False'
                         Height="30"
                         Padding="10,0,10,0"
                         BorderBrush="#FF808080"
-                        materialDesign:HintAssist.Hint="This month" 
                         HorizontalContentAlignment="Left"
                         VerticalContentAlignment="Center" 
                         FontFamily='Roboto Medium' FontSize='15' 
@@ -247,7 +247,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='50,0,0,30'/>
                     <Label 
-                        Content="{Binding MonthLate,Mode=TwoWay}" 
+                        Content="{Binding MonthLate, Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -261,7 +261,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='240,0,0,75'/>
                     <Label 
-                        Content="{Binding MonthCompleteSoon,Mode=TwoWay}"  
+                        Content="{Binding MonthCompleteSoon, Mode=TwoWay}"  
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -275,7 +275,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='240,0,0,30'/>
                     <Label 
-                        Content="{Binding MonthCompleteLate,Mode=TwoWay}"  
+                        Content="{Binding MonthCompleteLate, Mode=TwoWay}"  
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -297,8 +297,8 @@
                         FontWeight="Bold"/>
                     <ComboBox
                         ItemsSource="{Binding ListYear}"
-                        SelectedItem="{Binding CurrentYear,Mode=TwoWay}"
-                        Text='{Binding CurrentYear, Mode=OneWay}'
+                        SelectedItem="{Binding CurrentYear, Mode=TwoWay}"
+                        Text='{Binding CurrentYear, Mode=TwoWay}'
                         IsEditable='False'
                         Height="30"
                         Padding="10,0,10,0"
@@ -322,7 +322,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='50,0,0,75'/>
                     <Label 
-                        Content="{Binding YearPending,Mode=TwoWay}" 
+                        Content="{Binding YearPending, Mode=TwoWay}" 
                         FontSize="16" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -336,7 +336,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='50,0,0,30'/>
                     <Label 
-                        Content="{Binding YearLate,Mode=TwoWay}"  
+                        Content="{Binding YearLate, Mode=TwoWay}"  
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -350,7 +350,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='240,0,0,75'/>
                     <Label 
-                        Content="{Binding YearCompleteSoon,Mode=TwoWay}" 
+                        Content="{Binding YearCompleteSoon, Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -364,7 +364,7 @@
                         HorizontalAlignment="Left" 
                         FontWeight="Bold" Margin='240,0,0,30'/>
                     <Label 
-                        Content="{Binding YearCompleteLate,Mode=TwoWay}" 
+                        Content="{Binding YearCompleteLate, Mode=TwoWay}" 
                         FontSize="15" 
                         Foreground="#FF232360" 
                         VerticalAlignment="Bottom"  
@@ -389,11 +389,12 @@
                                     x:Name="job_type_cbx"
                                     SelectionChanged="job_type_cbx_SelectionChanged"
                                     SelectedItem="{Binding SelectedType}"
+                                    SelectedIndex="{Binding SelectedIndexnhe}"
                                     Width="170"
                                     Height="35"
                                     Padding="5,0,5,0"
                                     BorderThickness="0"
-                                    materialDesign:HintAssist.Hint="Choose Job Type" 
+                                    wpf:HintAssist.Hint="Choose Job Type" 
                                     FontSize="15" FontWeight="Bold" 
                                     VerticalContentAlignment="Center" Foreground='Gray'>
                                     <ComboBoxItem
@@ -426,16 +427,16 @@
                                 Height="40"
                                 Width="130">
                                 <Button
-                                    Click='reset_filters_btn_handle'
+                                    Click='Button_Click_1'
+                                    Command="{Binding LoadCM2}"
                                     Padding="0"
-                                    materialDesign:ButtonProgressAssist.Value="-1"
-                                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                                    wpf:ButtonProgressAssist.Value="-1"
+                                    wpf:ButtonProgressAssist.IsIndicatorVisible="True"
+                                    wpf:ButtonProgressAssist.IsIndeterminate="True"
                                     Height="35"
-                                    materialDesign:ButtonAssist.CornerRadius="10" 
+                                    wpf:ButtonAssist.CornerRadius="10" 
                                     Content='Reset Filters'
-                                    Background="#FF23DF00" BorderBrush="Gray" Width="110" Foreground='White'>
-                                </Button>
+                                    Background="#FF23DF00" BorderBrush="Gray" Width="110" Foreground='White'/>
                             </Grid>
 
                             <Grid
@@ -448,14 +449,14 @@
                                     Padding="0"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Height="35"
-                                    materialDesign:ButtonAssist.CornerRadius="10" 
+                                    wpf:ButtonAssist.CornerRadius="10" 
                                     Background="Transparent" BorderBrush="Gray" Width="110">
                                     <Grid
                                         Height="50"
                                         Width="150" 
                                         HorizontalAlignment="Center" 
                                         VerticalAlignment="Center">
-                                        <materialDesign:PackIcon
+                                        <wpf:PackIcon
                                             Kind="FilterMultipleOutline" 
                                             Height="20" 
                                             Width="20"
@@ -471,7 +472,7 @@
                                     </Grid>
                                 </Button>
                                 <Popup 
-                                    Name="popupnhe2"
+                                    x:Name="popupnhe2"
                                     AllowsTransparency="True"
                                     IsOpen="False"
                                     PopupAnimation="Fade"
@@ -491,7 +492,7 @@
                                                 Padding="0" Margin='20,20,0,0'/>
                                             <ComboBox
                                                 x:Name='category_cbx'
-                                                ItemsSource="{Binding Path=CategorySource}"   
+                                                ItemsSource="{Binding CategorySource}"   
                                                 DisplayMemberPath="name" 
                                                 Width="230"
                                                 Height="30"
@@ -499,7 +500,7 @@
                                                 BorderBrush="#FF808080"
                                                 BorderThickness="1"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                materialDesign:HintAssist.Hint="Category"
+                                                wpf:HintAssist.Hint="Category"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center" 
                                                 HorizontalContentAlignment="Left"
@@ -514,7 +515,7 @@
                                                 BorderBrush="#FF808080"
                                                 BorderThickness="1"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                materialDesign:HintAssist.Hint="Dependency"
+                                                wpf:HintAssist.Hint="Dependency"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center" 
                                                 HorizontalContentAlignment="Left"
@@ -529,25 +530,26 @@
                                                 BorderBrush="#FF808080"
                                                 BorderThickness="1"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                materialDesign:HintAssist.Hint="Assignor"
+                                                wpf:HintAssist.Hint="Assignor"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center" 
                                                 HorizontalContentAlignment="Left"
                                                 VerticalContentAlignment="Center" 
                                                 FontFamily='Roboto Medium' FontSize='13' Margin='30,20,30,0'/>
+
                                             <Button
                                                 Click='field_filter_handler'
                                                 Padding="0"
                                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                                 Height="30"
-                                                materialDesign:ButtonAssist.CornerRadius="10" 
+                                                wpf:ButtonAssist.CornerRadius="10" 
                                                 Background="#FF5051F9" BorderBrush="#FF5051F9" Width="200" Margin='0,20,0,0'>
                                                 <Grid
                                                     Height="30"
                                                     Width="230" 
                                                     HorizontalAlignment="Center" 
                                                     VerticalAlignment="Center">
-                                                    <materialDesign:PackIcon
+                                                    <wpf:PackIcon
                                                         Kind="Filter" 
                                                         Height="20" 
                                                         Width="20"
@@ -579,14 +581,14 @@
                                     Padding="0"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Height="35"
-                                    materialDesign:ButtonAssist.CornerRadius="10" 
+                                    wpf:ButtonAssist.CornerRadius="10" 
                                     Background="Transparent" BorderBrush="Gray" Width="110">
                                     <Grid
                                         Height="50"
                                         Width="150" 
                                         HorizontalAlignment="Center" 
                                         VerticalAlignment="Center">
-                                        <materialDesign:PackIcon
+                                        <wpf:PackIcon
                                             Kind="CalendarMinusOutline" 
                                             Height="20" 
                                             Width="20"
@@ -602,7 +604,7 @@
                                     </Grid>
                                 </Button>
                                 <Popup 
-                                    Name="popupnhe"
+                                    x:Name="popupnhe"
                                     AllowsTransparency="True"
                                     IsOpen="False"
                                     PopupAnimation="Fade"
@@ -630,7 +632,7 @@
                                                         Height="35"
                                                         Padding="5,10,5,0"
                                                         BorderThickness="0"
-                                                        materialDesign:HintAssist.Hint="Choose Field" 
+                                                        wpf:HintAssist.Hint="Choose Field" 
                                                         VerticalAlignment='Center'
                                                         FontSize="14" FontWeight="Bold" 
                                                         >
@@ -645,26 +647,26 @@
                                                             Content="End Date" />
                                                     </ComboBox>
                                                 </Border>
-                                                <Separator Width='260' HorizontalAlignment='Center' VerticalAlignment='Center' Margin='5,20,0,2'></Separator>
+                                                <Separator Width='260' HorizontalAlignment='Center' VerticalAlignment='Center' Margin='5,20,0,2'/>
                                                 <WrapPanel Orientation='Horizontal' Width='300' Margin='2,10,0,0' x:Name="panel">
                                                     <RadioButton Content='This Week' Margin='20,20,0,0' Width='100' FontSize='14'/>
                                                     <RadioButton Content='This Month' Margin='60,20,0,0' Width='100' FontSize='14'/>
                                                     <RadioButton Content='This Year' Margin='20,20,0,0' Width='100' FontSize='14'/>
                                                     <RadioButton Unchecked='date_range_unchecked_handler' Checked='date_range_checked_handler' Content='Date Range' Margin='60,20,0,0' Width='100' FontSize='14'/>
-                                                    <Separator Width='260' HorizontalAlignment='Center' VerticalAlignment='Center' Margin='16,20,0,2'></Separator>
+                                                    <Separator Width='260' HorizontalAlignment='Center' VerticalAlignment='Center' Margin='16,20,0,2'/>
                                                 </WrapPanel>
                                                 <TabControl x:Name='tab_control' Width='260' Visibility='Collapsed' HorizontalAlignment='Left' Height='374' Margin='20,20,0,0'>
                                                     <TabControl.Resources>
-                                                        <Style TargetType="TabItem">
+                                                        <Style TargetType="{x:Type TabItem}">
                                                             <Setter Property='Cursor' Value='Hand'/>
                                                             <Setter Property="FontSize" Value="14"/>
                                                             <Setter Property="Height" Value="25"/>
                                                             <Setter Property="FontWeight" Value="DemiBold"/>
                                                             <Setter Property="Template">
                                                                 <Setter.Value>
-                                                                    <ControlTemplate TargetType="TabItem">
+                                                                    <ControlTemplate TargetType="{x:Type TabItem}">
                                                                         <Border
-                                                                            Name="Border"
+                                                                            x:Name="Border"
                                                                             BorderBrush="Transparent"
                                                                             BorderThickness="1"
                                                                             CornerRadius="5"
@@ -698,24 +700,24 @@
                                                             <Grid.Resources>
                                                                 <Style
                                                                     x:Key="SecondaryCalendarDayButton"
-                                                                    TargetType="CalendarDayButton"
+                                                                    TargetType="{x:Type CalendarDayButton}"
                                                                     BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
                                                                     <Setter
-                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Property="wpf:CalendarAssist.SelectionColor"
                                                                         Value="{DynamicResource SecondaryHueMidBrush}" />
                                                                     <Setter
-                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Property="wpf:CalendarAssist.SelectionForegroundColor"
                                                                         Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
                                                                 </Style>
                                                                 <Style
                                                                     x:Key="SecondaryCalendarButton"
-                                                                    TargetType="CalendarButton"
+                                                                    TargetType="{x:Type CalendarButton}"
                                                                     BasedOn="{StaticResource MaterialDesignCalendarButton}">
                                                                     <Setter
-                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Property="wpf:CalendarAssist.SelectionColor"
                                                                         Value="{DynamicResource SecondaryHueMidBrush}" />
                                                                     <Setter
-                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Property="wpf:CalendarAssist.SelectionForegroundColor"
                                                                         Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
                                                                 </Style>
                                                             </Grid.Resources>
@@ -723,8 +725,8 @@
                                                                 x:Name='startDate'
                                                                 Background="{DynamicResource PrimaryHueLightBrush}"
                                                                 Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
-                                                                materialDesign:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
-                                                                materialDesign:CalendarAssist.HeaderForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                                                wpf:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
+                                                                wpf:CalendarAssist.HeaderForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                                                                 CalendarDayButtonStyle="{StaticResource SecondaryCalendarDayButton}"
                                                                 CalendarButtonStyle="{StaticResource SecondaryCalendarButton}" />
                                                         </Grid>
@@ -733,25 +735,25 @@
                                                         <Grid>
                                                             <Grid.Resources>
                                                                 <Style
-                                                                  x:Key="SecondaryCalendarDayButton"
-                                                                  TargetType="CalendarDayButton"
-                                                                  BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                                                                    x:Key="SecondaryCalendarDayButton"
+                                                                    TargetType="{x:Type CalendarDayButton}"
+                                                                    BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
                                                                     <Setter
-                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Property="wpf:CalendarAssist.SelectionColor"
                                                                         Value="{DynamicResource SecondaryHueMidBrush}" />
                                                                     <Setter
-                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Property="wpf:CalendarAssist.SelectionForegroundColor"
                                                                         Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
                                                                 </Style>
                                                                 <Style
                                                                     x:Key="SecondaryCalendarButton"
-                                                                    TargetType="CalendarButton"
+                                                                    TargetType="{x:Type CalendarButton}"
                                                                     BasedOn="{StaticResource MaterialDesignCalendarButton}">
                                                                     <Setter
-                                                                        Property="materialDesign:CalendarAssist.SelectionColor"
+                                                                        Property="wpf:CalendarAssist.SelectionColor"
                                                                         Value="{DynamicResource SecondaryHueMidBrush}" />
                                                                     <Setter
-                                                                        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                                                        Property="wpf:CalendarAssist.SelectionForegroundColor"
                                                                         Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
                                                                 </Style>
                                                             </Grid.Resources>
@@ -759,8 +761,8 @@
                                                                 x:Name='endDate'
                                                                 Background="{DynamicResource PrimaryHueLightBrush}"
                                                                 Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
-                                                                materialDesign:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
-                                                                materialDesign:CalendarAssist.HeaderForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                                                wpf:CalendarAssist.HeaderBackground="{DynamicResource PrimaryHueDarkBrush}"
+                                                                wpf:CalendarAssist.HeaderForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                                                                 CalendarDayButtonStyle="{StaticResource SecondaryCalendarDayButton}"
                                                                 CalendarButtonStyle="{StaticResource SecondaryCalendarButton}" />
                                                         </Grid>
@@ -772,14 +774,14 @@
                                                     Padding="0"
                                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                                     Height="30"
-                                                    materialDesign:ButtonAssist.CornerRadius="10" 
+                                                    wpf:ButtonAssist.CornerRadius="10" 
                                                     Background="#FF5051F9" BorderBrush="#FF5051F9" Width="200" Margin='0,20,0,0'>
                                                     <Grid
                                                         Height="30"
                                                         Width="200" 
                                                         HorizontalAlignment="Center" 
                                                         VerticalAlignment="Center">
-                                                        <materialDesign:PackIcon
+                                                        <wpf:PackIcon
                                                             Kind="Filter" 
                                                             Height="20" 
                                                             Width="20"
@@ -812,7 +814,7 @@
                                         HorizontalAlignment="Left" 
                                         VerticalAlignment="Center" 
                                         Margin="8,0,0,0" Padding="0" FontSize="13" >
-                                        <materialDesign:PackIcon 
+                                        <wpf:PackIcon 
                                             Kind="Magnify"
                                             Height="25"
                                             Width="25" VerticalAlignment="Center" HorizontalAlignment="Left" Margin='0,2,0,0'/>
@@ -822,8 +824,8 @@
                                         x:Name="SearchBox"
                                         TextChanged="TextBox_TextChanged"
                                         Width="200"
-                                        materialDesign:HintAssist.Hint="Enter job name."
-                                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                        wpf:HintAssist.Hint="Enter job name."
+                                        wpf:TextFieldAssist.DecorationVisibility="Hidden"
                                         BorderThickness="0"
                                         FontSize="15"
                                         Margin="30,0,0,0" VerticalAlignment="Center" Foreground="#E5000000" />
@@ -831,7 +833,7 @@
                             </Border>
                         </StackPanel>
                         <Grid Grid.Row="1">
-                            <Separator Width='1250' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='0,0,0,2' ></Separator>
+                            <Separator Width='1250' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='0,0,0,2' />
                             <StackPanel Width='1250' Height='430'>
                                 <ListView 
                                     ItemsSource="{Binding Jobs}"
@@ -854,11 +856,11 @@
                                                             <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
                                                                 <Border BorderThickness="0,0,0,0.2" BorderBrush="Black" Background="Transparent" >
                                                                     <TextBlock x:Name="ContentHeader" 
-                                                                               FontSize='15'
-                                                                               FontWeight='Bold'
-                                                                               Text="{TemplateBinding Content}" 
-                                                                               Padding="5,5,5,5" Width="{TemplateBinding Width}" 
-                                                                               TextAlignment="Center" />
+                                                                        FontSize='15'
+                                                                        FontWeight='Bold'
+                                                                        Text="{TemplateBinding Content}" 
+                                                                        Padding="5,5,5,5" Width="{TemplateBinding Width}" 
+                                                                        TextAlignment="Center" />
                                                                 </Border>
                                                             </ControlTemplate>
                                                         </Setter.Value>
@@ -872,8 +874,8 @@
                                                 <GridViewColumn.CellTemplate   >
                                                     <DataTemplate>
                                                         <TextBlock  Text="{Binding id}" Width="30" Margin="0,10,0,0"
-                                                                    FontWeight='SemiBold'
-                                                                    FontSize="12" />
+                                                            FontWeight='SemiBold'
+                                                            FontSize="12" />
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
@@ -1012,15 +1014,16 @@
                                                                         </Style.Triggers>
                                                                     </Style>
                                                                 </Border.Style>
-                                                                <materialDesign:PackIcon Kind="Magnify"
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.OpenEditJobCM, ElementName=_ListView}" 
+                                                                            CommandParameter="{Binding ElementName=JobListForSingleAssigneePage}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                                <wpf:PackIcon Kind="Magnify"
                                                                     Width="30"
                                                                     Height="30"
                                                                     Cursor="Hand" />
-                                                                <i:Interaction.Triggers>
-                                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditJobCM}" />
-                                                                    </i:EventTrigger>
-                                                                </i:Interaction.Triggers>
                                                             </Border>
                                                             <Border Margin="0 0 0 0"
                                                                 BorderBrush="Black"
@@ -1038,15 +1041,15 @@
                                                                         </Style.Triggers>
                                                                     </Style>
                                                                 </Border.Style>
-                                                                <materialDesign:PackIcon Kind="GarbageCanEmpty"
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.DeleteJobCM, ElementName=_ListView}" />
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                                <wpf:PackIcon Kind="GarbageCanEmpty"
                                                                     Width="30"
                                                                     Height="30"
                                                                     Cursor="Hand" />
-                                                                <i:Interaction.Triggers>
-                                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.DeleteJobCM}" />
-                                                                    </i:EventTrigger>
-                                                                </i:Interaction.Triggers>
                                                             </Border>
 
                                                         </StackPanel>

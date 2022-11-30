@@ -63,13 +63,13 @@ namespace JobsManagementApp.View.Share
 
         private void date_filter_btn_handle(object sender, RoutedEventArgs e)
         {
-            if(filters == null && view == null)
+            if (filters == null & view == null)
             {
                 filters = new Dictionary<string, Predicate<ReportsDTO>>();
                 view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
                 view.Filter = FilterJob;
             }
-            popupnhe.IsOpen = !popupnhe.IsOpen;
+            popupnhe.IsOpen = true;
             if (ShadowMask.Visibility == Visibility.Visible)
                 ShadowMask.Visibility = Visibility.Collapsed;
             if (ShadowMask.Visibility == Visibility.Collapsed)
@@ -78,7 +78,7 @@ namespace JobsManagementApp.View.Share
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (filters == null && view == null)
+            if (filters == null & view == null)
             {
                 filters = new Dictionary<string, Predicate<ReportsDTO>>();
                 view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
@@ -208,19 +208,31 @@ namespace JobsManagementApp.View.Share
                 checkedValue.IsChecked = false;
         }
 
-        private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (filters == null && view == null)
-            {
-                filters = new Dictionary<string, Predicate<ReportsDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
-            ResetFilter();
+            SearchBox.Text = "";
             month_rbtn.IsChecked = false;
             year_rbtn.IsChecked = false;
             day_range_rbtn.IsChecked = false;
             week_rbtn.IsChecked = false;
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
+            
+        }
+
+        private void ReportListForSingleAssigneePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
         }
     }
 }

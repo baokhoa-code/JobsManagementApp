@@ -119,6 +119,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand AddOrganizationCM { get; set; }
         public ICommand SaveCurrentPageCM { get; set; }
         public ICommand LoadCM { get; set; }
+        public ICommand RefreshCM { get; set; }
         public StaffManagementPageAdminViewModel(Admin a)
         {
             admin = new Admin(a);
@@ -129,7 +130,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
             OpenAddStaffWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 StaffAddWindow dba = new StaffAddWindow();
-                StaffAddViewModel vm = new StaffAddViewModel(admin);
+                StaffAddViewModel vm = new StaffAddViewModel(admin,Staffs);
                 vm.Mask = MaskName;
                 MaskName.Visibility = Visibility.Visible;
                 dba.DataContext = vm;
@@ -145,8 +146,12 @@ namespace JobsManagementApp.ViewModel.AdminModel
             });
             LoadCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-
                 Load();
+            });
+            RefreshCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+
+                Load2();
 
 
 
@@ -369,6 +374,25 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 else
                     PositionSource = new ObservableCollection<PositionsDTO>();
 
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e);
+                MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                mb.ShowDialog();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                mb.ShowDialog();
+            }
+        }
+        public async Task Load2()
+        {
+            try
+            {
+                Staffs = new ObservableCollection<UsersDTO>(await UserService.Ins.GetAllUser());
             }
             catch (MySqlException e)
             {

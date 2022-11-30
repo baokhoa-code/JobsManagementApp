@@ -172,8 +172,8 @@ namespace JobsManagementApp.ViewModel.ShareModel
         {
             admin = new Admin(a);
             staff = new UsersDTO();
-            Backupstaff = user_t;
             currentDate = DateTime.Now;
+            Backupstaff = null;
             Gender = new List<string>();
             Gender.Add("NAM"); Gender.Add("NU"); Gender.Add("KHAC");
             Question = new List<string>();
@@ -183,7 +183,26 @@ namespace JobsManagementApp.ViewModel.ShareModel
             //DEFINE COMMAND
             LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                Load();
+                if(user_t != null)
+                {
+                    UsersDTO utemp = await UserService.Ins.GetUser((int)user_t.id);
+                    if(utemp != null)
+                    {
+                        if (Backupstaff == null)
+                            Backupstaff = user_t;
+                        Load();
+                    }
+                    else
+                    {
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Chosen user is not exist!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Chosen user cannot be null!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
 
             });
             EditStaffCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
@@ -197,7 +216,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 }
                 else
                 {
-                    if (UserService.Ins.CheckExisted(staffUserName))
+                    if (UserService.Ins.CheckExisted(staffUserName) && Backupstaff.username != staffUserName)
                     {
                         MessageBoxCustom mb = new MessageBoxCustom("Error", "Staff username already existed!", MessageType.Error, MessageButtons.OK);
                         mb.ShowDialog();
@@ -406,14 +425,14 @@ namespace JobsManagementApp.ViewModel.ShareModel
                     staffAvatar = openFileDialog.FileName;
                 }
             });
-            MoveToJobListCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
+            MoveToJobListCM = new RelayCommand<Page>((p) => { return Backupstaff != null; }, (p) =>
             {
                 JobListForSingleAssignee dba = new JobListForSingleAssignee();
                 JobListForSingleAssigneeViewModel vm = new JobListForSingleAssigneeViewModel(admin, (int) Backupstaff.id);
                 dba.DataContext = vm;
                 p.NavigationService.Navigate(dba);
             });
-            MoveToReportListCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
+            MoveToReportListCM = new RelayCommand<Page>((p) => { return Backupstaff != null; }, (p) =>
             {
                 ReportListForSingleAssignee dba = new ReportListForSingleAssignee();
                 ReportListForSingleAssigneeViewModel vm = new ReportListForSingleAssigneeViewModel(admin, (int)Backupstaff.id);

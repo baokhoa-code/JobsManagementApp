@@ -143,7 +143,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
         public ICommand CloseWindowCM { get; set; }
         #endregion
 
-        public StaffAddViewModel(Admin a)
+        public StaffAddViewModel(Admin a, ObservableCollection<UsersDTO> Staffs)
         {
             admin = new Admin(a);
             staff = new UsersDTO();
@@ -307,7 +307,11 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                                                         mb.ShowDialog();
                                                                                         MessageBoxCustom mb1 = new MessageBoxCustom("Annouce", "An user (staff) with password: '" + staff.pass + "' has been created, please change password in the the next login!", MessageType.Info, MessageButtons.OK);
                                                                                         mb1.ShowDialog();
-
+                                                                                        UsersDTO temp = UserService.Ins.GetLatestUser();
+                                                                                        if(temp != null)
+                                                                                        {
+                                                                                            Staffs.Add(temp);
+                                                                                        }
 
                                                                                     }
                                                                                     else

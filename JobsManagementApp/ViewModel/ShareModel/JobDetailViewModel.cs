@@ -308,6 +308,14 @@ namespace JobsManagementApp.ViewModel.ShareModel
                         }
                         for (int i = 0; i < DependencySource.Count; i++)
                         {
+                            if (DependencySource[i].id == jobId)
+                            {
+                                DependencySource.RemoveAt(i);
+                                i = DependencySource.Count;
+                            }
+                        }
+                        for (int i = 0; i < DependencySource.Count; i++)
+                        {
                             if (DependencySource[i].id == CurrentJob.dependency_id)
                             {
                                 jobDependency = DependencySource[i];

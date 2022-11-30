@@ -28,19 +28,14 @@ namespace JobsManagementApp.View.Admin.Staff
         {
             InitializeComponent();
         }
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private bool FilterJob(object obj)
         {
-            if (filters == null && view == null)
-            {
-                filters = new Dictionary<string, Predicate<UsersDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
-            RemoveFilter("SEARCH");
-            AddFilterAndRefresh("SEARCH", item => item.name.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >=  0 ||
-                                                    item.email.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                                    item.username.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            UsersDTO c = (UsersDTO)obj;
+            return filters.Values
+                .Aggregate(true,
+                    (prevValue, predicate) => prevValue && predicate(c));
         }
+
         public void ClearFilters()
         {
             filters.Clear();
@@ -66,26 +61,35 @@ namespace JobsManagementApp.View.Admin.Staff
             view.Refresh();
         }
 
-        private bool FilterJob(object obj)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UsersDTO c = (UsersDTO)obj;
-            return filters.Values
-                .Aggregate(true,
-                    (prevValue, predicate) => prevValue && predicate(c));
+            string s = SearchBox.Text;
+            if (!string.IsNullOrEmpty(s))
+            {
+                if (filters == null & view == null)
+                {
+                    filters = new Dictionary<string, Predicate<UsersDTO>>();
+                    view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                    view.Filter = FilterJob;
+                }
+                RemoveFilter("SEARCH");
+                AddFilterAndRefresh("SEARCH", item => item.name.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                                        item.email.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                                        item.username.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
         }
 
         private void organization_cbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (filters == null && view == null)
-            {
-                filters = new Dictionary<string, Predicate<UsersDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
-            OrganizationsDTO a = (OrganizationsDTO )organization_cbx.SelectedItem;
-            
+            OrganizationsDTO a = (OrganizationsDTO)organization_cbx.SelectedItem; 
             if(a != null)
             {
+                if (filters == null & view == null)
+                {
+                    filters = new Dictionary<string, Predicate<UsersDTO>>();
+                    view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                    view.Filter = FilterJob;
+                }
                 string s = a.name;
                 if (!string.IsNullOrEmpty(s))
                 {
@@ -98,15 +102,15 @@ namespace JobsManagementApp.View.Admin.Staff
         }
         private void position_cbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (filters == null && view == null)
-            {
-                filters = new Dictionary<string, Predicate<UsersDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
             PositionsDTO a = (PositionsDTO)position_cbx.SelectedItem;
             if(a != null)
             {
+                if (filters == null & view == null)
+                {
+                    filters = new Dictionary<string, Predicate<UsersDTO>>();
+                    view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                    view.Filter = FilterJob;
+                }
                 string s = a.name;
                 if (!string.IsNullOrEmpty(s))
                 {
@@ -119,13 +123,12 @@ namespace JobsManagementApp.View.Admin.Staff
 
         private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
         {
-            if (filters == null && view == null)
+            if (filters != null & view != null)
             {
-                filters = new Dictionary<string, Predicate<UsersDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
+                ResetFilter();
             }
-            ResetFilter();
+            filters = null;
+            view = null;
             organization_cbx.SelectedIndex = -1;
             position_cbx.SelectedIndex = -1;
             SearchBox.Text = "";
@@ -134,7 +137,7 @@ namespace JobsManagementApp.View.Admin.Staff
 
         private void organ_popup_btn_handle(object sender, RoutedEventArgs e)
         {
-            if (filters == null && view == null)
+            if (filters == null & view == null)
             {
                 filters = new Dictionary<string, Predicate<UsersDTO>>();
                 view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
@@ -172,7 +175,7 @@ namespace JobsManagementApp.View.Admin.Staff
 
         private void position_popup_btn_handle(object sender, RoutedEventArgs e)
         {
-            if (filters == null && view == null)
+            if (filters == null & view == null)
             {
                 filters = new Dictionary<string, Predicate<UsersDTO>>();
                 view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
@@ -189,17 +192,12 @@ namespace JobsManagementApp.View.Admin.Staff
             SearchBox.Text = "";
         }
 
-        private void organization_cbx2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void StaffManagePage_Loaded(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ResetFilter();
-            organization_cbx.SelectedIndex = -1;
-            position_cbx.SelectedIndex = -1;
-            SearchBox.Text = "";
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
             filters = null;
             view = null;
         }

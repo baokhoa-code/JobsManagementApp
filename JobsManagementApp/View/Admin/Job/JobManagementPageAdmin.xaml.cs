@@ -511,5 +511,15 @@ namespace JobsManagementApp.View.Admin.Job
             filters = null;
             view = null;
         }
+
+        private void JobManagePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
+        }
     }
 }

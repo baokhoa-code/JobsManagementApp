@@ -224,5 +224,15 @@ namespace JobsManagementApp.View.Admin.Report
             day_range_rbtn.IsChecked = false;
             week_rbtn.IsChecked = false;
         }
+
+        private void ReportManagePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
+        }
     }
 }

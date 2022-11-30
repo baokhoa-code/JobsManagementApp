@@ -17,7 +17,6 @@ namespace JobsManagementApp.Service
         {
 
         }
-
         private static UserService? _ins;
         public static UserService? Ins
         {
@@ -31,6 +30,36 @@ namespace JobsManagementApp.Service
             }
             private set => _ins = value;
         }
+
+        public UsersDTO GetLatestUser()
+        {
+            UsersDTO u = null;
+            try
+            {
+                DatabaseConnection dbc = new DatabaseConnection();
+                string code = "";
+                MySqlDataReader reader;
+
+                code = "SELECT* FROM USER WHERE ID = (SELECT MAX(ID) FROM USER)";
+                dbc.command.CommandText = code;
+                dbc.connection.Open();
+                reader = dbc.command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    u = new UsersDTO(Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), Int16.Parse(reader.GetString(14)));
+                }
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return u;
+        }
+
         public async Task<(bool, string)> ChangePassword(string username, string newpass)
         {
             try
@@ -133,6 +162,22 @@ namespace JobsManagementApp.Service
                 dbc1.command.ExecuteNonQuery();
                 dbc1.connection.Close();
 
+                DatabaseConnection dbc2 = new DatabaseConnection();
+                string code2 = "";
+                code2 = "UPDATE JOB SET ASSIGNEE_NAME = '" + u.name + "'  WHERE ASSIGNEE_ID = " + u.id + " AND ASSIGNEE_TYPE = 'USER' ";
+                dbc2.command.CommandText = code2;
+                dbc2.connection.Open();
+                dbc2.command.ExecuteNonQuery();
+                dbc2.connection.Close();
+
+                DatabaseConnection dbc3 = new DatabaseConnection();
+                string code3 = "";
+                code3 = "UPDATE JOB SET ASSIGNOR_NAME = '" + u.name + "'  WHERE ASSIGNOR_ID = " + u.id + " AND ASSIGNOR_TYPE = 'USER' ";
+                dbc3.command.CommandText = code3;
+                dbc3.connection.Open();
+                dbc3.command.ExecuteNonQuery();
+                dbc3.connection.Close();
+
                 return (true, "Update Success");
             }
             catch (Exception)
@@ -142,7 +187,7 @@ namespace JobsManagementApp.Service
         }
         public async Task<UsersDTO> GetUser(int id)
         {
-            UsersDTO u = new UsersDTO();
+            UsersDTO u = null;
             try
             {
                 DatabaseConnection dbc = new DatabaseConnection();

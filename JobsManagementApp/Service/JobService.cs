@@ -504,7 +504,7 @@ namespace JobsManagementApp.Service
                 dbc1.connection.Close();
                 DatabaseConnection dbc2 = new DatabaseConnection();
                 string code2 = "";
-                code2 = "DELETE FROM REPORT WHERE JOB_ID = @id";
+                code2 = "UPDATE JOB SET DEPENDENCY_ID = -1, DEPENDENCY_NAME = 'NONE' WHERE DEPENDENCY_ID = " + id + " ";
                 dbc2.command.CommandText = code2;
                 dbc2.command.Parameters.AddWithValue("@id", id);
                 dbc2.connection.Open();

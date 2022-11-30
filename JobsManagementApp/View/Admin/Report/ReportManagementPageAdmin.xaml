@@ -10,6 +10,7 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
+      Loaded="ReportManagePage_Loaded"
       FontFamily="Roboto"
       Name="ReportManagePage"
       Title="JobManagementAdmin">

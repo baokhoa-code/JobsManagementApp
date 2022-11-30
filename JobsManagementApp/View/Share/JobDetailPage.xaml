@@ -216,8 +216,10 @@
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
+                                                        <TextBlock><Run Text="{Binding id}" /></TextBlock>
+                                                        <TextBlock Text="-"/>
                                                         <TextBlock><Run Text="{Binding type}" /></TextBlock>
-                                                        <TextBlock Text=" - "/>
+                                                        <TextBlock Text="-"/>
                                                         <TextBlock><Run Text="{Binding name}" /></TextBlock>
                                                     </StackPanel>
                                                 </DataTemplate>

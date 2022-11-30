@@ -12,6 +12,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
+      Loaded="StaffManagePage_Loaded"
       Name="StaffManagePage"
       Title="StaffManagementPageAdmin">
 
@@ -35,11 +36,12 @@
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal">
                 <Button 
+                    Click='reset_filters_btn_handle'
                     FontSize="18" 
                     Background="Transparent"
                     Foreground="#232360" 
                     FontWeight="Bold"
-                    Command="{Binding LoadCM}" BorderBrush="Transparent" Height="32"
+                    Command="{Binding RefreshCM}" BorderBrush="Transparent" Height="32"
                         >
                     <StackPanel Orientation="Horizontal">
                         <wpf:PackIcon Kind="Reload" Height="24" Width="24"/>
@@ -47,16 +49,6 @@
                     </StackPanel>
 
                 </Button>
-                <Button
-                    Click='reset_filters_btn_handle'
-                    Padding="0"
-                    wpf:ButtonProgressAssist.Value="-1"
-                    wpf:ButtonProgressAssist.IsIndicatorVisible="True"
-                    wpf:ButtonProgressAssist.IsIndeterminate="True"
-                    Height="30"
-                    wpf:ButtonAssist.CornerRadius="10" 
-                    Content='Reset Filters'
-                    Background="#FF23DF00" BorderBrush="Gray" Width="100" Foreground='White'/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
@@ -387,7 +379,6 @@
                                                 ItemsSource="{Binding OrganizationSource}"   
                                                 DisplayMemberPath="name"  
                                                 SelectedItem="{Binding CurrentOrganization, Mode=TwoWay}"
-                                                SelectionChanged='organization_cbx2_SelectionChanged'
                                                 x:Name='organization_cbx2'
                                                 Width="250"
                                                 Height="38"
@@ -545,7 +536,7 @@
                     Height="40"
                     Width="130" VerticalAlignment='Center' HorizontalAlignment='Left' Margin='1155,0,0,0'>
                     <Button
-                        Click="Button_Click"
+                        Click="reset_filters_btn_handle"
                         Command="{Binding OpenAddStaffWindowCM}"
                         Padding="0"
                         Style="{StaticResource MaterialDesignRaisedButton}"

@@ -11,6 +11,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1300"
       FontFamily="Roboto"
+      Loaded="ReportListForSingleAssigneePage_Loaded"
       Name="ReportListForSingleAssigneePage"
       Title="JobManagementAdmin">
 
@@ -68,15 +69,17 @@
                     Foreground="#232360" 
                     FontWeight="Bold" VerticalAlignment='Bottom' Width='235' Margin='0,0,0,0'/>
                 <Label 
-                    Content="Assignee Job List" 
+                    Content="Assignee Report List" 
                     FontSize="28" 
                     Foreground="#232360" 
                     FontWeight="Bold" VerticalAlignment='Center' Margin='185,0,0,0'/>
                 <Button
+                    Click="Button_Click_1"
+                    Command="{Binding OpenAddReportWindowCM}"
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="45"
-                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="135" Margin='380,8,0,0'>
+                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="135" Margin='340,8,0,0'>
                     <StackPanel Orientation='Horizontal'
                         Height="50"
                         Width="130" 
@@ -113,7 +116,8 @@
                                 Height="40"
                                 Width="130" Margin='10,12.5,0,0'>
                                 <Button
-                                    Click='reset_filters_btn_handle'
+                                    Click='Button_Click_1'
+                                    Command="{Binding LoadCM}"
                                     Padding="0"
                                     materialDesign:ButtonProgressAssist.Value="-1"
                                     materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
@@ -514,7 +518,8 @@
                                                                     Cursor="Hand" />
                                                                 <i:Interaction.Triggers>
                                                                     <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                                        <i:InvokeCommandAction Command="{Binding ElementName=_ListView, Path=DataContext.OpenEditReportPageCM}" />
+                                                                        <i:InvokeCommandAction Command="{Binding ElementName=ReportListForSingleAssigneePage, Path=DataContext.OpenEditReportPageCM}" 
+                                                                                               CommandParameter="{Binding ElementName=ReportListForSingleAssigneePage}"/>
                                                                     </i:EventTrigger>
                                                                 </i:Interaction.Triggers>
                                                             </Border>

@@ -33,6 +33,9 @@ namespace JobsManagementApp.View.Share
             InitializeComponent();
 
         }
+        private void loaded_handle(object sender, RoutedEventArgs e)
+        {
+        }
         public void ClearFilters()
         {
             filters.Clear();
@@ -68,79 +71,82 @@ namespace JobsManagementApp.View.Share
 
         private void job_type_cbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(filters == null && view == null)
+            if (job_type_cbx.SelectedIndex != -1)
             {
-                filters = new Dictionary<string, Predicate<JobsDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
-            
-            ComboBoxItem s = (ComboBoxItem)job_type_cbx.SelectedItem;
+                if (filters == null & view == null)
+                {
+                    filters = new Dictionary<string, Predicate<JobsDTO>>();
+                    view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                    view.Filter = FilterJob;
+                }
+                ComboBoxItem s = (ComboBoxItem)job_type_cbx.SelectedItem;
 
-            switch (s.Content.ToString())
-            {
-                case "ALL JOBS":
-                    {
-                        RemoveFilter("WAITING");
-                        RemoveFilter("PENDING");
-                        RemoveFilter("LATE");
-                        RemoveFilter("COMPLETE LATE");
-                        RemoveFilter("COMPLETE SOON");
-                        return;
-                    }
-                case "WAITING":
-                    {
-                        RemoveFilter("PENDING");
-                        RemoveFilter("LATE");
-                        RemoveFilter("COMPLETE LATE");
-                        RemoveFilter("COMPLETE SOON");
-                        AddFilterAndRefresh("WAITING", item => item.stage == "WAITING");
-                        return;
-                    }
-                case "PENDING":
-                    {
-                        RemoveFilter("WAITING");
-                        RemoveFilter("LATE");
-                        RemoveFilter("COMPLETE LATE");
-                        RemoveFilter("COMPLETE SOON");
-                        AddFilterAndRefresh("PENDING", item => item.stage == "PENDING");
-                        return;
-                    }
-                case "LATE":
-                    {
-                        RemoveFilter("WAITING");
-                        RemoveFilter("PENDING");
-                        RemoveFilter("COMPLETE LATE");
-                        RemoveFilter("COMPLETE SOON");
-                        AddFilterAndRefresh("LATE", item => item.stage == "LATE");
-                        return;
-                    }
-                case "COMPLETE SOON":
-                    {
-                        RemoveFilter("WAITING");
-                        RemoveFilter("PENDING");
-                        RemoveFilter("LATE");
-                        RemoveFilter("COMPLETE LATE");
-                        AddFilterAndRefresh("COMPLETE SOON", item => item.stage == "COMPLETE SOON");
-                        return;
-                    }
-                case "COMPLETE LATE":
-                    {
-                        RemoveFilter("WAITING");
-                        RemoveFilter("PENDING");
-                        RemoveFilter("LATE");
-                        RemoveFilter("COMPLETE SOON");
-                        AddFilterAndRefresh("COMPLETE LATE", item => item.stage == "COMPLETE LATE");
-                        return;
-                    }
-                default:
-                    // code block
-                    break;
+                switch (s.Content.ToString())
+                {
+                    case "ALL JOBS":
+                        {
+                            RemoveFilter("WAITING");
+                            RemoveFilter("PENDING");
+                            RemoveFilter("LATE");
+                            RemoveFilter("COMPLETE LATE");
+                            RemoveFilter("COMPLETE SOON");
+                            return;
+                        }
+                    case "WAITING":
+                        {
+                            RemoveFilter("PENDING");
+                            RemoveFilter("LATE");
+                            RemoveFilter("COMPLETE LATE");
+                            RemoveFilter("COMPLETE SOON");
+                            AddFilterAndRefresh("WAITING", item => item.stage == "WAITING");
+                            return;
+                        }
+                    case "PENDING":
+                        {
+                            RemoveFilter("WAITING");
+                            RemoveFilter("LATE");
+                            RemoveFilter("COMPLETE LATE");
+                            RemoveFilter("COMPLETE SOON");
+                            AddFilterAndRefresh("PENDING", item => item.stage == "PENDING");
+                            return;
+                        }
+                    case "LATE":
+                        {
+                            RemoveFilter("WAITING");
+                            RemoveFilter("PENDING");
+                            RemoveFilter("COMPLETE LATE");
+                            RemoveFilter("COMPLETE SOON");
+                            AddFilterAndRefresh("LATE", item => item.stage == "LATE");
+                            return;
+                        }
+                    case "COMPLETE SOON":
+                        {
+                            RemoveFilter("WAITING");
+                            RemoveFilter("PENDING");
+                            RemoveFilter("LATE");
+                            RemoveFilter("COMPLETE LATE");
+                            AddFilterAndRefresh("COMPLETE SOON", item => item.stage == "COMPLETE SOON");
+                            return;
+                        }
+                    case "COMPLETE LATE":
+                        {
+                            RemoveFilter("WAITING");
+                            RemoveFilter("PENDING");
+                            RemoveFilter("LATE");
+                            RemoveFilter("COMPLETE SOON");
+                            AddFilterAndRefresh("COMPLETE LATE", item => item.stage == "COMPLETE LATE");
+                            return;
+                        }
+                    default:
+                        // code block
+                        break;
+                }
             }
+
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (filters == null && view == null)
+            if (filters == null & view == null)
             {
                 filters = new Dictionary<string, Predicate<JobsDTO>>();
                 view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
@@ -151,7 +157,12 @@ namespace JobsManagementApp.View.Share
         }
         private void time_filter_handler(object sender, RoutedEventArgs e)
         {
-
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             int CurrentYear = DateTime.Now.Year;
             int LastYear = CurrentYear - 1;
             int CurrentMonth = DateTime.Now.Month;
@@ -296,6 +307,12 @@ namespace JobsManagementApp.View.Share
         }
         private void field_filter_handler(object sender, RoutedEventArgs e)
         {
+            if (filters == null & view == null)
+            {
+                filters = new Dictionary<string, Predicate<JobsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
             CategoriesDTO cate = (CategoriesDTO)category_cbx.SelectedItem;
 
             string dependency = (string)dependency_cbx.SelectedValue;
@@ -332,20 +349,6 @@ namespace JobsManagementApp.View.Share
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void date_range_checked_handler(object sender, RoutedEventArgs e)
         {
             if (tab_control.Visibility == Visibility.Collapsed)
@@ -364,12 +367,6 @@ namespace JobsManagementApp.View.Share
 
         private void date_filter_btn_handle(object sender, RoutedEventArgs e)
         {
-            if (filters == null && view == null)
-            {
-                filters = new Dictionary<string, Predicate<JobsDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
             popupnhe.IsOpen = !popupnhe.IsOpen;
             if (ShadowMask.Visibility == Visibility.Visible)
                 ShadowMask.Visibility = Visibility.Collapsed;
@@ -387,7 +384,7 @@ namespace JobsManagementApp.View.Share
 
         private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
         {
-            if (filters == null && view == null)
+            if (filters == null & view == null)
             {
                 filters = new Dictionary<string, Predicate<JobsDTO>>();
                 view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
@@ -402,7 +399,7 @@ namespace JobsManagementApp.View.Share
 
         private void filter_btn_handle(object sender, RoutedEventArgs e)
         {
-            if (filters == null && view == null)
+            if (filters == null & view == null)
             {
                 filters = new Dictionary<string, Predicate<JobsDTO>>();
                 view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
@@ -423,6 +420,54 @@ namespace JobsManagementApp.View.Share
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            category_cbx.SelectedIndex = -1;
+            dependency_cbx.SelectedIndex = -1;
+            assignor_cbx.SelectedIndex = -1;
+            SearchBox.Text = "";
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            category_cbx.SelectedIndex = -1;
+            dependency_cbx.SelectedIndex = -1;
+            assignor_cbx.SelectedIndex = -1;
+            SearchBox.Text = "";
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
+        }
+
+        private void JobManagePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
+        }
+
+        private void JobListForSingleAssigneePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
         }
     }
 }

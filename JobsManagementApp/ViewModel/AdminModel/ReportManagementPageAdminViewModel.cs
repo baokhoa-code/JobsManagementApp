@@ -15,7 +15,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class ReportManagementPageAdminViewModel : BaseViewModel
     {
-        public static Admin admin;
+        public Admin admin { get; set; }
         private bool _IsGettingSource;
         public bool IsGettingSource
         {

@@ -74,13 +74,21 @@ namespace JobsManagementApp.ViewModel.ShareModel
             {
                 MaskName = p;
             });
-            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return assignee != null; }, async (p) =>
             {
-
+                ReportAddWindow dba = new ReportAddWindow();
+                ReportAddViewModel vm = new ReportAddViewModel(admin, Reports, (int) assignee.id);
+                MaskName.Visibility = Visibility.Visible;
+                vm.Mask = MaskName;
+                dba.DataContext = vm;
+                dba.ShowDialog();
             });
-            OpenEditReportPageCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            OpenEditReportPageCM = new RelayCommand<Page>((p) => { return SelectedItem != null; }, async (p) =>
             {
-
+                ReportDetailViewModel vm = new ReportDetailViewModel(admin, SelectedItem);
+                ReportDetailPage dashboardpage = new ReportDetailPage();
+                dashboardpage.DataContext = vm;
+                p.NavigationService.Navigate(dashboardpage);
             });
             DeleteReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
@@ -116,6 +124,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 }
             });
         }
+        
         public async Task Load()
         {
             try
@@ -128,6 +137,11 @@ namespace JobsManagementApp.ViewModel.ShareModel
                     Reports = new ObservableCollection<ReportsDTO>(await ReportService.Ins.GetAllReportByAssigneeID("USER", (int)assignee.id));
                     assigneeId = (int)assignee.id;
                     assigneeName = assignee.name;
+                }
+                else
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Chosen staff is not exist!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
                 }
 
                 IsGettingSource = false;

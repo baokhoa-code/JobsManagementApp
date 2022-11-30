@@ -165,6 +165,7 @@
                                 x:Name="job_assignee"
                                 ItemsSource="{Binding AssigneeSource}" 
                                 SelectedItem="{Binding jobAssignee}"
+                                IsHitTestVisible="{Binding IsAssigneeChanagable}"
                                 wpf:HintAssist.Hint="Can be empty"
                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                 Height="30"
@@ -175,13 +176,11 @@
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock>
-                                            <Run Text="{Binding type}" />
-                                            </TextBlock>
-                                            <TextBlock Text=" - "/>
-                                            <TextBlock>
-                                            <Run Text="{Binding name}" />
-                                            </TextBlock>
+                                            <TextBlock><Run Text="{Binding id}" /></TextBlock>
+                                            <TextBlock Text="-"/>
+                                            <TextBlock><Run Text="{Binding type}" /></TextBlock>
+                                            <TextBlock Text="-"/>
+                                            <TextBlock><Run Text="{Binding name}" /></TextBlock>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>

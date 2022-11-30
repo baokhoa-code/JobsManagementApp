@@ -1,4 +1,5 @@
-﻿using JobsManagementApp.Model;
+﻿
+using JobsManagementApp.Model;
 using JobsManagementApp.Service;
 using JobsManagementApp.View.Share;
 using System;
@@ -18,7 +19,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
     {
         public Admin admin { get; set; }
         public int assigneeid { get; set; }
-        public UsersDTO assignee { get; set; }
+        public UsersDTO assignee;
         private string _assigneeName;
         public string assigneeName
         {
@@ -31,6 +32,10 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _assigneeId; }
             set { _assigneeId = value; OnPropertyChanged(); }
         }
+        
+
+
+
         private bool _IsGettingSource;
         public bool IsGettingSource
         {
@@ -54,12 +59,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
         {
             get { return _AssignorSource; }
             set { _AssignorSource = value; OnPropertyChanged(); }
-        }
-        private List<string> _AssigneeSource;
-        public List<string> AssigneeSource
-        {
-            get { return _AssigneeSource; }
-            set { _AssigneeSource = value; OnPropertyChanged(); }
         }
         private ComboBoxItem _SelectedType;
         public ComboBoxItem SelectedType
@@ -90,6 +89,12 @@ namespace JobsManagementApp.ViewModel.ShareModel
         {
             get { return _CurrentWeekRange; }
             set { _CurrentWeekRange = value; OnPropertyChanged(); }
+        }
+        private Page _CurrentPage;
+        public Page CurrentPage
+        {
+            get { return _CurrentPage; }
+            set { _CurrentPage = value; OnPropertyChanged(); }
         }
         public ListView listView;
         public static Grid MaskName { get; set; }
@@ -190,7 +195,12 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _SelectedItem2; }
             set { _SelectedItem2 = value; OnPropertyChanged(); }
         }
-        public ICommand GoBackCM { get; set; }
+        private int _SelectedIndexnhe;
+        public int SelectedIndexnhe
+        {
+            get { return _SelectedIndexnhe; }
+            set { _SelectedIndexnhe = value; OnPropertyChanged(); }
+        }
         public ICommand OpenAddJobWindowCM { get; set; }
         public ICommand OpenEditJobCM { get; set; }
         public ICommand DeleteJobCM { get; set; }
@@ -200,6 +210,9 @@ namespace JobsManagementApp.ViewModel.ShareModel
         public ICommand ListYearChangeCM { get; set; }
         public ICommand LoadFilterCbxCM { get; set; }
         public ICommand LoadCM { get; set; }
+        public ICommand LoadCM2 { get; set; }
+        public ICommand GoBackCM { get; set; }
+
         private ObservableCollection<JobsDTO> _Jobs;
         public ObservableCollection<JobsDTO> Jobs
         {
@@ -217,7 +230,17 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _SelectedItem; }
             set { _SelectedItem = value; OnPropertyChanged(); }
         }
-        public ObservableCollection<JobsDTO> JobsStore { get; set; }
+        private ObservableCollection<JobsDTO> _JobsStore;
+        public ObservableCollection<JobsDTO> JobsStore
+        {
+
+            get => _JobsStore;
+            set
+            {
+                _JobsStore = value;
+                OnPropertyChanged();
+            }
+        }
         public JobListForSingleAssigneeViewModel(Admin a, int assignee_id)
         {
             admin = new Admin(a);
@@ -225,28 +248,56 @@ namespace JobsManagementApp.ViewModel.ShareModel
             CategorySource = new ObservableCollection<CategoriesDTO>();
             DependencySource = new List<string>();
             AssignorSource = new List<string>();
+
             //GET CURRENT TIME
             CurrentYear = DateTime.Now.Year.ToString();
             CurrentMonth = DateTime.Now.Month.ToString();
             CurrentDate = DateTime.Now.Day.ToString();
+            SelectedIndexnhe = -1;
 
             //DEFINE COMMANDS
-            LoadCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            GoBackCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
+            {
+                p.NavigationService.GoBack();
+            });
+            LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 Load();
+
+            });
+            LoadCM2 = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+
+                Load2();
+
+            });
+            OpenAddJobWindowCM = new RelayCommand<object>((p) => { return assignee != null; }, async (p) =>
+            {
+                JobAddWindow dba = new JobAddWindow();
+                JobAddViewModel vm = new JobAddViewModel(admin, this);
+                MaskName.Visibility = Visibility.Visible;
+                vm.Mask = MaskName;
+                dba.DataContext = vm;
+                dba.ShowDialog();
+
+            });
+            OpenEditJobCM = new RelayCommand<Page>((p) => { return SelectedItem != null; }, (p) =>
+            {
+                JobDetailViewModel vm = new JobDetailViewModel(admin, SelectedItem);
+                JobDetailPage dashboardpage = new JobDetailPage();
+                dashboardpage.DataContext = vm;
+                p.NavigationService.Navigate(dashboardpage);
 
             });
             LoadFilterCbxCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
 
-                    InsertCategoryCombobox();
-                    InsertAssignorCombobox();
-                    InsertDependencyCombobox();
-                
-
+                InsertCategoryCombobox();
+                InsertAssignorCombobox();
+                InsertDependencyCombobox();
 
             });
-            DeleteJobCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            DeleteJobCM = new RelayCommand<Window>((p) => { return SelectedItem != null; }, async (p) =>
             {
                 MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this Job and it related reports?", MessageType.Warning, MessageButtons.YesNo);
                 result.ShowDialog();
@@ -269,8 +320,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                 break;
                             }
                         }
-                        InsertAssignorCombobox();
-                        InsertDependencyCombobox();
                         MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
                         mb.ShowDialog();
                     }
@@ -284,16 +333,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
             MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
             {
                 MaskName = p;
-            });
-            GoBackCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
-            {
-                p.NavigationService.GoBack();
-            });
-            OpenAddJobWindowCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            {
-                //JobAddWindow wd = new JobAddWindow();
-                //MaskName.Visibility = Visibility.Visible;
-                //wd.ShowDialog();
             });
             ListWeekRageChangeCM = new RelayCommand<ListView>((p) => { return CurrentWeekRange != null; }, (p) =>
             {
@@ -324,34 +363,15 @@ namespace JobsManagementApp.ViewModel.ShareModel
             });
         }
         //INTERNAL FUNCTIONS
-        public async Task Load()
+        public async Task Load2()
         {
-
+            SelectedIndexnhe = -1;
             try
             {
-                IsGettingSource = true;
-                assignee = await UserService.Ins.GetUser(assigneeid);
-                
-                if (assignee != null)
-                {
-                    Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJobByAssigneeID("USER", (int)assignee.id));
-                    assigneeId = (int)assignee.id;
-                    assigneeName = assignee.name;
-                }
-                    
+
+                Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJobByAssigneeID("USER", (int)assignee.id));
                 JobsStore = new ObservableCollection<JobsDTO>(Jobs);
-                InsertCategoryCombobox();
 
-                //INSERT COMBOBOXES
-                InsertWeekCombobox();
-                InsertMonthCombobox(CurrentMonth);
-                InsertYearCombobox();
-
-                //GET CURRENT WEEK, MONTH, YEAR JOB AMOUNT
-                InsertWeekJobAmount();
-                InsertMonthJobAmount();
-                InsertYearJobAmount();
-                IsGettingSource = false;
             }
             catch (MySqlException e)
             {
@@ -365,6 +385,50 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
                 mb.ShowDialog();
             }
+        }
+        public async Task Load()
+        {
+            assignee = await UserService.Ins.GetUser(assigneeid);
+            if (assignee != null)
+            {
+                assigneeId = (int)assignee.id;
+                assigneeName = assignee.name;
+                try
+                {
+                    IsGettingSource = true;
+                    Jobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJobByAssigneeID("USER", (int)assignee.id));
+                    JobsStore = new ObservableCollection<JobsDTO>(Jobs);
+                    InsertCategoryCombobox();
+
+                    //INSERT COMBOBOXES
+                    InsertWeekCombobox();
+                    InsertMonthCombobox(CurrentMonth);
+                    InsertYearCombobox();
+
+                    //GET CURRENT WEEK, MONTH, YEAR JOB AMOUNT
+                    InsertWeekJobAmount();
+                    InsertMonthJobAmount();
+                    InsertYearJobAmount();
+                    IsGettingSource = false;
+                }
+                catch (MySqlException e)
+                {
+                    Console.WriteLine(e);
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
+            }
+            else
+            {
+                MessageBoxCustom mb = new MessageBoxCustom("Error", "Chosen assignee is not exist!", MessageType.Error, MessageButtons.OK);
+            }
+
         }
         public void InsertWeekCombobox()
         {
@@ -407,12 +471,12 @@ namespace JobsManagementApp.ViewModel.ShareModel
         public void InsertDependencyCombobox()
         {
 
-            DependencySource = JobService.Ins.InsertDependencyComboboxByUserID(assigneeid);
+            DependencySource = JobService.Ins.InsertDependencyCombobox();
         }
         public void InsertAssignorCombobox()
         {
 
-            AssignorSource = JobService.Ins.InsertAssignorComboboxByUserID(assigneeid); 
+            AssignorSource = JobService.Ins.InsertAssignorCombobox();
         }
         public void InsertWeekJobAmount()
         {
