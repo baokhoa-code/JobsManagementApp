@@ -88,7 +88,6 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffAddWindow.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffEditAndDetailPage.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\UserInformationPage.g.cs
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\User\DashBoardUser.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\App.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp_MarkupCompile.cache
@@ -111,7 +110,6 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\ReportListForSingleAssignee.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\StaffEditAndDetailPage.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\Share\UserInformationPage.baml
-E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\User\DashBoardUser.baml
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp.g.resources
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp.GeneratedMSBuildEditorConfig.editorconfig
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp.AssemblyInfoInputs.cache
@@ -123,3 +121,7 @@ E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-window
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp.pdb
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\JobsManagementApp.genruntimeconfig.cache
 E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\ref\JobsManagementApp.dll
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\User\MainWindowUser.g.cs
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\User\MainWindowUser.baml
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\User\DashBoard\DashBoardPageUser.g.cs
+E:\CODE\NLCN\PROJECT\JobsManagementApp\JobsManagementApp\obj\Debug\net6.0-windows\View\User\DashBoard\DashBoardPageUser.baml

@@ -15,15 +15,30 @@ using System.Windows.Shapes;
 namespace JobsManagementApp.View.User
 {
     /// <summary>
-    /// Interaction logic for DashBoardUser.xaml
+    /// Interaction logic for MainWindowUser.xaml
     /// </summary>
-    public partial class DashBoardUser : Window
+    public partial class MainWindowUser : Window
     {
-        public DashBoardUser()
+        public MainWindowUser()
         {
             InitializeComponent();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_close_click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button_minimize_click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void btn5_Checked(object sender, RoutedEventArgs e)
         {
 
         }

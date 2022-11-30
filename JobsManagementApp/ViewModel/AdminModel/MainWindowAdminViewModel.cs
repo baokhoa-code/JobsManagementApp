@@ -1,6 +1,7 @@
 ﻿using JobsManagementApp.View.General;
 using JobsManagementApp.View.Admin;
 using JobsManagementApp.View.User;
+using JobsManagementApp.ViewModel.GeneralModel;
 using JobsManagementApp.Service;
 using System;
 using System.Collections.Generic;

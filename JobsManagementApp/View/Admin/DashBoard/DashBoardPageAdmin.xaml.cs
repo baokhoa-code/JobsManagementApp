@@ -411,5 +411,15 @@ namespace JobsManagementApp.View.Admin.DashBoard
             filters = null;
             view = null;
         }
+
+        private void DashBoardPageAd_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
+        }
     }
 }

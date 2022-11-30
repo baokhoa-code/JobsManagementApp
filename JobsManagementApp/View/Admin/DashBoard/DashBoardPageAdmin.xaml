@@ -13,6 +13,7 @@
       Name="DashBoardPageAd"
       IsVisibleChanged="DashBoardPageAd_IsVisibleChanged"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      Loaded="DashBoardPageAd_Loaded"
       Title="UserHomePage">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

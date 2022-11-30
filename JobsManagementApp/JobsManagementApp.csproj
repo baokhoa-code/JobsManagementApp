@@ -79,8 +79,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModel\UserModel\" />
 	  <Folder Include="View\Admin\Statistic\" />
+	  <Folder Include="View\User\Job\" />
+	  <Folder Include="View\User\Statistic\" />
+	  <Folder Include="View\User\Report\" />
 	</ItemGroup>
 
 	<ItemGroup>

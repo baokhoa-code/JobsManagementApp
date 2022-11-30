@@ -259,18 +259,32 @@ namespace JobsManagementApp.ViewModel.ShareModel
             });
         }
 
-        public ReportDetailViewModel(UsersDTO u, JobsDTO job_t)
+        public ReportDetailViewModel(UsersDTO a, JobsDTO job_t)
         {
-            user = u;
+            user = a;
             job = new JobsDTO();
+            AssigneeChanagable = true;
             Reports = new ObservableCollection<ReportsDTO>();
             BackupReport = new ReportsDTO();
             CurrentReport = new ReportsDTO();
 
             //DEFINE COMMANDS
+            MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
+            {
+                MaskName = p;
+            });
             GoBackCM = new RelayCommand<Page>((p) => { return true; }, (p) =>
             {
                 p.NavigationService.GoBack();
+            });
+            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                ReportAddWindow dba = new ReportAddWindow();
+                ReportAddViewModel vm = new ReportAddViewModel(user, (int)job_t.id, Reports);
+                MaskName.Visibility = Visibility.Visible;
+                vm.Mask = MaskName;
+                dba.DataContext = vm;
+                dba.ShowDialog();
             });
             LoadCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
@@ -282,7 +296,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 }
                 else
                 {
-
                     try
                     {
                         Reports = new ObservableCollection<ReportsDTO>(await ReportService.Ins.GetAllReportByJobID((int)job.id));
@@ -299,8 +312,18 @@ namespace JobsManagementApp.ViewModel.ShareModel
                         MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
                         mb.ShowDialog();
                     }
-                    BackupReport = Reports[0];
-                    CurrentReport = new ReportsDTO(BackupReport);
+                    if (Reports.Count <= 0)
+                    {
+                        MessageBoxCustom result = new MessageBoxCustom("Warning", "The current job do not have any report!", MessageType.Warning, MessageButtons.OK);
+                        result.ShowDialog();
+                    }
+                    else
+                    {
+                        BackupReport = Reports[0];
+                        CurrentReport = new ReportsDTO(BackupReport);
+
+                    }
+
                 }
 
             });
@@ -413,8 +436,10 @@ namespace JobsManagementApp.ViewModel.ShareModel
                     }
                 }
             });
-
         }
+
+
+
         public ReportDetailViewModel(Admin a, ReportsDTO report_t)
         {
             admin = a;

@@ -3,6 +3,7 @@ using JobsManagementApp.View.Admin;
 using JobsManagementApp.View.User;
 using JobsManagementApp.Service;
 using JobsManagementApp.ViewModel.AdminModel;
+using JobsManagementApp.ViewModel.UserModel;
 using JobsManagementApp.Model;
 using System;
 using System.Collections.Generic;
@@ -338,8 +339,10 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                             MainWindowAdmin dba = new MainWindowAdmin();
                             MainWindowAdminViewModel vm = new MainWindowAdminViewModel(admin);
                             dba.DataContext = vm;
-                            //dba.img_avatar.ImageSource = new BitmapImage(new Uri(admin.avatar, UriKind.Relative));
                             dba.Show();
+                            Password = "";
+                            Username = "";
+                            SelectedRole = null;
                             LoginWindow.Close();
                             return;
                         }
@@ -357,9 +360,13 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                         }
                         else
                         {
-                            LoginWindow.Hide();
-                            DashBoardUser dbu = new DashBoardUser();
-                            dbu.Show();
+                            MainWindowUser dba = new MainWindowUser();
+                            MainWindowUserViewModel vm = new MainWindowUserViewModel(user);
+                            dba.DataContext = vm;
+                            dba.Show();
+                            Password = "";
+                            Username = "";
+                            SelectedRole = null;
                             LoginWindow.Close();
                             return;
                         }

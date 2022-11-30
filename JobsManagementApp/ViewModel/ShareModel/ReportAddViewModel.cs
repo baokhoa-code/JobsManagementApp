@@ -234,48 +234,16 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 reportCreatedTime =  p.Text.ToString();
             });
         }
-        public ReportAddViewModel(Admin a, ObservableCollection<ReportsDTO> Reports, int assignee_Id)
+
+        public ReportAddViewModel(UsersDTO a, int job_Id, ObservableCollection<ReportsDTO> Reports)
         {
-            admin = new Admin(a);
+            user = a;
             report = new ReportsDTO();
-            assigneeid = assignee_Id;
+            jobId = job_Id;
             //DEFINE COMMAND
-            LoadCM = new RelayCommand<Frame>((p) => { return true; }, async (p) =>
+            LoadCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                UsersDTO temp = await UserService.Ins.GetUser(assigneeid);
-                if(temp != null)
-                {
-                    reportTile = "";
-                    reportCreatedTime = "";
-                    reportDescription = "";
-                    SelectedAssignedJob = new JobsDTO(); ;
-                    SelectedIndexAssignedJob = -1;
-                    jobAssignor = "";
-                    jobAssignee = "";
-                    jobStartDate = "";
-                    try
-                    {
-                        AssignedJobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJobByAssigneeID("USER", (int)temp.id));
-                    }
-                    catch (MySqlException e)
-                    {
-                        Console.WriteLine(e);
-                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
-                        mb.ShowDialog();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
-                        mb.ShowDialog();
-                    }
-                }
-                else
-                {
-                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Assignee is not exist!", MessageType.Error, MessageButtons.OK);
-                    mb.ShowDialog();
-                }
-                
+                Load();
 
             });
             JobChangedCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
@@ -404,15 +372,51 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 reportCreatedTime = p.Text.ToString();
             });
         }
-        public ReportAddViewModel(UsersDTO u, int job_Id)
+
+
+
+        public ReportAddViewModel(Admin a, ObservableCollection<ReportsDTO> Reports, int assignee_Id)
         {
-            user = new UsersDTO(u);
+            admin = new Admin(a);
             report = new ReportsDTO();
-            jobId = job_Id;
+            assigneeid = assignee_Id;
             //DEFINE COMMAND
-            LoadCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            LoadCM = new RelayCommand<Frame>((p) => { return true; }, async (p) =>
             {
-                Load();
+                UsersDTO temp = await UserService.Ins.GetUser(assigneeid);
+                if(temp != null)
+                {
+                    reportTile = "";
+                    reportCreatedTime = "";
+                    reportDescription = "";
+                    SelectedAssignedJob = new JobsDTO(); ;
+                    SelectedIndexAssignedJob = -1;
+                    jobAssignor = "";
+                    jobAssignee = "";
+                    jobStartDate = "";
+                    try
+                    {
+                        AssignedJobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJobByAssigneeID("USER", (int)temp.id));
+                    }
+                    catch (MySqlException e)
+                    {
+                        Console.WriteLine(e);
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Assignee is not exist!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
+                
 
             });
             JobChangedCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
@@ -478,6 +482,11 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                         (bool isSuccess, string messageFromUpdate) = await ReportService.Ins.AddReport(report);
                                         if (isSuccess)
                                         {
+                                            ReportsDTO temp = ReportService.Ins.GetLatestReport();
+                                            if (temp != null)
+                                            {
+                                                Reports.Add(temp);
+                                            }
                                             MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
                                             mb.ShowDialog();
                                             report = new ReportsDTO();
