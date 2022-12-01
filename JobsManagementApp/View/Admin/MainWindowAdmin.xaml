@@ -219,7 +219,7 @@
                                 HorizontalAlignment="Center" Margin="0,130,0,0" FontWeight="Bold" FontFamily="Roboto" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                             <Label 
                                 Content='Admin'
-                                FontSize="14" 
+                                FontSize="16" 
                                 Foreground="#FF5F6388" 
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Center" Margin="0,155,0,0" FontWeight="Medium" Padding="0,0,0,0" FontFamily="Roboto Medium"/>

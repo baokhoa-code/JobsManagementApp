@@ -85,7 +85,7 @@ namespace JobsManagementApp.View.Share
                 view.Filter = FilterJob;
             }
             RemoveFilter("SEARCH");
-            AddFilterAndRefresh("SEARCH", item => item.tile.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 && item.job_name.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            AddFilterAndRefresh("SEARCH", item => item.tile.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 || item.job_name.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         private void date_range_checked_handler(object sender, RoutedEventArgs e)

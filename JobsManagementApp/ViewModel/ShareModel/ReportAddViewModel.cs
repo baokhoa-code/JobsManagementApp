@@ -545,6 +545,178 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 reportCreatedTime = p.Text.ToString();
             });
         }
+
+        public ReportAddViewModel(UsersDTO a, ObservableCollection<ReportsDTO> Reports, int assignee_Id)
+        {
+            user = a;
+            report = new ReportsDTO();
+            assigneeid = assignee_Id;
+            //DEFINE COMMAND
+            LoadCM = new RelayCommand<Frame>((p) => { return true; }, async (p) =>
+            {
+                UsersDTO temp = await UserService.Ins.GetUser(assigneeid);
+                if (temp != null)
+                {
+                    reportTile = "";
+                    reportCreatedTime = "";
+                    reportDescription = "";
+                    SelectedAssignedJob = new JobsDTO(); ;
+                    SelectedIndexAssignedJob = -1;
+                    jobAssignor = "";
+                    jobAssignee = "";
+                    jobStartDate = "";
+                    try
+                    {
+                        AssignedJobs = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJobByAssigneeID("USER", (int)temp.id));
+                    }
+                    catch (MySqlException e)
+                    {
+                        Console.WriteLine(e);
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Assignee is not exist!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
+
+
+            });
+            JobChangedCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                if (SelectedAssignedJob != null)
+                {
+                    jobAssignor = SelectedAssignedJob.assignor_id + ": "
+                        + SelectedAssignedJob.assignor_type + " - " + SelectedAssignedJob.assignor_name;
+                    jobAssignee = SelectedAssignedJob.assignee_id + ": "
+                        + SelectedAssignedJob.assignee_type + " - " + SelectedAssignedJob.assignee_name;
+                    jobStartDate = SelectedAssignedJob.start_date;
+                }
+
+
+            });
+            AddReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                if (string.IsNullOrEmpty(reportTile))
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Report tile cannot be empty!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                    report = new ReportsDTO();
+                }
+                else
+                {
+                    report.tile = reportTile;
+                    if (string.IsNullOrEmpty(reportDescription))
+                    {
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Report description cannot be empty!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                        report = new ReportsDTO();
+                    }
+                    else
+                    {
+                        report.description = reportDescription;
+                        if (string.IsNullOrEmpty(reportCreatedTime))
+                        {
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Report created time cannot be empty!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+                            report = new ReportsDTO();
+                        }
+                        else
+                        {
+                            report.created_time = reportCreatedTime;
+                            if (SelectedAssignedJob == null)
+                            {
+                                MessageBoxCustom mb = new MessageBoxCustom("Error", "You must choose specific job!", MessageType.Error, MessageButtons.OK);
+                                mb.ShowDialog();
+                                report = new ReportsDTO();
+                            }
+                            else
+                            {
+                                report.job_id = SelectedAssignedJob.id;
+                                report.job_name = SelectedAssignedJob.name;
+
+                                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to add this report?", MessageType.Warning, MessageButtons.YesNo);
+                                result.ShowDialog();
+
+                                if (result.DialogResult == true)
+                                {
+                                    try
+                                    {
+                                        (bool isSuccess, string messageFromUpdate) = await ReportService.Ins.AddReport(report);
+                                        if (isSuccess)
+                                        {
+                                            ReportsDTO temp = ReportService.Ins.GetLatestReport();
+                                            if (temp != null)
+                                            {
+                                                Reports.Add(temp);
+                                            }
+                                            MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
+                                            mb.ShowDialog();
+                                            report = new ReportsDTO();
+                                            reportTile = "";
+                                            reportCreatedTime = "";
+                                            reportDescription = "";
+                                        }
+                                        else
+                                        {
+                                            MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
+                                            mb.ShowDialog();
+                                        }
+                                    }
+                                    catch (MySqlException e)
+                                    {
+                                        Console.WriteLine(e);
+                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                                        mb.ShowDialog();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e);
+                                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                                        mb.ShowDialog();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            });
+            ClearInforCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                report = new ReportsDTO();
+                reportTile = "";
+                reportCreatedTime = "";
+                reportDescription = "";
+
+            });
+            CloseWindowCM = new RelayCommand<Window>((p) => { return p != null; }, async (p) =>
+            {
+                report = new ReportsDTO();
+                reportTile = "";
+                reportCreatedTime = "";
+                reportDescription = "";
+                SelectedAssignedJob = null;
+                AssignedJobs = null;
+                if (Mask != null)
+                    Mask.Visibility = Visibility.Collapsed;
+                p.Close();
+
+            });
+            SaveCreatedTimeCM = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
+            {
+                reportCreatedTime = p.Text.ToString();
+            });
+        }
+
         public async Task Load()
         {
             reportTile = "";

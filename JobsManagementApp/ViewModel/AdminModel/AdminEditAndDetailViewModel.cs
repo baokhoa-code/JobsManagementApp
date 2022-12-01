@@ -25,7 +25,7 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Text;
 
-namespace JobsManagementApp.ViewModel.ShareModel
+namespace JobsManagementApp.ViewModel.AdminModel
 {
     public class AdminEditAndDetailViewModel : BaseViewModel
     {
@@ -199,7 +199,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 }
                 else
                 {
-                    if (UserService.Ins.CheckExisted(staffUserName))
+                    if (AdminService.Ins.CheckExisted(staffUserName) && staffUserName != Backupadmin.username)
                     {
                         MessageBoxCustom mb = new MessageBoxCustom("Error", "Admin username already existed!", MessageType.Error, MessageButtons.OK);
                         mb.ShowDialog();
@@ -348,7 +348,8 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                                                             mb.ShowDialog();
                                                                                             main.adminName = admin.name;
                                                                                             main.adminAvatar = admin.avatar;
-                                                                                            main.adminAddress = admin.address;                                                                                        }
+                                                                                            main.adminAddress = admin.address;
+                                                                                        }
                                                                                         else
                                                                                         {
                                                                                             MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
@@ -422,7 +423,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             staffAddress = Backupadmin.address;
             staffEmail = Backupadmin.email;
             staffPhone = Backupadmin.phone;
-            staffAddress = Backupadmin.answer;
+            staffAddress = Backupadmin.address;
             staffUserName = Backupadmin.username;
             staffAnswer = Backupadmin.answer;
             staffAvatar = Backupadmin.avatar;

@@ -14,7 +14,7 @@
       FontFamily="Roboto"
       Loaded="JobListForSingleAssigneePage_Loaded"
       Name="JobListForSingleAssigneePage"
-      Title="JobManagementAdmin">
+      Title="JobListForSingleAssignees">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

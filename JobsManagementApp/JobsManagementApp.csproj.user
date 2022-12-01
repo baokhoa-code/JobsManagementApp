@@ -70,7 +70,13 @@
     <Compile Update="View\User\DashBoard\DashBoardPageUser.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\User\Job\JobManagementPageUser.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\User\MainWindowUser.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\User\Report\ReportManagementPageUser.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -141,7 +147,13 @@
     <Page Update="View\User\DashBoard\DashBoardPageUser.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\User\Job\JobManagementPageUser.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\User\MainWindowUser.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\User\Report\ReportManagementPageUser.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -2,6 +2,8 @@
 using JobsManagementApp.View.Admin;
 using JobsManagementApp.View.User;
 using JobsManagementApp.View.User.DashBoard;
+using JobsManagementApp.View.User.Job;
+using JobsManagementApp.View.User.Report;
 using JobsManagementApp.Service;
 using System;
 using System.Collections.Generic;
@@ -105,29 +107,32 @@ namespace JobsManagementApp.ViewModel.UserModel
             });
             LoadJobManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                //if (p != null)
-                //{
-                //    JobManagementPageAdminViewModel vm = new JobManagementPageAdminViewModel(user);
-                //    JobManagementPageAdmin dashboardpage = new JobManagementPageAdmin();
-                //    dashboardpage.DataContext = vm;
-                //    p.Content = dashboardpage;
-                //}
+                if (p != null)
+                {
+                    JobManagementPageUser dba = new JobManagementPageUser();
+                    JobManagementPageUserViewModel vm = new JobManagementPageUserViewModel(user, (int)user.id);
+                    dba.DataContext = vm;
+                    p.NavigationService.Navigate(dba);
+                }
 
             });
             LoadReportManagementPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                //ReportManagementPageAdminViewModel vm = new ReportManagementPageAdminViewModel(user);
-                //ReportManagementPageAdmin reportMangementPage = new ReportManagementPageAdmin();
-                //reportMangementPage.DataContext = vm;
-                //p.Content = reportMangementPage;
+                if (p != null)
+                {
+                    ReportManagementPageUser dba = new ReportManagementPageUser();
+                    ReportManagementPageUserViewModel vm = new ReportManagementPageUserViewModel(user, (int)user.id);
+                    dba.DataContext = vm;
+                    p.NavigationService.Navigate(dba);
+                }
             });
             LoadUserInfortPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                //UserInformationPage dba = new UserInformationPage();
-                //AdminEditAndDetailViewModel vm = new AdminEditAndDetailViewModel(user, this);
-                //dba.DataContext = vm;
-                //if (p != null)
-                //    p.Content = dba;
+                UserInformationPage dba = new UserInformationPage();
+                UserEditAndDetailViewModel vm = new UserEditAndDetailViewModel(user, this);
+                dba.DataContext = vm;
+                if (p != null)
+                    p.Content = dba;
             });
         }
     }
