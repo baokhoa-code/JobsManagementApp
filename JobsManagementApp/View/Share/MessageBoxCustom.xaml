@@ -89,7 +89,9 @@
                                 <Image x:Name="ImgMessage"
                                        Height="50"
                                        Margin="20 0 0 5" />
-                                <TextBlock x:Name="txtMessage"
+                                <TextBox x:Name="txtMessage"
+                                            IsReadOnly="True"
+                                            IsReadOnlyCaretVisible="True"
                                            TextWrapping="Wrap"
                                            Width="220"
                                            Height="45"
@@ -97,7 +99,7 @@
                                            Grid.Row="0"
                                            Margin="15 23 5 5"
                                            materialDesign:HintAssist.Hint=""
-                                           FontSize="18" />
+                                           FontSize="18" BorderBrush="Transparent" />
                             </StackPanel>
                         </materialDesign:TransitioningContent>
                     </Grid>
