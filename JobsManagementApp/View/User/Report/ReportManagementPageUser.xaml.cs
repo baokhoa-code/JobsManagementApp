@@ -211,18 +211,22 @@ namespace JobsManagementApp.View.User.Report
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+
             SearchBox.Text = "";
             month_rbtn.IsChecked = false;
             year_rbtn.IsChecked = false;
             day_range_rbtn.IsChecked = false;
             week_rbtn.IsChecked = false;
-            if (filters != null & view != null)
+            if (filters != null && view != null)
             {
                 ResetFilter();
             }
-            filters = null;
-            view = null;
-
+            else
+            {
+                filters = new Dictionary<string, Predicate<ReportsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
         }
 
         private void ReportListForSingleAssigneePage_Loaded(object sender, RoutedEventArgs e)

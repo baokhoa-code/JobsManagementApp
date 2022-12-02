@@ -30,27 +30,14 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation='Horizontal' Grid.Row="0" Margin="5,0,0,0">
-                <Button 
-                    Click="Button_Click_1"
-                    FontSize="18" 
-                    Background="Transparent"
-                    Foreground="#232360" 
-                    FontWeight="Bold"
-                    Command="{Binding LoadCM}" BorderBrush="Transparent" Height="32"
-                        >
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Reload" Height="24" Width="24"/>
-                        <Label Content="Refresh" Foreground="#232360" FontSize="18"/>
-                    </StackPanel>
-
-                </Button>
                 <Button
                     Click="Button_Click_1"
                     Command="{Binding OpenAddReportWindowCM}"
                     Padding="0"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="40"
-                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" Width="130" Margin='1015,0,0,0'>
+                    materialDesign:ButtonAssist.CornerRadius="10" Background="#FF5051F9" BorderBrush="#FF5051F9" 
+                    Width="130" Margin='1140,0,0,0'>
                     <StackPanel Orientation='Horizontal'
                         Height="50"
                         Width="130" 
@@ -88,7 +75,6 @@
                                 Width="130" Margin='10,12.5,0,0'>
                                 <Button
                                     Click='Button_Click_1'
-                                    Command="{Binding LoadCM}"
                                     Padding="0"
                                     materialDesign:ButtonProgressAssist.Value="-1"
                                     materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"

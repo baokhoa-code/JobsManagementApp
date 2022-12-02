@@ -445,12 +445,6 @@ namespace JobsManagementApp.View.Admin.Job
 
         private void category_popup_btn_handle(object sender, RoutedEventArgs e)
         {
-            if (filters == null & view == null)
-            {
-                filters = new Dictionary<string, Predicate<JobsDTO>>();
-                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
-                view.Filter = FilterJob;
-            }
             popupnhe1.IsOpen = !popupnhe1.IsOpen;
             if (ShadowMask.Visibility == Visibility.Visible)
                 ShadowMask.Visibility = Visibility.Collapsed;
@@ -461,7 +455,12 @@ namespace JobsManagementApp.View.Admin.Job
             assignor_cbx.SelectedIndex = -1;
             assignee_cbx.SelectedIndex = -1;
             SearchBox.Text = "";
-            ResetFilter();
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            filters = null;
+            view = null;
         }
 
         private void close_category_popup(object sender, RoutedEventArgs e)

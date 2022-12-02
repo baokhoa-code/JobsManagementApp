@@ -77,6 +77,16 @@ namespace JobsManagementApp.View.Admin.Staff
                                                         item.email.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
                                                         item.username.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
             }
+            else
+            {
+                if (filters == null & view == null)
+                {
+                    filters = new Dictionary<string, Predicate<UsersDTO>>();
+                    view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                    view.Filter = FilterJob;
+                }
+                RemoveFilter("SEARCH");
+            }
         }
 
         private void organization_cbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -121,7 +131,7 @@ namespace JobsManagementApp.View.Admin.Staff
             
         }
 
-        private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
+        private void reset_filters_btn_handle1(object sender, RoutedEventArgs e)
         {
             if (filters != null & view != null)
             {
@@ -132,6 +142,23 @@ namespace JobsManagementApp.View.Admin.Staff
             organization_cbx.SelectedIndex = -1;
             position_cbx.SelectedIndex = -1;
             SearchBox.Text = "";
+
+        }
+        private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
+        {
+            organization_cbx.SelectedIndex = -1;
+            position_cbx.SelectedIndex = -1;
+            SearchBox.Text = "";
+            if (filters != null & view != null)
+            {
+                ResetFilter();
+            }
+            else
+            {
+                filters = new Dictionary<string, Predicate<UsersDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
 
         }
 

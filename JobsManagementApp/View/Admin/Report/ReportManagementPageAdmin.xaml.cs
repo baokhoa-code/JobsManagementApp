@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace JobsManagementApp.View.Admin.Report
 {
@@ -85,7 +86,9 @@ namespace JobsManagementApp.View.Admin.Report
                 view.Filter = FilterJob;
             }
             RemoveFilter("SEARCH");
-            AddFilterAndRefresh("SEARCH", item => item.tile.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 && item.job_name.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            AddFilterAndRefresh("SEARCH", item => item.tile.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 || item.job_name.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+
+
         }
 
         private void date_range_checked_handler(object sender, RoutedEventArgs e)
@@ -208,26 +211,28 @@ namespace JobsManagementApp.View.Admin.Report
                 checkedValue.IsChecked = false;
         }
 
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             
-            if (filters != null & view != null)
-            {
-                ResetFilter();
-            }
-            filters = null;
-            view = null;
             SearchBox.Text = "";
             month_rbtn.IsChecked = false;
             year_rbtn.IsChecked = false;
             day_range_rbtn.IsChecked = false;
             week_rbtn.IsChecked = false;
+            if (filters != null && view != null)
+            {
+                ResetFilter();
+            }
+            else
+            {
+                filters = new Dictionary<string, Predicate<ReportsDTO>>();
+                view = (CollectionView)CollectionViewSource.GetDefaultView(_ListView.ItemsSource);
+                view.Filter = FilterJob;
+            }
         }
-
         private void ReportManagePage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (filters != null & view != null)
+            if (filters != null || view != null)
             {
                 ResetFilter();
             }

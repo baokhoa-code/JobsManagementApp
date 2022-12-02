@@ -36,7 +36,7 @@
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal">
                 <Button 
-                    Click='reset_filters_btn_handle'
+                    Click='reset_filters_btn_handle1'
                     FontSize="18" 
                     Background="Transparent"
                     Foreground="#232360" 

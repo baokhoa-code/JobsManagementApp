@@ -104,10 +104,10 @@
                                         FontWeight="SemiBold" Margin='0,0,0,0'/>
                                     <Label 
                                         Visibility="{Binding IsVisible}"
-                                        Content='Changable field: worked hour, percent and end date.'
+                                        Content='Changable field: worked hour, percent and end date'
                                         FontSize="16" 
                                         Foreground="#FFFA1B44" 
-                                        FontWeight="SemiBold" Margin="500,0,0,0"/>
+                                        FontWeight="SemiBold" Margin="480,0,0,0"/>
                                     <Label 
                                         Visibility="{Binding IsVisible2}"
                                         Content='Changable field: None.'
@@ -497,7 +497,7 @@
             Grid.Column='1'
             Background="white">
             <Grid >
-                <TreeView Name="trvMenu" FontSize="20" ItemContainerStyle="{StaticResource TheStyle}">
+                <TreeView Name="trvMenu" FontSize="17" ItemContainerStyle="{StaticResource TheStyle}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedItemChanged">
                             <i:InvokeCommandAction Command="{Binding ChangeJobCM}"

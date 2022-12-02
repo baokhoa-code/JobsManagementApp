@@ -57,7 +57,7 @@
                     Content="{Binding assigneeId}" 
                     FontSize="18" 
                     Foreground="#232360" 
-                    FontWeight="Bold" VerticalAlignment='Bottom' Width='15' Margin='10,0,0,0'/>
+                    FontWeight="Bold" VerticalAlignment='Bottom' Width='25' Margin='10,0,0,0'/>
                 <Label 
                     Content="-" 
                     FontSize="18" 
@@ -922,9 +922,18 @@
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation='Vertical'>
-                                                            <TextBlock Text="{Binding assignor_type}" FontWeight='SemiBold' HorizontalAlignment='Center'
-                                                                FontSize="12"
-                                                                Margin="10,2,0,0" />
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding assignor_id}" FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                    FontSize="12"
+                                                                    Margin="10,2,0,0" />
+                                                                <TextBlock Text=" - " FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                    FontSize="12"
+                                                                    Margin="0,2,0,0" />
+                                                                <TextBlock Text="{Binding assignor_type}" FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                    FontSize="12"
+                                                                    Margin="0,2,0,0" />
+                                                            </StackPanel>
+                                                            
                                                             <TextBlock Text="{Binding assignor_name}" FontWeight='SemiBold' HorizontalAlignment='Center'
                                                                 FontSize="12"
                                                                 Margin="10,0,0,0" />
@@ -937,9 +946,17 @@
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation='Vertical'>
-                                                            <TextBlock Text="{Binding assignee_type}"  FontWeight='SemiBold' HorizontalAlignment='Center'
-                                                                FontSize="12"
-                                                                Margin="10,2,0,0" />
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding assignee_id}" FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                    FontSize="12"
+                                                                    Margin="10,2,0,0" />
+                                                                <TextBlock Text=" - " FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                    FontSize="12"
+                                                                    Margin="0,2,0,0" />
+                                                                <TextBlock Text="{Binding assignee_type}" FontWeight='SemiBold' HorizontalAlignment='Center'
+                                                                    FontSize="12"
+                                                                    Margin="0,2,0,0" />
+                                                            </StackPanel>
                                                             <TextBlock Text="{Binding assignee_name}" FontWeight='SemiBold' HorizontalAlignment='Center'
                                                                 FontSize="12"
                                                                 Margin="10,0,0,0" />
