@@ -1,22 +1,23 @@
-﻿using JobsManagementApp.View.General;
-using JobsManagementApp.View.Admin;
+﻿using JobsManagementApp.View.Admin;
 using JobsManagementApp.View.User;
-using JobsManagementApp.Service;
+using JobsManagementApp.View.Share; 
+using JobsManagementApp.View.General;
+using JobsManagementApp.Model;
 using JobsManagementApp.ViewModel.AdminModel;
 using JobsManagementApp.ViewModel.UserModel;
-using JobsManagementApp.Model;
+using JobsManagementApp.Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using JobsManagementApp.View.Share;
-using JobsManagementApp.ViewModel.ShareModel;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
+using JobsManagementApp.ViewModel.ShareModel;
 
 namespace JobsManagementApp.ViewModel.GeneralModel
 {
@@ -253,10 +254,14 @@ namespace JobsManagementApp.ViewModel.GeneralModel
 
                                                 if (SelectedRole.Content.ToString() == "Admin")
                                                 {
+                                                    string M5Pass = GetMD5Password(userForgotNewPassword);
+                                                    userForgotNewPassword = M5Pass;
                                                     (isSuccess, messageFromUpdate) = await AdminService.Ins.ChangePassword(userForgotName, userForgotNewPassword);
                                                 }
                                                 else
                                                 {
+                                                    string M5Pass = GetMD5Password(userForgotNewPassword);
+                                                    userForgotNewPassword = M5Pass;
                                                     (isSuccess, messageFromUpdate) = await UserService.Ins.ChangePassword(userForgotName, userForgotNewPassword);
                                                 }
                                                 if (isSuccess)
@@ -328,7 +333,8 @@ namespace JobsManagementApp.ViewModel.GeneralModel
 
                         Admin admin;
                         string message;
-                        (admin, message) = AdminService.Ins.Login(usn, pwr);
+                        string M5Pass = GetMD5Password(pwr);
+                        (admin, message) = AdminService.Ins.Login(usn, M5Pass);
                         if (admin == null)
                         {
                             lbl.Content = message;
@@ -352,7 +358,8 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                     {
                         UsersDTO user;
                         string message;
-                        (user, message) = UserService.Ins.Login(usn, pwr);
+                        string M5Pass = GetMD5Password(pwr);
+                        (user, message) = UserService.Ins.Login(usn, M5Pass);
                         if (user == null)
                         {
                             lbl.Content = message;
@@ -375,6 +382,25 @@ namespace JobsManagementApp.ViewModel.GeneralModel
 
                
             }
+        }
+
+        public string ByteArrayToString(byte[] arrInput)
+        {
+            int i;
+            StringBuilder sOutput = new StringBuilder(arrInput.Length);
+            for (i = 0; i < arrInput.Length - 1; i++)
+            {
+                sOutput.Append(arrInput[i].ToString("X2"));
+            }
+            return sOutput.ToString();
+        }
+        public string GetMD5Password(string s)
+        {
+            byte[] tmpHash_t;
+            string pass = "";
+            tmpHash_t = new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.ASCII.GetBytes(s));
+            pass = ByteArrayToString(tmpHash_t);
+            return pass;
         }
     }
 }
