@@ -134,7 +134,7 @@ namespace JobsManagementApp.Service
                 string code1 = "";
                 code1 = "INSERT INTO USER(NAME, GENDER, D_O_B, PHONE, ADDRESS,  ORGANIZATION, POSITION, AVATAR, EMAIL, USERNAME, PASS, QUESTION, ANSWER, TOTAL_WORKING_HOUR) VALUES('"
                         + u.name + "','" +u.gender +"','"+u.dob+ "','"+u.phone+ "','"+u.address+ "','"+u.organization+ "','"+u.position+ "','"+
-                        u.avatar+ "','"+u.email+ "','"+u.username+ "','"+u.pass+ "','"+u.question+ "','"+u.answer+ "',"+u.total_working_hour+ ")" ;
+                        u.avatar.Replace("\\", "/") + "','"+u.email+ "','"+u.username+ "','"+u.pass+ "','"+u.question+ "','"+u.answer+ "',"+u.total_working_hour+ ")" ;
                 dbc1.command.CommandText = code1;
                 dbc1.connection.Open();
                 dbc1.command.ExecuteNonQuery();
@@ -155,7 +155,7 @@ namespace JobsManagementApp.Service
                 string code1 = "";
                 code1 = "UPDATE USER SET NAME = '" + u.name  + "', GENDER = '" + u.gender  + "', D_O_B = '" + u.dob  + "', PHONE = '" + u.phone  +
                     "', ADDRESS = '" + u.address  + "', ORGANIZATION ='" + u.organization  + "', POSITION = '" + u.position  + "', AVATAR = '" + 
-                    u.avatar  + "', EMAIL = '" + u.email  + "', USERNAME = '" + u.username  + "', PASS = '" + u.pass  + "', QUESTION = '" + u.question 
+                    u.avatar.Replace("\\", "/") + "', EMAIL = '" + u.email  + "', USERNAME = '" + u.username  + "', PASS = '" + u.pass  + "', QUESTION = '" + u.question 
                     + "', ANSWER = '" + u.answer  + "', TOTAL_WORKING_HOUR = " + u.total_working_hour  + " WHERE ID = " + u.id + " ";
                 dbc1.command.CommandText = code1;
                 dbc1.connection.Open();

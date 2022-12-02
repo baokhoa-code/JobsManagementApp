@@ -11,6 +11,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent"
+        SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         Topmost="True"
         AllowsTransparency="True"
@@ -77,29 +78,28 @@
                         <RowDefinition Height="90" />
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
-
                     <Grid Grid.Row="0">
                         <materialDesign:TransitioningContent VerticalAlignment="Center"
-                                                             Height="80">
+                    Height="80">
                             <materialDesign:TransitioningContent.OpeningEffects>
                                 <materialDesign:TransitionEffect Kind="FadeIn" />
                                 <materialDesign:TransitionEffect Kind="SlideInFromBottom" />
                             </materialDesign:TransitioningContent.OpeningEffects>
                             <StackPanel Orientation="Horizontal">
                                 <Image x:Name="ImgMessage"
-                                       Height="50"
-                                       Margin="20 0 0 5" />
+                            Height="50"
+                            Margin="20 0 0 5" />
                                 <TextBox x:Name="txtMessage"
-                                            IsReadOnly="True"
-                                            IsReadOnlyCaretVisible="True"
-                                           TextWrapping="Wrap"
-                                           Width="220"
-                                           Height="45"
-                                           HorizontalAlignment="Center"
-                                           Grid.Row="0"
-                                           Margin="15 23 5 5"
-                                           materialDesign:HintAssist.Hint=""
-                                           FontSize="18" BorderBrush="Transparent" />
+                                         BorderThickness="0"
+                                         IsReadOnly="True"
+                            TextWrapping="Wrap"
+                            Width="240"
+                            Height="65"
+                            HorizontalAlignment="Center"
+                            Grid.Row="0"
+                            Margin="25,23,5,5"
+                            materialDesign:HintAssist.Hint=""
+                            FontSize="18" />
                             </StackPanel>
                         </materialDesign:TransitioningContent>
                     </Grid>

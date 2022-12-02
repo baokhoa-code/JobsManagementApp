@@ -305,7 +305,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                                                     {
                                                                                         MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
                                                                                         mb.ShowDialog();
-                                                                                        MessageBoxCustom mb1 = new MessageBoxCustom("Annouce", "An user (staff) with password: '" + staff.pass + "' has been created, please change password in the the next login!", MessageType.Info, MessageButtons.OK);
+                                                                                        MessageBoxCustom mb1 = new MessageBoxCustom("Annouce", "User " + staff.username + " is created with password: '" + staff.pass + "'!", MessageType.Info, MessageButtons.OK);
                                                                                         mb1.ShowDialog();
                                                                                         UsersDTO temp = UserService.Ins.GetLatestUser();
                                                                                         if(temp != null)
