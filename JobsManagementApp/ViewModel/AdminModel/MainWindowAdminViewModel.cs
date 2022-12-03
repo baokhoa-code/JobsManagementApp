@@ -1,6 +1,7 @@
 ﻿using JobsManagementApp.View.General;
 using JobsManagementApp.View.Admin;
 using JobsManagementApp.View.User;
+using JobsManagementApp.View.Admin.Statistic;
 using JobsManagementApp.ViewModel.GeneralModel;
 using JobsManagementApp.Service;
 using System;
@@ -60,6 +61,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
         public ICommand LoadJobManagementPageCM { get; set; }
         public ICommand LoadStaffManagementPageCM { get; set; }
         public ICommand LoadReportManagementPageCM { get; set; }
+        public ICommand LoadStatisticPageCM { get; set; }
         public ICommand LoadUserInfortPageCM { get; set; }
         public ICommand LogoutCM { get; set; }
 
@@ -97,13 +99,6 @@ namespace JobsManagementApp.ViewModel.AdminModel
             {
                 if (p != null)
                 {
-
-                    //JobsDTO j = JobService.Ins.GetJob(19);
-                    //JobDetailViewModel vm = new JobDetailViewModel(admin, j);
-                    //JobDetailPage dashboardpage = new JobDetailPage();
-                    //dashboardpage.DataContext = vm;
-                    //p.Content = dashboardpage;
-
                     DashBoardPageAdminViewModel vm = new DashBoardPageAdminViewModel(admin);
                     DashBoardPageAdmin dashboardpage = new DashBoardPageAdmin();
                     dashboardpage.DataContext = vm;
@@ -137,6 +132,13 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 ReportManagementPageAdmin reportMangementPage = new ReportManagementPageAdmin();
                 reportMangementPage.DataContext = vm;
                 p.Content = reportMangementPage;
+            });
+            LoadStatisticPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
+            {
+                if (p != null)
+                {
+                    p.Content = new StatisticPage();
+                }
             });
             LoadUserInfortPageCM = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {

@@ -314,6 +314,79 @@ namespace JobsManagementApp.Service
             dbc.connection.Close();
             return Users;
         }
+        public async Task<ObservableCollection<UsersDTOMore>> GetTop5User()
+        {
+            ObservableCollection<UsersDTOMore> Users = new ObservableCollection<UsersDTOMore>();
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT *, COUNT(U.ID) AS COMPLETED_JOB_QUANTITY FROM USER AS U JOIN JOB AS J ON U.ID = J.ASSIGNEE_ID AND J.ASSIGNEE_TYPE = 'USER' WHERE J.END_DATE != 'NONE' GROUP BY U.ID ORDER BY COMPLETED_JOB_QUANTITY DESC";
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            int count =0;
+            while (reader.Read() && count < 5)
+            {
+                Users.Add(
+                    new UsersDTOMore(
+                        Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), Int16.Parse(reader.GetString(14)), Int16.Parse(reader.GetString(33)), reader.GetString(21), reader.GetString(22), reader.GetString(23)));
+                count++;
+            }
+            dbc.connection.Close();
+            return Users;
+        }
+        public async Task<ObservableCollection<UsersDTOMore>> GetTop5UserByYear(int year)
+        {
+            ObservableCollection<UsersDTOMore> Users = new ObservableCollection<UsersDTOMore>();
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT *, COUNT(U.ID) AS COMPLETED_JOB_QUANTITY FROM USER AS U JOIN JOB AS J ON U.ID = J.ASSIGNEE_ID AND J.ASSIGNEE_TYPE = 'USER' WHERE J.END_DATE != 'NONE' GROUP BY U.ID ORDER BY COMPLETED_JOB_QUANTITY DESC";
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            while (reader.Read())
+            {
+                UsersDTOMore temp = new UsersDTOMore(
+                        Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), Int16.Parse(reader.GetString(14)), Int16.Parse(reader.GetString(33)), reader.GetString(21), reader.GetString(22), reader.GetString(23));
+                if (DateTime.ParseExact(temp.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Year == year){
+                    Users.Add(temp);
+                }
+            }
+            dbc.connection.Close();
+            return Users;
+        }
+        public async Task<ObservableCollection<UsersDTOMore>> GetTop5UserByMonth(int month)
+        {
+            ObservableCollection<UsersDTOMore> Users = new ObservableCollection<UsersDTOMore>();
+            DatabaseConnection dbc = new DatabaseConnection();
+            string code = "";
+            MySqlDataReader reader;
+
+            code = "SELECT *, COUNT(U.ID) AS COMPLETED_JOB_QUANTITY FROM USER AS U JOIN JOB AS J ON U.ID = J.ASSIGNEE_ID AND J.ASSIGNEE_TYPE = 'USER' WHERE J.END_DATE != 'NONE' GROUP BY U.ID ORDER BY COMPLETED_JOB_QUANTITY DESC";
+            dbc.command.CommandText = code;
+            dbc.connection.Open();
+            reader = dbc.command.ExecuteReader();
+            while (reader.Read())
+            {
+                UsersDTOMore temp = new UsersDTOMore(
+                        Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9),
+                        reader.GetString(10), reader.GetString(11), reader.GetString(12), reader.GetString(13), Int16.Parse(reader.GetString(14)), Int16.Parse(reader.GetString(33)), reader.GetString(21), reader.GetString(22), reader.GetString(23));
+                if (DateTime.ParseExact(temp.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Month == month && DateTime.ParseExact(temp.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Year == DateTime.Now.Year)
+                {
+                    Users.Add(temp);
+                }
+            }
+            dbc.connection.Close();
+            return Users;
+        }
         public  ObservableCollection<UsersDTO> GetAllUser1()
         {
             ObservableCollection<UsersDTO> Users = new ObservableCollection<UsersDTO>();

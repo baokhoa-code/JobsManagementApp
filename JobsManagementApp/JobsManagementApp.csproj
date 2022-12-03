@@ -79,7 +79,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="View\Admin\Statistic\" />
 	  <Folder Include="View\User\Statistic\" />
 	</ItemGroup>
 

@@ -22,6 +22,15 @@
     <Compile Update="View\Admin\Staff\StaffManagementPageAdmin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Admin\Statistic\RankingStatistic.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Statistic\StatisticPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Statistic\SummaryStatistical.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\General\ForgotPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -97,6 +106,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Admin\Staff\StaffManagementPageAdmin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Statistic\RankingStatistic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Statistic\StatisticPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Statistic\SummaryStatistical.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\General\ForgotPage.xaml">

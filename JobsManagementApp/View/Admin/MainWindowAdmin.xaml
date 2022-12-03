@@ -164,7 +164,9 @@
                             <RadioButton 
                                         x:Name="btn6"
                                         GroupName='test'
-                                        Style="{StaticResource RadioButtonStyle1}">
+                                        Style="{StaticResource RadioButtonStyle1}"
+                                        Command="{Binding LoadStatisticPageCM}"
+                                        CommandParameter="{Binding ElementName=MainFrame}">
                                 <Grid
                                             Height="50"
                                             Width="160" 

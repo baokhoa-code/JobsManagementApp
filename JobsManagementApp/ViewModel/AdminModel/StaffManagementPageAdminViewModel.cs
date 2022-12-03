@@ -99,7 +99,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
             OpenAddStaffWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 StaffAddWindow dba = new StaffAddWindow();
-                StaffAddViewModel vm = new StaffAddViewModel(admin,Staffs);
+                StaffAddViewModel vm = new StaffAddViewModel(admin, Staffs);
                 vm.Mask = MaskName;
                 MaskName.Visibility = Visibility.Visible;
                 dba.DataContext = vm;
@@ -222,7 +222,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                         mb.ShowDialog();
                     }
                 }
-            });        
+            });
             AddPositionCM = new RelayCommand<TextBox>((p) => { return true; }, async (p) =>
             {
                 TextBox temp = (p as TextBox);
@@ -231,7 +231,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                     string s = temp.Text;
                     if (s != null && s != "")
                     {
-                        if(CurrentOrganization != null)
+                        if (CurrentOrganization != null)
                         {
                             int c = PositionSource.Count(x => x.name == s);
                             if (c > 0)
@@ -249,7 +249,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                                 {
                                     try
                                     {
-                                        (bool isSuccess, string messageFromUpdate) = await OrganizationAndPositionService.Ins.InsertPosition(CurrentOrganization.name,s);
+                                        (bool isSuccess, string messageFromUpdate) = await OrganizationAndPositionService.Ins.InsertPosition(CurrentOrganization.name, s);
                                         if (isSuccess)
                                         {
                                             OrganizationSource = new ObservableCollection<OrganizationsDTO>(await OrganizationAndPositionService.Ins.GetAllOrganization());
@@ -286,7 +286,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                             MessageBoxCustom mb = new MessageBoxCustom("Error", "You did not choose organization!", MessageType.Error, MessageButtons.OK);
                             mb.ShowDialog();
                         }
-                        
+
 
                     }
                     if (s == null || s == "")
@@ -429,7 +429,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
                 mb.ShowDialog();
             }
         }
-        
+
 
     }
 }
