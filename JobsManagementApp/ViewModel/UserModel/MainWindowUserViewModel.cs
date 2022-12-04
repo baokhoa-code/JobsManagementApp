@@ -60,7 +60,6 @@ namespace JobsManagementApp.ViewModel.UserModel
         public ICommand FirstLoadCM { get; set; }
         public ICommand LoadDashBoardPageCM { get; set; }
         public ICommand LoadJobManagementPageCM { get; set; }
-        public ICommand LoadStaffManagementPageCM { get; set; }
         public ICommand LoadReportManagementPageCM { get; set; }
         public ICommand LoadUserInfortPageCM { get; set; }
         public ICommand LogoutCM { get; set; }

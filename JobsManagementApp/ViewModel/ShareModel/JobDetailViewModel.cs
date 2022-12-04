@@ -973,76 +973,178 @@ namespace JobsManagementApp.ViewModel.ShareModel
             });
             UpdateJobCM = new RelayCommand<TreeView>((p) => { return true; }, async (p) =>
             {
-                updateJob = new JobsDTO();
-                if (string.IsNullOrEmpty(jobName))
+                if (IsChangable || IsChangable2)
                 {
-                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Job name cannot be empty!", MessageType.Error, MessageButtons.OK);
-                    mb.ShowDialog();
                     updateJob = new JobsDTO();
-                }
-                else
-                {
-                    updateJob.name = jobName;
-                    if (string.IsNullOrEmpty(jobDescription))
+                    if (string.IsNullOrEmpty(jobName))
                     {
-                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Job description cannot be empty!", MessageType.Error, MessageButtons.OK);
+                        MessageBoxCustom mb = new MessageBoxCustom("Error", "Job name cannot be empty!", MessageType.Error, MessageButtons.OK);
                         mb.ShowDialog();
                         updateJob = new JobsDTO();
                     }
                     else
                     {
-                        updateJob.description = jobDescription;
-                        if (string.IsNullOrEmpty(jobRequire_hour))
+                        updateJob.name = jobName;
+                        if (string.IsNullOrEmpty(jobDescription))
                         {
-                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Job require hour cannot be empty!", MessageType.Error, MessageButtons.OK);
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Job description cannot be empty!", MessageType.Error, MessageButtons.OK);
                             mb.ShowDialog();
                             updateJob = new JobsDTO();
                         }
                         else
                         {
-                            updateJob.required_hour = Int32.Parse(jobRequire_hour);
-                            if (string.IsNullOrEmpty(jobWorked_hour))
+                            updateJob.description = jobDescription;
+                            if (string.IsNullOrEmpty(jobRequire_hour))
                             {
-                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Job worked hour cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                MessageBoxCustom mb = new MessageBoxCustom("Error", "Job require hour cannot be empty!", MessageType.Error, MessageButtons.OK);
                                 mb.ShowDialog();
                                 updateJob = new JobsDTO();
                             }
                             else
                             {
-                                updateJob.worked_hour = Int32.Parse(jobWorked_hour);
-                                if (jobEndDate == null)
+                                updateJob.required_hour = Int32.Parse(jobRequire_hour);
+                                if (string.IsNullOrEmpty(jobWorked_hour))
                                 {
-                                    updateJob.end_date = "NONE";
+                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Job worked hour cannot be empty!", MessageType.Error, MessageButtons.OK);
+                                    mb.ShowDialog();
+                                    updateJob = new JobsDTO();
                                 }
                                 else
                                 {
-                                    DateTime temp = (DateTime)jobEndDate;
-                                    updateJob.end_date = temp.ToString("dd-MM-yyyy");
-                                }
-                                updateJob.id = CurrentJob.id;
-                                updateJob.assignor_id = CurrentJob.assignor_id;
-                                updateJob.assignor_type = CurrentJob.assignor_type;
-                                updateJob.assignor_name = CurrentJob.assignor_name;
-                                updateJob.assignee_id = jobAssignee.id;
-                                updateJob.assignee_type = jobAssignee.type;
-                                updateJob.assignee_name = jobAssignee.name;
-                                updateJob.dependency_id = jobDependency.id;
-                                updateJob.dependency_name = jobDependency.name;
-                                updateJob.stage = jobStage;
-                                updateJob.start_date = jobStartDate.ToString("dd-MM-yyyy");
-                                updateJob.due_date = jobDueDate.ToString("dd-MM-yyyy");
-                                updateJob.category = jobCategory.name;
-                                updateJob.percent = jobPercent;
-                                MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you really want to update this job?", MessageType.Warning, MessageButtons.YesNo);
-                                result.ShowDialog();
-
-                                if (result.DialogResult == true)
-                                {
-                                    if ((jobAssignee.type != BackupJob.assignee_type) || (jobAssignee.type == BackupJob.assignee_type && jobAssignee.id != BackupJob.assignee_id))
+                                    updateJob.worked_hour = Int32.Parse(jobWorked_hour);
+                                    if (jobEndDate == null)
                                     {
-                                        MessageBoxCustom result2 = new MessageBoxCustom("Warning", "You changed assignee, this update will delete all related report, you still want to update this job?", MessageType.Warning, MessageButtons.YesNo);
-                                        result2.ShowDialog();
-                                        if (result2.DialogResult == true)
+                                        updateJob.end_date = "NONE";
+                                    }
+                                    else
+                                    {
+                                        DateTime temp = (DateTime)jobEndDate;
+                                        updateJob.end_date = temp.ToString("dd-MM-yyyy");
+                                    }
+                                    updateJob.id = CurrentJob.id;
+                                    updateJob.assignor_id = CurrentJob.assignor_id;
+                                    updateJob.assignor_type = CurrentJob.assignor_type;
+                                    updateJob.assignor_name = CurrentJob.assignor_name;
+                                    updateJob.assignee_id = jobAssignee.id;
+                                    updateJob.assignee_type = jobAssignee.type;
+                                    updateJob.assignee_name = jobAssignee.name;
+                                    updateJob.dependency_id = jobDependency.id;
+                                    updateJob.dependency_name = jobDependency.name;
+                                    updateJob.stage = jobStage;
+                                    updateJob.start_date = jobStartDate.ToString("dd-MM-yyyy");
+                                    updateJob.due_date = jobDueDate.ToString("dd-MM-yyyy");
+                                    updateJob.category = jobCategory.name;
+                                    updateJob.percent = jobPercent;
+                                    MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you really want to update this job?", MessageType.Warning, MessageButtons.YesNo);
+                                    result.ShowDialog();
+
+                                    if (result.DialogResult == true)
+                                    {
+                                        if ((jobAssignee.type != BackupJob.assignee_type) || (jobAssignee.type == BackupJob.assignee_type && jobAssignee.id != BackupJob.assignee_id))
+                                        {
+                                            MessageBoxCustom result2 = new MessageBoxCustom("Warning", "You changed assignee, this update will delete all related report, you still want to update this job?", MessageType.Warning, MessageButtons.YesNo);
+                                            result2.ShowDialog();
+                                            if (result2.DialogResult == true)
+                                            {
+                                                try
+                                                {
+                                                    (bool isSuccess, string messageFromUpdate) = await JobService.Ins.UpdateJob(updateJob);
+                                                    if (isSuccess)
+                                                    {
+                                                        MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
+                                                        mb.ShowDialog();
+                                                        CurrentJob.id = updateJob.id;
+                                                        CurrentJob.name = updateJob.name;
+                                                        CurrentJob.end_date = updateJob.end_date;
+                                                        CurrentJob.start_date = updateJob.start_date;
+                                                        CurrentJob.due_date = updateJob.due_date;
+                                                        CurrentJob.category = updateJob.category;
+                                                        CurrentJob.description = updateJob.description;
+                                                        CurrentJob.percent = updateJob.percent;
+                                                        CurrentJob.stage = updateJob.stage;
+                                                        CurrentJob.dependency_id = updateJob.dependency_id;
+                                                        CurrentJob.dependency_name = updateJob.dependency_name;
+                                                        CurrentJob.assignee_id = updateJob.assignee_id;
+                                                        CurrentJob.assignee_type = updateJob.assignee_type;
+                                                        CurrentJob.assignee_name = updateJob.assignee_name;
+                                                        CurrentJob.assignor_id = updateJob.assignor_id;
+                                                        CurrentJob.assignor_type = updateJob.assignor_type;
+                                                        CurrentJob.assignor_name = updateJob.assignor_name;
+                                                        CurrentJob.required_hour = updateJob.required_hour;
+                                                        CurrentJob.worked_hour = updateJob.worked_hour;
+
+                                                        BackupJob.id = updateJob.id;
+                                                        BackupJob.name = updateJob.name;
+                                                        BackupJob.end_date = updateJob.end_date;
+                                                        BackupJob.start_date = updateJob.start_date;
+                                                        BackupJob.due_date = updateJob.due_date;
+                                                        BackupJob.category = updateJob.category;
+                                                        BackupJob.description = updateJob.description;
+                                                        BackupJob.percent = updateJob.percent;
+                                                        BackupJob.stage = updateJob.stage;
+                                                        BackupJob.dependency_id = updateJob.dependency_id;
+                                                        BackupJob.dependency_name = updateJob.dependency_name;
+                                                        BackupJob.assignee_id = updateJob.assignee_id;
+                                                        BackupJob.assignee_type = updateJob.assignee_type;
+                                                        BackupJob.assignee_name = updateJob.assignee_name;
+                                                        BackupJob.assignor_id = updateJob.assignor_id;
+                                                        BackupJob.assignor_type = updateJob.assignor_type;
+                                                        BackupJob.assignor_name = updateJob.assignor_name;
+                                                        BackupJob.required_hour = updateJob.required_hour;
+                                                        BackupJob.worked_hour = updateJob.worked_hour;
+
+                                                        chosenJob.id = updateJob.id;
+                                                        chosenJob.name = updateJob.name;
+                                                        chosenJob.end_date = updateJob.end_date;
+                                                        chosenJob.start_date = updateJob.start_date;
+                                                        chosenJob.due_date = updateJob.due_date;
+                                                        chosenJob.category = updateJob.category;
+                                                        chosenJob.description = updateJob.description;
+                                                        chosenJob.percent = updateJob.percent;
+                                                        chosenJob.stage = jobStage;
+                                                        chosenJob.dependency_id = updateJob.dependency_id;
+                                                        chosenJob.dependency_name = updateJob.dependency_name;
+                                                        chosenJob.assignee_id = updateJob.assignee_id;
+                                                        chosenJob.assignee_type = updateJob.assignee_type;
+                                                        chosenJob.assignee_name = updateJob.assignee_name;
+                                                        chosenJob.assignor_id = updateJob.assignor_id;
+                                                        chosenJob.assignor_type = updateJob.assignor_type;
+                                                        chosenJob.assignor_name = updateJob.assignor_name;
+                                                        chosenJob.required_hour = updateJob.required_hour;
+                                                        chosenJob.worked_hour = updateJob.worked_hour;
+
+                                                        //GET ROOT ID OF CHOSEN JOB
+                                                        int rootJobID = JobService.Ins.GetRootJobId((int)CurrentJob.id);
+                                                        //BUILD TREE FROM ROOT ID
+                                                        treeview.Items.Remove(TreeJob);
+                                                        TreeJob = JobService.Ins.GetJobForTreeBinding(rootJobID, (int)CurrentJob.id);
+                                                        treeview.Items.Add(TreeJob);
+                                                    }
+                                                    else
+                                                    {
+                                                        MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
+                                                        mb.ShowDialog();
+                                                    }
+                                                }
+                                                catch (MySqlException e)
+                                                {
+                                                    Console.WriteLine(e);
+                                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                                                    mb.ShowDialog();
+                                                }
+                                                catch (Exception e)
+                                                {
+                                                    Console.WriteLine(e);
+                                                    MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                                                    mb.ShowDialog();
+                                                }
+                                            }
+                                            else
+                                            {
+                                                updateJob = new JobsDTO();
+                                            }
+                                        }
+                                        else
                                         {
                                             try
                                             {
@@ -1099,7 +1201,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                     chosenJob.category = updateJob.category;
                                                     chosenJob.description = updateJob.description;
                                                     chosenJob.percent = updateJob.percent;
-                                                    chosenJob.stage = jobStage;
+                                                    chosenJob.stage = updateJob.stage;
                                                     chosenJob.dependency_id = updateJob.dependency_id;
                                                     chosenJob.dependency_name = updateJob.dependency_name;
                                                     chosenJob.assignee_id = updateJob.assignee_id;
@@ -1117,6 +1219,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                     treeview.Items.Remove(TreeJob);
                                                     TreeJob = JobService.Ins.GetJobForTreeBinding(rootJobID, (int)CurrentJob.id);
                                                     treeview.Items.Add(TreeJob);
+
                                                 }
                                                 else
                                                 {
@@ -1137,111 +1240,17 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                 mb.ShowDialog();
                                             }
                                         }
-                                        else
-                                        {
-                                            updateJob = new JobsDTO();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        try
-                                        {
-                                            (bool isSuccess, string messageFromUpdate) = await JobService.Ins.UpdateJob(updateJob);
-                                            if (isSuccess)
-                                            {
-                                                MessageBoxCustom mb = new MessageBoxCustom("Annouce", messageFromUpdate, MessageType.Success, MessageButtons.OK);
-                                                mb.ShowDialog();
-                                                CurrentJob.id = updateJob.id;
-                                                CurrentJob.name = updateJob.name;
-                                                CurrentJob.end_date = updateJob.end_date;
-                                                CurrentJob.start_date = updateJob.start_date;
-                                                CurrentJob.due_date = updateJob.due_date;
-                                                CurrentJob.category = updateJob.category;
-                                                CurrentJob.description = updateJob.description;
-                                                CurrentJob.percent = updateJob.percent;
-                                                CurrentJob.stage = updateJob.stage;
-                                                CurrentJob.dependency_id = updateJob.dependency_id;
-                                                CurrentJob.dependency_name = updateJob.dependency_name;
-                                                CurrentJob.assignee_id = updateJob.assignee_id;
-                                                CurrentJob.assignee_type = updateJob.assignee_type;
-                                                CurrentJob.assignee_name = updateJob.assignee_name;
-                                                CurrentJob.assignor_id = updateJob.assignor_id;
-                                                CurrentJob.assignor_type = updateJob.assignor_type;
-                                                CurrentJob.assignor_name = updateJob.assignor_name;
-                                                CurrentJob.required_hour = updateJob.required_hour;
-                                                CurrentJob.worked_hour = updateJob.worked_hour;
-
-                                                BackupJob.id = updateJob.id;
-                                                BackupJob.name = updateJob.name;
-                                                BackupJob.end_date = updateJob.end_date;
-                                                BackupJob.start_date = updateJob.start_date;
-                                                BackupJob.due_date = updateJob.due_date;
-                                                BackupJob.category = updateJob.category;
-                                                BackupJob.description = updateJob.description;
-                                                BackupJob.percent = updateJob.percent;
-                                                BackupJob.stage = updateJob.stage;
-                                                BackupJob.dependency_id = updateJob.dependency_id;
-                                                BackupJob.dependency_name = updateJob.dependency_name;
-                                                BackupJob.assignee_id = updateJob.assignee_id;
-                                                BackupJob.assignee_type = updateJob.assignee_type;
-                                                BackupJob.assignee_name = updateJob.assignee_name;
-                                                BackupJob.assignor_id = updateJob.assignor_id;
-                                                BackupJob.assignor_type = updateJob.assignor_type;
-                                                BackupJob.assignor_name = updateJob.assignor_name;
-                                                BackupJob.required_hour = updateJob.required_hour;
-                                                BackupJob.worked_hour = updateJob.worked_hour;
-
-                                                chosenJob.id = updateJob.id;
-                                                chosenJob.name = updateJob.name;
-                                                chosenJob.end_date = updateJob.end_date;
-                                                chosenJob.start_date = updateJob.start_date;
-                                                chosenJob.due_date = updateJob.due_date;
-                                                chosenJob.category = updateJob.category;
-                                                chosenJob.description = updateJob.description;
-                                                chosenJob.percent = updateJob.percent;
-                                                chosenJob.stage = updateJob.stage;
-                                                chosenJob.dependency_id = updateJob.dependency_id;
-                                                chosenJob.dependency_name = updateJob.dependency_name;
-                                                chosenJob.assignee_id = updateJob.assignee_id;
-                                                chosenJob.assignee_type = updateJob.assignee_type;
-                                                chosenJob.assignee_name = updateJob.assignee_name;
-                                                chosenJob.assignor_id = updateJob.assignor_id;
-                                                chosenJob.assignor_type = updateJob.assignor_type;
-                                                chosenJob.assignor_name = updateJob.assignor_name;
-                                                chosenJob.required_hour = updateJob.required_hour;
-                                                chosenJob.worked_hour = updateJob.worked_hour;
-
-                                                //GET ROOT ID OF CHOSEN JOB
-                                                int rootJobID = JobService.Ins.GetRootJobId((int)CurrentJob.id);
-                                                //BUILD TREE FROM ROOT ID
-                                                treeview.Items.Remove(TreeJob);
-                                                TreeJob = JobService.Ins.GetJobForTreeBinding(rootJobID, (int)CurrentJob.id);
-                                                treeview.Items.Add(TreeJob);
-
-                                            }
-                                            else
-                                            {
-                                                MessageBoxCustom mb = new MessageBoxCustom("Error", messageFromUpdate, MessageType.Error, MessageButtons.OK);
-                                                mb.ShowDialog();
-                                            }
-                                        }
-                                        catch (MySqlException e)
-                                        {
-                                            Console.WriteLine(e);
-                                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
-                                            mb.ShowDialog();
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            Console.WriteLine(e);
-                                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
-                                            mb.ShowDialog();
-                                        }
                                     }
                                 }
                             }
                         }
                     }
+
+                }
+                else
+                {
+                    MessageBoxCustom mb = new MessageBoxCustom("Error", "You do not have permission to change this job!", MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
                 }
 
 
