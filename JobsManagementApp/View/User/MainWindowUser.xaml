@@ -176,20 +176,20 @@
                                 FontSize="16" 
                                 Foreground="#FF5F6388" 
                                 VerticalAlignment="Top"
-                                HorizontalAlignment="Center" Margin="0,130,0,0" FontWeight="Bold" FontFamily="Roboto" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                HorizontalAlignment="Center" Margin="0,140,0,0" FontWeight="Bold" FontFamily="Roboto" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                             <Label 
                                 Content='User'
                                 FontSize="15" 
                                 Foreground="#FF5F6388" 
                                 VerticalAlignment="Top"
-                                HorizontalAlignment="Center" Margin="0,155,0,0" FontWeight="Medium" Padding="0,0,0,0" FontFamily="Roboto Medium"/>
+                                HorizontalAlignment="Center" Margin="0,165,0,0" FontWeight="Medium" Padding="0,0,0,0" FontFamily="Roboto Medium"/>
                             <Label 
                                 x:Name="label_address"
                                 Content='{Binding userAddress}'
-                                FontSize="13" 
+                                FontSize="12" 
                                 Foreground="#FF5F6388" 
                                 VerticalAlignment="Top"
-                                HorizontalAlignment="Center" Margin="0,175,0,0" FontFamily="Roboto Light"/>
+                                HorizontalAlignment="Center" Margin="0,185,0,0" FontFamily="Roboto Light"/>
                         </Grid>
                         <Grid Grid.Row="6">
                             <RadioButton 

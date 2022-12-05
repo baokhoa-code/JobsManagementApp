@@ -197,7 +197,7 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                 }
                 
             }); 
-            ChangePasswordCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            ChangePasswordCM = new RelayCommand<object>((p) => { return userForgotQuestion != "Username is not exist, question cannot found!"; }, async (p) =>
             {
 
                 if (string.IsNullOrEmpty(userForgotName))

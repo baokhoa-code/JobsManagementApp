@@ -152,7 +152,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             {
                 CurrentReport = new ReportsDTO(BackupReport);
             });
-            UpdateReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            UpdateReportCM = new RelayCommand<object>((p) => { return Reports != null && Reports.Count > 0 ; }, async (p) =>
             {
                 if (string.IsNullOrEmpty(CurrentReport.tile))
                 {
@@ -233,7 +233,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 }
 
             });
-            DeleteReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            DeleteReportCM = new RelayCommand<object>((p) => { return Reports != null && Reports.Count > 0; }, async (p) =>
             {
                 MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this report?", MessageType.Warning, MessageButtons.YesNo);
                 result.ShowDialog();
@@ -286,7 +286,9 @@ namespace JobsManagementApp.ViewModel.ShareModel
             {
                 p.NavigationService.GoBack();
             });
-            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return ((job.assignee_type == "USER" && job.assignee_id == user.id) || (job.assignor_type == "USER" && job.assignor_id == user.id))
+;
+            }, async (p) =>
             {
                 ReportAddWindow dba = new ReportAddWindow();
                 ReportAddViewModel vm = new ReportAddViewModel(user, (int)job_t.id, Reports);
@@ -340,7 +342,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             {
                 CurrentReport = new ReportsDTO(BackupReport);
             });
-            UpdateReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            UpdateReportCM = new RelayCommand<object>((p) => { return Reports != null && Reports.Count > 0  && ((job.assignee_type == "USER" && job.assignee_id == user.id) || (job.assignor_type == "USER" && job.assignor_id == user.id));}, async (p) =>
             {
                 if (string.IsNullOrEmpty(CurrentReport.tile))
                 {
@@ -421,7 +423,9 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 }
 
             });
-            DeleteReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            DeleteReportCM = new RelayCommand<object>((p) => { return Reports != null && Reports.Count > 0 && ((job.assignee_type == "USER" && job.assignee_id == user.id) || (job.assignor_type == "USER" && job.assignor_id == user.id))
+;
+            }, async (p) =>
             {
                 MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this report?", MessageType.Warning, MessageButtons.YesNo);
                 result.ShowDialog();
@@ -528,7 +532,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             {
                 CurrentReport = new ReportsDTO(BackupReport);
             });
-            UpdateReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            UpdateReportCM = new RelayCommand<object>((p) => { return Reports != null && Reports.Count > 0 ; }, async (p) =>
             {
                 if (string.IsNullOrEmpty(CurrentReport.tile))
                 {
@@ -608,7 +612,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 }
 
             });
-            DeleteReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            DeleteReportCM = new RelayCommand<object>((p) => { return Reports != null && Reports.Count > 0 ; }, async (p) =>
             {
                 MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this report?", MessageType.Warning, MessageButtons.YesNo);
                 result.ShowDialog();
@@ -659,7 +663,9 @@ namespace JobsManagementApp.ViewModel.ShareModel
             {
                 p.NavigationService.GoBack();
             });
-            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return job != null; }, async (p) =>
+            OpenAddReportWindowCM = new RelayCommand<object>((p) => { return job != null && ((job.assignee_type == "USER" && job.assignee_id == user.id) || (job.assignor_type == "USER" && job.assignor_id == user.id))
+;
+            }, async (p) =>
             {
                 ReportAddWindow dba = new ReportAddWindow();
                 ReportAddViewModel vm = new ReportAddViewModel(user, (int)job.id, Reports);
@@ -713,7 +719,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             {
                 CurrentReport = new ReportsDTO(BackupReport);
             });
-            UpdateReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            UpdateReportCM = new RelayCommand<object>((p) => { return Reports != null && Reports.Count > 0 && job != null && ((job.assignee_type == "USER" && job.assignee_id == user.id) || (job.assignor_type == "USER" && job.assignor_id == user.id)); }, async (p) =>
             {
                 if (string.IsNullOrEmpty(CurrentReport.tile))
                 {
@@ -793,7 +799,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 }
 
             });
-            DeleteReportCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            DeleteReportCM = new RelayCommand<object>((p) => { return Reports != null && Reports.Count > 0 && job != null && ((job.assignee_type == "USER" && job.assignee_id == user.id) || (job.assignor_type == "USER" && job.assignor_id == user.id)); }, async (p) =>
             {
                 MessageBoxCustom result = new MessageBoxCustom("Warning", "Do you want to delete this report?", MessageType.Warning, MessageButtons.YesNo);
                 result.ShowDialog();
