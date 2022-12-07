@@ -133,16 +133,15 @@ namespace JobsManagementApp.View.Admin.Staff
 
         private void reset_filters_btn_handle1(object sender, RoutedEventArgs e)
         {
+            organization_cbx.SelectedIndex = -1;
+            position_cbx.SelectedIndex = -1;
+            SearchBox.Text = "";
             if (filters != null & view != null)
             {
                 ResetFilter();
             }
             filters = null;
             view = null;
-            organization_cbx.SelectedIndex = -1;
-            position_cbx.SelectedIndex = -1;
-            SearchBox.Text = "";
-
         }
         private void reset_filters_btn_handle(object sender, RoutedEventArgs e)
         {

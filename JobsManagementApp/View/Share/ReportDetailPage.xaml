@@ -328,6 +328,7 @@
                                     VerticalContentAlignment='Center' Width='80' Margin="60,0,0,0" FontSize="14"/>
                                 <TextBox
                                     Text="{Binding CurrentReport.tile}"
+                                    IsHitTestVisible="{Binding IsChangable}"
                                     x:Name="job_name2"
                                     FontWeight="DemiBold"
                                     FontSize="14"
@@ -365,6 +366,7 @@
                                             materialDesign:ButtonAssist.CornerRadius="10" 
                                             Background="Transparent" BorderBrush="Transparent">
                                             <materialDesign:PackIcon
+                                                IsHitTestVisible="{Binding IsChangable}"
                                                 Kind="CalendarMinusOutline" 
                                                 Height="20" 
                                                 Width="20"
@@ -433,6 +435,7 @@
                                             VerticalContentAlignment='Center' Width='130' Padding='0,0,0,0' HorizontalAlignment='Left' Margin='40,0,0,0' FontSize="14"/>
                                     <TextBox
                                             Text="{Binding CurrentReport.description}"
+                                            IsHitTestVisible="{Binding IsChangable}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Height="220"
                                             TextWrapping="Wrap" Width='660' HorizontalAlignment='Left' Margin='40,10,0,0' FontSize="14"

@@ -49,7 +49,12 @@ namespace JobsManagementApp.ViewModel.ShareModel
             get { return _AssigneeChanagable; }
             set { _AssigneeChanagable = value; OnPropertyChanged(); }
         }
-
+        private bool _IsChangable;
+        public bool IsChangable
+        {
+            get { return _IsChangable; }
+            set { _IsChangable = value; OnPropertyChanged(); }
+        }
 
 
         #endregion
@@ -87,7 +92,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             Reports = new ObservableCollection<ReportsDTO>();
             BackupReport = new ReportsDTO();
             CurrentReport = new ReportsDTO();
-
+            IsChangable = true;
             //DEFINE COMMANDS
             MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
             {
@@ -334,6 +339,14 @@ namespace JobsManagementApp.ViewModel.ShareModel
                         CurrentReport = new ReportsDTO(BackupReport);
 
                     }
+                    if (!((job.assignee_type == "USER" && job.assignee_id == user.id) || (job.assignor_type == "USER" && job.assignor_id == user.id)))
+                    {
+                        IsChangable = false;
+                    }
+                    else
+                    {
+                        IsChangable = true;
+                    }
 
                 }
 
@@ -468,7 +481,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
             Reports = new ObservableCollection<ReportsDTO>();
             BackupReport = new ReportsDTO();
             CurrentReport = new ReportsDTO();
-
+            IsChangable = true;
             //DEFINE COMMANDS
             MaskNameCM = new RelayCommand<Grid>((p) => { return true; }, (p) =>
             {
@@ -701,7 +714,14 @@ namespace JobsManagementApp.ViewModel.ShareModel
                         MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
                         mb.ShowDialog();
                     }
-
+                    if (!((job.assignee_type == "USER" && job.assignee_id == user.id) || (job.assignor_type == "USER" && job.assignor_id == user.id)))
+                    {
+                        IsChangable = false;
+                    }
+                    else
+                    {
+                        IsChangable = true;
+                    }
                     for (int i = 0; i < Reports.Count; i++)
                     {
                         if (Reports[i].id == tempr.id)
