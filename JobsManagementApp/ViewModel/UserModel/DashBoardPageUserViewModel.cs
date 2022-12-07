@@ -178,7 +178,7 @@ namespace JobsManagementApp.ViewModel.UserModel
             CurrentDate = DateTime.Now.Day.ToString();
             DateTime d = new DateTime(Int16.Parse(CurrentYear), Int16.Parse(CurrentMonth), Int16.Parse(CurrentDate));
             DateTime d_plus = FirstDayOfWeek(d);
-            CurrentWeekRange = d_plus.ToString("dd/MM/yyyy") + "-" + d.ToString("dd/MM/yyyy");
+            CurrentWeekRange = d_plus.ToString("dd/MM/yyyy") + "-" + d_plus.AddDays(7).ToString("dd/MM/yyyy");
 
             //DEFINE ALERT
             YearAlertRange = "Start from " + (Int16.Parse(CurrentYear) - 4) + " to " + CurrentYear;
@@ -589,7 +589,7 @@ namespace JobsManagementApp.ViewModel.UserModel
             double[] complete = new double[5];
             DateTime d = new DateTime(Int16.Parse(CurrentYear), Int16.Parse(CurrentMonth), Int16.Parse(CurrentDate));
             DateTime d_plus = FirstDayOfWeek(d);
-            CurrentWeekRange = d_plus.ToString("dd/MM/yyyy") + "-" + d.ToString("dd/MM/yyyy");
+            CurrentWeekRange = d_plus.ToString("dd/MM/yyyy") + "-" + d_plus.AddDays(7).ToString("dd/MM/yyyy");
             for (int i = 0; i < 5; i++)
             {
                 pending[i] = JobsLine.Where(

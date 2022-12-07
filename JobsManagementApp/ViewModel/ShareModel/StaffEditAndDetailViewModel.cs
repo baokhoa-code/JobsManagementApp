@@ -451,7 +451,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
             staffAddress = Backupstaff.address;
             staffEmail = Backupstaff.email;
             staffPhone = Backupstaff.phone;
-            staffAddress = Backupstaff.answer;
             staffUserName = Backupstaff.username;
             staffAnswer = Backupstaff.answer;
             staffAvatar = Backupstaff.avatar;

@@ -285,6 +285,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                 System.Globalization.CultureInfo.InvariantCulture);
                                             jobStartDate = current;
                                             jobDueDate = current;
+                                            DependencySource = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
                                         }
                                         else
                                         {
@@ -487,6 +488,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                 System.Globalization.CultureInfo.InvariantCulture);
                                             jobStartDate = current;
                                             jobDueDate = current;
+                                            DependencySource = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
                                         }
                                         else
                                         {
@@ -683,6 +685,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                 System.Globalization.CultureInfo.InvariantCulture);
                                             jobStartDate = current;
                                             jobDueDate = current;
+                                            DependencySource = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
                                         }
                                         else
                                         {
@@ -895,6 +898,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                 System.Globalization.CultureInfo.InvariantCulture);
                                             jobStartDate = current;
                                             jobDueDate = current;
+                                            DependencySource = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
                                         }
                                         else
                                         {
@@ -1115,6 +1119,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                 System.Globalization.CultureInfo.InvariantCulture);
                                             jobStartDate = current;
                                             jobDueDate = current;
+                                            DependencySource = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
                                         }
                                         else
                                         {
@@ -1301,6 +1306,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                 System.Globalization.CultureInfo.InvariantCulture);
                                             jobStartDate = current;
                                             jobDueDate = current;
+                                            DependencySource = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
                                         }
                                         else
                                         {
@@ -1467,6 +1473,7 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                                 System.Globalization.CultureInfo.InvariantCulture);
                                             jobStartDate = current;
                                             jobDueDate = current;
+                                            DependencySource = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
                                         }
                                         else
                                         {

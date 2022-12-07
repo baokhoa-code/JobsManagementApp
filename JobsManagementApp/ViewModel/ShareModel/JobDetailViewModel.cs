@@ -751,6 +751,16 @@ namespace JobsManagementApp.ViewModel.ShareModel
                             i = AssigneeSource.Count;
                         }
                     }
+                    DependencySource = new ObservableCollection<JobsDTO>(await JobService.Ins.GetAllJob());
+                    DependencySource.Insert(0, new JobsDTO(-1, "NONE"));
+                    for (int i = 0; i < DependencySource.Count; i++)
+                    {
+                        if (DependencySource[i].id == CurrentJob.id)
+                        {
+                            DependencySource.RemoveAt(i);
+                            i = DependencySource.Count;
+                        }
+                    }
                     for (int i = 0; i < DependencySource.Count; i++)
                     {
                         if (DependencySource[i].id == CurrentJob.dependency_id)

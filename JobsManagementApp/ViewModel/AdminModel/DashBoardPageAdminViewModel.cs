@@ -178,8 +178,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
             CurrentDate = DateTime.Now.Day.ToString();
             DateTime d = new DateTime(Int16.Parse(CurrentYear), Int16.Parse(CurrentMonth), Int16.Parse(CurrentDate));
             DateTime d_plus = FirstDayOfWeek(d);
-            CurrentWeekRange = d_plus.ToString("dd/MM/yyyy") + "-" + d.ToString("dd/MM/yyyy");
-
+            CurrentWeekRange = d_plus.ToString("dd/MM/yyyy") + "-" + d_plus.AddDays(7).ToString("dd/MM/yyyy");
+            
             //DEFINE ALERT
             YearAlertRange = "Start from "+ (Int16.Parse(CurrentYear) - 4) +  " to " + CurrentYear;
             MonthAlertRange = "Start from 1 to " + CurrentMonth;
@@ -373,8 +373,8 @@ namespace JobsManagementApp.ViewModel.AdminModel
 
             waiting = JobsPie.Where(
                 item => item.stage == "WAITING" &&
-                DateTime.Compare(a, DateTime.ParseExact(item.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) <= 0 &&
-                DateTime.Compare(b, DateTime.ParseExact(item.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) >= 0
+                DateTime.Compare(a, DateTime.ParseExact(item.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) < 0 &&
+                DateTime.Compare(b, DateTime.ParseExact(item.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)) > 0
                 ).Count();
 
             pending = JobsPie.Where(
@@ -589,7 +589,7 @@ namespace JobsManagementApp.ViewModel.AdminModel
             double[] complete = new double[5];
             DateTime d = new DateTime(Int16.Parse(CurrentYear), Int16.Parse(CurrentMonth), Int16.Parse(CurrentDate));
             DateTime d_plus = FirstDayOfWeek(d);
-            CurrentWeekRange = d_plus.ToString("dd/MM/yyyy") + "-" + d.ToString("dd/MM/yyyy");
+            CurrentWeekRange = d_plus.ToString("dd/MM/yyyy") + "-" + d_plus.AddDays(7).ToString("dd/MM/yyyy");
             for(int i = 0; i < 5; i++)
             {
                 pending[i] = JobsLine.Where(

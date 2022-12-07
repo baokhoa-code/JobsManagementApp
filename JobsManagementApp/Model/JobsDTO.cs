@@ -85,7 +85,7 @@ namespace JobsManagementApp.Model
                 }
                 else
                 {
-                    if (DateTime.Compare(end, due) < 0)
+                    if (DateTime.Compare(end, due) <= 0)
                     {
                         stage = "COMPLETE SOON";
                     }
