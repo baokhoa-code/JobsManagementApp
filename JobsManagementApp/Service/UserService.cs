@@ -349,7 +349,8 @@ namespace JobsManagementApp.Service
             dbc.command.CommandText = code;
             dbc.connection.Open();
             reader = dbc.command.ExecuteReader();
-            while (reader.Read())
+            int count = 0;
+            while (reader.Read() && count < 5)
             {
                 UsersDTOMore temp = new UsersDTOMore(
                         Int16.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3),
@@ -358,6 +359,7 @@ namespace JobsManagementApp.Service
                 if (DateTime.ParseExact(temp.start_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture).Year == year){
                     Users.Add(temp);
                 }
+                count++;    
             }
             dbc.connection.Close();
             return Users;

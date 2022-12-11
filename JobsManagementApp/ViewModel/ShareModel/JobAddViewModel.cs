@@ -353,7 +353,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 jobName = "";
                 jobRequire_hour = "";
                 jobDescription = "";
-                jobAssignee = null;
                 jobCategory = null;
                 jobDependency = null;
                 DateTime current_t = DateTime.Now;
@@ -480,7 +479,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                             jobName = "";
                                             jobRequire_hour = "";
                                             jobDescription = "";
-                                            jobAssignee = null;
                                             jobCategory = null;
                                             jobDependency = null;
                                             DateTime current_t = DateTime.Now;
@@ -752,7 +750,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 jobName = "";
                 jobRequire_hour = "";
                 jobDescription = "";
-                jobAssignee = null;
                 jobCategory = null;
                 jobDependency = null;
                 DateTime current_t = DateTime.Now;
@@ -890,7 +887,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                             jobName = "";
                                             jobRequire_hour = "";
                                             jobDescription = "";
-                                            jobAssignee = null;
                                             jobCategory = null;
                                             jobDependency = null;
                                             DateTime current_t = DateTime.Now;
@@ -949,7 +945,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 jobName = "";
                 jobRequire_hour = "";
                 jobDescription = "";
-                jobAssignee = null;
                 jobCategory = null;
                 jobDependency = null;
                 DateTime current_t = DateTime.Now;
@@ -966,7 +961,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                 jobName = "";
                 jobRequire_hour = "";
                 jobDescription = "";
-                jobAssignee = null;
                 jobCategory = null;
                 jobDependency = null;
                 DateTime current_t = DateTime.Now;

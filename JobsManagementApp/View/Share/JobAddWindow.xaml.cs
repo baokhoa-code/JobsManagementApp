@@ -69,22 +69,22 @@ namespace JobsManagementApp.View.Share
 
         private void clear_infor(object sender, RoutedEventArgs e)
         {
-            DateTime current_t = DateTime.Now;
-            DateTime current = DateTime.ParseExact(current_t.ToString("dd-MM-yyyy"), "dd-MM-yyyy",
-                System.Globalization.CultureInfo.InvariantCulture);
-            job_assignee.SelectedIndex = -1;
-            job_assignee.SelectedItem = null;
-            job_category.SelectedIndex = -1;
-            job_category.SelectedItem = null;
-            job_dependency.SelectedIndex = -1;
-            job_dependency.SelectedItem = null;
-            job_require_hour.Text = string.Empty;
-            job_name.Text = string.Empty;
-            job_description.Text = string.Empty;
-            job_start_date.SelectedDate = current;
-            job_start_date.DisplayDate = current;
-            job_due_date.SelectedDate = current;
-            job_due_date.DisplayDate = current;
+            //DateTime current_t = DateTime.Now;
+            //DateTime current = DateTime.ParseExact(current_t.ToString("dd-MM-yyyy"), "dd-MM-yyyy",
+            //    System.Globalization.CultureInfo.InvariantCulture);
+            //job_assignee.SelectedIndex = -1;
+            //job_assignee.SelectedItem = null;
+            //job_category.SelectedIndex = -1;
+            //job_category.SelectedItem = null;
+            //job_dependency.SelectedIndex = -1;
+            //job_dependency.SelectedItem = null;
+            //job_require_hour.Text = string.Empty;
+            //job_name.Text = string.Empty;
+            //job_description.Text = string.Empty;
+            //job_start_date.SelectedDate = current;
+            //job_start_date.DisplayDate = current;
+            //job_due_date.SelectedDate = current;
+            //job_due_date.DisplayDate = current;
 
         }
 
