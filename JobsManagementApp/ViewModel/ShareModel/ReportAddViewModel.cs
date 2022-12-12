@@ -180,7 +180,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                             mb.ShowDialog();
                                             report = new ReportsDTO();
                                             reportTile = "";
-                                            reportCreatedTime = "";
                                             reportDescription = "";
                                         }
                                         else
@@ -318,7 +317,6 @@ namespace JobsManagementApp.ViewModel.ShareModel
                                             mb.ShowDialog();
                                             report = new ReportsDTO();
                                             reportTile = "";
-                                            reportCreatedTime = "";
                                             reportDescription = "";
                                         }
                                         else

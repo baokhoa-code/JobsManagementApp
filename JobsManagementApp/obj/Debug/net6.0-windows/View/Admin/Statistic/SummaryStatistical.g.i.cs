@@ -101,8 +101,7 @@ namespace JobsManagementApp.View.Admin.Statistic {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/JobsManagementApp;V1.0.0.0;component/view/admin/statistic/summarystatistical.xam" +
-                    "l", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/JobsManagementApp;component/view/admin/statistic/summarystatistical.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\View\Admin\Statistic\SummaryStatistical.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
