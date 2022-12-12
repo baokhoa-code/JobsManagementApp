@@ -1444,11 +1444,10 @@ namespace JobsManagementApp.ViewModel.ShareModel
                             jobEndDate = PastEndDate;
                         else
                         {
-                            MessageBoxCustom mb = new MessageBoxCustom("Infor", "You setted job to complete stage, system will choose radom date between start and due date!", MessageType.Info, MessageButtons.OK);
+                            MessageBoxCustom mb = new MessageBoxCustom("Infor", "Job setted to complete, system will choose random end date!", MessageType.Info, MessageButtons.OK);
                             mb.ShowDialog();
                             MessageBoxCustom mb2 = new MessageBoxCustom("Infor", "Please change end date to your desired date!", MessageType.Info, MessageButtons.OK);
                             mb2.ShowDialog();
-                            var randomTest = new Random();
 
                             TimeSpan timeSpan = jobDueDate - jobStartDate;
                             TimeSpan newSpan = new TimeSpan(0, randomTest.Next(0, (int)timeSpan.TotalMinutes), 0);
