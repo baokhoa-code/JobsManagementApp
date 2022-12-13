@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `job`
 --
+CREATE DATABASE IF NOT EXISTS `job` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `job`;
 
 -- --------------------------------------------------------
 
