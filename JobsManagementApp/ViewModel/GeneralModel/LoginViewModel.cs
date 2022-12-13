@@ -167,11 +167,27 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                     userForgotNewPassword = "";
                     if (!string.IsNullOrEmpty(userForgotName))
                     {
-                        forgotAdmin = await AdminService.Ins.GetAdminByUsername(userForgotName);
+                        try
+                        {
+                            forgotAdmin = await AdminService.Ins.GetAdminByUsername(userForgotName);
                         if (forgotAdmin is null)
                             userForgotQuestion = "Username is not exist, question cannot found!";
                         else
                             userForgotQuestion = forgotAdmin.question;
+                        }
+                        catch (MySqlException e)
+                        {
+                            Console.WriteLine(e);
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+                        }
+                        
                     }
                     else
                         userForgotQuestion = "";
@@ -183,14 +199,28 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                     userForgotAnswer = "";
                     userForgotNewPassword = "";
 
-                    userForgotNewPassword = "";
                     if (!string.IsNullOrEmpty(userForgotName))
                     {
-                        forgotUser = await UserService.Ins.GetUserByUsername(userForgotName);
-                        if (forgotUser is null)
-                            userForgotQuestion = "Username is not exist, question cannot found!";
-                        else
-                            userForgotQuestion = forgotUser.question;
+                        try
+                        {
+                            forgotUser = await UserService.Ins.GetUserByUsername(userForgotName);
+                            if (forgotUser is null)
+                                userForgotQuestion = "Username is not exist, question cannot found!";
+                            else
+                                userForgotQuestion = forgotUser.question;
+                        }
+                        catch (MySqlException e)
+                        {
+                            Console.WriteLine(e);
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+                        }
                     }
                     else
                         userForgotQuestion = "";
@@ -334,24 +364,40 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                         Admin admin;
                         string message;
                         string M5Pass = GetMD5Password(pwr);
-                        (admin, message) = AdminService.Ins.Login(usn, M5Pass);
-                        if (admin == null)
+                        try
                         {
-                            lbl.Content = message;
-                            return;
+                            (admin, message) = AdminService.Ins.Login(usn, M5Pass);
+                            if (admin == null)
+                            {
+                                lbl.Content = message;
+                                return;
+                            }
+                            else
+                            {
+                                MainWindowAdmin dba = new MainWindowAdmin();
+                                MainWindowAdminViewModel vm = new MainWindowAdminViewModel(admin);
+                                dba.DataContext = vm;
+                                dba.Show();
+                                Password = "";
+                                Username = "";
+                                SelectedRole = null;
+                                LoginWindow.Close();
+                                return;
+                            }
                         }
-                        else
+                        catch (MySqlException e)
                         {
-                            MainWindowAdmin dba = new MainWindowAdmin();
-                            MainWindowAdminViewModel vm = new MainWindowAdminViewModel(admin);
-                            dba.DataContext = vm;
-                            dba.Show();
-                            Password = "";
-                            Username = "";
-                            SelectedRole = null;
-                            LoginWindow.Close();
-                            return;
+                            Console.WriteLine(e);
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
                         }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+                        }
+                        
 
                     }
                     else
@@ -359,23 +405,38 @@ namespace JobsManagementApp.ViewModel.GeneralModel
                         UsersDTO user;
                         string message;
                         string M5Pass = GetMD5Password(pwr);
-                        (user, message) = UserService.Ins.Login(usn, M5Pass);
-                        if (user == null)
+                        try
                         {
-                            lbl.Content = message;
-                            return;
+                            (user, message) = UserService.Ins.Login(usn, M5Pass);
+                            if (user == null)
+                            {
+                                lbl.Content = message;
+                                return;
+                            }
+                            else
+                            {
+                                MainWindowUser dba = new MainWindowUser();
+                                MainWindowUserViewModel vm = new MainWindowUserViewModel(user);
+                                dba.DataContext = vm;
+                                dba.Show();
+                                Password = "";
+                                Username = "";
+                                SelectedRole = null;
+                                LoginWindow.Close();
+                                return;
+                            }
                         }
-                        else
+                        catch (MySqlException e)
                         {
-                            MainWindowUser dba = new MainWindowUser();
-                            MainWindowUserViewModel vm = new MainWindowUserViewModel(user);
-                            dba.DataContext = vm;
-                            dba.Show();
-                            Password = "";
-                            Username = "";
-                            SelectedRole = null;
-                            LoginWindow.Close();
-                            return;
+                            Console.WriteLine(e);
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Can not connect to the database!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            MessageBoxCustom mb = new MessageBoxCustom("Error", "Sytem error!", MessageType.Error, MessageButtons.OK);
+                            mb.ShowDialog();
                         }
                     }
                 }
