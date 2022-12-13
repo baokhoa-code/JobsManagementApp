@@ -12,5 +12,8 @@
 	in solution exploere, right click 'Solution 'JobsManagementApp', choose 'Build Solution'
 	in handle bar click run build button to execute app.
 
+#github repository link
+	https://github.com/baokhoa-code/JobsManagementApp
+
 #warning: this application is created in fix height and width, meaning that some device with 
 		screen smaller than 15,6 inch will catch promblem in app rendering
